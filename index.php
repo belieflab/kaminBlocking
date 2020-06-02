@@ -18,13 +18,13 @@ file_put_contents($name, $data);
     <link href="jsPsych/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
-  <body  style="background-color:black;">  
+  <body  style="background-color:white;">  
   
   <div class="loading centeredDiv">
     <h1 class="loading">Loading...</h1>
   </div>
   <div id="consentHolder" class="consent centeredDiv">
-  <h3 id="consentPreamble" class="consent" style="color:white;">In order for us to conduct this test online, we need to include the standard consent form below. <br /> <br /> </h3>
+  <h3 id="consentPreamble" class="consent" style="color:black;">In order for us to conduct this test online, we need to include the standard consent form below. <br /> <br /> </h3>
   <div id="consentForm" class="consent consent-box"> 
     <h2 id="consentHeading" class="consent">
       CONSENT FOR PARTICIPATION IN A RESERCH PROJECT 200 FR. 1 (2016-2)
@@ -36,7 +36,7 @@ file_put_contents($name, $data);
       
     </h2>
     <p id="consentInstructions" class="consent">
-      <b>Study Title:</b> Perception and Decisions
+      <b>Study Title:</b> Computerized Assessment of Psychosis Risk (CAPR)
       <br><br>
       <b>Principal Investigator:</b> Philip R. Corlett, PhD
       <br><br>
@@ -98,89 +98,139 @@ file_put_contents($name, $data);
   
   <script>
     /* create timeline */
-    var timeline = [];
+    let timeline = [];
 
     /* define welcome message trial */
-    var welcome = {
+    let welcome = {
       type: "html-keyboard-response",
-      stimulus: '<p style="color:white;">Welcome to the experiment! Press any key to begin.</p>'
+      stimulus: '<p style="color:black;">Welcome to the experiment! Press any key to begin.</p>'
     };
     timeline.push(welcome);
 
     /* define instructions trial */
-    var instructions_1 = {
+    let instructions_1 = {
       type: "html-keyboard-response",
-      stimulus: '<p style="color:white;">In this experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</p>' +
-                '<p style="color:white;">You have been presented with a new patient who suffers from allergic reactions following some meals, but not others.</p> '+
-                '<p style="color:white;">You arrange for them to eat a number of different meals, containing one or two foods, and observe whether or not they have an allergic reaction.</p>'+
+      stimulus: '<p style="color:black;">In this experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</p>' +
+                '<p style="color:black;">You have been presented with a new patient who suffers from allergic reactions following some meals, but not others.</p> '+
+                '<p style="color:black;">You arrange for them to eat a number of different meals, containing one or two foods, and observe whether or not they have an allergic reaction.</p>'+
                 '<br>'+
-                '<p style="color:white;">Press the space bar to continue.</p>',
+                '<p style="color:black;">Press the space bar to continue.</p>',
       choices: [32], //ascii spacebar
     };
     timeline.push(instructions_1);
 
-    var instructions_2 = {
+    let instructions_2 = {
       type: "html-keyboard-response",
-      stimulus: '<p style="color:white;">During the experiment, you will be shown pictures of the foods given to your patient for each meal.</p>'+
-                '<p style="color:white;">You will then be shown whether or not they suffered an allergic reaction after eating the meal.</p>' + 
-                '<p style="color:white;">When you see each meal, please predict whether or not you believe they will suffer an allergic reaction after eating the meal.</p>'+
+      stimulus: '<p style="color:black;">During the experiment, you will be shown pictures of the foods given to your patient for each meal.</p>'+
+                '<p style="color:black;">You will then be shown whether or not they suffered an allergic reaction after eating the meal.</p>' + 
+                '<p style="color:black;">When you see each meal, please predict whether or not you believe they will suffer an allergic reaction after eating the meal.</p>'+
                 '<br>'+
-                '<p style="color:white;">To predict that a particular meal <strong><u>will not</strong></u> cause an allergy please press the <q><strong>0</strong></q> key on the keyboard.</p>'+
-                '<p style="color:white;">To predict that a meal <b><u>will cause</b></u> an allergic reaction please press the <q><strong>1</strong></q> key on the keyboard.</p>'+
+                '<p style="color:black;">To predict that a particular meal <strong><u>will not</strong></u> cause an allergy please press the <q><strong>0</strong></q> key on the keyboard.</p>'+
+                '<p style="color:black;">To predict that a meal <b><u>will cause</b></u> an allergic reaction please press the <q><strong>1</strong></q> key on the keyboard.</p>'+
                 '<br>'+
-                '<p style="color:white;">Press either of the response keys to continue.</p>',
+                '<p style="color:black;">Press either of the response keys to continue.</p>',
       choices: [48, 49], //ascii spacebar
     };
     timeline.push(instructions_2);
 
-    var instructions_3 = {
+    let instructions_3 = {
       type: "html-keyboard-response",
-      stimulus: '<p style="color:white;">Obviously you will have to guess at first.</p>'+
-                '<p style="color:white;">But hopefully, as you see more meals, you will learn which foods tend to make your patient have an allergic reaction.</p>'+
+      stimulus: '<p style="color:black;">Obviously you will have to guess at first.</p>'+
+                '<p style="color:black;">But hopefully, as you see more meals, you will learn which foods tend to make your patient have an allergic reaction.</p>'+
                 '<br>'+
-                '<p style="color:white;">Food <strong><u>does not</strong></u> cause an allergy &#8594 <q><strong>0</strong></q> key </p>'+
-                '<p style="color:white;">Food <strong><u>causes</strong></u> an allergy &#8594 <q><strong>1</strong></q> key</p>'+
+                '<p style="color:black;">Food <strong><u>does not</strong></u> cause an allergy &#8594 <q><strong>0</strong></q> key </p>'+
+                '<p style="color:black;">Food <strong><u>causes</strong></u> an allergy &#8594 <q><strong>1</strong></q> key</p>'+
                 '<br>'+
-                '<p style="color:white;">Try to make your prediction <b><u>before</b></u> the meal leaves the screen.</p>'+
-                // '<p style="color:white;">Please hold the key down longer if you are more confident you are making the right choice.</p>'+
-                // '<p style="color:white;">If you think you are guessing please hold the key briefly. If you are very confident you should press and hold until the meal disappears from the screen.</p>'+
+                '<p style="color:black;">Try to make your prediction <b><u>before</b></u> the meal leaves the screen.</p>'+
+                // '<p style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</p>'+
+                // '<p style="color:black;">If you think you are guessing please hold the key briefly. If you are very confident you should press and hold until the meal disappears from the screen.</p>'+
                 '<br>'+
-                '<p style="color:white;">Press the space bar to begin the practice trials.</p>',
+                '<p style="color:black;">Press the space bar to begin the practice trials.</p>',
       choices: [32],
     };
     timeline.push(instructions_3);
 
     /* START TRAINING TRIAL FOR PARTICIPANTS */
 
-    var practice_stim_array = [];
-    // for (var i = 0; i < 3; i++){
-    //   train_stimuli_array.push('stim/~practice/' + i + '.png');
-    // }
-    practice_stim_array.push('stim/~practice/lemon.png');
-    practice_stim_array.push('stim/~practice/strawberry.png');
-    practice_stim_array.push('stim/~practice/tangerine.png');
+    let stim_array = [];
+    for (let i = 1; i < 19; i++){
+      stim_array.push('stimuli/s' + i + '.jpg');
+    }
 
+    let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
 
+    let pract_run = stim_shuffle;
 
-    var practice_stimuli = [
-    {stimulus: practice_stim_array[0], data: {test_part: 'practice', correct_response: 48}}, // 0 key
-    {stimulus: practice_stim_array[1], data: {test_part: 'practice', correct_response: 48}}, // 0 key
-    {stimulus: practice_stim_array[2], data: {test_part: 'practice', correct_response: 49}}, // 1 key
+    let stage_one = stim_shuffle;
+
+    let stage_two = stim_shuffle;
+
+    let stage_three = stim_shuffle;
+
+    // let feedback_array = [];
+    //   feedback_array.push('stimuli/-.jpg');
+    //   feedback_array.push('stimuli/+.jpg');
+
+    // let feedback_stimuli = [
+    //   {feedback: feedback_array[0], data: {test_part: 'feedback', correct_response: 48}}, // 0 key
+    //   {feedback: feedback_array[1], data: {test_part: 'feedback', correct_response: 49}}, // 1 key
+    // ]
+
+    let practice_stimuli = [
+      {stimulus: pract_run[15], stimulus2: '', data: {test_part: 'practice', correct_response: 48}}, // 0 key
+      {stimulus: pract_run[16], stimulus2: '', data: {test_part: 'practice', correct_response: 48}}, // 0 key
+      {stimulus: pract_run[17], stimulus2: '', data: {test_part: 'practice', correct_response: 49}}, // 1 key
+    ]
+
+    let learning_stimuli = [
+      {stimulus: stage_one[0], stimulus2: '',  data: {test_part: 'learning', correct_response: 49}}, // 1 key
+      {stimulus: stage_one[1], stimulus2: '', data: {test_part: 'learning', correct_response: 49}}, // 1 key
+      {stimulus: stage_one[4], stimulus2: '', data: {test_part: 'learning', correct_response: 48}}, // 0 key
+      {stimulus: stage_one[5], stimulus2: '', data: {test_part: 'learning', correct_response: 48}}, // 0 key
+      {stimulus: stage_one[9], stimulus2: '', data: {test_part: 'learning', correct_response: 48}}, // 0 key
+      {stimulus: stage_one[10], stimulus2: '', data: {test_part: 'learning', correct_response: 49}}, // 1 key
+      {stimulus: stage_one[11], stimulus2: '', data: {test_part: 'learning', correct_response: 48}}, // 0 key
+    ]
+
+    let blocking_stimuli = [
+      {stimulus: stage_two[0], stimulus2: stage_two[2], data: {test_part: 'blocking', correct_response: 49}}, // 1 key
+      {stimulus: stage_two[1], stimulus2: stage_two[3], data: {test_part: 'blocking', correct_response: 49}}, // 1 key
+      {stimulus: stage_two[4], stimulus2: stage_two[6], data: {test_part: 'blocking', correct_response: 49}}, // 1 key
+      {stimulus: stage_two[5], stimulus2: stage_two[7], data: {test_part: 'blocking', correct_response: 49}}, // 1 key
+      {stimulus: stage_two[8], stimulus2: stage_two[9], data: {test_part: 'blocking', correct_response: 48}}, // 0 key
+      {stimulus: stage_two[10], stimulus2: '', data: {test_part: 'blocking', correct_response: 49}}, // 1 key
+      {stimulus: stage_two[11], stimulus2: '', data: {test_part: 'blocking', correct_response: 48}}, // 0 key
+    ]
+
+    let testing_stimuli = [
+      {stimulus: stage_three[2], stimulus2: '', data: {test_part: 'testing', correct_response: 49}}, // 1 key
+      {stimulus: stage_three[3], stimulus2: '', data: {test_part: 'testing', correct_response: 48}}, // 0 key
+      {stimulus: stage_three[6], stimulus2: '', data: {test_part: 'testing', correct_response: 49}}, // 1 key
+      {stimulus: stage_three[7], stimulus2: '', data: {test_part: 'testing', correct_response: 48}}, // 0 key
+      {stimulus: stage_three[8], stimulus2: '', data: {test_part: 'testing', correct_response: 48}}, // 0 key
+      {stimulus: stage_three[10], stimulus2: stage_two[9], data: {test_part: 'testing', correct_response: 49}}, // 1 key
+      {stimulus: stage_three[11], stimulus2: '', data: {test_part: 'testing', correct_response: 48}}, // 0 key
     ]
 
     // create fixation point
-    var fixation = {
+    let fixation = {
       data: {test_part: 'fixation'},
       type: 'html-keyboard-response',
-      stimulus: '<div style="color:white; font-size:60px;"></div>',
+      stimulus: '<div style="color:black; font-size:60px;"></div>',
       choices: jsPsych.NO_KEYS,
       trial_duration: 1000,
     }
 
-    // create practice trials
-    var practice = {
-      type: "image-keyboard-response",
-      stimulus: jsPsych.timelineVariable('stimulus'), //train_stimuli_array, //jsPsych.timelineVariable('stimulus'),
+    // create  trials
+    let stimuli = {
+      type: "html-keyboard-response",
+      stimulus: function(){
+                var html="<img src='"+jsPsych.timelineVariable('stimulus', true)+"'>" +
+                "<img src='"+jsPsych.timelineVariable('stimulus2', true)+"'>";
+                return html;
+      }, 
+      
+      // jsPsych.timelineVariable('stimulus'),
       choices: [48, 49], // [0 key , 1 key]
       trial_duration: 3000,
       response_ends_trial: true,
@@ -196,15 +246,16 @@ file_put_contents($name, $data);
       }
     };
 
+
     // inter-stimulus interval
     let isi = [1000, 5000];
 
     // create feedback trials
-    var feedback = {
+    let feedback = {
       data: {test_part: 'feedback'},
       type: 'html-keyboard-response',
       // stimulus: function() {
-      //     var last_trial_accuracy = jsPsych.data.get().last(1).values()[0].accuracy;
+      //     let last_trial_accuracy = jsPsych.data.get().last(1).values()[0].accuracy;
       //     if (last_trial_accuracy == 1) {
       //         return '<div style="color:red; font-size:60px;">ALLERGIC REACTION!</div>'
       //     } else {
@@ -212,11 +263,13 @@ file_put_contents($name, $data);
       //     }
       //   },
       stimulus: function() {
-        var last_trial_feedback = jsPsych.data.get().last(1).values()[0].correct_response;
+        let last_trial_feedback = jsPsych.data.get().last(1).values()[0].correct_response;
         if (last_trial_feedback == 49) { // if last correct_response == 49 (1 key)
-          return '<div style="color:red; font-size:60px;">ALLERGIC REACTION!</div>'
+          // return '<div style="color:red; font-size:60px;">ALLERGIC REACTION!</div>'
+          return '<img src=stimuli/+.jpg ></img>'
         } else if (last_trial_feedback == 48) { // if last correct_response == 48 (0 key)
-          return '<div style="color:green; font-size:60px;">NO REACTION</div>'
+          // return '<div style="color:green; font-size:60px;">NO REACTION</div>'
+          return '<img src=stimuli/-.jpg ></img>'
         }
       },
       choices: jsPsych.NO_KEYS,
@@ -231,8 +284,8 @@ file_put_contents($name, $data);
       }
     };
 
-    var practice_procedure = {
-      timeline: [fixation, practice, feedback],
+    let practice_procedure = {
+      timeline: [fixation, stimuli, feedback],
       timeline_variables: practice_stimuli,
       randomize_order: false,
     }
@@ -241,917 +294,83 @@ file_put_contents($name, $data);
 
     /* END TRAINING TRIAL FOR PARTICIPANTS */
 
-    var instructions_4 = {
+    let instructions_4 = {
       type: "html-keyboard-response",
-      stimulus: '<p style="color:white;">Let us begin! Press the space bar when you are ready to start the experiment.</p>'+
-                '<p style="color:white;">It should last about 20 minutes with breaks in-between.</p>'+
+      stimulus: '<p style="color:black;">Let us begin! Press the space bar when you are ready to start the experiment.</p>'+
+                '<p style="color:black;">It should last about 20 minutes with breaks in-between.</p>'+
                 '<br>'+
-                '<p style="color:white;">Good Luck!</p>',
+                '<p style="color:black;">Good Luck!</p>',
       choices: [32],
 
     };
     timeline.push(instructions_4);
 
-    // Import all stimuli for the LEARNING section
-    var learning_stimuli_array = [];
-    // for (var i = 0; i < 100; i++){
-      test_stimuli_array.push("stim/avocado.png");
-      test_stimuli_array.push("stim/banana.png");
-      test_stimuli_array.push("stim/broccoli.png");
-      test_stimuli_array.push("stim/carrot.png");
-      test_stimuli_array.push("stim/cherries.png");
-      test_stimuli_array.push("stim/coconut.png");
-      test_stimuli_array.push("stim/cooked-rice.png");
-      test_stimuli_array.push("stim/cut-of-meat.png");
-      test_stimuli_array.push("stim/eggplant.png");
-      test_stimuli_array.push("stim/glass-of-milk.png");
-      test_stimuli_array.push("stim/grapes.png");
-      test_stimuli_array.push("stim/hot-pepper.png");
-      test_stimuli_array.push("stim/leafy-green.png");
-      test_stimuli_array.push("stim/pear.png");
-      test_stimuli_array.push("stim/pineapple.png");
-      test_stimuli_array.push("stim/poultry-leg.png");
-      test_stimuli_array.push("stim/red-apple.png");
-      test_stimuli_array.push("stim/watermelon.png");
-    // }
 
-    var learning_stimuli = [
-    {stimulus: practice_stim_array[0], data: {test_part: 'practice', correct_response: 48}}, // 0 key
-    {stimulus: practice_stim_array[1], data: {test_part: 'practice', correct_response: 48}}, // 0 key
-    {stimulus: practice_stim_array[2], data: {test_part: 'practice', correct_response: 49}}, // 1 key
-    ]
-
-
-        // create practice trials
-    var learning = {
-      type: "image-keyboard-response",
-      stimulus: jsPsych.timelineVariable('stimulus'), //train_stimuli_array, //jsPsych.timelineVariable('stimulus'),
-      choices: [48, 49], // [0 key , 1 key]
-      trial_duration: 3000,
-      response_ends_trial: true,
-      data: jsPsych.timelineVariable('data'),
-      on_finish: function(data){
-        // data.practice = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press);
-        // data.practice = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
-        if (data.key_press == data.correct_response) {
-          data.accuracy = 1
-        } else {
-          data.accuracy = 0
-        }
-      }
-    };
-
-    // }
-
-    /* START OF PHASE I - TRAINING */
-
-    // Import stimuli for phase I - block 1     
-    var stimuli_block1 = [
-      {stimulus: test_stimuli_array[0], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_response_array[0], data: {test_part: 'test', correct_response: '.'}},      
-      {stimulus: test_stimuli_array[1], data: {test_part: 'test', correct_response: ','}},
-      {stimulus: test_response_array[0], data: {test_part: 'test', correct_response: '.'}}, 
-      {stimulus: test_stimuli_array[2], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_stimuli_array[3], data: {test_part: 'test', correct_response: ','}},
-      {stimulus: test_stimuli_array[4], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_stimuli_array[5], data: {test_part: 'test', correct_response: ','}},
-      {stimulus: test_stimuli_array[6], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_stimuli_array[7], data: {test_part: 'test', correct_response: ','}},
-      {stimulus: test_stimuli_array[8], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_stimuli_array[9], data: {test_part: 'test', correct_response: ','}},
-      {stimulus: test_stimuli_array[10], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_stimuli_array[11], data: {test_part: 'test', correct_response: ','}},
-      {stimulus: test_stimuli_array[12], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_stimuli_array[13], data: {test_part: 'test', correct_response: ','}},
-      {stimulus: test_stimuli_array[14], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_stimuli_array[15], data: {test_part: 'test', correct_response: ','}},
-      {stimulus: test_stimuli_array[16], data: {test_part: 'test', correct_response: '.'}},
-      {stimulus: test_stimuli_array[17], data: {test_part: 'test', correct_response: ','}},
-      // {stimulus: test_stimuli_array[18], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[19], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[20], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[21], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[22], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[23], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[24], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[25], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[26], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[27], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[28], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[29], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[30], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[31], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[32], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[33], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[34], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[35], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[36], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[37], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[38], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[39], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[40], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[41], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[42], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[43], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[44], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[45], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[46], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[47], data: {test_part: 'train', correct_response: ','}},
-      // {stimulus: test_stimuli_array[48], data: {test_part: 'train', correct_response: '.'}},
-      // {stimulus: test_stimuli_array[49], data: {test_part: 'train', correct_response: ','}}, 
-    ]
-
-    //var shuffled_stimuli = jsPsych.randomization.shuffle(all_test_stimuli);
-
-    var test = {
-      type: "image-keyboard-response",
-      stimulus: jsPsych.timelineVariable('stimulus'),
-      choices: [',', '.'],
-      data: jsPsych.timelineVariable('data'),
-      on_finish: function(data){
-        data.practice = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press)
-        //data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
-    }
-  }
-
-    var test_procedure_block1 = {
-      timeline: [fixation, test],
-      timeline_variables: stimuli_block1,
-      randomize_order: false
+    let learning_procedure = {
+      timeline: [fixation, stimuli, feedback],
+      timeline_variables: learning_stimuli,
+      randomize_order: true,
+      type: 'fixed-repititions',
+      repetitions: 10
     }
 
-    timeline.push(test_procedure_block1);
-
-    /* END OF PHASE I - BLOCK 1 */
-
-//     // BREAK: Block 1 complete, start Block 2
-//     var instructions_5 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">Good job, block 1 complete! Please take a moment to rest.</p> ' +
-//           '<p style="color:white;">When you are ready to continue with block 2 of 4, press the space bar.</p> ',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_5);
-
-
-//       /* START OF PHASE I - BLOCK 2 */
-
-//     // Import stimuli for phase I - block 2     
-//     var stimuli_block2 = [
-//       {stimulus: test_stimuli_array[50], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[51], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[52], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[53], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[54], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[55], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[56], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[57], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[58], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[59], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[60], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[61], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[62], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[63], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[64], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[65], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[66], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[67], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[68], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[69], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[70], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[71], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[72], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[73], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[74], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[75], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[76], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[77], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[78], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[79], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[80], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[81], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[82], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[83], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[84], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[85], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[86], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[87], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[88], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[89], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[90], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[91], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[92], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[93], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[94], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[95], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[96], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[97], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[98], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[99], data: {test_part: 'test', correct_response: ','}}, 
-//     ] 
-
-//     //var shuffled_stimuli = jsPsych.randomization.shuffle(all_test_stimuli);
-
-//     var test_procedure_block2 = {
-//       timeline: [fixation, test],
-//       timeline_variables: stimuli_block2,
-//       randomize_order: true
-//     }
-
-//     timeline.push(test_procedure_block2);
-
-
-//     /* END OF PHASE I - BLOCK 2 */
-
-//     // BREAK: Block 2 complete, start Block 3
-//     var instructions_6 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">Half way there! Please take a moment to rest.</p> ' +
-//           '<p style="color:white;">When you are ready to continue with block 3 of 4, press the space bar.</p> ',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_6);
-
-//     /* START OF PHASE I - BLOCK 3 */
-
-//     // Import stimuli for phase I - block 3     
-//     var stimuli_block3 = [
-//       {stimulus: test_stimuli_array[100], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[101], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[102], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[103], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[104], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[105], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[106], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[107], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[108], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[109], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[110], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[111], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[112], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[113], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[114], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[115], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[116], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[117], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[118], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[119], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[120], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[121], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[122], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[123], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[124], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[125], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[126], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[127], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[128], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[129], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[130], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[131], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[132], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[133], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[134], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[135], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[136], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[137], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[138], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[139], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[140], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[141], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[142], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[143], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[144], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[145], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[146], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[147], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[148], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[149], data: {test_part: 'test', correct_response: ','}},
-//      ]
-
-//     //var shuffled_stimuli = jsPsych.randomization.shuffle(all_test_stimuli);
-
-//     var test_procedure_block3 = {
-//       timeline: [fixation, test],
-//       timeline_variables: stimuli_block3,
-//       randomize_order: true
-//     }
-
-//     timeline.push(test_procedure_block3);
-
-
-//     /* END OF PHASE I - BLOCK 3 */
-
-//     // BREAK: Block 3 complete, start Block 4
-//     var instructions_7 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">One more block to go! Please take a moment to rest.</p> ' +
-//           '<p style="color:white;">When you are ready to continue with block 4 of 4, press the space bar.</p> ',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_7);
-
-//         /* START OF PHASE I - BLOCK 4 */
-
-//     // Import stimuli for phase I - block 4     
-//     var stimuli_block4 = [
-//       {stimulus: test_stimuli_array[150], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[151], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[152], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[153], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[154], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[155], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[156], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[157], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[158], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[159], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[160], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[161], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[162], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[163], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[164], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[165], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[166], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[167], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[168], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[169], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[170], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[171], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[172], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[173], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[174], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[175], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[176], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[177], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[178], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[179], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[180], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[181], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[182], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[183], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[184], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[185], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[186], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[187], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[188], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[189], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[190], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[191], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[192], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[193], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[194], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[195], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[196], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[197], data: {test_part: 'test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[198], data: {test_part: 'test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[199], data: {test_part: 'test', correct_response: ','}}, 
-//     ]
-
-//     //var shuffled_stimuli = jsPsych.randomization.shuffle(all_test_stimuli);
-
-//     var test_procedure_block4 = {
-//       timeline: [fixation, test],
-//       timeline_variables: stimuli_block4,
-//       randomize_order: true
-//     }
-
-//     timeline.push(test_procedure_block4);
-
-
-//     /* END OF PHASE I - BLOCK 4 */ 
-
-// /*   var debrief_block = {
-//       type: "html-keyboard-response",
-//       stimulus: function(){
-
-//         var trials = jsPsych.data.get().filter({test_part: 'test'});
-//         var correct_trials = trials.filter({correct: true});
-//         var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
-//         var rt = Math.round(correct_trials.select('rt').mean());
-
-//         return "<p style='color:white;'> You responded correctly on "+accuracy+"% of the trials. </p>"+
-//         "<p style='color:white;'>Your average response time was "+rt+"ms.</p>"+
-//         "<p style='color:white;'>Press any key to complete the experiment. Thank you!</p>";
-//       }
-//     }; 
-
-//      timeline.push(debrief_block); */
-
-//     // COMPLETION MESSAGE: Completed Classification Phase
-//     var instructions_8 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">Phase I of the experiment is complete.</p> ' +
-//           '<p style="color:white;">Press the space bar to proceed to Phase II of the experiment.</p> ',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_8);
-
-
-//     /* END PHASE I OF TASK: CLASSIFICATION PHASE */
-
-
-//     /* START PHASE II OF TASK: CLASSIFICATION and ANTICIPATION PHASE */
-
-//     var instructions_9 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">Now we are interested in how well you can predict patterns in the series of figures. You will be asked to predict whether the next figure in the series is more male-like or female-like. '+
-//         'When you see the <q>Next Figure</q> prompt, press the corresponding response keys to indicate your prediction: </p>'+
-//         '<p style="color:white;"> Male &#8594 <q>,</q> (comma)</p>'+
-//         '<p style="color:white;"> Female &#8594 <q>.</q> (period)</p>'+
-//         '<p style="color:white;">The actual figure will then appear on the screen. After you see the figure, please guess the assigned gender with response keys. </p>'+
-//         '<p style="color:white;">As before, you will receive 2 cents for correctly classifying each figure.</p>'+
-//         '<p style="color:white;">Press either response keys to continue.</p>',
-//       choices: [',', '.'],
-//     };
-//     timeline.push(instructions_9);
-
-//     var instructions_10 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">PREDICTION BONUS</p> ' +
-//           '<p style="color:white;">Your prediction accuracy is the total number of correct predictions you make over the 200 trials.</p> ' +
-//           '<p style="color:white;">In addition to the 2 cents per correct figure classification, you have the chance to receive a bonus of 40 dollars IF your accuracy is above average relative to previous participants.</p>' +
-//           '<p style="color:white;">If your accuracy is below average relative to previous participants, then you will not receive the 40 dollar bonus.</p>'+
-//           '<p style="color:white;">Press the space bar to continue.</p>',
-//       choices: [32],
-//     };
-//     timeline.push(instructions_10);
-
-//     var instructions_11 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">Here are some examples.</p> ' +
-//           '<p style="color:white;">For each, predict whether the next figure looks more male-like or female-like. Then, when the figure appears, guess whether it looks more male-like or female-like and indicate your choice.</p> ' +
-//           '<p style="color:white;">Press the space bar to continue.</p>',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_11);
-
-//     /* START TRAINING TRIAL FOR PARTICIPANTS */
-
-// /*     var train_stimuli_array = [];
-//     for (var i = 0; i < 3; i++){
-//       train_stimuli_array.push("Stimuli/Hangul_E" + i + ".bmp");
-//     } */
-
-//     var c2_train_stimuli = [
-//     {stimulus: train_stimuli_array[0], data: {test_part: 'c2_train', correct_response: ','}},//{stimulus: train_stimuli_array[0]}, //{stimulus: train_stimuli_array[0], data: {test_part: 'test', correct_response: ','}},
-//     {stimulus: train_stimuli_array[1], data: {test_part: 'c2_train', correct_response: ','}},  //{stimulus: train_stimuli_array[1]}, //{stimulus: train_stimuli_array[1], data: {test_part: 'test', correct_response: ','}},
-//     {stimulus: train_stimuli_array[2], data: {test_part: 'c2_train', correct_response: '.'}},  //{stimulus: train_stimuli_array[2]},  //{stimulus: train_stimuli_array[2], data: {test_part: 'test', correct_response: '.'}},
-//     ]
-
-//     var prediction ={
-//         type: "html-keyboard-response",
-//         stimulus: '<p style="color:white;"> Next Figure: Male or Female? </p>',
-//         choices: [',','.'],
-//         data: {
-//             test_part: 'prediction_train',
-//             //correct_predicted_response: ',',
-//         },
-//         on_finish: function(data){
-//           data.A = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press)
-//         //data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.pred_response);
-//       }
-//     }
-
-// /*     var fixation = {
-//       type: 'html-keyboard-response',
-//       stimulus: '<div style="color:white; font-size:60px;">+</div>',
-//       choices: jsPsych.NO_KEYS,
-//       trial_duration: 1000,
-//       data: {test_part: 'fixation'}
-//     } */
-
-//     var c2_train = {
-//       type: "image-keyboard-response",
-//       stimulus: jsPsych.timelineVariable('stimulus'), //train_stimuli_array, //jsPsych.timelineVariable('stimulus'),
-//       choices: [',', '.'],
-//       data: jsPsych.timelineVariable('data'),
-//       on_finish: function(data){
-//         data.C2 = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press)
-//       }
-//     }
-
-//     var c2_train_procedure = {
-//       timeline: [prediction, fixation, c2_train],
-//       timeline_variables: c2_train_stimuli,
-//       randomize_order: true
-//     }
-
-//     timeline.push(c2_train_procedure);
-
-//     var instructions_12 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">Let us begin! Press the space bar when you are ready to start block 1 of 4.</p> ',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_12);
-
-//     // Import all stimuli for the task
-// /*     var test_stimuli_array = [];
-//     for (var i = 0; i < 100; i++){
-//       test_stimuli_array.push("Stimuli/Hangul_F" + i + ".bmp");
-//       test_stimuli_array.push("Stimuli/Hangul_M" + i + ".bmp");
-//     } */
-
-//     /* START OF PHASE I - BLOCK 1 */
-
-//     // Import stimuli for phase I - block 1     
-//     var stimuli_c2block1 = [
-//       {stimulus: test_stimuli_array[0], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[1], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[2], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[3], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[4], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[5], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[6], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[7], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[8], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[9], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[10], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[11], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[12], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[13], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[14], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[15], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[16], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[17], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[18], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[19], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[20], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[21], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[22], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[23], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[24], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[25], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[26], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[27], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[28], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[29], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[30], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[31], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[32], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[33], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[34], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[35], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[36], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[37], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[38], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[39], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[40], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[41], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[42], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[43], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[44], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[45], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[46], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[47], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[48], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[49], data: {test_part: 'c2_test', correct_response: ','}}, 
-//     ]
-
-//     //var shuffled_stimuli = jsPsych.randomization.shuffle(all_test_stimuli);
-
-//     var prediction_c2 ={
-//         type: "html-keyboard-response",
-//         stimulus: '<p style="color:white;"> Next Figure: Male or Female? </p>',
-//         choices: [',','.'],
-//         data: {
-//             test_part: 'prediction',
-//             //correct_predicted_response: ',',
-//         },
-//         on_finish: function(data){
-//           data.A = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press)
-//         //data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.pred_response);
-//       }
-//     }
-
-//     var c2test = {
-//       type: "image-keyboard-response",
-//       stimulus: jsPsych.timelineVariable('stimulus'),
-//       choices: [',', '.'],
-//       data: jsPsych.timelineVariable('data'),
-//       on_finish: function(data){
-//         data.C2 = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press)
-//         //data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
-//     }
-//   }
-
-//     var test_procedure_c2block1 = {
-//       timeline: [prediction_c2, fixation, c2test],
-//       timeline_variables: stimuli_c2block1,
-//       randomize_order: true
-//     }
-
-//     timeline.push(test_procedure_c2block1);
-
-//     /* END OF PHASE I - BLOCK 1 */
-
-//     // BREAK: Block 1 complete, start Block 2
-//     var instructions_13 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">Good job, block 1 complete! Please take a moment to rest.</p> ' +
-//           '<p style="color:white;">When you are ready to continue with block 2 of 4, press the space bar.</p> ',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_13);
-
-
-//       /* START OF PHASE I - BLOCK 2 */
-
-//     // Import stimuli for phase I - block 2     
-//     var stimuli_c2block2 = [
-//       {stimulus: test_stimuli_array[50], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[51], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[52], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[53], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[54], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[55], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[56], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[57], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[58], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[59], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[60], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[61], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[62], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[63], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[64], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[65], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[66], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[67], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[68], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[69], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[70], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[71], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[72], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[73], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[74], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[75], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[76], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[77], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[78], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[79], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[80], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[81], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[82], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[83], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[84], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[85], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[86], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[87], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[88], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[89], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[90], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[91], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[92], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[93], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[94], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[95], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[96], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[97], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[98], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[99], data: {test_part: 'c2_test', correct_response: ','}}, 
-//     ] 
-
-//     //var shuffled_stimuli = jsPsych.randomization.shuffle(all_test_stimuli);
-
-//     var test_procedure_c2block2 = {
-//       timeline: [prediction_c2, fixation, c2test],
-//       timeline_variables: stimuli_c2block2,
-//       randomize_order: true
-//     }
-
-//     timeline.push(test_procedure_c2block2);
-
-
-//     /* END OF PHASE I - BLOCK 2 */
-
-//     // BREAK: Block 2 complete, start Block 3
-//     var instructions_14 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">Half way there! Please take a moment to rest.</p> ' +
-//           '<p style="color:white;">When you are ready to continue with block 3 of 4, press the space bar.</p> ',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_14);
-
-//     /* START OF PHASE I - BLOCK 3 */
-
-//     // Import stimuli for phase I - block 3     
-//     var stimuli_c2block3 = [
-//       {stimulus: test_stimuli_array[100], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[101], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[102], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[103], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[104], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[105], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[106], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[107], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[108], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[109], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[110], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[111], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[112], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[113], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[114], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[115], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[116], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[117], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[118], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[119], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[120], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[121], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[122], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[123], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[124], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[125], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[126], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[127], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[128], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[129], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[130], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[131], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[132], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[133], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[134], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[135], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[136], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[137], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[138], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[139], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[140], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[141], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[142], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[143], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[144], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[145], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[146], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[147], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[148], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[149], data: {test_part: 'c2_test', correct_response: ','}}, 
-//     ]
-
-//     //var shuffled_stimuli = jsPsych.randomization.shuffle(all_test_stimuli);
-
-//     var test_procedure_c2block3 = {
-//       timeline: [prediction_c2, fixation, c2test],
-//       timeline_variables: stimuli_c2block3,
-//       randomize_order: true
-//     }
-
-//     timeline.push(test_procedure_c2block3);
-
-
-//     /* END OF PHASE I - BLOCK 3 */
-
-//     // BREAK: Block 3 complete, start Block 4
-//     var instructions_15 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">One more block to go! Please take a moment to rest.</p> ' +
-//           '<p style="color:white;">When you are ready to continue with block 4 of 4, press the space bar.</p> ',
-//       choices: [32],
-//       post_trial_gap: 2000
-//     };
-//     timeline.push(instructions_15);
-
-//         /* START OF PHASE I - BLOCK 4 */
-
-//     // Import stimuli for phase I - block 4     
-//     var stimuli_c2block4 = [
-//       {stimulus: test_stimuli_array[150], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[151], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[152], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[153], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[154], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[155], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[156], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[157], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[158], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[159], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[160], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[161], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[162], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[163], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[164], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[165], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[166], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[167], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[168], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[169], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[170], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[171], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[172], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[173], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[174], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[175], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[176], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[177], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[178], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[179], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[180], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[181], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[182], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[183], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[184], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[185], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[186], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[187], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[188], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[189], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[190], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[191], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[192], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[193], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[194], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[195], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[196], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[197], data: {test_part: 'c2_test', correct_response: ','}},
-//       {stimulus: test_stimuli_array[198], data: {test_part: 'c2_test', correct_response: '.'}},
-//       {stimulus: test_stimuli_array[199], data: {test_part: 'c2_test', correct_response: ','}}, 
-//     ]
-
-//     //var shuffled_stimuli = jsPsych.randomization.shuffle(all_test_stimuli);
-
-//     var test_procedure_c2block4 = {
-//       timeline: [prediction_c2, fixation, c2test],
-//       timeline_variables: stimuli_c2block4,
-//       randomize_order: true
-//     }
-
-//     timeline.push(test_procedure_c2block4);
-
-
-//     /* END OF PHASE I - BLOCK 4 */ 
-
-// /*   var debrief_block = {
-//       type: "html-keyboard-response",
-//       stimulus: function(){
-
-//         var trials = jsPsych.data.get().filter({test_part: 'test'});
-//         var correct_trials = trials.filter({correct: true});
-//         var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
-//         var rt = Math.round(correct_trials.select('rt').mean());
-
-//         return "<p style='color:white;'> You responded correctly on "+accuracy+"% of the trials. </p>"+
-//         "<p style='color:white;'>Your average response time was "+rt+"ms.</p>"+
-//         "<p style='color:white;'>Press any key to complete the experiment. Thank you!</p>";
-//       }
-//     }; 
-
-//      timeline.push(debrief_block); */
-
-//     // COMPLETION MESSAGE: Completed Classification Phase
-//     var link = "https://survey.az1.qualtrics.com/SE/?SID=SV_9uARDX1aXEXq1pP&Q_JFE=0&workerId="
-//     var instructions_16 = {
-//       type: "html-keyboard-response",
-//       stimulus: '<p style="color:white;">You have now completed the task! Saving data...PLEASE DO NOT CLOSE THIS BROWSER until you complete the second part.</p> ' +
-//           '<p style="color:white;">BEFORE THE LINK DISAPPEARS please move on to the second part of the task at this link to obtain your completion code:</p> ' +
-//           "<a href=" + link + ' target="_blank">' + link + "</a>",
-//       choices: jsPsych.NO_KEYS,
-//       trial_duration: 40000
-//     };
-//     timeline.push(instructions_16);
-
-
+    timeline.push(learning_procedure);
+
+    let blocking_procedure = {
+      timeline: [fixation, stimuli, feedback],
+      timeline_variables: blocking_stimuli,
+      randomize_order: true,
+      type: 'fixed-repititions',
+      repetitions: 6
+    }
+
+    timeline.push(blocking_procedure);
+
+    let testing_procedure = {
+      timeline: [fixation, stimuli, feedback],
+      timeline_variables: testing_stimuli,
+      randomize_order: true,
+      type: 'fixed-repititions',
+      repetitions: 6
+    }
+
+    timeline.push(testing_procedure);
+
+    
 
 //     /* END PHASE II OF TASK: CLASSIFICATION and ANTICIPATION PHASE */
 
-// function saveData(name, data){
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('POST', 'test-self-deception.php'); // 'write_data.php' is the path to the php file described above.
-//   xhr.setRequestHeader('Content-Type', 'application/json');
-//   xhr.send(JSON.stringify({filename: name, filedata: data}));
-// }
+function saveData(name, data){
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', 'index.php'); // 'write_data.php' is the path to the php file described above.
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({filename: name, filedata: data}));
+}
 
-//var this_seed = new Date().getTime();
+//let this_seed = new Date().getTime();
     //Math.seedrandom(this_seed);
 
-    //var randNum = Math.random() * 1000
-    //var randNumRounded = Math.floor(randNum+1)
+    //let randNum = Math.random() * 1000
+    //let randNumRounded = Math.floor(randNum+1)
     function getParamFromURL(name)
     {
       name = name.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");
-      var regexS = "[\?&]"+name+"=([^&#]*)";
-      var regex = new RegExp( regexS );
-      var results = regex.exec( window.location.href );
+      let regexS = "[\?&]"+name+"=([^&#]*)";
+      let regex = new RegExp( regexS );
+      let results = regex.exec( window.location.href );
       if( results == null )
         return "";
       else
         return results[1];
     }
-    var workerID = getParamFromURL( 'workerId' );
+    let workerID = prompt( 'subjectID' );
 
     /* start the experiment */
     function startExperiment(){
       jsPsych.init({
         timeline: timeline,
         show_progress_bar: true,
-        on_finish: function(){ saveData("full-self-deception_" + workerID, jsPsych.data.get().csv()); }
+        on_finish: function(){ saveData("food-allergy_" + workerID, jsPsych.data.get().csv()); }
         //on_finish: function(){
           //jsPsych.data.get().filter([{test_part: 'test'},{test_part: 'prediction'},{test_part: 'c2_test'}]).localSave("csv", `test-self-deception-data.csv`);
             //jsPsych.data.displayData(); 
@@ -1162,11 +381,8 @@ file_put_contents($name, $data);
 
 <footer>
 
-<!-- <script type="text/javascript" src="https://perceptionexperiments.net/SDU/Libraries/Timeout.js"></script> -->
-<!-- <script type="text/javascript" src="https://perceptionexperiments.net/SDU/Libraries/lodash.js"></script> -->
-<!-- <script type="text/javascript" src="https://perceptionexperiments.net/SDU/Libraries/seedrandom.js"></script> -->
 <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
-<!-- <script type="text/javascript" src="https://perceptionexperiments.net/SDU/Libraries/jquery.csv.js"></script> -->
+
 
 <script>
 // show page when loaded 
