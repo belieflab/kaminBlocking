@@ -159,57 +159,40 @@ file_put_contents($name, $data);
 
     let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
 
-    let pract_run = stim_shuffle;
-
-    let stage_one = stim_shuffle;
-
-    let stage_two = stim_shuffle;
-
-    let stage_three = stim_shuffle;
-
-    // let feedback_array = [];
-    //   feedback_array.push('stimuli/-.jpg');
-    //   feedback_array.push('stimuli/+.jpg');
-
-    // let feedback_stimuli = [
-    //   {feedback: feedback_array[0], data: {test_part: 'feedback', correct_response: 48}}, // 0 key
-    //   {feedback: feedback_array[1], data: {test_part: 'feedback', correct_response: 49}}, // 1 key
-    // ]
-
     let practice_stimuli = [
-      {stimulus: pract_run[15], stimulus2: '', data: {test_part: 'practice', correct_response: 48}}, // 0 key
-      {stimulus: pract_run[16], stimulus2: '', data: {test_part: 'practice', correct_response: 48}}, // 0 key
-      {stimulus: pract_run[17], stimulus2: '', data: {test_part: 'practice', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[15], stimulus2: '', data: {test_part: 'practice', correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[16], stimulus2: '', data: {test_part: 'practice', correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[17], stimulus2: '', data: {test_part: 'practice', correct_response: 49}}, // 1 key
     ]
 
     let learning_stimuli = [
-      {stimulus: stage_one[0], stimulus2: '',  data: {test_part: 'learning', reaction: 'allergy', role: 'singlePositive', correct_response: 49}}, // 1 key
-      {stimulus: stage_one[1], stimulus2: '', data: {test_part: 'learning', reaction: 'allergy', role: 'singlePositive', correct_response: 49}}, // 1 key
-      {stimulus: stage_one[4], stimulus2: '', data: {test_part: 'learning', reaction: 'noReaction', role: 'singleNegative', correct_response: 48}}, // 0 key
-      {stimulus: stage_one[5], stimulus2: '', data: {test_part: 'learning', reaction: 'noReaction', role: 'singleNegative',correct_response: 48}}, // 0 key
-      {stimulus: stage_one[9], stimulus2: '', data: {test_part: 'learning', reaction: 'noReaction', role: 'singleNegative',correct_response: 48}}, // 0 key
-      {stimulus: stage_one[10], stimulus2: '', data: {test_part: 'learning', reaction: 'allergy', role: 'singlePositive', correct_response: 49}}, // 1 key
-      {stimulus: stage_one[11], stimulus2: '', data: {test_part: 'learning', reaction: 'noReaction', role: 'singleNegative',correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[0], stimulus2: '',  data: {test_part: 'learning', reaction: 'allergy', role: 'singlePositive', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[1], stimulus2: '', data: {test_part: 'learning', reaction: 'allergy', role: 'singlePositive', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[4], stimulus2: '', data: {test_part: 'learning', reaction: 'noReaction', role: 'singleNegative', correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[5], stimulus2: '', data: {test_part: 'learning', reaction: 'noReaction', role: 'singleNegative',correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[9], stimulus2: '', data: {test_part: 'learning', reaction: 'noReaction', role: 'singleNegative',correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[10], stimulus2: '', data: {test_part: 'learning', reaction: 'allergy', role: 'singlePositive', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[11], stimulus2: '', data: {test_part: 'learning', reaction: 'noReaction', role: 'singleNegative',correct_response: 48}}, // 0 key
     ]
 
     let blocking_stimuli = [
-      {stimulus: stage_two[0], stimulus2: stage_two[2], data: {test_part: 'blocking', reaction: 'allergy', role: 'blocking', correct_response: 49}}, // 1 key
-      {stimulus: stage_two[1], stimulus2: stage_two[3], data: {test_part: 'blocking', reaction: 'allergy', role: 'blocking', correct_response: 49}}, // 1 key
-      {stimulus: stage_two[4], stimulus2: stage_two[6], data: {test_part: 'blocking', reaction: 'allergy', role: 'blockingControl', correct_response: 49}}, // 1 key
-      {stimulus: stage_two[5], stimulus2: stage_two[7], data: {test_part: 'blocking', reaction: 'allergy', role: 'blockingControl', correct_response: 49}}, // 1 key
-      {stimulus: stage_two[8], stimulus2: stage_two[9], data: {test_part: 'blocking', reaction: 'noReaction', role: 'noAllergyControl', correct_response: 48}}, // 0 key
-      {stimulus: stage_two[10], stimulus2: '', data: {test_part: 'blocking', reaction: 'allergy', role: 'consistentAllergy', correct_response: 49}}, // 1 key
-      {stimulus: stage_two[11], stimulus2: '', data: {test_part: 'blocking', reaction: 'noReaction', role: 'consistentNoAllergy', correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[0], stimulus2: stim_shuffle[2], data: {test_part: 'blocking', reaction: 'allergy', role: 'blocking', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[1], stimulus2: stim_shuffle[3], data: {test_part: 'blocking', reaction: 'allergy', role: 'blocking', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[4], stimulus2: stim_shuffle[6], data: {test_part: 'blocking', reaction: 'allergy', role: 'blockingControl', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[5], stimulus2: stim_shuffle[7], data: {test_part: 'blocking', reaction: 'allergy', role: 'blockingControl', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[8], stimulus2: stim_shuffle[9], data: {test_part: 'blocking', reaction: 'noReaction', role: 'noAllergyControl', correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[10], stimulus2: '', data: {test_part: 'blocking', reaction: 'allergy', role: 'consistentAllergy', correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[11], stimulus2: '', data: {test_part: 'blocking', reaction: 'noReaction', role: 'consistentNoAllergy', correct_response: 48}}, // 0 key
     ]
 
     let testing_stimuli = [
-      {stimulus: stage_three[2], stimulus2: '', data: {test_part: 'testing', reaction: 'allergy', role: 'blockingViolation',correct_response: 49}}, // 1 key
-      {stimulus: stage_three[3], stimulus2: '', data: {test_part: 'testing', reaction: 'noReaction', role: 'blockingConfirmation',correct_response: 48}}, // 0 key
-      {stimulus: stage_three[6], stimulus2: '', data: {test_part: 'testing', reaction: 'allergy', role: 'blockingConfirmationControl',correct_response: 49}}, // 1 key
-      {stimulus: stage_three[7], stimulus2: '', data: {test_part: 'testing', reaction: 'noReaction', role: 'blockingViolationControl',correct_response: 48}}, // 0 key
-      {stimulus: stage_three[8], stimulus2: '', data: {test_part: 'testing', reaction: 'noReaction', role: 'noAllergyControl',correct_response: 48}}, // 0 key
-      {stimulus: stage_three[10], stimulus2: stage_three[9], data: {test_part: 'testing', reaction: 'allergy', role: 'consistentAllergy',correct_response: 49}}, // 1 key
-      {stimulus: stage_three[11], stimulus2: '', data: {test_part: 'testing', reaction: 'noReaction', role: 'consistentNoAllergy',correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[2], stimulus2: '', data: {test_part: 'testing', reaction: 'allergy', role: 'blockingViolation',correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[3], stimulus2: '', data: {test_part: 'testing', reaction: 'noReaction', role: 'blockingConfirmation',correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[6], stimulus2: '', data: {test_part: 'testing', reaction: 'allergy', role: 'blockingConfirmationControl',correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[7], stimulus2: '', data: {test_part: 'testing', reaction: 'noReaction', role: 'blockingViolationControl',correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[8], stimulus2: '', data: {test_part: 'testing', reaction: 'noReaction', role: 'noAllergyControl',correct_response: 48}}, // 0 key
+      {stimulus: stim_shuffle[10], stimulus2: stim_shuffle[9], data: {test_part: 'testing', reaction: 'allergy', role: 'consistentAllergy',correct_response: 49}}, // 1 key
+      {stimulus: stim_shuffle[11], stimulus2: '', data: {test_part: 'testing', reaction: 'noReaction', role: 'consistentNoAllergy',correct_response: 48}}, // 0 key
     ]
 
     // create fixation point
@@ -370,6 +353,7 @@ function saveData(name, data){
       jsPsych.init({
         timeline: timeline,
         show_progress_bar: true,
+        preload_images: [stim_shuffle],
         on_finish: function(){ saveData("food-allergy_" + workerID, jsPsych.data.get().csv()); }
         //on_finish: function(){
           //jsPsych.data.get().filter([{test_part: 'test'},{test_part: 'prediction'},{test_part: 'c2_test'}]).localSave("csv", `test-self-deception-data.csv`);
