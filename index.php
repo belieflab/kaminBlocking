@@ -11,7 +11,7 @@ file_put_contents($name, $data);
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Self-Deception Task</title>
+    <title>Food Allergy</title>
     <script src="jsPsych/jspsych.js"></script>
     <script src="jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
