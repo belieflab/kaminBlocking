@@ -51,7 +51,7 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
         git clone https://github.com/belieflab/foodAllery.git
 
 #### Modifty permissions:
-3. Copy this text into your terminal from the /var/www/html folder (the folder you are already in).
+3. Execute these two chmod commands in terminal from  /var/www/html (the directory you are already in).
 
         sudo chmod -R 755 foodAllergy/
         sudo chmod -R 777 foodAllergy/data
