@@ -34,7 +34,7 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 #### Start experiment:     
 9. Click this URL: [http://localhost:8080/foodAllergy](http://localhost:8080/foodAllergy)
       
-BRAVO! You're ready to edit the code in a text editor of your choice.  
+BRAVO! You're ready to edit the code in a text editor of your choice.__ 
 
 ## Hosting Guide  
 
