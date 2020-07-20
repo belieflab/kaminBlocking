@@ -35,7 +35,7 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 9. Click this URL: [http://localhost:8080/foodAllergy](http://localhost:8080/foodAllergy)
       
 #### View the source code:  
-10. Open the 
+10. Open the foodAllergy directory in a text editor of your choice. We use [https://code.visualstudio.com/](http://localhost:8080/foodAllergy)
     Mac/Linux:
 
         cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs/foodAllergy
