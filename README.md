@@ -1,7 +1,7 @@
 # foodAllergy
 This is a psychological task designed to track new causal belief formation. It involves subjects learning to associate causes (foods) with effects (allergies in a fictitious patient).
 
-The scenario is as follows: subjects imagine they are an allergist and they are charged with figuring our which foods cause allergies in a fictitious patient and which ones do not. They see each meal he has eaten (comprised of one or two different foods) , for 3 seconds then they see whether or not an allergy happened (for one second). When a meal is on the screen, they make a prediction with a 2-alternative button push (allergy or no allergy). They also press and hold the key down for longer the more confident they are that they are making the right choice.
+The scenario is as follows: subjects imagine they are an allergist and they are charged with figuring our which foods cause allergies in a fictitious patient and which ones do not. They see each meal he has eaten (comprised of one or two different foods) , for 3 seconds then they see whether or not an allergy happened (for one second). When a meal is on the screen, they make a prediction with a 2-alternative button push (allergy or no allergy).
 
 ## Development Guide
 
