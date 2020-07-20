@@ -38,7 +38,7 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 10. Open the 
     Mac/Linux:
 
-        cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs\\foodAllergy
+        cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs/foodAllergy
 
     Windows:
 
@@ -49,7 +49,7 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 #### Clone the git repository:
 1. Open Terminal and navigate to the your server's default directory:
 
-    Apache Linux:
+    Apache Linux default directory:
 
         cd /var/www/html
 
