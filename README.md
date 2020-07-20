@@ -1,5 +1,5 @@
 # foodAllergy
-description
+This is a psychological task designed to track new causal belief formation. It involves subjects learning to associate causes (foods) with effects (allergies in a fictitious patient).
 
 ## Development Guide
 
