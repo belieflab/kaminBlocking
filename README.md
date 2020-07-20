@@ -20,7 +20,7 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
         cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs
     Windows:
 
-        cd C://xampp//htdocs
+        cd C:\\xampp\\htdocs
 
 7. Clone into htdocs:
 
@@ -34,7 +34,15 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 #### Start experiment:     
 9. Click this URL: [http://localhost:8080/foodAllergy](http://localhost:8080/foodAllergy)
       
-BRAVO! You're ready to edit the code in a text editor of your choice.__ 
+#### View the source code:  
+10. Open the 
+    Mac/Linux:
+
+        cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs\\foodAllergy
+
+    Windows:
+
+        cd C:\\xampp\\htdocs\\foodAllergy
 
 ## Hosting Guide  
 
