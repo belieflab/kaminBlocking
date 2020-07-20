@@ -26,7 +26,7 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 
         git clone https://github.com/belieflab/foodAllergy.git
 
-#### Modifty permissions:
+#### Modify permissions:
 8. Copy this text into your terminal from the htdocs folder (the folder you are already in).
 
         sudo chmod -R 777 foodAllergy/
