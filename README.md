@@ -36,10 +36,10 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
       
       
       
-### BRAVO! You're a XAMPP master.
+#### BRAVO! You're a XAMPP master.
 
-
-
+/
+/
 ## Hosting Guide
 
 #### Clone the git repository:
