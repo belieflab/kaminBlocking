@@ -37,7 +37,8 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 BRAVO! You're ready to edit the code in a text editor of your choice.  
 
 ## Hosting Guide
-
+  
+  
 #### Clone the git repository:
 1. Open Terminal and navigate to the your server's default directory:
 
