@@ -34,10 +34,8 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 #### Start experiment:     
 9. Click this URL: [http://localhost:8080/foodAllergy](http://localhost:8080/foodAllergy)
       
-      
-      
-#### BRAVO! You're a XAMPP master.
-\
+#### BRAVO! You're a XAMPP master./
+
 
 ## Hosting Guide
 
