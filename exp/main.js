@@ -132,6 +132,7 @@ timeline.push(practice_procedure);
 /* END TRAINING TRIAL FOR PARTICIPANTS */
 
 
+
 /* BEGIN EXPERIMENT */
 
 let instructions_4 = {
@@ -176,17 +177,14 @@ let testing_procedure = {
 
 timeline.push(testing_procedure);
 
-// COMPLETION MESSAGE: Completed Classification Phase
-var instructions_16 = {
+//COMPLETION MESSAGE: Completed Classification Phase
+
+let qualtricsSurvey = {
     type: "html-keyboard-response",
-    stimulus: '<p style="color:white;">You have now completed the task! Saving data...PLEASE DO NOT CLOSE THIS BROWSER until you complete the second part.</p> ' +
-        '<p style="color:white;">BEFORE THE LINK DISAPPEARS please move on to the second part of the task at this link to obtain your completion code:</p> ' +
-        "<a href=" + link + ' target="_blank">' + qualtrics + "</a>",
+    stimulus: '<p style="color:black;">You have now completed the task! Saving data...PLEASE DO NOT CLOSE THIS BROWSER until you complete the second part.</p> ' +
+        '<p style="color:black;">BEFORE THE LINK DISAPPEARS please move on to the second part of the task at this link to obtain your completion code:</p> ' +
+        "<a href=" + qualtrics + ' target="_blank">' + qualtrics + "</a>",
     choices: jsPsych.NO_KEYS,
     trial_duration: 40000,
-    on_start: function(trial) {
-    jsPsych.setProgressBar(1);
-    }
 };
-timeline.push(instructions_16);
-
+timeline.push(qualtricsSurvey);
