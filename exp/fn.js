@@ -33,9 +33,7 @@ function getParamFromURL(name){
 
 // Take the user to a random URL, selected from the pool below 
 
-function randomizeURL(linkArray) {
-	window.location=linkArray[Math.floor(Math.random()*linkArray.length)];
-}
+
 
 
 
