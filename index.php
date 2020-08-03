@@ -58,7 +58,7 @@ file_put_contents($name, $data);
       <br><br>
       <u><b>Economic Considerations</b></u>
       <br>
-      You will receive the reward specified on the Mechanical-Turk HIT for completing both the game and the questionnaire. Payment for completion of the HIT is $6.00 with up to a $2.00 bonus based on task performance and a further $40 bonus to individuals who score in the top 1%. Upon finishing the game and submitting the questionnaire, you will receive code numbers. Please record these two code numbers and submit them for payment. 
+      You will receive the reward specified on the Mechanical-Turk HIT for completing both the game and the questionnaire. Payment for completion of the HIT is $6.00, which will be paid upon finish. Upon finishing the game and submitting the questionnaire, you will receive code numbers. Please record these two code numbers and submit them for payment. 
       <br><br>
       <u><b>Confidentiality</b></u>
       <br>
@@ -72,7 +72,7 @@ file_put_contents($name, $data);
       <br><br>
       <u><b>Questions or Concerns</b></u>
       <br>
-      If you have any questions or concerns regarding the experiment, you may contact us here at the lab by emailing BLAMLabRequester@gmail.com If you have general questions about your rights as a research participant, you may contact the Yale University Human Investigation Committee at 203-785-4688 or human.subjects@yale.edu (HSC# 2000026290).
+      If you have any questions or concerns regarding the experiment, you may contact us here at the lab by emailing belieflabrequester@gmail.com If you have general questions about your rights as a research participant, you may contact the Yale University Human Investigation Committee at 203-785-4688 or human.subjects@yale.edu (HSC# 2000026290).
 
     </p>
   </div>
@@ -110,7 +110,7 @@ file_put_contents($name, $data);
     /* define instructions trial */
     let instructions_1 = {
       type: "html-keyboard-response",
-      stimulus: '<p style="color:black;">In this experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</p>' +
+      stimulus: '<p style="color:black;">In the first part of the experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</p>' +
                 '<p style="color:black;">You have been presented with a new patient who suffers from allergic reactions following some meals, but not others.</p> '+
                 '<p style="color:black;">You arrange for them to eat a number of different meals, containing one or two foods, and observe whether or not they have an allergic reaction.</p>'+
                 '<br>'+
@@ -121,7 +121,7 @@ file_put_contents($name, $data);
 
     let instructions_2 = {
       type: "html-keyboard-response",
-      stimulus: '<p style="color:black;">During the experiment, you will be shown pictures of the foods given to your patient for each meal.</p>'+
+      stimulus: '<p style="color:black;">During the first part of the experiment, you will be shown pictures of the foods given to your patient for each meal.</p>'+
                 '<p style="color:black;">You will then be shown whether or not they suffered an allergic reaction after eating the meal.</p>' + 
                 '<p style="color:black;">When you see each meal, please predict whether or not you believe they will suffer an allergic reaction after eating the meal.</p>'+
                 '<br>'+
@@ -280,7 +280,7 @@ file_put_contents($name, $data);
     let instructions_4 = {
       type: "html-keyboard-response",
       stimulus: '<p style="color:black;">Let us begin! Press the space bar when you are ready to start the experiment.</p>'+
-                '<p style="color:black;">It should last about 20 minutes with breaks in-between.</p>'+
+                '<p style="color:black;">The first part of the experiment should last about 20 minutes with breaks in-between. After you finish, you will be directed to the 2nd part of the experiment which is a survey (about 20-30 minutes).</p>'+
                 '<br>'+
                 '<p style="color:black;">Good Luck!</p>',
       choices: [32],
@@ -318,6 +318,21 @@ file_put_contents($name, $data);
     }
 
     timeline.push(testing_procedure);
+    
+    // COMPLETION MESSAGE: Completed Classification Phase
+    var link = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0U3wW3G3HfY8Ie1"
+    var instructions_16 = {
+      type: "html-keyboard-response",
+      stimulus: '<p style="color:white;">You have now completed the task! Saving data...PLEASE DO NOT CLOSE THIS BROWSER until you complete the second part.</p> ' +
+          '<p style="color:white;">BEFORE THE LINK DISAPPEARS please move on to the second part of the task at this link to obtain your completion code:</p> ' +
+          "<a href=" + link + ' target="_blank">' + link + "</a>",
+      choices: jsPsych.NO_KEYS,
+      trial_duration: 40000,
+      on_start: function(trial) {
+        jsPsych.setProgressBar(1);
+      }
+    };
+    timeline.push(instructions_16);
 
     
 
@@ -378,3 +393,6 @@ window.onload = function() {
 </script>
 </footer>
   </html>
+
+
+  
