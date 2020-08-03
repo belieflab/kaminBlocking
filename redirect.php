@@ -6,4 +6,4 @@
 <body>
     <script> randomizeURL(links) </script>
 </body>
-</html>å
+</html>

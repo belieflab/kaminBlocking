@@ -25,7 +25,7 @@ let instructions_2 = {
     type: "html-keyboard-response",
     stimulus: '<p style="color:black;">During the first part of the experiment, you will be shown pictures of the foods given to your patient for each meal.</p>'+
             '<p style="color:black;">You will then be shown whether or not they suffered an allergic reaction after eating the meal.</p>' + 
-            '<p style="color:black;">When you see each meal, please predict whether or not you believe they will suffer an allergic reaction after eating the meal.</p>'+
+            '<p style="color:black;">When you see each meal, you will have three seconds to predict whether or not you believe they will suffer an allergic reaction after eating the meal.</p>'+
             '<br>'+
             '<p style="color:black;">To predict that a particular meal <strong><u>will not</strong></u> cause an allergy please press the <q><strong>0</strong></q> key on the keyboard.</p>'+
             '<p style="color:black;">To predict that a meal <b><u>will cause</b></u> an allergic reaction please press the <q><strong>1</strong></q> key on the keyboard.</p>'+
@@ -86,9 +86,6 @@ let stimuli = {
     }
 };
 
-
-// inter-stimulus interval
-let isi = [1000, 5000];
 
 // create feedback trials
 let feedback = {
