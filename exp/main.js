@@ -147,35 +147,35 @@ let instructions_4 = {
 timeline.push(instructions_4);
 
 
-let learning_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: learning_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 10
-}
+// let learning_procedure = {
+//     timeline: [fixation, stimuli, feedback],
+//     timeline_variables: learning_stimuli,
+//     randomize_order: true,
+//     type: 'fixed-repititions',
+//     repetitions: 10
+// }
 
-timeline.push(learning_procedure);
+// timeline.push(learning_procedure);
 
-let blocking_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: blocking_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
-}
+// let blocking_procedure = {
+//     timeline: [fixation, stimuli, feedback],
+//     timeline_variables: blocking_stimuli,
+//     randomize_order: true,
+//     type: 'fixed-repititions',
+//     repetitions: 6
+// }
 
-timeline.push(blocking_procedure);
+// timeline.push(blocking_procedure);
 
-let testing_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: testing_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
-}
+// let testing_procedure = {
+//     timeline: [fixation, stimuli, feedback],
+//     timeline_variables: testing_stimuli,
+//     randomize_order: true,
+//     type: 'fixed-repititions',
+//     repetitions: 6
+// }
 
-timeline.push(testing_procedure);
+// timeline.push(testing_procedure);
 
 //COMPLETION MESSAGE: Completed Classification Phase
 
@@ -185,6 +185,22 @@ let qualtricsSurvey = {
         '<p style="color:black;">BEFORE THE LINK DISAPPEARS please move on to the second part of the task at this link to obtain your completion code:</p> ' +
         "<a href=" + qualtrics + ' target="_blank">' + qualtrics + "</a>",
     choices: jsPsych.NO_KEYS,
-    trial_duration: 40000,
+    trial_duration: 40,
 };
 timeline.push(qualtricsSurvey);
+
+
+function startExperiment(){
+    jsPsych.init({
+        timeline: timeline,
+        show_progress_bar: true,
+        preload_images: [stim_shuffle],
+        on_finish: function(){
+          saveData("food-allergy_" + workerId, jsPsych.data.get().csv());
+        }
+        //on_finish: function(){
+        //jsPsych.data.get().filter([{test_part: 'test'},{test_part: 'prediction'},{test_part: 'c2_test'}]).localSave("csv", `test-self-deception-data.csv`);
+            //jsPsych.data.displayData(); 
+        //}
+    });
+  }

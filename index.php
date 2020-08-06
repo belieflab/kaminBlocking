@@ -12,7 +12,6 @@ file_put_contents($name, $data);
   <head>
     <title>Food Allergy</title>
 
-    <script type="text/javascript" src="conf.js"></script>
     <script src="jsPsych/jspsych.js"></script>
     <script src="jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
@@ -24,8 +23,9 @@ file_put_contents($name, $data);
     </body>
   <footer>
 
-  <script type="text/javascript" src="exp/fn.js"></script>
+    <script type="text/javascript" src="exp/fn.js"></script>
     <script type="text/javascript" src="exp/var.js"></script>
+    <script type="text/javascript" src="exp/conf.js"></script>
     <script type="text/javascript" src="exp/main.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
   </footer>

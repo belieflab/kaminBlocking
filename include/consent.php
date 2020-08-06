@@ -63,8 +63,6 @@ window.onload = function() {
 
     </p>
   </div>
-
-
 </div>
 <div id="attritionHolder" class="attrition centeredDiv"> 
   <p id="attritionInstructions" class="attrition"></p>
@@ -75,9 +73,6 @@ window.onload = function() {
   <p id="workerIDErrorMessage">You are ineligible for this task, since your worker ID has been recorded as participating in this task already. 
     Please return the HIT.</p>
 </div>
-
-
-
   <div id="nextButtonHolder" class="buttonHolder">
   <button id="nextButton" onclick="startExperiment()">CONSENT/NEXT</button>
 </div>
