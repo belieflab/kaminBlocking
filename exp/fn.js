@@ -8,7 +8,6 @@ function saveData(name, data){
     xhr.send(JSON.stringify({filename: name, filedata: data}));
   }
 
-
 function getParamFromURL(name) {
   name = name.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");
   var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -20,9 +19,20 @@ function getParamFromURL(name) {
     return results[1];
 }
 
-// Take the user to a random URL, selected from the pool below 
-
-
+function startExperiment(){
+  jsPsych.init({
+      timeline: timeline,
+      show_progress_bar: true,
+      preload_images: [stim_shuffle],
+      on_finish: function(){
+        saveData("food-allergy_" + workerId, jsPsych.data.get().csv());
+      }
+      //on_finish: function(){
+      //jsPsych.data.get().filter([{test_part: 'test'},{test_part: 'prediction'},{test_part: 'c2_test'}]).localSave("csv", `test-self-deception-data.csv`);
+          //jsPsych.data.displayData(); 
+      //}
+  });
+}
 
 
 
