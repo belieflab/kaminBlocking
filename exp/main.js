@@ -185,7 +185,7 @@ let qualtricsSurvey = {
         '<p style="color:black;">BEFORE THE LINK DISAPPEARS please move on to the second part of the task at this link to obtain your completion code:</p> ' +
         "<a href=" + qualtrics + ' target="_blank">' + qualtrics + "</a>",
     choices: jsPsych.NO_KEYS,
-    trial_duration: 40,
+    trial_duration: 40000,
 };
 timeline.push(qualtricsSurvey);
 
