@@ -11,7 +11,7 @@ file_put_contents($name, $data);
 <html>
   <head>
     <title>Food Allergy</title>
-
+    <script src="db/submit.js"></script>
     <script src="jsPsych/jspsych.js"></script>
     <script src="jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
@@ -19,7 +19,7 @@ file_put_contents($name, $data);
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
     <body style="background-color:white;">  
-      <?php include 'include/consent.php'?>
+      <?php include 'include/intake.php'?>
     </body>
   <footer>
 

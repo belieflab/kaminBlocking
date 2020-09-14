@@ -5,52 +5,64 @@ let timeline = [];
 /* define welcome message trial */
 let welcome = {
     type: "html-keyboard-response",
-    stimulus: '<p style="color:black;">Welcome to the experiment! Press any key to begin.</p>'
+    stimulus: '<h1 style="color:black;">Welcome to the experiment!</h1>'+
+    '<p>Press any key to begin.</p>'
 };
 timeline.push(welcome);
 
 /* define instructions trial */
 let instructions_1 = {
     type: "html-keyboard-response",
-    stimulus: '<p style="color:black;">In the first part of the experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</p>' +
-            '<p style="color:black;">You have been presented with a new patient who suffers from allergic reactions following some meals, but not others.</p> '+
-            '<p style="color:black;">You arrange for them to eat a number of different meals, containing one or two foods, and observe whether or not they have an allergic reaction.</p>'+
-            '<br>'+
-            '<p style="color:black;">Press the space bar to continue.</p>',
+    stimulus: '<h2 style="color:black;">In the first part of the experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</h2>' +
+            '<h3 style="color:black;">You have been presented with a new patient who suffers from allergic reactions following some meals, but not others.</h3> '+
+            '<h3 style="color:black;">You arrange for them to eat a number of different meals, containing one or two foods, and observe whether or not they have an allergic reaction.</h3>'+
+            '<p style="color:black;">Press the spacebar to continue.</p>',
     choices: [32], //ascii spacebar
 };
 timeline.push(instructions_1);
 
 let instructions_2 = {
     type: "html-keyboard-response",
-    stimulus: '<p style="color:black;">During the first part of the experiment, you will be shown pictures of the foods given to your patient for each meal.</p>'+
-            '<p style="color:black;">You will then be shown whether or not they suffered an allergic reaction after eating the meal.</p>' + 
-            '<p style="color:black;">When you see each meal, you will have three seconds to predict whether or not you believe they will suffer an allergic reaction after eating the meal.</p>'+
-            '<br>'+
-            '<p style="color:black;">To predict that a particular meal <strong><u>will not</strong></u> cause an allergy please press the <q><strong>0</strong></q> key on the keyboard.</p>'+
-            '<p style="color:black;">To predict that a meal <b><u>will cause</b></u> an allergic reaction please press the <q><strong>1</strong></q> key on the keyboard.</p>'+
-            '<br>'+
-            '<p style="color:black;">Press either of the response keys to continue.</p>',
-    choices: [48, 49], //ascii spacebar
+    stimulus: '<h2 style="color:black;">During the first part of the experiment, you will be shown pictures of the foods given to your patient for each meal.</h2>'+
+            '<h3 style="color:black;">You will then be shown whether or not they suffered an allergic reaction after eating the meal.</h3>' + 
+            '<h3 style="color:black;">When you see each meal, you will have three seconds to predict whether or not you believe they will suffer an allergic reaction after eating the meal.</h3>'+
+            '<p style="color:black;">Press the spacebar to continue.</p>',
+            choices: [32], //ascii spacebar
 };
 timeline.push(instructions_2);
 
 let instructions_3 = {
     type: "html-keyboard-response",
-    stimulus: '<p style="color:black;">Obviously you will have to guess at first.</p>'+
-            '<p style="color:black;">But hopefully, as you see more meals, you will learn which foods tend to make your patient have an allergic reaction.</p>'+
-            '<br>'+
-            '<p style="color:black;">Food <strong><u>does not</strong></u> cause an allergy &#8594 <q><strong>0</strong></q> key </p>'+
-            '<p style="color:black;">Food <strong><u>causes</strong></u> an allergy &#8594 <q><strong>1</strong></q> key</p>'+
-            '<br>'+
-            '<p style="color:black;">Try to make your prediction <b><u>before</b></u> the meal leaves the screen.</p>'+
-            // '<p style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</p>'+
-            // '<p style="color:black;">If you think you are guessing please hold the key briefly. If you are very confident you should press and hold until the meal disappears from the screen.</p>'+
-            '<br>'+
-            '<p style="color:black;">Press the space bar to begin the practice trials.</p>',
-    choices: [32],
+    stimulus: '<h2 style="color:black;">To predict that a particular meal <strong><u>will not</strong></u> cause an allergy please press the <q><strong>0</strong></q> key on the keyboard.</h2>'+
+            '<h2 style="color:black;">To predict that a meal <b><u>will cause</b></u> an allergic reaction please press the <q><strong>1</strong></q> key on the keyboard.</h2>'+
+            '<p style="color:black;">Press either of the response keys to continue.</p>',
+    choices: [48, 49], //ascii spacebar
 };
 timeline.push(instructions_3);
+
+let instructions_4 = {
+    type: "html-keyboard-response",
+    stimulus: '<h2 style="color:black;">Obviously you will have to guess at first.</h2>'+
+            '<h3 style="color:black;">But hopefully, as you see more meals, you will learn which foods tend to make your patient have an allergic reaction.</h3>'+
+            '<br>'+
+            '<h2 style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</h2>'+
+            '<h3 style="color:black;">If you think you are guessing please hold the key briefly.</h3>'+
+            '<h3 style="color:black;">If you are very confident you should press and hold until the meal disappears from the screen.</h3>'+
+            '<p style="color:black;">Press the spacebar to continue.</p>',
+    choices: [32],
+};
+timeline.push(instructions_4);
+
+let instructions_5 = {
+type: "html-keyboard-response",
+stimulus: '<h2 style="color:black;">Try to make your prediction <b><u>before</b></u> the meal leaves the screen.</h2>'+
+        '<br>'+
+        '<h2 style="color:black;">Food <strong><u>does not</strong></u> cause an allergy &#8594 <q><strong>0</strong></q> key </h2>'+
+        '<h2 style="color:black;">Food <strong><u>causes</strong></u> an allergy &#8594 <q><strong>1</strong></q> key</h2>'+
+        '<p style="color:black;">Press the spacebar to begin the practice trials.</p>',
+choices: [32],
+};
+timeline.push(instructions_5);
 
 // create fixation point
 let fixation = {
@@ -135,16 +147,16 @@ timeline.push(practice_procedure);
 
 /* BEGIN EXPERIMENT */
 
-let instructions_4 = {
+let instructions_6 = {
     type: "html-keyboard-response",
-    stimulus: '<p style="color:black;">Let us begin! Press the space bar when you are ready to start the experiment.</p>'+
+    stimulus: '<p style="color:black;">Let us begin! Press the spacebar when you are ready to start the experiment.</p>'+
             '<p style="color:black;">The first part of the experiment should last about 20 minutes with breaks in-between. After you finish, you will be directed to the 2nd part of the experiment which is a survey (about 20-30 minutes).</p>'+
             '<br>'+
             '<p style="color:black;">Good Luck!</p>',
     choices: [32],
 
 };
-timeline.push(instructions_4);
+timeline.push(instructions_6);
 
 
 let learning_procedure = {
