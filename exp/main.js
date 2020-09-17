@@ -85,15 +85,55 @@ let stimuli = {
     // jsPsych.timelineVariable('stimulus'),
     choices: [48, 49], // [0 key , 1 key]
     trial_duration: 3000,
-    response_ends_trial: true,
+    // stimulus_duration: 3000,
+    response_ends_trial: false,
+    prompt: progressBar + fillUp + feedbackGenerator + timeRemaining + '<input autocomplete="autocomplete_off_hack_xfr4!k" id="tapTap" type="text" style="background-color:black; outline:none; border:none; background:none" onkeypress="">',
     data: jsPsych.timelineVariable('data'),
+    on_load: function buttonPress(data){
+        barFill = document.getElementById("fillUp");
+        barFill.innerHTML = 'Hold key to indicate confidence.';
+        document.getElementById("tapTap").focus(); //gives focus to the text box
+        document.getElementById("counter").setAttribute("onkeypress", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
+        // if (data.key_press==48){
+        //     // pressing_time = 7000;
+        //     // buttonPressing.trial_duration = pressing_time;
+        //     document.getElementById("counter").setAttribute("onkeypress", "return (event.charCode == 48) && moveConfidence()"); // event.charCode allows us to set specific keys to use
+        //     participantResponse = 48;
+        //   } else if (data.key_press==49){ 
+        //     // pressing_time= 21000; // for right handed only
+        //     // buttonPressing.trial_duration = pressing_time;
+        //     document.getElementById("counter").setAttribute("onkeypress", "return (event.charCode == 49) && moveConfidence()"); // event.charCode allows us to set specific keys to use
+        //     participantResponse = 49;
+        //   }
+    },
+    // on_load: function(data){
+    //     eventTarget.addEventListener("keydown", event => {
+    //         if (event.isComposing || event.keyCode === 229) {
+    //           return;
+    //         }
+    //         console.log("yes");
+    //       });
+    // },
     on_finish: function(data){
     // data.practice = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press);
     // data.practice = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
+    // document.getElementById("demo").addEventListener("keypress", confidenceIndicator);
+    // function confidenceIndicator() {
+    //     var last;
+    //     var output = $('#demo');
+    //     $('#txt').on('input', function() {
+    //         var n = new Date()
+    //         output.text((last - n) + ' ms');
+    //         last = n;
+    //     });
+    //     data.confidence = output.text(last - n);
+    // }
     if (data.key_press == data.correct_response) {
-        data.accuracy = 1
+        data.accuracy = 48
+        data.percent_confidence = totalConfidence;
     } else {
-        data.accuracy = 0
+        data.accuracy = 49
+        data.percent_confidence = totalConfidence;
     }
     }
 };
@@ -164,30 +204,30 @@ let learning_procedure = {
     timeline_variables: learning_stimuli,
     randomize_order: true,
     type: 'fixed-repititions',
-    repetitions: 10
+    repetitions: 1
 }
 
 timeline.push(learning_procedure);
 
-let blocking_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: blocking_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
-}
+// let blocking_procedure = {
+//     timeline: [fixation, stimuli, feedback],
+//     timeline_variables: blocking_stimuli,
+//     randomize_order: true,
+//     type: 'fixed-repititions',
+//     repetitions: 6
+// }
 
-timeline.push(blocking_procedure);
+// timeline.push(blocking_procedure);
 
-let testing_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: testing_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
-}
+// let testing_procedure = {
+//     timeline: [fixation, stimuli, feedback],
+//     timeline_variables: testing_stimuli,
+//     randomize_order: true,
+//     type: 'fixed-repititions',
+//     repetitions: 6
+// }
 
-timeline.push(testing_procedure);
+// timeline.push(testing_procedure);
 
 //COMPLETION MESSAGE: Completed Classification Phase
 
@@ -197,7 +237,7 @@ let qualtricsSurvey = {
         '<p style="color:black;">BEFORE THE LINK DISAPPEARS please move on to the second part of the task at this link to obtain your completion code:</p> ' +
         "<a href=" + qualtrics + ' target="_blank">' + qualtrics + "</a>",
     choices: jsPsych.NO_KEYS,
-    trial_duration: 40000,
+    trial_duration: 10000,
 };
 timeline.push(qualtricsSurvey);
 

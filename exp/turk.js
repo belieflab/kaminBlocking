@@ -11,7 +11,7 @@ function getParamFromURL(name) {
     return results[1];
 }
 
-var workerId = getParamFromURL( 'workerId' );
+
 
 // Take the user to a random URL, selected from the pool below 
 var link = ["index.php"+"?workerId="+workerId];
