@@ -45,9 +45,12 @@ let instructions_4 = {
     stimulus: '<h2 style="color:black;">Obviously you will have to guess at first.</h2>'+
             '<h3 style="color:black;">But hopefully, as you see more meals, you will learn which foods tend to make your patient have an allergic reaction.</h3>'+
             '<br>'+
-            '<h2 style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</h2>'+
-            '<h3 style="color:black;">If you think you are guessing please hold the key briefly.</h3>'+
-            '<h3 style="color:black;">If you are very confident you should press and hold until the meal disappears from the screen.</h3>'+
+            '<h2 style="color:black;">Please hold the reponse key AND the spacebar if you are more confident you are making the right choice.</h2>'+
+            '<h3 style="color:black;">If you think you are guessing please hold both keys briefly.</h3>'+
+            '<h3 style="color:black;">If you are very confident you should press and hold both keys until the meal disappears from the screen.</h3>'+
+            // '<h2 style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</h2>'+
+            // '<h3 style="color:black;">If you think you are guessing please hold the key briefly.</h3>'+
+            // '<h3 style="color:black;">If you are very confident you should press and hold until the meal disappears from the screen.</h3>'+
             '<p style="color:black;">Press the spacebar to continue.</p>',
     choices: [32],
 };
@@ -91,7 +94,7 @@ let stimuli = {
     data: jsPsych.timelineVariable('data'),
     on_load: function buttonPress(data){
         barFill = document.getElementById("fillUp");
-        barFill.innerHTML = 'Hold key to indicate confidence.';
+        barFill.innerHTML = 'Hold either response key and the spacebar to indicate confidence.';
         document.getElementById("tapTap").focus(); //gives focus to the text box
         document.getElementById("counter").setAttribute("onkeypress", "return (event.charCode === 32) && moveConfidence()"); // event.charCode allows us to set specific keys to use 
         // if (data.key_press==48){
@@ -128,6 +131,11 @@ let stimuli = {
     //     });
     //     data.confidence = output.text(last - n);
     // }
+    data.subject_key = 'GUID';
+    data.src_subject_id = workerId;
+    data.interview_date = today;
+    data.interview_age = ageAtAssessment;
+    data.sex = sexAtBirth;
     if (data.key_press == data.correct_response) {
         data.accuracy = true;
         data.percent_confidence = totalConfidence;
