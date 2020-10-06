@@ -13,9 +13,6 @@ function moveConfidence(data) { // function definition
   // });
   width = parseFloat(width.slice(0, -1)); // variable reassignment
     if (width >= 99) { // set to record 100 taps
-      feedbackLogic = 'You completed the task!';
-      tapTotal = 100;
-      console.log('complete');
       trialComplete = 1;
       width = document.getElementById("keyBar").style.width="0%"; // reset to 0
       jsPsych.finishTrial();  
