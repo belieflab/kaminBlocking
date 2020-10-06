@@ -4,13 +4,15 @@ src_subject_id,String,20,Required,Subject ID how it's defined in lab/project,,,"
 interview_date,Date,,Required,Date on which the interview/genetic test/sampling/imaging/biospecimen was completed. MM/DD/YYYY,,Required field,"sessiondate,studyday"
 interview_age,Integer,,Required,Age in months at the time of the interview/test/sampling/imaging.,0 :: 1260,"Age is rounded to chronological month. If the research participant is 15-days-old at time of interview, the appropriate value would be 0 months. If the participant is 16-days-old, the value would be 1 month.",age
 sex,String,1,Required,Sex of the subject,M;F; O; NR,M = Male; F = Female; O=Other; NR = Not reported,"gender,sex"
-stim,String,,Recommended,Stimulus ID based on picture file name,,,
+stim_left,String,,Recommended,Stimulus ID based on picture file name,,,
+stim_right,String,,Recommended,Stimulus ID based on picture file name,,,
 trial,Integer,,Recommended,Identifies the position of the stimulus within the task,0 :: 176,,
 test_part,String,,Recommended,Identifies the task condition,Original; Inverted,"For ""original"" condition, faces are in normal position (i.e., right-side up)",
 rt,Integer,,Recommended,Reflects time elapsed since response options emerge,,,
-key_press,Float,,Recommended,The ascii keyboard key pressed for each response,48;49,48 = 0 key; 49 = 1 key;,
-time_elapsed,integer,,Recommended,Total time passed,,useful for determining runtime as well as whether subject idles during task,
-response_face,Integer,,Recommended,Indicates if subject identified a face or not,0; 1,"0 = No face, 1 = A face is present",
-response_age,Integer,,Recommended,"Only present if subject identified face, indicates whether they labelled it as old or young",0; 1,"0 = Young face, 1 = Old face",
-response_sex,Integer,,Recommended,"Only present if subject identified face, indicates whether they labelled it as male or female",0; 1,"0 = Female, 1 = Male",
-accuracy_face,Integer,,Recommended,Indicates if subject correctly identified a face or correctly identified the absence of a face,0; 1,0 = Incorrect; 1 = Correct,
+time_elapsed,Integer,,Recommended,Total time passed,,useful for determining runtime as well as whether subject idles during task,
+trial,Integer,,Recommended,trial number index,0:23,,
+reaction,String,,Recommended,Pre-determined allergic reaction status of stimulus pair,allergy;no-reaction,whether stimulus or stimulus pair is of the allergy or no-reaction condition,
+condition,String,,Recommended,Test condition,single-positive;single-negative;blocking;blocking-control,identifies the task condition for analysis,
+response,Integer,,Recommended,The ascii keyboard key pressed for each trial response,48;49,48 = 0 key; 49 = 1 key;,
+accuracy,Integer,,Recommended,Indicates if subject correctly identified a face or correctly identified the allergy or no-allergy,0; 1,0 = Incorrect; 1 = Correct,
+confidence,Float,,Recommended,Indicates subject confidence rating percentage on each trial,0::100.4,Participants hold down key to indicate rating confidence on each trial,
