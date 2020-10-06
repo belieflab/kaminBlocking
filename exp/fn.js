@@ -1,7 +1,7 @@
 /* start the experiment */
 
 //  increment confidence bar
-function moveConfidence(data) { // function definition
+function moveConfidence(event) { // function definition
   var width = document.getElementById("keyBar").style.width; // variable assignment of width property of keyBar
   // $(document).ready(function(){
   //   $("input").keydown(function(){
@@ -19,13 +19,14 @@ function moveConfidence(data) { // function definition
       trialComplete = 1;
       width = document.getElementById("keyBar").style.width="0%"; // reset to 0
       jsPsych.finishTrial();  
+      // return (event.charCode == 48 || event.charCode == 49)
     } else {
       width+= 3.34;
       console.log(width);
       totalConfidence = width;
       trialComplete = 0;
       width = document.getElementById("keyBar").style.width=String(width)+"%";
-      return (event.charCode == 48 || event.charCode == 49)
+      // return (event.charCode == 48 || event.charCode == 49)
     }
 
   }
@@ -55,7 +56,7 @@ function startExperiment(){
       preload_images: [stim_shuffle],
       on_finish: function(){
         // saveData("food-allergy_" + workerId, jsPsych.data.get().csv());
-        saveData("food-allergy_" + workerID, jsPsych.data.get().csv());
+        saveData("kamin-blocking_" + workerID, jsPsych.data.get().csv());
       }
       //on_finish: function(){
       //jsPsych.data.get().filter([{test_part: 'test'},{test_part: 'prediction'},{test_part: 'c2_test'}]).localSave("csv", `test-self-deception-data.csv`);

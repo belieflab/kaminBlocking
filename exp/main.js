@@ -66,7 +66,7 @@ timeline.push(instructions_5);
 
 // create fixation point
 let fixation = {
-    data: {test_part: 'fixation'},
+    // data: {test_part: 'fixation'},
     type: 'html-keyboard-response',
     stimulus: '<div style="color:black; font-size:60px;"></div>',
     choices: jsPsych.NO_KEYS,
@@ -87,13 +87,13 @@ let stimuli = {
     trial_duration: 3000,
     // stimulus_duration: 3000,
     response_ends_trial: false,
-    prompt: progressBar + fillUp + feedbackGenerator + timeRemaining + '<input autocomplete="autocomplete_off_hack_xfr4!k" id="tapTap" type="text" style="background-color:black; outline:none; border:none; background:none" onkeypress="">',
+    prompt: progressBar + fillUp + feedbackGenerator + timeRemaining + '<input autocomplete="autocomplete_off_hack_xfr4!k" id="tapTap" type="text" style="background-color:black; color: transparent; outline:none; border:none; background:none" onkeypress="">',
     data: jsPsych.timelineVariable('data'),
     on_load: function buttonPress(data){
         barFill = document.getElementById("fillUp");
         barFill.innerHTML = 'Hold key to indicate confidence.';
         document.getElementById("tapTap").focus(); //gives focus to the text box
-        document.getElementById("counter").setAttribute("onkeypress", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
+        document.getElementById("counter").setAttribute("onkeypress", "return (event.charCode === 32) && moveConfidence()"); // event.charCode allows us to set specific keys to use 
         // if (data.key_press==48){
         //     // pressing_time = 7000;
         //     // buttonPressing.trial_duration = pressing_time;
@@ -129,11 +129,14 @@ let stimuli = {
     //     data.confidence = output.text(last - n);
     // }
     if (data.key_press == data.correct_response) {
-        data.accuracy = 48
+        data.accuracy = true;
+        data.percent_confidence = totalConfidence;
+    } else if (data.key_press == data.incorrect_response) {
+        data.accuracy = false;
         data.percent_confidence = totalConfidence;
     } else {
-        data.accuracy = 49
-        data.percent_confidence = totalConfidence;
+        data.accuracy = '';
+        data.percent_confidence = 0;
     }
     }
 };
@@ -141,7 +144,7 @@ let stimuli = {
 
 // create feedback trials
 let feedback = {
-    data: {test_part: 'feedback'},
+    // data: {test_part: 'feedback'},
     type: 'html-keyboard-response',
     // stimulus: function() {
     //     let last_trial_accuracy = jsPsych.data.get().last(1).values()[0].accuracy;
