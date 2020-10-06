@@ -137,7 +137,7 @@ let stimuli = {
     //     });
     //     data.confidence = output.text(last - n);
     // }
-    data.subject_key = 'GUID';
+    data.subjectkey = 'GUID';
     data.src_subject_id = workerId;
     data.interview_date = today;
     data.interview_age = ageAtAssessment;
@@ -147,17 +147,19 @@ let stimuli = {
 
     if (responseKey == data.correct_response) {
         data.accuracy = 1;
-        data.percent_confidence = totalConfidence;
+        data.confidence = totalConfidence;
         responseKey = '';
     } else if (responseKey == data.incorrect_response) {
         data.accuracy = 0;
-        data.percent_confidence = totalConfidence;
+        data.confidence = totalConfidence;
         responseKey = '';
     } else {
         data.accuracy = '';
-        data.percent_confidence = '';
+        data.confidence = '';
         responseKey = '';
     }
+    data.trial = trialIterator;
+    trialIterator ++;
     }
 };
 
