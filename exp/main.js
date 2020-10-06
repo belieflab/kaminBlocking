@@ -212,8 +212,8 @@ timeline.push(practice_procedure);
 
 let instructions_6 = {
     type: "html-keyboard-response",
-    stimulus: '<h2 style="color:black;">Let us begin! Press the spacebar when you are ready to start the experiment.</h2>'+
-            '<p style="color:black;">Good Luck!</p>',
+    stimulus: '<h2 style="color:black;">Let us begin!</h2>'+
+            '<p style="color:black;">Press the spacebar when you are ready to start the experiment.</p>',
     choices: [32],
 
 };
@@ -252,14 +252,13 @@ timeline.push(learning_procedure);
 
 //COMPLETION MESSAGE: Completed Classification Phase
 
-let qualtricsSurvey = {
+let task_completion = {
     type: "html-keyboard-response",
-    stimulus: '<p style="color:black;">You have now completed the task! Saving data...PLEASE DO NOT CLOSE THIS BROWSER until you complete the second part.</p> ' +
-        '<p style="color:black;">BEFORE THE LINK DISAPPEARS please move on to the second part of the task at this link to obtain your completion code:</p> ' +
-        "<a href=" + qualtrics + ' target="_blank">' + qualtrics + "</a>",
+    stimulus: "<p style='color:white;'>You have completed this task. Please wait for the experimenter to continue.</p>"+
+    "<p style='color:white;'>Data Saving...Do not close this window until the text dissapears.”</p>",
     choices: jsPsych.NO_KEYS,
     trial_duration: 10000,
 };
-timeline.push(qualtricsSurvey);
+timeline.push(task_completion);
 
 
