@@ -28,8 +28,8 @@ for (let i = 1; i < 19; i++){
 let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
 
 let practice_stimuli = [
-    {stimulus: stim_shuffle[15], stimulus2: '', data: {test_part: 'practice', correct_response: 48, correct_response: 48}}, // 0 key
-    {stimulus: stim_shuffle[16], stimulus2: '', data: {test_part: 'practice', correct_response: 48, correct_response: 48,}}, // 0 key
+    {stimulus: stim_shuffle[15], stimulus2: '', data: {test_part: 'practice', correct_response: 48, incorrect_response: 49}}, // 0 key
+    {stimulus: stim_shuffle[16], stimulus2: '', data: {test_part: 'practice', correct_response: 48, incorrect_response: 49,}}, // 0 key
     {stimulus: stim_shuffle[17], stimulus2: '', data: {test_part: 'practice', correct_response: 49, incorrect_response: 48}}, // 1 key
 ]
 
