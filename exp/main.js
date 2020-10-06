@@ -83,7 +83,7 @@ let stimuli = {
     }, 
     
     // jsPsych.timelineVariable('stimulus'),
-    choices: jsPsych.NO_KEYS, // key_press handled instead by selectionKey
+    choices: jsPsych.NO_KEYS, // key_press handled instead by responseKey
     trial_duration: 3000,
     // stimulus_duration: 3000,
     response_ends_trial: false,
@@ -96,10 +96,10 @@ let stimuli = {
         document.body.onkeypress = function(e){
             if(e.keyCode == 48){
                 document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
-                selectionKey = 48;
+                responseKey = 48;
             } else if (e.keyCode == 49) {
                 document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
-                selectionKey = 49;
+                responseKey = 49;
 
             }
         }
@@ -143,13 +143,13 @@ let stimuli = {
     data.interview_age = ageAtAssessment;
     data.sex = sexAtBirth;
     
-    data.response = selectionKey;
+    data.response = responseKey;
 
-    if (selectionKey == data.correct_response) {
+    if (responseKey == data.correct_response) {
         data.accuracy = 1;
         data.percent_confidence = totalConfidence;
         responseKey = '';
-    } else if (selectionKey == data.incorrect_response) {
+    } else if (responseKey == data.incorrect_response) {
         data.accuracy = 0;
         data.percent_confidence = totalConfidence;
         responseKey = '';

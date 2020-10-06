@@ -11,7 +11,7 @@ let feedbackGenerator = '<p id="feedbackGenerator" style="color:black;"></p>';
 let totalConfidence = [0]; // must be 0 to compensate for participant should they miss first trial
 
 // // user selection of allergy or no-allergy
-let selectionKey;
+let responseKey;
 
 // progress bar container
 let progressBar = '<div id="counter" class="w3-container" style="color:black"><div class="w3-light-grey"><div class="w3-grey" id="keyBar" style="height:24px;width:0%;"></div></div><br><div>';
