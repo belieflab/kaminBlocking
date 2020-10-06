@@ -256,8 +256,8 @@ timeline.push(learning_procedure);
 
 let task_completion = {
     type: "html-keyboard-response",
-    stimulus: "<p style='color:white;'>You have completed this task. Please wait for the experimenter to continue.</p>"+
-    "<p style='color:white;'>Data Saving...Do not close this window until the text dissapears.”</p>",
+    stimulus: "<p style='color:black;'>You have completed this task. Please wait for the experimenter to continue.</p>"+
+    "<p style='color:black;'>Data Saving...Do not close this window until the text dissapears.”</p>",
     choices: jsPsych.NO_KEYS,
     trial_duration: 10000,
 };
