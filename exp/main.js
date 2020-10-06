@@ -45,12 +45,9 @@ let instructions_4 = {
     stimulus: '<h2 style="color:black;">Obviously you will have to guess at first.</h2>'+
             '<h3 style="color:black;">But hopefully, as you see more meals, you will learn which foods tend to make your patient have an allergic reaction.</h3>'+
             '<br>'+
-            '<h2 style="color:black;">Please hold the reponse key AND the spacebar if you are more confident you are making the right choice.</h2>'+
-            '<h3 style="color:black;">If you think you are guessing please hold both keys briefly.</h3>'+
-            '<h3 style="color:black;">If you are very confident you should press and hold both keys until the meal disappears from the screen.</h3>'+
-            // '<h2 style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</h2>'+
-            // '<h3 style="color:black;">If you think you are guessing please hold the key briefly.</h3>'+
-            // '<h3 style="color:black;">If you are very confident you should press and hold until the meal disappears from the screen.</h3>'+
+            '<h2 style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</h2>'+
+            '<h3 style="color:black;">If you think you are guessing please hold the key briefly.</h3>'+
+            '<h3 style="color:black;">If you are very confident you should press and hold until the meal disappears from the screen.</h3>'+
             '<p style="color:black;">Press the spacebar to continue.</p>',
     choices: [32],
 };
@@ -86,7 +83,7 @@ let stimuli = {
     }, 
     
     // jsPsych.timelineVariable('stimulus'),
-    choices: [48, 49], // [0 key , 1 key]
+    choices: jsPsych.NO_KEYS, // key_press handled instead by selectionKey
     trial_duration: 3000,
     // stimulus_duration: 3000,
     response_ends_trial: false,
@@ -94,9 +91,18 @@ let stimuli = {
     data: jsPsych.timelineVariable('data'),
     on_load: function buttonPress(data){
         barFill = document.getElementById("fillUp");
-        barFill.innerHTML = 'Hold either response key and the spacebar to indicate confidence.';
+        barFill.innerHTML = 'Hold response key to indicate confidence level.';
         document.getElementById("tapTap").focus(); //gives focus to the text box
-        document.getElementById("counter").setAttribute("onkeypress", "return (event.charCode === 32) && moveConfidence()"); // event.charCode allows us to set specific keys to use 
+        document.body.onkeypress = function(e){
+            if(e.keyCode == 48){
+                document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
+                selectionKey = 48;
+            } else if (e.keyCode == 49) {
+                document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
+                selectionKey = 49;
+
+            }
+        }
         // if (data.key_press==48){
         //     // pressing_time = 7000;
         //     // buttonPressing.trial_duration = pressing_time;
@@ -136,10 +142,13 @@ let stimuli = {
     data.interview_date = today;
     data.interview_age = ageAtAssessment;
     data.sex = sexAtBirth;
-    if (data.key_press == data.correct_response) {
+    
+    data.response = selectionKey;
+
+    if (selectionKey == data.correct_response) {
         data.accuracy = true;
         data.percent_confidence = totalConfidence;
-    } else if (data.key_press == data.incorrect_response) {
+    } else if (selectionKey == data.incorrect_response) {
         data.accuracy = false;
         data.percent_confidence = totalConfidence;
     } else {

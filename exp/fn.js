@@ -1,7 +1,7 @@
 /* start the experiment */
 
 //  increment confidence bar
-function moveConfidence(event) { // function definition
+function moveConfidence(data) { // function definition
   var width = document.getElementById("keyBar").style.width; // variable assignment of width property of keyBar
   // $(document).ready(function(){
   //   $("input").keydown(function(){
