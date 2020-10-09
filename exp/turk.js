@@ -13,7 +13,7 @@ function getParamFromURL(name) {
 
 
 
-// Take the user to a random URL, selected from the pool below 
+// Take the user to a random URL, selected from the pool below:
 var link = ["index.php"+"?workerId="+workerId];
 
 function randomizeURL(linkArray) {
