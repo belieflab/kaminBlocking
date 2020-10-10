@@ -83,7 +83,7 @@ let stimuli = {
     }, 
     
     // jsPsych.timelineVariable('stimulus'),
-    choices: jsPsych.NO_KEYS, // key_press handled instead by responseKey
+    choices: [jsPsych.NO_KEYS], // key_press handled instead by responseKey
     trial_duration: 3000,
     // stimulus_duration: 3000,
     response_ends_trial: false,
@@ -93,56 +93,35 @@ let stimuli = {
         barFill = document.getElementById("fillUp");
         barFill.innerHTML = 'Hold response key to indicate confidence level.';
         document.getElementById("tapTap").focus(); //gives focus to the text box
-        document.body.onkeypress = function(e){
-            if(e.keyCode == 48){
-                document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
-                responseKey = 48;
-            } else if (e.keyCode == 49) {
-                document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
-                responseKey = 49;
+        $(document).ready(function(){
+            $("#tapTap").keypress(function(event){
+                var keycode = event.which;
+                if (barFill.innerHTML = 'Hold response key to indicate confidence level.') { // reused from eefrt, just needed a placeholder here
+                  if (keycode == 48) {
+                    document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
+                  } else {
+                    document.getElementById("counter").setAttribute("onkeydown", "return false"); // event.charCode allows us to set specific keys to use 
+                  }
+              } else if (barFill.innerHTML = 'Hold response key to indicate confidence level.'){ // reused from eefrt, just needed a placeholder here
+                  if (keycode == 49) {
+                    document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
+                  } else {
+                    document.getElementById("counter").setAttribute("onkeydown", "return false"); // event.charCode allows us to set specific keys to use 
+                  }
+                };
+              });
+            })
+       },
 
-            }
-        }
-        // if (data.key_press==48){
-        //     // pressing_time = 7000;
-        //     // buttonPressing.trial_duration = pressing_time;
-        //     document.getElementById("counter").setAttribute("onkeypress", "return (event.charCode == 48) && moveConfidence()"); // event.charCode allows us to set specific keys to use
-        //     participantResponse = 48;
-        //   } else if (data.key_press==49){ 
-        //     // pressing_time= 21000; // for right handed only
-        //     // buttonPressing.trial_duration = pressing_time;
-        //     document.getElementById("counter").setAttribute("onkeypress", "return (event.charCode == 49) && moveConfidence()"); // event.charCode allows us to set specific keys to use
-        //     participantResponse = 49;
-        //   }
-    },
-    // on_load: function(data){
-    //     eventTarget.addEventListener("keydown", event => {
-    //         if (event.isComposing || event.keyCode === 229) {
-    //           return;
-    //         }
-    //         console.log("yes");
-    //       });
-    // },
+
+
     on_finish: function(data){
-    // data.practice = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press);
-    // data.practice = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
-    // document.getElementById("demo").addEventListener("keypress", confidenceIndicator);
-    // function confidenceIndicator() {
-    //     var last;
-    //     var output = $('#demo');
-    //     $('#txt').on('input', function() {
-    //         var n = new Date()
-    //         output.text((last - n) + ' ms');
-    //         last = n;
-    //     });
-    //     data.confidence = output.text(last - n);
-    // }
+
     data.subjectkey = 'GUID';
     data.src_subject_id = workerId;
     data.interview_date = today;
     data.interview_age = ageAtAssessment;
     data.sex = sexAtBirth;
-    
     data.response = responseKey;
 
     if (responseKey == data.correct_response) {
