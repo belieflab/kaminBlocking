@@ -226,13 +226,43 @@ timeline.push(testing_procedure);
 
 //COMPLETION MESSAGE: Completed Classification Phase
 
-let task_completion = {
+let save_data = {
     type: "html-keyboard-response",
-    stimulus: "<p style='color:black;'>You have completed this task. Please wait for the experimenter to continue.</p>"+
-    "<p style='color:black;'>Data Saving...Do not close this window until the text dissapears.”</p>",
+    stimulus: "<p>Data saving...</p>"+
+    '<div class="sk-cube-grid">'+
+  '<div class="sk-cube sk-cube1"></div>'+
+  '<div class="sk-cube sk-cube2"></div>'+
+  '<div class="sk-cube sk-cube3"></div>'+
+  '<div class="sk-cube sk-cube4"></div>'+
+  '<div class="sk-cube sk-cube5"></div>'+
+  '<div class="sk-cube sk-cube6"></div>'+
+  '<div class="sk-cube sk-cube7"></div>'+
+  '<div class="sk-cube sk-cube8"></div>'+
+  '<div class="sk-cube sk-cube9"></div>'+
+  '</div>'+
+    "<p>Do not close this window until the text dissapears.</p>",
+  
     choices: jsPsych.NO_KEYS,
-    trial_duration: 10000,
-};
-timeline.push(task_completion);
+    trial_duration: 5000,
+    on_finish: function(){
+      saveData("delay-discounting_" + workerId, jsPsych.data.get().csv());
+    }
+  };
+
+  timeline.push(save_data);
+  
+  let end = {
+    type: "html-keyboard-response",
+    stimulus:   "<p>Thank you!</p>"+
+    "<p>You have successfully completed the experiment and your data has been saved.</p>"+
+    "<p>To leave feedback on this task, please click the following link:</p>"+
+    "<p><a href='https://omnibus.sh/eCRFs/feedback/kaminblocking.php'>Leave Task Feedback!</a></p>"+
+        // "<p>Please wait for the experimenter to continue.</p>"+
+    "<p>You may now close the expriment window at anytime.</p>",
+    choices: jsPsych.NO_KEYS,
+    trial_duration: 60000,
+  };
+
+  timeline.push(end);
 
 
