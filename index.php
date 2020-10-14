@@ -20,7 +20,7 @@ file_put_contents($name, $data);
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/w3.css"> <!-- styling for w3c progress bars -->
   </head>
-    <body style="background-color:white;">  
+    <body onbeforeunload="return areYouSure()" style="background-color:white;">  
       <?php include 'include/intake.php'?>
     </body>
   <footer>
