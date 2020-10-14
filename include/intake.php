@@ -70,16 +70,26 @@
 </form>
 </div>
 <div>
-<button id="nextButton" style="display: none" onclick="startExperiment()">START</button>
+<button id="nextButton" class="startExp" style="display: none" onclick="startExperiment()">START</button> 
 <!-- <p id="nextButton" style="display: none" >please make sure you are in a quiet place. When you are ready to begin, click 'START'</p> -->
 <br>
 </div>
 <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
 <script>$("button.loadMain").click(function(){
-      // $.getScript("exp/timeline.js");
+
     // $.getScript("exp/main.js");
     // $.getScript("exp/timeline.js");
     // $.load("include/consent.php");
+  }); </script>
+
+<script>$(document).ready(function(){$("button.startExp").click(function(){
+        // $("body").addClass("noClick");
+      $("body").addClass("hideCursor");
+
+    // $.getScript("exp/main.js");
+    // $.getScript("exp/timeline.js");
+    // $.load("include/consent.php");
+  });
   }); </script>
 <script>
 </script>

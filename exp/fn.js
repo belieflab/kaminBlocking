@@ -18,7 +18,7 @@ function moveConfidence(data) { // function definition
       jsPsych.finishTrial();  
       // return (event.charCode == 48 || event.charCode == 49)
     } else {
-      width+= 3.45; // approximation to reach 100% confidence in 3s
+      width+= 3.70; // approximation to reach 99.9% confidence in 3s
       console.log(width);
       totalConfidence = width;
       trialComplete = 0;
@@ -53,6 +53,7 @@ function startExperiment(){
       preload_images: [stim_shuffle, 'stimuli/+.jpg', 'stimuli/-.jpg'],
   });
 }
+
 
 
 

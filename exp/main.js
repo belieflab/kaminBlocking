@@ -6,8 +6,9 @@ let timeline = [];
 let welcome = {
     type: "html-keyboard-response",
     stimulus: '<h1 style="color:black;">Welcome to the experiment!</h1>'+
-    '<p>Press any key to begin.</p>'
+    '<p>Press any key to begin.</p>',
 };
+
 timeline.push(welcome);
 
 /* define instructions trial */
