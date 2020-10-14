@@ -247,6 +247,9 @@ let save_data = {
     trial_duration: 5000,
     on_finish: function(){
       saveData("kamin-blocking_" + workerId, jsPsych.data.get().csv());
+      $(document).ready(function(){
+      $("body").addClass("showCursor"); // returns cursor functionality
+    });
     }
   };
 

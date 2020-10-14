@@ -85,6 +85,7 @@
 <script>$(document).ready(function(){$("button.startExp").click(function(){
         // $("body").addClass("noClick");
       $("body").addClass("hideCursor");
+      $("#tapTap").attr("autocomplete", "off"); //disable input level 
 
     // $.getScript("exp/main.js");
     // $.getScript("exp/timeline.js");
