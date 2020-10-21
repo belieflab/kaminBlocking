@@ -99,9 +99,13 @@ let stimuli = {
                 var keycode = event.which;
                 if (barFill.innerHTML = 'Hold response key to indicate confidence level.') { // reused from eefrt, just needed a placeholder here
                   if (keycode == 48) {
-                    document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
+                    document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use
+                    responseKey = 48;
+                    // console.log(responseKey);
                   } else if (keycode == 49) {
-                    document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use 
+                    document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use
+                    responseKey = 49;
+                    // console.log(responseKey);
                   } else { // all other keys ignored
                     document.getElementById("counter").setAttribute("onkeydown", "return false"); // event.charCode allows us to set specific keys to use 
                   }
@@ -200,30 +204,30 @@ let learning_procedure = {
     timeline_variables: learning_stimuli,
     randomize_order: true,
     type: 'fixed-repititions',
-    repetitions: 10
+    repetitions: 1
 }
 
 timeline.push(learning_procedure);
 
-let blocking_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: blocking_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
-}
+// let blocking_procedure = {
+//     timeline: [fixation, stimuli, feedback],
+//     timeline_variables: blocking_stimuli,
+//     randomize_order: true,
+//     type: 'fixed-repititions',
+//     repetitions: 6
+// }
 
-timeline.push(blocking_procedure);
+// timeline.push(blocking_procedure);
 
-let testing_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: testing_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
-}
+// let testing_procedure = {
+//     timeline: [fixation, stimuli, feedback],
+//     timeline_variables: testing_stimuli,
+//     randomize_order: true,
+//     type: 'fixed-repititions',
+//     repetitions: 6
+// }
 
-timeline.push(testing_procedure);
+// timeline.push(testing_procedure);
 
 //COMPLETION MESSAGE: Completed Classification Phase
 
@@ -247,9 +251,10 @@ let save_data = {
     trial_duration: 5000,
     on_finish: function(){
       saveData("kamin-blocking_" + workerId, jsPsych.data.get().csv());
+      document.getElementById("unload").onbeforeunload='';
       $(document).ready(function(){
       $("body").addClass("showCursor"); // returns cursor functionality
-    });
+  });
     }
   };
 
