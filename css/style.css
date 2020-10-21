@@ -235,3 +235,8 @@ body {
   .noClick {
     pointer-events: none;
   }
+
+    /* hide cursor */
+.showCursor {
+  cursor: default;
+  }
