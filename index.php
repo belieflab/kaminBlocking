@@ -40,8 +40,11 @@ $prepare->close();
     <script type="text/javascript" src="exp/fn.js"></script>
     <script type="text/javascript" src="exp/var.js"></script>
     <script type="text/javascript" src="exp/conf.js"></script>
-    <script type="text/javascript" src="exp/main.js"></script>
+    <!-- <script type="text/javascript" src="exp/main.js"></script> -->
     <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
+    <script type="text/javascript">
+    let feedbackLink = "https://omnibus.sh/eCRFs/feedback/tasks/dd.php?studyId=<?php echo $studyId?>";
+    </script>
   </footer>
 </html>
 

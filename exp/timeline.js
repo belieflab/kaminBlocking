@@ -252,7 +252,7 @@ let save_data = {
     choices: jsPsych.NO_KEYS,
     trial_duration: 5000,
     on_finish: function(){
-      saveData("kamin-blocking_" + workerId, jsPsych.data.get().csv());
+      saveData("kamin_" + workerId, jsPsych.data.get().csv());
       document.getElementById("unload").onbeforeunload='';
       $(document).ready(function(){
       $("body").addClass("showCursor"); // returns cursor functionality
@@ -267,11 +267,11 @@ let save_data = {
     stimulus:   "<p>Thank you!</p>"+
     "<p>You have successfully completed the experiment and your data has been saved.</p>"+
     "<p>To leave feedback on this task, please click the following link:</p>"+
-    "<p><a href='https://omnibus.sh/eCRFs/feedback/kaminblocking.php'>Leave Task Feedback!</a></p>"+
-        // "<p>Please wait for the experimenter to continue.</p>"+
-    "<p>You may now close the expriment window at anytime.</p>",
+    "<p style='color:white;'><a href="+feedbackLink+">Leave Task Feedback!</a></p>"+
+    // "<p>Please wait for the experimenter to continue.</p>"+
+    "<p><i>You may now close the expriment window at anytime.</i></p>",
     choices: jsPsych.NO_KEYS,
-    trial_duration: 60000,
+    // trial_duration: 60000,
   };
 
   timeline.push(end);

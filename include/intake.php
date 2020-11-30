@@ -6,10 +6,10 @@
     <p><b>Select your Research Site:</b></p>
     <select name="facility" id="siteid">
         <option value="none">---</option>
-        <option value="Maryland">Maryland</option>
-        <option value="Northwestern">Northwestern</option>
+        <option value="Maryland">UMBC</option>
+        <option value="Northwestern">NU</option>
         <option value="Temple">Temple</option>
-        <option value="Georgia">Georgia</option>
+        <option value="Georgia">UGA</option>
         <option value="Yale">Yale</option>
         <option value="Emory">Emory</option>
     </select>
@@ -91,6 +91,7 @@
 </div>
 <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
 <script>$("button.loadMain").click(function(){
+        $.getScript("exp/timeline.js");
   }); </script>
 <script>
 $("button.noCursor").click(function(){
