@@ -267,7 +267,7 @@ let save_data = {
     stimulus:   "<p>Thank you!</p>"+
     "<p>You have successfully completed the experiment and your data has been saved.</p>"+
     "<p>To leave feedback on this task, please click the following link:</p>"+
-    "<p style='color:white;'><a href="+feedbackLink+">Leave Task Feedback!</a></p>"+
+    "<p><a href="+feedbackLink+">Leave Task Feedback!</a></p>"+
     // "<p>Please wait for the experimenter to continue.</p>"+
     "<p><i>You may now close the expriment window at anytime.</i></p>",
     choices: jsPsych.NO_KEYS,
