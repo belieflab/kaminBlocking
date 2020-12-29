@@ -137,7 +137,7 @@ let stimuli = {
         data.confidence = '';
         responseKey = '';
     }
-    data.trial = trialIterator;
+    data.index = trialIterator;
     trialIterator ++;
     }
 };
