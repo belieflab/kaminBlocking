@@ -32,6 +32,7 @@ $ageInMonths = $_GET["interview_age"];
   <head>
     <title>Food Allergy</title>
     <script src="db/validate.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
     <script src="jsPsych/jspsych.js"></script>
     <script src="jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
@@ -40,15 +41,23 @@ $ageInMonths = $_GET["interview_age"];
     <link rel="stylesheet" type="text/css" href="css/w3.css"> <!-- styling for w3c progress bars -->
   </head>
     <body id='unload' onbeforeunload="return areYouSure()" style="background-color:white;">  
-      <?php include 'include/nda.php'?>
+    <?php
+      if ($db_connection_status == true) {
+        include_once "include/nda.php";
+        // echo'<br>';
+        // echo'connected';
+      } else if ($db_connection_status == false) {
+        include_once "include/intake.php";
+        // echo'<br>';
+        // echo'not connected';
+      }
+    ?>
     </body>
   <footer>
 
     <script type="text/javascript" src="exp/fn.js"></script>
     <script type="text/javascript" src="exp/var.js"></script>
     <script type="text/javascript" src="exp/conf.js"></script>
-    <!-- <script type="text/javascript" src="exp/main.js"></script> -->
-    <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
     <script type="text/javascript">
     let feedbackLink = "https://belieflab.yale.edu/omnibus/eCRFs/feedback/tasks/kamin.php?candidateId=<?php echo $candidateId?>&studyId=<?php echo $studyId?>";
     let GUID = "<?php echo $subjectKey?>";

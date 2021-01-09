@@ -9,9 +9,7 @@ let EasyKey_uCase;
 let HardKey_uCase;
 
 // let ageAtAssessment;
-
 // let sexAtBirth;
-
 // let GUID;
 
 let today = new Date();
@@ -21,19 +19,41 @@ let yyyy = today.getFullYear();
 today = mm + '/' + dd + '/' + yyyy;
 todayStandard = yyyy + '-' + mm + '-' + dd;
 
-// function ageFinder(){
-//     if (document.getElementById("dob").value !== '') {
-//         let DOB = dob.value;
-//         let DOByyyy = DOB.slice(0,4);
-//         let DOBmm = DOB.slice(5,7);
-//         // let DOBdd = DOB.slice(8,10);
-//         let ageInMonths = ((yyyy*12)-(DOByyyy*12)+(mm-DOBmm));
-//         ageAtAssessment = parseInt(ageInMonths);
-//     } else {
-//         alert("Please enter your date of birth.");
-//     }
+if (db_connection == false) {
 
-// }
+    function ageFinder(){
+        if (document.getElementById("dob").value !== '') {
+            let DOB = dob.value;
+            let DOByyyy = DOB.slice(0,4);
+            let DOBmm = DOB.slice(5,7);
+            // let DOBdd = DOB.slice(8,10);
+            let ageInMonths = ((yyyy*12)-(DOByyyy*12)+(mm-DOBmm));
+            ageAtAssessment = parseInt(ageInMonths);
+        } else {
+            alert("Please enter your date of birth.");
+        }
+
+    }
+
+    function validateSite() {
+        // document.getElementById("sex").value = sex;
+        if (document.getElementById("siteid").value === 'none') {
+            alert("Please select a valid research site.");
+
+        }
+    }
+
+    function sexFinder() {
+        // document.getElementById("sex").value = sex;
+        if (document.getElementById("male").checked === true) {
+            sexAtBirth = "M";
+        } else if (document.getElementById("female").checked === true) {
+            sexAtBirth = "F";
+        } 
+    }
+
+}
+
 
 function guidBuilder(){
     if (document.getElementById("guid").value !== '') {
@@ -55,30 +75,30 @@ function validateIntake() {
     }
   }
 
-//   function validateSite() {
-//     // document.getElementById("sex").value = sex;
-//     if (document.getElementById("siteid").value === 'none') {
-//         alert("Please select a valid research site.");
 
-//     }
-// }
 
 function validateBrightness() {
-    // document.getElementById("sex").value = sex;
-    if (document.getElementById("brightness").value == '0') {
-        alert("Please confirm you have turned your screen brightness up to 100%");
+    if (document.getElementById("brightness").checked == false) {
+        alert("Please confirm your screen brightness is 100%");
 
     }
 }
 
-// function sexFinder() {
-//     // document.getElementById("sex").value = sex;
-//     if (document.getElementById("male").checked === true) {
-//         sexAtBirth = "M";
-//     } else if (document.getElementById("female").checked === true) {
-//         sexAtBirth = "F";
-//     } 
-// }
+function validateHeadphones() {
+    if (document.getElementById("headphones").checked == false) {
+        alert("Please confirm your headphones are plugged in.");
+
+    }
+}
+
+function validateVolume() {
+    if (document.getElementById("volume").checked == false) {
+        alert("Please confirm your headphone volume is 50%");
+
+    }
+}
+
+
 
 function validateSex() {
     if (document.getElementById("male").checked === false && document.getElementById("female").checked === false ) {
@@ -136,8 +156,8 @@ function submitIntake() {
 
   
 
-    if(subjectID == "") {
-        alert("Please enter a valid SubjectID.")
+    if(document.getElementById("brightness").checked == false || document.getElementById("headphones").checked == false || document.getElementById("volume").checked == false) {
+        // do nothing
     } else {
         // alert("your subjectid is " + siteNumber + subjectID);
         workerId = parseInt(subjectID);

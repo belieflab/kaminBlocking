@@ -5,7 +5,7 @@
   <div id="intake">
     
 
-<form>
+  <form>
     <!-- <label for="handedness"><b>Are you right or left handed?</b></label> -->
     <p><b>Which is your dominant hand?</b></p>
         <label for="right">Right</label>
@@ -15,13 +15,20 @@
         <input type="radio" name="handedness" id="leftHanded" value="leftHanded">
 
         <!-- <span class="checkmark"></span> -->
-  </form>
+
     <p><b>Before proceeding to the task, please confirm the following are true:</b></p>
     <label class="container">Screen brightness is up to 100% &nbsp&nbsp&nbsp&nbsp  
-    <input type="hidden" name="brightness" id="brightness" value="0" />
     <input type="checkbox" name="brightness" id="brightness" value="1"/>
+    </label>
     <br>
+    <label class="container">Headphones plugged in? &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      
+    <input type="checkbox" name="headphones" id="headphones" value="1"/>
+    </label>
+    <br>
+    <label class="container">Headphone volume is set to 50% &nbsp&nbsp&nbsp  
+    <input type="checkbox" name="volume" id="volume" value="1"/>
   </label>
+  </form>
   
   <!-- <label class="container">Headphones plugged in? &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp               
     <input type="checkbox"> 
@@ -34,7 +41,7 @@
   </label>
 </form>
 <br> -->
-<button id="submitButton" class="loadMain" onclick="submitIntake(), validateHandedness(), validateBrightness()" type="button">submit</button>
+<button id="submitButton" class="loadMain" onclick="submitIntake(), validateHandedness(), validateBrightness(), validateHeadphones(), validateVolume()" type="button">submit</button>
 </div>
 <div id="validation" style="display: none">
     <br>
@@ -46,9 +53,9 @@
 <!-- <p id="nextButton" style="display: none" >please make sure you are in a quiet place. When you are ready to begin, click 'START'</p> -->
 <br>
 </div>
-<script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
 <script>$("button.loadMain").click(function(){
-        $.getScript("exp/timeline.js");
+      $.getScript("exp/timeline.js");
+      // $.getScript("exp/main.js");
   }); </script>
 <script>
 $("button.noCursor").click(function(){
