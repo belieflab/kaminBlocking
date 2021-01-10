@@ -20,14 +20,14 @@
     <label class="container">Screen brightness is up to 100% &nbsp&nbsp&nbsp&nbsp  
     <input type="checkbox" name="brightness" id="brightness" value="1"/>
     </label>
-    <br>
+    <!-- <br>
     <label class="container">Headphones plugged in? &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      
     <input type="checkbox" name="headphones" id="headphones" value="1"/>
     </label>
     <br>
     <label class="container">Headphone volume is set to 50% &nbsp&nbsp&nbsp  
     <input type="checkbox" name="volume" id="volume" value="1"/>
-  </label>
+  </label> -->
   </form>
   
   <!-- <label class="container">Headphones plugged in? &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp               
@@ -41,15 +41,17 @@
   </label>
 </form>
 <br> -->
-<button id="submitButton" class="loadMain" onclick="submitIntake(), validateHandedness(), validateBrightness(), validateHeadphones(), validateVolume()" type="button">submit</button>
+<button id="submitButton" class="btn btn-primary btn-lg loadMain" onclick="validateHandedness(), validateBrightness(), /*validateHeadphones(), validateVolume(),*/ submitIntake()" type="button">SUBMIT</button>
 </div>
 <div id="validation" style="display: none">
     <br>
     <form>
 </form>
 </div>
-<div>
-<button id="nextButton" class="noCursor" style="display: none" onclick="startExperiment()">START</button>
+
+<div id="load" style="display: none">
+<h3>All validation rules were passed successfully. Click to load the experiment.</h3>
+<button id="nextButton" class="noCursor" onclick="startExperiment()">LOAD</button>
 <!-- <p id="nextButton" style="display: none" >please make sure you are in a quiet place. When you are ready to begin, click 'START'</p> -->
 <br>
 </div>
