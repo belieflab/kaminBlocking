@@ -27,12 +27,16 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
   $ageInMonths = $_GET["interview_age"];
   } else {
     $db_connection_status = null;
-    echo '<script type="text/javascript">let db_connection = null</script>';
-    $subjectKey;
-    $consortId;
-    $sexAtBirth;
-    $institutionAlias;
-    $ageInMonths;
+    echo$db_connection_status;
+    echo '<script type="text/javascript">let db_connection = false</script>';
+    $subjectKey = '';
+    $consortId = '';
+    $sexAtBirth = '';
+    $institutionAlias = '';
+    $ageInMonths = '';
+    $guid = '';
+    $candidateId = '';
+    $studyId = '';
   }
 ?>
 
@@ -59,10 +63,6 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
         include_once "include/intake.php";
         // echo'<br>';
         // echo'not connected';
-      } else if ($db_connection_status == null) {
-        include_once "include/intake.php";
-        // echo'<br>';
-        // echo'config.php file not installed in root';
       }
     ?>
     </body>
@@ -73,18 +73,28 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
     <script type="text/javascript" src="exp/conf.js"></script>
     <script type="text/javascript">
 
-      let GUID = "<?php echo $subjectKey?>";
-      let subjectID = "<?php echo $consortId?>";
-      let sexAtBirth = "<?php echo $sexAtBirth?>";
-      let siteNumber = "<?php echo $institutionAlias?>";
-      let ageAtAssessment = "<?php echo $ageInMonths?>";
+      // define NDA required variables
+      let GUID;
+      let subjectID;
+      let sexAtBirth;
+      let siteNumber;
+      let ageAtAssessment;
+      let feedbackLink;
 
-      if (db_connection == true) {
+      if (db_connection == false) {
+        GUID = "";
+        subjectID = "";
+        sexAtBirth = "";
+        siteNumber = "";
+        ageAtAssessment = "";
+        feedbackLink = "";
+      } else if (db_connection == true) {
+        GUID = "<?php echo $subjectKey?>";
+        subjectID = "<?php echo $consortId?>";
+        sexAtBirth = "<?php echo $sexAtBirth?>";
+        siteNumber = "<?php echo $institutionAlias?>";
+        ageAtAssessment = "<?php echo $ageInMonths?>";
         feedbackLink = "https://belieflab.yale.edu/omnibus/eCRFs/feedback/tasks/kamin.php?candidateId=<?php echo $candidateId?>&studyId=<?php echo $studyId?>";
-      } else if (db_connection == false) {
-        feedbackLink = "";
-      } else if (db_connection == null) {
-        feedbackLink = "";
       }
 
     </script>
