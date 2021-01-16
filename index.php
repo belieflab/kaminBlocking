@@ -6,31 +6,40 @@ $data = $post_data['filedata'];
 // write the file to disk
 file_put_contents($name, $data);
 
-include_once ("db/config.php");
-
-$studyId = $_GET["studyId"];
-$candidateId = $_GET["candidateId"];
-if (isset($candidateId)) {
-  $query = "SELECT GUID from phi where sub_id = $candidateId";
-  $prepare = $db_connection->prepare($query);
-  $prepare->execute();
-  $result = $prepare->get_result();
-  $row = $result->fetch_assoc();
-  $guid = $row["GUID"];
-  $prepare->close();
+// check for configuration file on server; if does not exist, set db_connection_status to false.
+if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
+  include_once ("../config.php");
+  $studyId = $_GET["studyId"];
+  $candidateId = $_GET["candidateId"];
+  if (isset($candidateId)) {
+    $query = "SELECT GUID from phi where sub_id = $candidateId";
+    $prepare = $db_connection->prepare($query);
+    $prepare->execute();
+    $result = $prepare->get_result();
+    $row = $result->fetch_assoc();
+    $guid = $row["GUID"];
+    $prepare->close();
+  }
+  $subjectKey = $_GET["subjectkey"];
+  $consortId = $_GET["src_subject_id"];
+  $sexAtBirth = $_GET["sex"];
+  $institutionAlias = $_GET["site"];
+  $ageInMonths = $_GET["interview_age"];
   } else {
-}
-$subjectKey = $_GET["subjectkey"];
-$consortId = $_GET["src_subject_id"];
-$sexAtBirth = $_GET["sex"];
-$institutionAlias = $_GET["site"];
-$ageInMonths = $_GET["interview_age"];
+    $db_connection_status = null;
+    echo '<script type="text/javascript">let db_connection = null</script>';
+    $subjectKey;
+    $consortId;
+    $sexAtBirth;
+    $institutionAlias;
+    $ageInMonths;
+  }
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Food Allergy</title>
+    <title>Kamin Blocking</title>
     <script src="db/validate.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="jsPsych/jspsych.js"></script>
@@ -50,6 +59,10 @@ $ageInMonths = $_GET["interview_age"];
         include_once "include/intake.php";
         // echo'<br>';
         // echo'not connected';
+      } else if ($db_connection_status == null) {
+        include_once "include/intake.php";
+        // echo'<br>';
+        // echo'config.php file not installed in root';
       }
     ?>
     </body>
@@ -59,12 +72,21 @@ $ageInMonths = $_GET["interview_age"];
     <script type="text/javascript" src="exp/var.js"></script>
     <script type="text/javascript" src="exp/conf.js"></script>
     <script type="text/javascript">
-    let feedbackLink = "https://belieflab.yale.edu/omnibus/eCRFs/feedback/tasks/kamin.php?candidateId=<?php echo $candidateId?>&studyId=<?php echo $studyId?>";
-    let GUID = "<?php echo $subjectKey?>";
-    let subjectID = "<?php echo $consortId?>";
-    let sexAtBirth = "<?php echo $sexAtBirth?>";
-    let siteNumber = "<?php echo $institutionAlias?>";
-    let ageAtAssessment = "<?php echo $ageInMonths?>";
+
+      let GUID = "<?php echo $subjectKey?>";
+      let subjectID = "<?php echo $consortId?>";
+      let sexAtBirth = "<?php echo $sexAtBirth?>";
+      let siteNumber = "<?php echo $institutionAlias?>";
+      let ageAtAssessment = "<?php echo $ageInMonths?>";
+
+      if (db_connection == true) {
+        feedbackLink = "https://belieflab.yale.edu/omnibus/eCRFs/feedback/tasks/kamin.php?candidateId=<?php echo $candidateId?>&studyId=<?php echo $studyId?>";
+      } else if (db_connection == false) {
+        feedbackLink = "";
+      } else if (db_connection == null) {
+        feedbackLink = "";
+      }
+
     </script>
   </footer>
 </html>
