@@ -9,7 +9,7 @@ let welcome = {
     '<p>Press any key to begin.</p>',
 };
 
-timeline.push(welcome);
+
 
 /* define instructions trial */
 let instructions_1 = {
@@ -20,7 +20,7 @@ let instructions_1 = {
             '<p style="color:black;">Press the spacebar to continue.</p>',
     choices: [32], //ascii spacebar
 };
-timeline.push(instructions_1);
+
 
 let instructions_2 = {
     type: "html-keyboard-response",
@@ -30,7 +30,7 @@ let instructions_2 = {
             '<p style="color:black;">Press the spacebar to continue.</p>',
             choices: [32], //ascii spacebar
 };
-timeline.push(instructions_2);
+
 
 let instructions_3 = {
     type: "html-keyboard-response",
@@ -39,7 +39,7 @@ let instructions_3 = {
             '<p style="color:black;">Press either of the response keys to continue.</p>',
     choices: [48, 49], //ascii spacebar
 };
-timeline.push(instructions_3);
+
 
 let instructions_4 = {
     type: "html-keyboard-response",
@@ -52,7 +52,7 @@ let instructions_4 = {
             '<p style="color:black;">Press the spacebar to continue.</p>',
     choices: [32],
 };
-timeline.push(instructions_4);
+
 
 let instructions_5 = {
 type: "html-keyboard-response",
@@ -63,7 +63,7 @@ stimulus: '<h2 style="color:black;">Try to make your prediction <b><u>before</b>
         '<p style="color:black;">Press the spacebar to begin the practice trials.</p>',
 choices: [32],
 };
-timeline.push(instructions_5);
+
 
 // create fixation point
 let fixation = {
@@ -177,13 +177,7 @@ let feedback = {
     }
 };
 
-let practice_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: practice_stimuli,
-    randomize_order: false,
-}
 
-timeline.push(practice_procedure);
 
 /* END TRAINING TRIAL FOR PARTICIPANTS */
 
@@ -198,38 +192,6 @@ let instructions_6 = {
     choices: [32],
 
 };
-timeline.push(instructions_6);
-
-
-let learning_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: learning_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 10
-}
-
-timeline.push(learning_procedure);
-
-let blocking_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: blocking_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
-}
-
-timeline.push(blocking_procedure);
-
-let testing_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: testing_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
-}
-
-timeline.push(testing_procedure);
 
 //COMPLETION MESSAGE: Completed Classification Phase
 
@@ -260,7 +222,7 @@ let save_data = {
     }
   };
 
-  timeline.push(save_data);
+
   
   let end = {
     type: "html-keyboard-response",
@@ -274,6 +236,7 @@ let save_data = {
     // trial_duration: 60000,
   };
 
-  timeline.push(end);
+// call main
+$.getScript("exp/main.js");
 
 

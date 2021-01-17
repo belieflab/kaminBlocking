@@ -1,5 +1,3 @@
-/* start the experiment */
-
 //  increment confidence bar
 function moveConfidence(data) { // function definition
   var width = document.getElementById("keyBar").style.width; // variable assignment of width property of keyBar
@@ -54,11 +52,8 @@ function startExperiment(){
   });
 }
 
-
-
-
-  //onbeforeunload in body
-  function areYouSure() {
-    return "Write something clever here...";
-  }
-  areYouSure();
+//onbeforeunload in body
+function areYouSure() {
+  return "Write something clever here...";
+}
+areYouSure();

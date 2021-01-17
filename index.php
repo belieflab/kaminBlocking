@@ -1,43 +1,6 @@
 <?php
-$post_data = json_decode(file_get_contents('php://input'), true); 
-// the directory "data" must be writable by the server
-$name = "data/".$post_data['filename'].".csv"; 
-$data = $post_data['filedata'];
-// write the file to disk
-file_put_contents($name, $data);
-
-// check for configuration file on server; if does not exist, set db_connection_status to false.
-if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
-  include_once ("../config.php");
-  $studyId = $_GET["studyId"];
-  $candidateId = $_GET["candidateId"];
-  if (isset($candidateId)) {
-    $query = "SELECT GUID from phi where sub_id = $candidateId";
-    $prepare = $db_connection->prepare($query);
-    $prepare->execute();
-    $result = $prepare->get_result();
-    $row = $result->fetch_assoc();
-    $guid = $row["GUID"];
-    $prepare->close();
-  }
-  $subjectKey = $_GET["subjectkey"];
-  $consortId = $_GET["src_subject_id"];
-  $sexAtBirth = $_GET["sex"];
-  $institutionAlias = $_GET["site"];
-  $ageInMonths = $_GET["interview_age"];
-  } else {
-    $db_connection_status = null;
-    echo$db_connection_status;
-    echo '<script type="text/javascript">let db_connection = false</script>';
-    $subjectKey = '';
-    $consortId = '';
-    $sexAtBirth = '';
-    $institutionAlias = '';
-    $ageInMonths = '';
-    $guid = '';
-    $candidateId = '';
-    $studyId = '';
-  }
+  require_once 'db/data.php';
+  require_once 'db/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +16,7 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/w3.css"> <!-- styling for w3c progress bars -->
   </head>
-    <body id='unload' onbeforeunload="return areYouSure()" style="background-color:white;">  
+  <body id='unload' onbeforeunload="return areYouSure()" style="background-color:white;">  
     <?php
       if ($db_connection_status == true) {
         include_once "include/nda.php";
@@ -65,15 +28,13 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
         // echo'not connected';
       }
     ?>
-    </body>
+  </body>
   <footer>
-
     <script type="text/javascript" src="exp/fn.js"></script>
     <script type="text/javascript" src="exp/var.js"></script>
     <script type="text/javascript" src="exp/conf.js"></script>
     <script type="text/javascript">
-
-      // define NDA required variables
+      // declare NDA required variables
       let GUID;
       let subjectID;
       let sexAtBirth;
@@ -81,14 +42,14 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
       let ageAtAssessment;
       let feedbackLink;
 
-      if (db_connection == false) {
+      if (db_connection === false) {
         GUID = "";
         subjectID = "";
         sexAtBirth = "";
         siteNumber = "";
         ageAtAssessment = "";
         feedbackLink = "";
-      } else if (db_connection == true) {
+      } else if (db_connection === true) {
         GUID = "<?php echo $subjectKey?>";
         subjectID = "<?php echo $consortId?>";
         sexAtBirth = "<?php echo $sexAtBirth?>";
@@ -96,7 +57,6 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
         ageAtAssessment = "<?php echo $ageInMonths?>";
         feedbackLink = "https://belieflab.yale.edu/omnibus/eCRFs/feedback/tasks/kamin.php?candidateId=<?php echo $candidateId?>&studyId=<?php echo $studyId?>";
       }
-
     </script>
   </footer>
 </html>
