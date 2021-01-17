@@ -104,9 +104,6 @@ function validateSite() {
         case "Emory":
             siteNumber = 'Emory';
             break;
-        case "Vanderbilt":
-            siteNumber = 'Vanderbilt';
-            break;
         default:
             siteNumber = '';
     }

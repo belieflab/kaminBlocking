@@ -12,11 +12,6 @@
         <option value="Georgia">UGA</option>
         <option value="Yale">Yale</option>
         <option value="Emory">Emory</option>
-        <?php
-        if ($db_connection_status === false) {
-          echo'<option value="Vaderbilt">Vanderbilt</option>';
-        }
-        ?>
     </select>
     <label for="facility"></label>
     <!-- <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
@@ -107,7 +102,6 @@
 </div>
 <script>$("button.loadMain").click(function(){
       $.getScript("exp/timeline.js");
-      // $.getScript("exp/main.js");
   }); </script>
 <script>
 $("button.noCursor").click(function(){
