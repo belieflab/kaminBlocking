@@ -1,6 +1,7 @@
 <?php
   require_once 'db/data.php';
   require_once 'db/config.php';
+  echo$_SERVER["DOCUMENT_ROOT"];
 ?>
 
 <!DOCTYPE html>
