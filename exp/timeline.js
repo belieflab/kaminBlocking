@@ -121,6 +121,7 @@ let stimuli = {
     data.interview_date = today;
     data.interview_age = ageAtAssessment;
     data.sex = sexAtBirth;
+    data.phenotype = groupStatus;
     data.handedness = handedness;
     data.response = responseKey;
 
