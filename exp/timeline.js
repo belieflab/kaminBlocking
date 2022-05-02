@@ -124,6 +124,7 @@ let stimuli = {
     data.phenotype = groupStatus;
     data.handedness = handedness;
     data.response = responseKey;
+    data.version = version;
 
     if (responseKey == data.correct_response) {
         data.accuracy = 1;
