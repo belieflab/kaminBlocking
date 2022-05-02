@@ -95,7 +95,9 @@
 <div>
 
 <div id="load" style="display: none">
-<h3>All validation rules were passed successfully. Click to load the experiment.</h3>
+<h3>All validation rules were passed successfully!</h3>
+<h3>Please keep your browser in fullscreen for the duration of the experiment.</h3>
+<h3>Click to load the experiment.</h3>
 <button id="nextButton" class="noCursor" onclick="startExperiment()">LOAD</button>
 <!-- <p id="nextButton" style="display: none" >please make sure you are in a quiet place. When you are ready to begin, click 'START'</p> -->
 <br>

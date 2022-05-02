@@ -19,6 +19,32 @@ let yyyy = today.getFullYear();
 today = mm + '/' + dd + '/' + yyyy;
 let todayStandard = yyyy + '-' + mm + '-' + dd;
 
+/* Get the documentElement (<html>) to display the page in fullscreen */
+const elem = document.documentElement;
+const screenResolutionHeight = screen.height
+
+/* View in fullscreen */
+function openFullscreen() {
+  if (elem.requestFullscreen) { /* Chrome, Firefox */
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+/* Close fullscreen */
+function closeFullscreen() {
+    if (document.exitFullscreen) { /* Chrome, Firefox */
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+      document.msExitFullscreen();
+    }
+  }
+
 // these functions are called when db_connection === true (e.g. omnibus.local or omnibus.yale) && db_connection === true
 
 function validateIntake() {
@@ -135,23 +161,31 @@ function validateAge() {
 
 function submitIntake() {
 
-    let rightHandedness = document.getElementById("rightHanded").checked;
-    let leftHandedness = document.getElementById("leftHanded").checked;
+    if (screenResolutionHeight > 768) {
+        openFullscreen();
+
+        let rightHandedness = document.getElementById("rightHanded").checked;
+        let leftHandedness = document.getElementById("leftHanded").checked;
 
 
-    if (rightHandedness === true) {
-        handedness = "right";
-        antihandedness = "left";
-    } else if (leftHandedness === true) {
-        handedness = "left";
-        antihandedness = "right";
-    }
+        if (rightHandedness === true) {
+            handedness = "right";
+            antihandedness = "left";
+        } else if (leftHandedness === true) {
+            handedness = "left";
+            antihandedness = "right";
+        }
 
-    if (document.getElementById("brightness").checked === false /*|| document.getElementById("headphones").checked === false || document.getElementById("volume").checked === false*/) {
-        // do nothing
+        if (document.getElementById("brightness").checked === false /*|| document.getElementById("headphones").checked === false || document.getElementById("volume").checked === false*/) {
+            // do nothing
+        } else {
+            // alert("your subjectid is " + subjectID);
+            workerId = parseInt(subjectID);
+            validateIntake();
+        }
+
     } else {
-        // alert("your subjectid is " + subjectID);
-        workerId = parseInt(subjectID);
-        validateIntake();
+        alert("Your screen resolution is too low to view the experiment correctly.\nYour experimenter can help you increase your screen resolution.\nThank you!")
     }
+
 }

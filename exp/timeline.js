@@ -88,7 +88,7 @@ let stimuli = {
     trial_duration: 3000,
     // stimulus_duration: 3000,
     response_ends_trial: false,
-    prompt: progressBar + fillUp + feedbackGenerator + timeRemaining + '<input autocomplete="autocomplete_off_hack_xfr4!k" id="tapTap" type="text" style="background-color:black; color: transparent; outline:none; border:none; background:none" onkeypress="">',
+    prompt: progressBar + fillUp + feedbackGenerator + timeRemaining + '<form autocomplete="off" action=""> <input autocomplete="false" name="hidden" id="tapTap" type="text" style="background-color:black; color: transparent; outline:none; border:none; background:none;" onkeypress="">',
     data: jsPsych.timelineVariable('data'),
     on_load: function buttonPress(data){
         barFill = document.getElementById("fillUp");
@@ -220,6 +220,7 @@ let save_data = {
       document.getElementById("unload").onbeforeunload='';
       $(document).ready(function(){
       $("body").addClass("showCursor"); // returns cursor functionality
+      closeFullscreen(); // kill fullscreen
   });
     }
   };
