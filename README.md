@@ -1,3 +1,7 @@
+variables:
+
+version = 'corrected' version appears after error disovered in testing_stimuli, the consistent-allergy conidition had a stimulus 2 pairing, which should never have been the case. Per Phil Corlett, previous data is not compromised for key trial types. However, low level controls (I-,J+) should not be used in combined analysis of tasks without version 'correct' variable!
+
 # Kamin Blocking
 This is a psychological task designed to track new causal belief formation. It involves subjects learning to associate causes (foods) with effects (allergies in a fictitious patient).
 
