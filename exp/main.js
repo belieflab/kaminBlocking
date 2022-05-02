@@ -9,7 +9,7 @@ let learning_procedure = {
     timeline_variables: learning_stimuli,
     randomize_order: true,
     type: 'fixed-repititions',
-    repetitions: 1
+    repetitions: 2
 }
 
 let blocking_procedure = {
@@ -17,7 +17,7 @@ let blocking_procedure = {
     timeline_variables: blocking_stimuli,
     randomize_order: true,
     type: 'fixed-repititions',
-    repetitions: 6
+    repetitions: 2
 }
 
 let testing_procedure = {
@@ -25,23 +25,25 @@ let testing_procedure = {
     timeline_variables: testing_stimuli,
     randomize_order: true,
     type: 'fixed-repititions',
-    repetitions: 6
+    repetitions: 2
 }
 
 timeline.push(welcome);
 
-timeline.push(instructions_1);
-timeline.push(instructions_2);
-timeline.push(instructions_3);
-timeline.push(instructions_4);
-timeline.push(instructions_5);
+// timeline.push(instructions_1);
+// timeline.push(instructions_2);
+// timeline.push(instructions_3);
+// timeline.push(instructions_4);
+// timeline.push(instructions_5);
 
 // timeline.push(practice_procedure);
 
-timeline.push(instructions_6);
+// timeline.push(instructions_6);
 
 timeline.push(learning_procedure);
+timeline.push(instructions_1);
 timeline.push(blocking_procedure);
+timeline.push(instructions_1);
 timeline.push(testing_procedure);
 
 timeline.push(save_data);
