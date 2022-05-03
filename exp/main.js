@@ -9,7 +9,7 @@ let learning_procedure = {
     timeline_variables: learning_stimuli,
     randomize_order: true,
     type: 'fixed-repititions',
-    repetitions: 1
+    repetitions: 6
 }
 
 let blocking_procedure = {
@@ -17,7 +17,7 @@ let blocking_procedure = {
     timeline_variables: blocking_stimuli,
     randomize_order: true,
     type: 'fixed-repititions',
-    repetitions: 1
+    repetitions: 10
 }
 
 let testing_procedure = {
@@ -25,7 +25,7 @@ let testing_procedure = {
     timeline_variables: testing_stimuli,
     randomize_order: true,
     type: 'fixed-repititions',
-    repetitions: 1
+    repetitions: 10
 }
 
 timeline.push(welcome);
