@@ -161,7 +161,7 @@ function validateAge() {
 
 function submitIntake() {
 
-    if (screenResolutionHeight > 768) {
+    if (screenResolutionHeight >= 768) {
         openFullscreen();
 
         let rightHandedness = document.getElementById("rightHanded").checked;
