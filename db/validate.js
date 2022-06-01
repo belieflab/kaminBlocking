@@ -161,7 +161,13 @@ function validateAge() {
 
 function submitIntake() {
 
-    if (screenResolutionHeight >= 768) {
+
+    if (elem.webkitRequestFullscreen) {
+
+        // protect against Safari data saving issues
+        alert("Safari broswer detected. Please switch to Chrome or Firefox.");
+
+    } else if (screenResolutionHeight >= 768) {
         openFullscreen();
 
         let rightHandedness = document.getElementById("rightHanded").checked;
