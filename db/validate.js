@@ -45,6 +45,19 @@ function closeFullscreen() {
     }
   }
 
+// detect userAGENT
+let ua = navigator.userAgent.toLowerCase();
+let browser;
+if (ua.indexOf('safari') != -1) { 
+  if (ua.indexOf('chrome') > -1) {
+    browser = 'chrome';
+  } else {
+    browser = 'safari';
+  }
+} else {
+    browser = 'firefox';
+}
+
 // these functions are called when db_connection === true (e.g. omnibus.local or omnibus.yale) && db_connection === true
 
 function validateIntake() {
@@ -162,12 +175,13 @@ function validateAge() {
 function submitIntake() {
 
 
-    if (elem.webkitRequestFullscreen) {
+    if (browser === 'safari') {
 
         // protect against Safari data saving issues
         alert("Safari broswer detected. Please switch to Chrome or Firefox.");
 
     } else if (screenResolutionHeight >= 768) {
+
         openFullscreen();
 
         let rightHandedness = document.getElementById("rightHanded").checked;
