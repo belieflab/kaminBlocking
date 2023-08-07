@@ -1,4 +1,4 @@
-
+// $.getScript("exp/conf.js");
 /* create timeline */
 let timeline = [];
 
@@ -10,14 +10,10 @@ let welcome = {
 };
 
 
-
 /* define instructions trial */
 let instructions_1 = {
     type: "html-keyboard-response",
-    stimulus: '<h2 style="color:black;">In the first part of the experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</h2>' +
-            '<h3 style="color:black;">You have been presented with a new patient who suffers from allergic reactions following some meals, but not others.</h3> '+
-            '<h3 style="color:black;">You arrange for them to eat a number of different meals, containing one or two foods, and observe whether or not they have an allergic reaction.</h3>'+
-            '<p style="color:black;">Press the spacebar to continue.</p>',
+    stimulus: instructions1,
     choices: [32], //ascii spacebar
 };
 
@@ -238,7 +234,23 @@ let save_data = {
     choices: jsPsych.NO_KEYS,
     // trial_duration: 60000,
   };
-
+  let screenRandom = {
+    type: "html-keyboard-response",
+    stimulus:   "<p>Please answer the following question</p>"+
+    "<p>Did it feel random to you?</p>"+
+    "<label for='1'>1</label>"+
+    "<input type='radio' name='random' id='random' value='1'>"+
+    "<label for='2'>2</label>"+
+    "<input type='radio' name='random' id='random' value='2'>",
+    choices: jsPsych.NO_KEYS,
+    on_finish: function(){
+        document.getElementById("unload").onbeforeunload='';
+        $(document).ready(function(){
+        $("body").addClass("showCursor"); // returns cursor functionality
+    });
+      }
+    // trial_duration: 60000,
+  };
 // call main
 $.getScript("exp/main.js");
 

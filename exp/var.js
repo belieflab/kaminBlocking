@@ -28,7 +28,7 @@ let timeRemaining = '<p id="timeRemaining" style="text-align:center; color:black
 
 let stim_array = [];
 for (let i = 1; i < 19; i++){
-    stim_array.push('stimuli/s' + i + '.jpg');
+    stim_array.push('stimuli/'+taskVersion+'/s' + i + '.jpg');
 }
 
 let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
