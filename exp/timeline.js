@@ -239,42 +239,59 @@ let save_data = {
 
 
   
-  let end = {
-    type: "html-keyboard-response",
-    stimulus:   "<p>Thank you!</p>"+
-    "<p>You have successfully completed the experiment and your data has been saved.</p>"+
-    "<p>To leave feedback on this task, please click the following link:</p>"+
-    "<p><a href="+feedbackLink+">Leave Task Feedback!</a></p>"+
-    // "<p>Please wait for the experimenter to continue.</p>"+
-    "<p><i>You may now close the expriment window at anytime.</i></p>",
-    choices: jsPsych.NO_KEYS,
-    // trial_duration: 60000,
-  };
-  let screenRandom = {
-    type: "survey-multi-choice",
-    questions: [
-      {
-        prompt: "How random was this?", 
-        name: 'rating_random', 
-        options: ['Very', 'Somewhat', 'Unsure', 'Corn', 'Peas'], 
-        required: true,
-        horizontal: true
-      }, 
-      {
-        prompt: "Did you feel sabotaged?", 
-        name: 'rating_sabotage', 
-        options: ['Very', 'Somewhat', 'Unsure', 'Corn', 'Peas'], 
-        required: true,
-        horizontal: true
-      }
-    ],
-    choices: jsPsych.NO_KEYS,
-    on_finish: function(){
-        document.getElementById("unload").onbeforeunload='';
-        $(document).ready(function(){
-        $("body").addClass("showCursor"); // returns cursor functionality
-    });
-      }
+let end = {
+  type: "html-keyboard-response",
+  stimulus:   "<p>Thank you!</p>"+
+  "<p>You have successfully completed the experiment and your data has been saved.</p>"+
+  "<p>To leave feedback on this task, please click the following link:</p>"+
+  "<p><a href="+feedbackLink+">Leave Task Feedback!</a></p>"+
+  // "<p>Please wait for the experimenter to continue.</p>"+
+  "<p><i>You may now close the expriment window at anytime.</i></p>",
+  choices: jsPsych.NO_KEYS,
+  // trial_duration: 60000,
+};
+let screenRating1 = {
+  type: "survey-multi-choice",
+  questions: [
+    {
+      prompt: "How random was this?", 
+      name: 'rating_random', 
+      options: ['Very', 'Somewhat', 'Unsure', 'Corn', 'Peas'], 
+      required: true,
+      horizontal: true
+    }
+  ],
+  choices: jsPsych.NO_KEYS,
+  on_finish: function(){
+      document.getElementById("unload").onbeforeunload='';
+      $(document).ready(function(){
+      $("body").addClass("showCursor"); // returns cursor functionality
+  });
+    }
+}
+let screenRating2 = {
+  type: "survey-multi-choice",
+  questions: [
+    {
+      prompt: "Did you feel sabotaged?", 
+      name: 'rating_sabotage', 
+      options: ['Very', 'Somewhat', 'Unsure', 'Corn', 'Peas'], 
+      required: true,
+      horizontal: true
+    }
+  ],
+  choices: jsPsych.NO_KEYS,
+  on_finish: function(){
+      document.getElementById("unload").onbeforeunload='';
+      $(document).ready(function(){
+      $("body").addClass("showCursor"); // returns cursor functionality
+  });
+}
+
+
+
+
+
     // trial_duration: 60000,
   };
 // call main

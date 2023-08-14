@@ -236,10 +236,15 @@ body {
     pointer-events: none;
   }
 
-    /* hide cursor */
+    /* show cursor */
 .showCursor {
   cursor: default;
   }
+
+  /* attempt to style mouse cursor as black */
+.blackCursor {
+caret-color: black;
+}
 
   .image-container {
     display: flex; /* Use flexbox to align the images */
