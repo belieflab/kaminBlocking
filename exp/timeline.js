@@ -21,19 +21,14 @@ let instructions_1 = {
 
 let instructions_2 = {
     type: "html-keyboard-response",
-    stimulus: '<h2 style="color:black;">During the first part of the experiment, you will be shown pictures of the foods given to your patient for each meal.</h2>'+
-            '<h3 style="color:black;">You will then be shown whether or not they suffered an allergic reaction after eating the meal.</h3>' + 
-            '<h3 style="color:black;">When you see each meal, you will have three seconds to predict whether or not you believe they will suffer an allergic reaction after eating the meal.</h3>'+
-            '<p style="color:black;">Press the spacebar to continue.</p>',
+    stimulus: instructions2,
             choices: [32], //ascii spacebar
 };
 
 
 let instructions_3 = {
     type: "html-keyboard-response",
-    stimulus: '<h2 style="color:black;">To predict that a particular meal <strong><u>will not</strong></u> cause an allergy please press the <q><strong>0</strong></q> key on the keyboard.</h2>'+
-            '<h2 style="color:black;">To predict that a meal <b><u>will cause</b></u> an allergic reaction please press the <q><strong>1</strong></q> key on the keyboard.</h2>'+
-            '<p style="color:black;">Press either of the response keys to continue.</p>',
+    stimulus: instructions3,
     choices: [48, 49], //ascii spacebar
 };
 
@@ -254,9 +249,9 @@ let screenRating1 = {
   type: "survey-multi-choice",
   questions: [
     {
-      prompt: "How random was this?", 
+      prompt: "Were you concerned about your relationships with co-workers throughout the task?", 
       name: 'rating_random', 
-      options: ['Very', 'Somewhat', 'Unsure', 'Corn', 'Peas'], 
+      options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
       required: true,
       horizontal: true
     }
@@ -273,9 +268,9 @@ let screenRating2 = {
   type: "survey-multi-choice",
   questions: [
     {
-      prompt: "Did you feel sabotaged?", 
+      prompt: "Did any of your co-workers deliberately sabotage you?", 
       name: 'rating_sabotage', 
-      options: ['Very', 'Somewhat', 'Unsure', 'Corn', 'Peas'], 
+      options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
       required: true,
       horizontal: true
     }
