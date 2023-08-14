@@ -28,15 +28,15 @@ let timeRemaining = '<p id="timeRemaining" style="text-align:center; color:black
 
 let stim_array = [];
 for (let i = 1; i < 19; i++){
-    stim_array.push('stimuli/'+taskVersion+'/s' + i + '.jpg');
+    stim_array.push('stimuli/'+taskVersion+'/s' + i + fileExtension);
 }
 
 let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
 
 let practice_stimuli = [
-    {stimulus: stim_shuffle[15], stimulus2: '', data: {test_part: 'practice', correct_response: 48, incorrect_response: 49, stim_left: stim_shuffle[15].slice(8), stim_right: '', version: version}}, // 0 key
-    {stimulus: stim_shuffle[16], stimulus2: '', data: {test_part: 'practice', correct_response: 48, incorrect_response: 49, stim_left: stim_shuffle[16].slice(8), stim_right: '', version: version}}, // 0 key
-    {stimulus: stim_shuffle[17], stimulus2: '', data: {test_part: 'practice', correct_response: 49, incorrect_response: 48, stim_left: stim_shuffle[17].slice(8), stim_right: '', version: version}}, // 1 key
+    {stimulus: stim_shuffle[15], stimulus2: null, data: {test_part: 'practice', correct_response: 48, incorrect_response: 49, stim_left: stim_shuffle[15].slice(8), stim_right: '', version: version}}, // 0 key
+    {stimulus: stim_shuffle[16], stimulus2: null, data: {test_part: 'practice', correct_response: 48, incorrect_response: 49, stim_left: stim_shuffle[16].slice(8), stim_right: '', version: version}}, // 0 key
+    {stimulus: stim_shuffle[17], stimulus2: null, data: {test_part: 'practice', correct_response: 49, incorrect_response: 48, stim_left: stim_shuffle[17].slice(8), stim_right: '', version: version}}, // 1 key
 ]
 
 let learning_stimuli = [

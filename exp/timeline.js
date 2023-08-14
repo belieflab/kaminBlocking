@@ -74,12 +74,25 @@ let fixation = {
 // create  trials
 let stimuli = {
     type: "html-keyboard-response",
-    stimulus: function(){
-            var html="<img src='"+jsPsych.timelineVariable('stimulus', true)+"'>" +
-            "<img src='"+jsPsych.timelineVariable('stimulus2', true)+"'>";
-            return html;
-    }, 
+     
     
+    stimulus: function(){
+      var html;
+      var stimulus2 = jsPsych.timelineVariable('stimulus2', true);
+
+      if (stimulus2 !== null) {
+          html = "<img class='social-stimuli' src='" + jsPsych.timelineVariable('stimulus', true) + "'>" +
+                 "<img class='social-stimuli' src='" + stimulus2 + "'>";
+      } else {
+          html = "<img class='social-stimuli' src='" + jsPsych.timelineVariable('stimulus', true) + "'>";
+      }
+      return html;
+  },
+
+
+
+
+
     // jsPsych.timelineVariable('stimulus'),
     choices: [jsPsych.NO_KEYS], // key_press handled instead by responseKey
     trial_duration: 3000,

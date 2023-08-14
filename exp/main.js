@@ -31,12 +31,12 @@ let testing_procedure = {
 timeline.push(welcome);
 
 timeline.push(instructions_1);
-// timeline.push(instructions_2);
+timeline.push(instructions_2);
 // timeline.push(instructions_3);
 // timeline.push(instructions_4);
 // timeline.push(instructions_5);
 
-// timeline.push(practice_procedure);
+timeline.push(practice_procedure);
 
 // timeline.push(instructions_6);
 

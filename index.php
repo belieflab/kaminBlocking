@@ -15,8 +15,6 @@
     <link href="jsPsych/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/w3.css"> <!-- styling for w3c progress bars -->
-    <script async type="text/javascript" src="exp/conf.js"></script>
-    <script defer type="text/javascript" src="exp/var.js"></script>
   </head>
   <body id='unload' onbeforeunload="return areYouSure()" style="background-color:white;">  
     <?php
@@ -34,7 +32,9 @@
     ?>
   </body>
   <footer>
-    <script type="text/javascript" src="exp/fn.js"></script>
+  <script type="text/javascript" src="exp/conf.js"></script>
+  <script defer type="text/javascript" src="exp/var.js"></script>  
+  <script type="text/javascript" src="exp/fn.js"></script>
     
     <script type="text/javascript">
       // declare NDA required variables
