@@ -30,7 +30,7 @@ let testing_procedure = {
 
 timeline.push(welcome);
 
-// timeline.push(instructions_1);
+timeline.push(instructions_1);
 // timeline.push(instructions_2);
 // timeline.push(instructions_3);
 // timeline.push(instructions_4);
@@ -45,7 +45,5 @@ timeline.push(welcome);
 // timeline.push(testing_procedure);
 
 // timeline.push(save_data);
-if (taskVersion=="allergy"){
-    timeline.push(screenRandom);
-}
+timeline.push(screenRandom);
 timeline.push(end);

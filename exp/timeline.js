@@ -2,6 +2,7 @@
 /* create timeline */
 let timeline = [];
 
+
 /* define welcome message trial */
 let welcome = {
     type: "html-keyboard-response",
@@ -241,7 +242,13 @@ let save_data = {
     "<label for='1'>1</label>"+
     "<input type='radio' name='random' id='random' value='1'>"+
     "<label for='2'>2</label>"+
-    "<input type='radio' name='random' id='random' value='2'>",
+    "<input type='radio' name='random' id='random' value='2'>"+
+    "<label for='3'>3</label>"+
+    "<input type='radio' name='random' id='random' value='3'>"+
+    "<label for='4'>4</label>"+
+    "<input type='radio' name='random' id='random' value='4'>"+
+    "<label for='5'>5</label>"+
+    "<input type='radio' name='random' id='random' value='5'>",
     choices: jsPsych.NO_KEYS,
     on_finish: function(){
         document.getElementById("unload").onbeforeunload='';
