@@ -81,10 +81,12 @@ let stimuli = {
       var stimulus2 = jsPsych.timelineVariable('stimulus2', true);
 
       if (stimulus2 !== null) {
-          html = "<img class='social-stimuli' src='" + jsPsych.timelineVariable('stimulus', true) + "'>" +
-                 "<img class='social-stimuli' src='" + stimulus2 + "'>";
+          html = "<div class='image-container'>"+
+                 "<img class='stimuli-left' src='" + jsPsych.timelineVariable('stimulus', true) + "'>" +
+                 "<img class='stimuli-right' src='" + stimulus2 + "'>"+
+                 "</div>";
       } else {
-          html = "<img class='social-stimuli' src='" + jsPsych.timelineVariable('stimulus', true) + "'>";
+          html = "<img class='stimuli' src='" + jsPsych.timelineVariable('stimulus', true) + "'>";
       }
       return html;
   },
