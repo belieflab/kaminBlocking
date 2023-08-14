@@ -11,6 +11,7 @@
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="jsPsych/jspsych.js"></script>
     <script src="jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jsPsych/plugins/jspsych-survey-multi-choice.js"></script>
     <script src="jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
     <link href="jsPsych/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     <link rel="stylesheet" type="text/css" href="css/style.css">

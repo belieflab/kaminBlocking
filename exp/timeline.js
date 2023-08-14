@@ -251,19 +251,23 @@ let save_data = {
     // trial_duration: 60000,
   };
   let screenRandom = {
-    type: "html-keyboard-response",
-    stimulus:   "<p>Please answer the following question</p>"+
-    "<p>Did it feel random to you?</p>"+
-    "<label for='1'>1</label>"+
-    "<input type='radio' name='random' id='random' value='1'>"+
-    "<label for='2'>2</label>"+
-    "<input type='radio' name='random' id='random' value='2'>"+
-    "<label for='3'>3</label>"+
-    "<input type='radio' name='random' id='random' value='3'>"+
-    "<label for='4'>4</label>"+
-    "<input type='radio' name='random' id='random' value='4'>"+
-    "<label for='5'>5</label>"+
-    "<input type='radio' name='random' id='random' value='5'>",
+    type: "survey-multi-choice",
+    questions: [
+      {
+        prompt: "How random was this?", 
+        name: 'rating_random', 
+        options: ['Very', 'Somewhat', 'Unsure', 'Corn', 'Peas'], 
+        required: true,
+        horizontal: true
+      }, 
+      {
+        prompt: "Did you feel sabotaged?", 
+        name: 'rating_sabotage', 
+        options: ['Very', 'Somewhat', 'Unsure', 'Corn', 'Peas'], 
+        required: true,
+        horizontal: true
+      }
+    ],
     choices: jsPsych.NO_KEYS,
     on_finish: function(){
         document.getElementById("unload").onbeforeunload='';
