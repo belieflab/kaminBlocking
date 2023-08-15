@@ -168,12 +168,15 @@ let feedback = {
     let last_trial_feedback = jsPsych.data.get().last(1).values()[0].correct_response;
     if (last_trial_feedback == 49) { // if last correct_response == 49 (1 key)
         // return '<div style="color:red; font-size:60px;">ALLERGIC REACTION!</div>'
-        return '<img src=stimuli/+.jpg ></img>'
+        // return '<img src=stimuli/social/+.jpg ></img>'
+        return feedbackPositive
     } else if (last_trial_feedback == 48) { // if last correct_response == 48 (0 key)
         // return '<div style="color:green; font-size:60px;">NO REACTION</div>'
-        return '<img src=stimuli/-.jpg ></img>'
+        // return '<img src=stimuli/social/-.jpg ></img>'
+        return feedbackNegative
     }
     },
+
     choices: jsPsych.NO_KEYS,
     trial_duration: 1000,
     response_ends_trial: false,

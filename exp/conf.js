@@ -15,6 +15,8 @@ const qualtrics = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0U3wW3G3HfY8
 const taskVersion="social";
 let fileExtension;
 let instructions1;
+let feedbackNegative;
+let feedbackPositive;
 
 
 switch(taskVersion) {
@@ -31,6 +33,8 @@ switch(taskVersion) {
    instructions3='<h2 style="color:black;">To predict that a particular meal <strong><u>will not</strong></u> cause an allergy please press the <q><strong>0</strong></q> key on the keyboard.</h2>'+
    '<h2 style="color:black;">To predict that a meal <b><u>will cause</b></u> an allergic reaction please press the <q><strong>1</strong></q> key on the keyboard.</h2>'+
    '<p style="color:black;">Press either of the response keys to continue.</p>';
+   feedbackNegative='<img src=stimuli/allergy/-.jpg ></img>';
+   feedbackPositive='<img src=stimuli/allergy/+.jpg ></img>';
     break;
   case "social":
     fileExtension='.png';
@@ -45,7 +49,8 @@ switch(taskVersion) {
     instructions3='<h2 style="color:black;">To predict that a co-worker <strong><u>will not</strong></u> sabotage you, please press the <q><strong>0</strong></q> key on the keyboard.</h2>'+
     '<h2 style="color:black;">To predict that a co-worker <b><u>will sabotage</b></u> you please press the <q><strong>1</strong></q> key on the keyboard.</h2>'+
     '<p style="color:black;">Press either of the response keys to continue.</p>';
-    // '<h2 style="color:black;">You are being harassed by your co-workers, who is it???.</p>';
+    feedbackNegative='<img src=stimuli/social/-.jpg ></img>';
+    feedbackPositive='<img src=stimuli/social/+.jpg ></img>';
     break;
   case "nonsocial":
     break;
