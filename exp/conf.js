@@ -17,6 +17,7 @@ let fileExtension;
 let instructions1;
 let feedbackNegative;
 let feedbackPositive;
+let responseOptions;
 
 
 switch(taskVersion) {
@@ -35,6 +36,7 @@ switch(taskVersion) {
    '<p style="color:black;">Press either of the response keys to continue.</p>';
    feedbackNegative='<img src=stimuli/allergy/-.jpg ></img>';
    feedbackPositive='<img src=stimuli/allergy/+.jpg ></img>';
+   responseOptions='1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.'
     break;
   case "social":
     fileExtension='.png';
@@ -51,6 +53,7 @@ switch(taskVersion) {
     '<p style="color:black;">Press either of the response keys to continue.</p>';
     feedbackNegative='<img src=stimuli/social/-.jpg ></img>';
     feedbackPositive='<img src=stimuli/social/+.jpg ></img>';
+    responseOptions='1 Sabotaged&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 Helped <br><br> Hold response key to indicate confidence level.'
     break;
   case "nonsocial":
     break;

@@ -99,12 +99,12 @@ let stimuli = {
     data: jsPsych.timelineVariable('data'),
     on_load: function buttonPress(data){
         barFill = document.getElementById("fillUp");
-        barFill.innerHTML = '1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.';
+        barFill.innerHTML = responseOptions;
         document.getElementById("tapTap").focus(); //gives focus to the text box
         $(document).ready(function(){
             $("#tapTap").keypress(function(event){
                 var keycode = event.which;
-                if (barFill.innerHTML = '1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.') { // reused from eefrt, just needed a placeholder here
+                if (barFill.innerHTML = responseOptions) { 
                   if (keycode == 48) {
                     document.getElementById("counter").setAttribute("onkeydown", "return moveConfidence()"); // event.charCode allows us to set specific keys to use
                     responseKey = 48;
