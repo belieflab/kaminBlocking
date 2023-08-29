@@ -12,12 +12,19 @@
 const qualtrics = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0U3wW3G3HfY8Ie1?Q_JFE=qdg&workerId=";
 
 // goal 1: alter instructions to be socially salient
-const taskVersion="social";
+const taskVersion="allergy";
 let fileExtension;
 let instructions1;
+let instructions2;
+let instructions3;
+let instructions4;
+let instructions5;
 let feedbackNegative;
 let feedbackPositive;
 let responseOptions;
+let learning_stimuli;
+let blocking_stimuli;
+let testing_stimuli;
 
 
 switch(taskVersion) {
@@ -34,10 +41,25 @@ switch(taskVersion) {
    instructions3='<h2 style="color:black;">To predict that a particular meal <strong><u>will not</strong></u> cause an allergy please press the <q><strong>0</strong></q> key on the keyboard.</h2>'+
    '<h2 style="color:black;">To predict that a meal <b><u>will cause</b></u> an allergic reaction please press the <q><strong>1</strong></q> key on the keyboard.</h2>'+
    '<p style="color:black;">Press either of the response keys to continue.</p>';
+   instructions4='<h2 style="color:black;">Obviously you will have to guess at first.</h2>'+
+   '<h3 style="color:black;">But hopefully, as you see more meals, you will learn which foods tend to make your patient have an allergic reaction.</h3>'+
+   '<br>'+
+   '<h2 style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</h2>'+
+   '<h3 style="color:black;">If you think you are guessing please hold the key briefly.</h3>'+
+   '<h3 style="color:black;">If you are very confident you should press and hold until the meal disappears from the screen.</h3>'+
+   '<p style="color:black;">Press the spacebar to continue.</p>';
+   instructions5='<h2 style="color:black;">Try to make your prediction <b><u>before</b></u> the meal leaves the screen.</h2>'+
+   '<br>'+
+   '<h2 style="color:black;">Food <strong><u>does not</strong></u> cause an allergy &#8594 <q><strong>0</strong></q> key </h2>'+
+   '<h2 style="color:black;">Food <strong><u>causes</strong></u> an allergy &#8594 <q><strong>1</strong></q> key</h2>'+
+   '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
    feedbackNegative='<img src=stimuli/allergy/-.jpg ></img>';
    feedbackPositive='<img src=stimuli/allergy/+.jpg ></img>';
-   responseOptions='1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.'
-    break;
+   responseOptions='1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.';
+  //  learning_stimuli=learning_stimuli_standard;
+  //  blocking_stimuli=blocking_stimuli_standard;
+  //  testing_stimuli=testing_stimuli_standard; 
+   break;
   case "social":
     fileExtension='.png';
     instructions1='<h2 style="color:black;">In the first part of this experiment, you are asked to imagine that you are beginning a new job and your boss regularly evaluates you.</h2>' +
@@ -51,9 +73,24 @@ switch(taskVersion) {
     instructions3='<h2 style="color:black;">To predict that a co-worker <strong><u>will not</strong></u> sabotage you, please press the <q><strong>0</strong></q> key on the keyboard.</h2>'+
     '<h2 style="color:black;">To predict that a co-worker <b><u>will sabotage</b></u> you please press the <q><strong>1</strong></q> key on the keyboard.</h2>'+
     '<p style="color:black;">Press either of the response keys to continue.</p>';
-    feedbackNegative='<img src=stimuli/social/-.jpg ></img>';
-    feedbackPositive='<img src=stimuli/social/+.jpg ></img>';
-    responseOptions='1 Sabotaged&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 Helped <br><br> Hold response key to indicate confidence level.'
+    instructions4='<h2 style="color:black;">Obviously you will have to guess at first.</h2>'+
+   '<h3 style="color:black;">But hopefully, as you work with more people, you will learn which people tend to sabotage you.</h3>'+
+   '<br>'+
+   '<h2 style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</h2>'+
+   '<h3 style="color:black;">If you think you are guessing please hold the key briefly.</h3>'+
+   '<h3 style="color:black;">If you are very confident you should press and hold until the person disappears from the screen.</h3>'+
+   '<p style="color:black;">Press the spacebar to continue.</p>';
+   instructions5='<h2 style="color:black;">Try to make your prediction <b><u>before</b></u> the person leaves the screen.</h2>'+
+   '<br>'+
+   '<h2 style="color:black;">Co-worker <strong><u>does NOT</strong></u> sabotage you (helpful) &#8594 <q><strong>0</strong></q> key </h2>'+
+   '<h2 style="color:black;">Co-worker <strong><u>does</strong></u> sabotage you &#8594 <q><strong>1</strong></q> key</h2>'+
+   '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
+   feedbackNegative='<img src=stimuli/social/-.jpg ></img>';
+   feedbackPositive='<img src=stimuli/social/+.jpg ></img>';
+   responseOptions='1 Sabotaged&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 Helped <br><br> Hold response key to indicate confidence level.';
+  //  learning_stimuli=learning_stimuli_short;
+  //  blocking_stimuli=blocking_stimuli_short;
+  //  testing_stimuli=testing_stimuli_short;
     break;
   case "nonsocial":
     break;

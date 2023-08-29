@@ -35,24 +35,14 @@ let instructions_3 = {
 
 let instructions_4 = {
     type: "html-keyboard-response",
-    stimulus: '<h2 style="color:black;">Obviously you will have to guess at first.</h2>'+
-            '<h3 style="color:black;">But hopefully, as you see more meals, you will learn which foods tend to make your patient have an allergic reaction.</h3>'+
-            '<br>'+
-            '<h2 style="color:black;">Please hold the key down longer if you are more confident you are making the right choice.</h2>'+
-            '<h3 style="color:black;">If you think you are guessing please hold the key briefly.</h3>'+
-            '<h3 style="color:black;">If you are very confident you should press and hold until the meal disappears from the screen.</h3>'+
-            '<p style="color:black;">Press the spacebar to continue.</p>',
+    stimulus: instructions4,
     choices: [32],
 };
 
 
 let instructions_5 = {
 type: "html-keyboard-response",
-stimulus: '<h2 style="color:black;">Try to make your prediction <b><u>before</b></u> the meal leaves the screen.</h2>'+
-        '<br>'+
-        '<h2 style="color:black;">Food <strong><u>does not</strong></u> cause an allergy &#8594 <q><strong>0</strong></q> key </h2>'+
-        '<h2 style="color:black;">Food <strong><u>causes</strong></u> an allergy &#8594 <q><strong>1</strong></q> key</h2>'+
-        '<p style="color:black;">Press the spacebar to begin the practice trials.</p>',
+stimulus: instructions5,
 choices: [32],
 };
 
