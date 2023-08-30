@@ -4,33 +4,74 @@ let practice_procedure = {
     randomize_order: false,
 }
 
-let learning_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: learning_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 10
+let learning_procedure;
+switch(taskVersion) {
+    case "allergy":
+        learning_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: learning_stimuli_standard,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 10
+        };
+    break;
+    case "social":
+        learning_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: learning_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 10
+        };
+    break;
 }
 
-let blocking_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: blocking_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
+let blocking_procedure;
+switch(taskVersion) {
+    case "allergy": 
+        blocking_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: blocking_stimuli_standard,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 6
+        };
+    break;
+    case "social":
+        blocking_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: blocking_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 6
+        };
+    break;
 }
 
-let testing_procedure = {
-    timeline: [fixation, stimuli, feedback],
-    timeline_variables: testing_stimuli,
-    randomize_order: true,
-    type: 'fixed-repititions',
-    repetitions: 6
+let testing_procedure;
+switch(taskVersion) {
+    case "allergy":
+        testing_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: testing_stimuli_standard,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 6
+        };
+    break;
+    case "social":
+        testing_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: testing_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 6
+        }; 
+    break;
 }
-
 timeline.push(welcome);
 
-// timeline.push(instructions_1);
+timeline.push(instructions_1);
 // timeline.push(instructions_2);
 // timeline.push(instructions_3);
 // timeline.push(instructions_4);

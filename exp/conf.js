@@ -12,7 +12,7 @@
 const qualtrics = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0U3wW3G3HfY8Ie1?Q_JFE=qdg&workerId=";
 
 // goal 1: alter instructions to be socially salient
-const taskVersion="allergy";
+const taskVersion="social";
 let fileExtension;
 let instructions1;
 let instructions2;
@@ -22,9 +22,7 @@ let instructions5;
 let feedbackNegative;
 let feedbackPositive;
 let responseOptions;
-let learning_stimuli;
-let blocking_stimuli;
-let testing_stimuli;
+
 
 
 switch(taskVersion) {
