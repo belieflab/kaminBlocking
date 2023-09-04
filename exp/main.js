@@ -24,6 +24,15 @@ switch(taskVersion) {
             repetitions: 10
         };
     break;
+    case "nonsocial":
+        learning_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: learning_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 10
+        };
+    break;
 }
 
 let blocking_procedure;
@@ -46,6 +55,15 @@ switch(taskVersion) {
             repetitions: 6
         };
     break;
+    case "nonsocial":
+        blocking_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: blocking_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 6
+        };
+    break;
 }
 
 let testing_procedure;
@@ -60,6 +78,15 @@ switch(taskVersion) {
         };
     break;
     case "social":
+        testing_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: testing_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 6
+        }; 
+    break;
+    case "nonsocial":
         testing_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
