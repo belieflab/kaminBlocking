@@ -240,9 +240,11 @@ let end = {
 };
 
 
+
+
 let screenRating1;
 switch(taskVersion) {
-  case: "allergy":
+  case "allergy":
   screenRating1 = {
     type: "survey-multi-choice",
     questions: [
@@ -310,7 +312,7 @@ switch(taskVersion) {
 
 let screenRating2;
 switch(taskVersion) {
-  case: "allergy":
+  case "allergy":
   screenRating2 = {
     type: "survey-multi-choice",
     questions: [
