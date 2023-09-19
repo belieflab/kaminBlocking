@@ -238,219 +238,50 @@ let end = {
   choices: jsPsych.NO_KEYS,
   // trial_duration: 60000,
 };
-
-
-
-
-let screenRating1;
-switch(taskVersion) {
-  case "allergy":
-  screenRating1 = {
-    type: "survey-multi-choice",
-    questions: [
-      {
-        prompt: "Did you strongly consider the patient-doctor relationship when making choices?", 
-        name: 'rating_random', 
-        options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-        required: true,
-        horizontal: true
-      }
-    ],
-    choices: jsPsych.NO_KEYS,
-    on_finish: function(){
-        document.getElementById("unload").onbeforeunload='';
-        $(document).ready(function(){
-        $("body").addClass("showCursor"); // returns cursor functionality
-    });
-      }
-  };
-  break;
-  case "social":
-    screenRating1 = {
-      type: "survey-multi-choice",
-      questions: [
-        {
-          prompt: "Were you concerned about your relationships with co-workers throughout the task?", 
-          name: 'rating_random', 
-          options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-          required: true,
-          horizontal: true
-        }
-      ],
-      choices: jsPsych.NO_KEYS,
-      on_finish: function(){
-          document.getElementById("unload").onbeforeunload='';
-          $(document).ready(function(){
-          $("body").addClass("showCursor"); // returns cursor functionality
-      });
-        }
-    };
-    break;
-  case "nonsocial":
-    screenRating1 = {
-      type: "survey-multi-choice",
-      questions: [
-        {
-          prompt: "Do you feel that these shapes had emotions, personality, or a will of their own?", 
-          name: 'rating_random', 
-          options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-          required: true,
-          horizontal: true
-        }
-      ],
-      choices: jsPsych.NO_KEYS,
-      on_finish: function(){
-          document.getElementById("unload").onbeforeunload='';
-          $(document).ready(function(){
-          $("body").addClass("showCursor"); // returns cursor functionality
-      });
-        }
-    };
-    break;
-}
-
-
-let screenRating2;
-switch(taskVersion) {
-  case "allergy":
-  screenRating2 = {
-    type: "survey-multi-choice",
-    questions: [
-      {
-        prompt: "Did any of your co-workers deliberately sabotage you?", 
-        name: 'rating_sabotage', 
-        options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-        required: true,
-        horizontal: true
-      }
-    ],
-    choices: jsPsych.NO_KEYS,
-    on_finish: function(){
-        document.getElementById("unload").onbeforeunload='';
-        $(document).ready(function(){
-        $("body").addClass("showCursor"); // returns cursor functionality
-    });
+let screenRating1 = {
+  type: "survey-multi-choice",
+  questions: [
+    {
+      prompt: "Were you concerned about your relationships with co-workers throughout the task?", 
+      name: 'rating_random', 
+      options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
+      required: true,
+      horizontal: true
     }
+  ],
+  choices: jsPsych.NO_KEYS,
+  on_finish: function(){
+      document.getElementById("unload").onbeforeunload='';
+      $(document).ready(function(){
+      $("body").addClass("showCursor"); // returns cursor functionality
+  });
+    }
+}
+let screenRating2 = {
+  type: "survey-multi-choice",
+  questions: [
+    {
+      prompt: "Did any of your co-workers deliberately sabotage you?", 
+      name: 'rating_sabotage', 
+      options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
+      required: true,
+      horizontal: true
+    }
+  ],
+  choices: jsPsych.NO_KEYS,
+  on_finish: function(){
+      document.getElementById("unload").onbeforeunload='';
+      $(document).ready(function(){
+      $("body").addClass("showCursor"); // returns cursor functionality
+  });
+}
+
+
+
+
+
+    // trial_duration: 60000,
   };
-  break;
-  case "social":
-    screenRating2 = {
-      type: "survey-multi-choice",
-      questions: [
-        {
-          prompt: "Did any of your co-workers deliberately sabotage you?", 
-          name: 'rating_sabotage', 
-          options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-          required: true,
-          horizontal: true
-        }
-      ],
-      choices: jsPsych.NO_KEYS,
-      on_finish: function(){
-          document.getElementById("unload").onbeforeunload='';
-          $(document).ready(function(){
-          $("body").addClass("showCursor"); // returns cursor functionality
-      });
-      }
-    };
-    break;
-  case "nonsocial":
-    screenRating2 = {
-      type: "survey-multi-choice",
-      questions: [
-        {
-          prompt: "Did any of your co-workers deliberately sabotage you?", 
-          name: 'rating_sabotage', 
-          options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-          required: true,
-          horizontal: true
-        }
-      ],
-      choices: jsPsych.NO_KEYS,
-      on_finish: function(){
-          document.getElementById("unload").onbeforeunload='';
-          $(document).ready(function(){
-          $("body").addClass("showCursor"); // returns cursor functionality
-      });
-      }
-    };
-    break;
-}
-
-// screenRating1 = {
-//   type: "survey-multi-choice",
-//   questions: [
-//     {
-//       prompt: "Were you concerned about your relationships with co-workers throughout the task?", 
-//       name: 'rating_random', 
-//       options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-//       required: true,
-//       horizontal: true
-//     }
-//   ],
-//   choices: jsPsych.NO_KEYS,
-//   on_finish: function(){
-//       document.getElementById("unload").onbeforeunload='';
-//       $(document).ready(function(){
-//       $("body").addClass("showCursor"); // returns cursor functionality
-//   });
-//     }
-// }
-// let screenRating2 = {
-//   type: "survey-multi-choice",
-//   questions: [
-//     {
-//       prompt: "Did any of your co-workers deliberately sabotage you?", 
-//       name: 'rating_sabotage', 
-//       options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-//       required: true,
-//       horizontal: true
-//     }
-//   ],
-//   choices: jsPsych.NO_KEYS,
-//   on_finish: function(){
-//       document.getElementById("unload").onbeforeunload='';
-//       $(document).ready(function(){
-//       $("body").addClass("showCursor"); // returns cursor functionality
-//   });
-//   }
-// }
-
-
-
-let blocking_procedure;
-switch(taskVersion) {
-    case "allergy": 
-        blocking_procedure = {
-            timeline: [fixation, stimuli, feedback],
-            timeline_variables: blocking_stimuli_standard,
-            randomize_order: true,
-            type: 'fixed-repititions',
-            repetitions: 6
-        };
-    break;
-    case "social":
-        blocking_procedure = {
-            timeline: [fixation, stimuli, feedback],
-            timeline_variables: blocking_stimuli_short,
-            randomize_order: true,
-            type: 'fixed-repititions',
-            repetitions: 6
-        };
-    break;
-    case "nonsocial":
-        blocking_procedure = {
-            timeline: [fixation, stimuli, feedback],
-            timeline_variables: blocking_stimuli_short,
-            randomize_order: true,
-            type: 'fixed-repititions',
-            repetitions: 6
-        };
-    break;
-}
-
-
-
 // call main
 $.getScript("exp/main.js");
 
