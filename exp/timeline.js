@@ -238,11 +238,14 @@ let end = {
   choices: jsPsych.NO_KEYS,
   // trial_duration: 60000,
 };
+
+
+
 let screenRating1 = {
   type: "survey-multi-choice",
   questions: [
     {
-      prompt: "Were you concerned about your relationships with co-workers throughout the task?", 
+      prompt: question1, 
       name: 'rating_random', 
       options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
       required: true,
@@ -261,7 +264,7 @@ let screenRating2 = {
   type: "survey-multi-choice",
   questions: [
     {
-      prompt: "Did any of your co-workers deliberately sabotage you?", 
+      prompt: question2, 
       name: 'rating_sabotage', 
       options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
       required: true,
@@ -277,6 +280,44 @@ let screenRating2 = {
 }
 
 
+
+// let screenRating1 = {
+//   type: "survey-multi-choice",
+//   questions: [
+//     {
+//       prompt: "Were you concerned about your relationships with co-workers throughout the task?", 
+//       name: 'rating_random', 
+//       options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
+//       required: true,
+//       horizontal: true
+//     }
+//   ],
+//   choices: jsPsych.NO_KEYS,
+//   on_finish: function(){
+//       document.getElementById("unload").onbeforeunload='';
+//       $(document).ready(function(){
+//       $("body").addClass("showCursor"); // returns cursor functionality
+//   });
+//     }
+// }
+// let screenRating2 = {
+//   type: "survey-multi-choice",
+//   questions: [
+//     {
+//       prompt: "Did any of your co-workers deliberately sabotage you?", 
+//       name: 'rating_sabotage', 
+//       options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
+//       required: true,
+//       horizontal: true
+//     }
+//   ],
+//   choices: jsPsych.NO_KEYS,
+//   on_finish: function(){
+//       document.getElementById("unload").onbeforeunload='';
+//       $(document).ready(function(){
+//       $("body").addClass("showCursor"); // returns cursor functionality
+//   });
+// }
 
 
 

@@ -110,7 +110,7 @@ timeline.push(instructions_1);
 
 // timeline.push(learning_procedure);
 // timeline.push(blocking_procedure);
-timeline.push(testing_procedure);
+// timeline.push(testing_procedure);
 
 // timeline.push(save_data);
 timeline.push(screenRating1);
