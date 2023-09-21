@@ -90,7 +90,7 @@ let stimuli = {
     on_load: function buttonPress(data){
         barFill = document.getElementById("fillUp");
         barFill.innerHTML = responseOptions;
-        // document.getElementById("tapTap").focus(); //gives focus to the text box
+        document.getElementById("tapTap").focus(); //gives focus to the text box
         $(document).ready(function(){
             $("#tapTap").keypress(function(event){
                 var keycode = event.which;
