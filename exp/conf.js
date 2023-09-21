@@ -12,7 +12,7 @@
 const qualtrics = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0U3wW3G3HfY8Ie1?Q_JFE=qdg&workerId=";
 
 
-const taskVersion="nonsocial_gain";
+const taskVersion="nonsocial_loss";
 let fileExtension;
 let instructions1;
 let instructions2;
@@ -91,7 +91,7 @@ switch(taskVersion) {
    break;
 
   case "nonsocial_gain":
-    fileExtension='.png';
+    fileExtension='.jpg';
     instructions1='<h2 style="color:black;">In the first part of the experiment, you are asked to earn as many points as possible.</h2>' +
     '<h3 style="color:black;">You will be presented with unique shapes.</h3> '+
     '<h3 style="color:black;">You will observe whether or not the shapes are followed by points .</h3>'+
@@ -113,14 +113,14 @@ switch(taskVersion) {
    '<h2 style="color:black;">Shape <strong><u>is not</strong></u> followed by points &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Shape <strong><u>is</strong></u> followed by points &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/allergy/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/allergy/+.jpg ></img>';
-   responseOptions='1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.';
+   feedbackNegative='<img src=stimuli/nonsocial_gain/-.jpg ></img>';
+   feedbackPositive='<img src=stimuli/nonsocial_gain/+.jpg ></img>';
+   responseOptions='1 Gain Points&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Points <br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider your relationship with the shapes when making choices?";;
    question2= "Did any of the shapes deliberately sabotage you?"; 
    break;
   case "nonsocial_loss":
-    fileExtension='.png';
+    fileExtension='.jpg';
     instructions1='<h2 style="color:black;">In the first part of the experiment, you are asked to avoid losing any points.</h2>' +
     '<h3 style="color:black;">You will be presented with unique shapes.</h3> '+
     '<h3 style="color:black;">You will observe whether or not the shapes are followed by a loss of points .</h3>'+
@@ -142,9 +142,9 @@ switch(taskVersion) {
    '<h2 style="color:black;">Shape <strong><u>is not</strong></u> followed by loss of points &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Shape <strong><u>is</strong></u> followed by loss of points &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/allergy/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/allergy/+.jpg ></img>';
-   responseOptions='1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.';
+   feedbackNegative='<img src=stimuli/nonsocial_loss/-.jpg ></img>';
+   feedbackPositive='<img src=stimuli/nonsocial_loss/+.jpg ></img>';
+   responseOptions='1 Lose Points&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Points<br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider your relationship with the shapes when making choices?";;
    question2= "Did any of the shapes deliberately sabotage you?"; 
    break;
