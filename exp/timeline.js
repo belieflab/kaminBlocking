@@ -90,7 +90,7 @@ let stimuli = {
     on_load: function buttonPress(data){
         barFill = document.getElementById("fillUp");
         barFill.innerHTML = responseOptions;
-        document.getElementById("tapTap").focus(); //gives focus to the text box
+        // document.getElementById("tapTap").focus(); //gives focus to the text box
         $(document).ready(function(){
             $("#tapTap").keypress(function(event){
                 var keycode = event.which;
@@ -278,48 +278,6 @@ let screenRating2 = {
       $("body").addClass("showCursor"); // returns cursor functionality
   });
 }
-
-
-
-// let screenRating1 = {
-//   type: "survey-multi-choice",
-//   questions: [
-//     {
-//       prompt: "Were you concerned about your relationships with co-workers throughout the task?", 
-//       name: 'rating_random', 
-//       options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-//       required: true,
-//       horizontal: true
-//     }
-//   ],
-//   choices: jsPsych.NO_KEYS,
-//   on_finish: function(){
-//       document.getElementById("unload").onbeforeunload='';
-//       $(document).ready(function(){
-//       $("body").addClass("showCursor"); // returns cursor functionality
-//   });
-//     }
-// }
-// let screenRating2 = {
-//   type: "survey-multi-choice",
-//   questions: [
-//     {
-//       prompt: "Did any of your co-workers deliberately sabotage you?", 
-//       name: 'rating_sabotage', 
-//       options: ['Definitely Not', 'Probably Not', 'Unsure', 'Probably Yes', 'Definitely Yes'], 
-//       required: true,
-//       horizontal: true
-//     }
-//   ],
-//   choices: jsPsych.NO_KEYS,
-//   on_finish: function(){
-//       document.getElementById("unload").onbeforeunload='';
-//       $(document).ready(function(){
-//       $("body").addClass("showCursor"); // returns cursor functionality
-//   });
-// }
-
-
 
     // trial_duration: 60000,
   };
