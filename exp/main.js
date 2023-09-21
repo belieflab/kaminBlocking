@@ -114,6 +114,6 @@ timeline.push(practice_procedure);
 timeline.push(screenRating1);
 timeline.push(screenRating2);
 
-timeline.push(save_data);
+// timeline.push(save_data);
 
 timeline.push(end);
