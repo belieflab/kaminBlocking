@@ -7,6 +7,11 @@ This is a psychological task designed to track new causal belief formation. It i
 
 The scenario is as follows: subjects imagine they are an allergist and they are charged with figuring our which foods cause allergies in a fictitious patient and which ones do not. They see each meal he has eaten (comprised of one or two different foods) , for 3 seconds then they see whether or not an allergy happened (for one second). When a meal is on the screen, they make a prediction with a 2-alternative button push (allergy or no allergy).
 
+# Alternate versions
+Three new versions were developed that (a) use different instructions/framing contexts (social vs. nonsocial), (b) different stimuli (social avatars vs. fractals), and (c) have shorter format based on (Ongchoco et al., 2023)
+
+
+
 ## Development Guide
 
 #### Install and configure XAMPP:

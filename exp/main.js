@@ -24,7 +24,16 @@ switch(taskVersion) {
             repetitions: 10
         };
     break;
-    case "nonsocial":
+    case "nonsocial_gain":
+        learning_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: learning_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 10
+        };
+    break;
+    case "nonsocial_loss":
         learning_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
@@ -55,7 +64,16 @@ switch(taskVersion) {
             repetitions: 6
         };
     break;
-    case "nonsocial":
+    case "nonsocial_gain":
+        blocking_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: blocking_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 6
+        };
+    break;
+    case "nonsocial_loss":
         blocking_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
@@ -86,7 +104,16 @@ switch(taskVersion) {
             repetitions: 6
         }; 
     break;
-    case "nonsocial":
+    case "nonsocial_gain":
+        testing_procedure = {
+            timeline: [fixation, stimuli, feedback],
+            timeline_variables: testing_stimuli_short,
+            randomize_order: true,
+            type: 'fixed-repititions',
+            repetitions: 6
+        }; 
+    break;
+    case "nonsocial_loss":
         testing_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,

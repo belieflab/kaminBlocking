@@ -64,15 +64,25 @@ let stimuli = {
     stimulus: function(){
       var html;
       var stimulus2 = jsPsych.timelineVariable('stimulus2', true);
-
-      if (stimulus2 !== null) {
+    if (taskVersion !== "social") {
+      if (stimulus2 !== null ) {
           html = "<div class='image-container'>"+
-                 "<img class='stimuli-left' src='" + jsPsych.timelineVariable('stimulus', true) + "'>" +
-                 "<img class='stimuli-right' src='" + stimulus2 + "'>"+
-                 "</div>";
-      } else {
-          html = "<img class='stimuli' src='" + jsPsych.timelineVariable('stimulus', true) + "'>";
+                 "<img class='stimuli-left-allergy' src='" + jsPsych.timelineVariable('stimulus', true) + "'>" +
+                 "<img class='stimuli-right-allergy' src='" + stimulus2 + "'>"+
+                 "</div>"; 
+      } else if (stimulus2 === null) {
+          html = "<img class='stimuli-allergy' src='" + jsPsych.timelineVariable('stimulus', true) + "'>";
       }
+    } else {
+      if (stimulus2 !== null) {
+        html = "<div class='image-container'>"+
+               "<img class='stimuli-left-social' src='" + jsPsych.timelineVariable('stimulus', true) + "'>" +
+               "<img class='stimuli-right-social' src='" + stimulus2 + "'>"+
+               "</div>";
+    } else if (stimulus2 === null && taskVersion==="social") {
+        html = "<img class='stimuli-social' src='" + jsPsych.timelineVariable('stimulus', true) + "'>";
+    }
+  }
       return html;
   },
 
@@ -253,7 +263,7 @@ let screenRating1 = {
     }
   ],
   choices: jsPsych.NO_KEYS,
-  on_finish: function(){
+  on_start: function(){
       document.getElementById("unload").onbeforeunload='';
       $(document).ready(function(){
       $("body").addClass("showCursor"); // returns cursor functionality
