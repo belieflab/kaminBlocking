@@ -132,6 +132,7 @@ let stimuli = {
     data.handedness = handedness;
     data.response = responseKey;
     data.version = version;
+    data.task_version = taskVersion;
 
     if (responseKey == data.correct_response) {
         data.accuracy = 1;
@@ -268,6 +269,20 @@ let screenRating1 = {
       $(document).ready(function(){
       $("body").addClass("showCursor"); // returns cursor functionality
   });
+    },
+    on_finish: function(data){
+      data.subjectkey = GUID;
+      data.src_subject_id = workerId;
+      data.site = siteNumber;
+      data.interview_date = today;
+      data.interview_age = ageAtAssessment;
+      data.sex = sexAtBirth;
+      data.phenotype = groupStatus;
+      data.handedness = handedness;
+      data.response = responseKey;
+      data.version = version;
+      data.task_version = taskVersion;
+      data.rating_random = data.response.rating_random[0];
     }
 }
 let screenRating2 = {
@@ -282,12 +297,20 @@ let screenRating2 = {
     }
   ],
   choices: jsPsych.NO_KEYS,
-  on_finish: function(){
-      document.getElementById("unload").onbeforeunload='';
-      $(document).ready(function(){
-      $("body").addClass("showCursor"); // returns cursor functionality
-  });
-}
+  on_finish: function(data){
+    data.subjectkey = GUID;
+    data.src_subject_id = workerId;
+    data.site = siteNumber;
+    data.interview_date = today;
+    data.interview_age = ageAtAssessment;
+    data.sex = sexAtBirth;
+    data.phenotype = groupStatus;
+    data.handedness = handedness;
+    data.response = responseKey;
+    data.version = version;
+    data.task_version = taskVersion;
+    data.rating_sabotage = data.response.rating_sabotage[0];
+  }
 
     // trial_duration: 60000,
   };
