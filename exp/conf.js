@@ -12,7 +12,7 @@
 const qualtrics = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0U3wW3G3HfY8Ie1?Q_JFE=qdg&workerId=";
 
 // taskVersion choices: "social", "allergy", "nonsocial_gain", "nonsocial_loss"
-const taskVersion="nonsocial_gain";
+const taskVersion="social";
 let fileExtension;
 let instructions1;
 let instructions2;
