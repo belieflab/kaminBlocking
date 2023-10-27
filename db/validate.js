@@ -200,7 +200,7 @@ function submitIntake() {
             // do nothing
         } else {
             // alert("your subjectid is " + subjectID);
-            workerId = parseInt(subjectID);
+            workerId = subjectID;
             validateIntake();
         }
 
