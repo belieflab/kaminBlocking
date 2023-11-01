@@ -45,6 +45,7 @@
       let siteNumber;
       let ageAtAssessment;
       let groupStatus;
+      let visit;
       let feedbackLink;
 
       if (db_connection === false) {
@@ -55,6 +56,7 @@
         ageAtAssessment = "";
         feedbackLink = "";
         groupStatus = "";
+        visit = "";
       } else if (db_connection === true) {
         GUID = "<?php echo $subjectKey?>";
         subjectID = "<?php echo $consortId?>";
@@ -62,6 +64,7 @@
         siteNumber = "<?php echo $institutionAlias?>";
         ageAtAssessment = "<?php echo $ageInMonths?>";
         groupStatus = "<?php echo $groupStatus?>";
+        visit = "<?php echo $visit?>";
         feedbackLink = "https://belieflab.yale.edu/omnibus/eCRFs/feedback/tasks/kamin.php?candidateId=<?php echo $candidateId?>&studyId=<?php echo $studyId?>";
       }
     </script>

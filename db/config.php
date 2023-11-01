@@ -12,6 +12,7 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
   $institutionAlias = $_GET["site"];
   $ageInMonths = $_GET["interview_age"];
   $groupStatus = openssl_decrypt($_GET["phenotype"],$encryptionMethod, $secretHash);
+  $visit = openssl_decrypt($_GET["visit"],$encryptionMethod, $secretHash);
 
   } else {
     $db_connection_status = null;
@@ -23,6 +24,7 @@ if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/config.php')) {
     $institutionAlias = '';
     $ageInMonths = '';
     $groupStatus = '';
+    $visit = '';
     $candidateId = '';
     $studyId = '';
   }
