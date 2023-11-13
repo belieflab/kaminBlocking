@@ -11,8 +11,10 @@
 
 const qualtrics = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0U3wW3G3HfY8Ie1?Q_JFE=qdg&workerId=";
 
-// taskVersion choices: "social", "allergy", "nonsocial_gain", "nonsocial_loss"
-const taskVersion="nonsocial_gain";
+// taskVersion choices: "social_kamin", "kamin", "kamin_gain", "kamin_loss"
+// social_kamin involves avatars and focuses on sabotage
+// kamin_loss and kamin_gain focus on learning which fractal images gain or lose points
+const taskVersion="kamin_gain";
 let fileExtension;
 let instructions1;
 let instructions2;
@@ -27,7 +29,7 @@ let question2;
 
 
 switch(taskVersion) {
-  case "allergy":
+  case "kamin":
    fileExtension='.jpg';
    instructions1='<h2 style="color:black;">In the first part of the experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</h2>' +
     '<h3 style="color:black;">You have been presented with a new patient who suffers from allergic reactions following some meals, but not others.</h3> '+
@@ -52,13 +54,13 @@ switch(taskVersion) {
    '<h2 style="color:black;">Food <strong><u>does not</strong></u> cause an allergy &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Food <strong><u>causes</strong></u> an allergy &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/allergy/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/allergy/+.jpg ></img>';
+   feedbackNegative='<img src=stimuli/'+taskVersion+'/-.jpg ></img>';
+   feedbackPositive='<img src=stimuli/'+taskVersion+'/+.jpg ></img>';
    responseOptions='1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider the patient-doctor relationship when making choices?";
    question2= "Did it feel as though the foods were trying to trick you?";
    break;
-  case "social":
+  case "social_kamin":
     fileExtension='.png';
     instructions1='<h2 style="color:black;">In the first part of this experiment, you are asked to imagine that you are beginning a new job and your boss regularly evaluates you.</h2>' +
     '<h3 style="color:black;">You also have new co-workers, who you have to rely on for help with tasks. Nonetheless, some co-workers will actively wish for you to fail!</h3> '+
@@ -83,14 +85,14 @@ switch(taskVersion) {
    '<h2 style="color:black;">Co-worker <strong><u>does NOT</strong></u> sabotage you (helpful) &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Co-worker <strong><u>does</strong></u> sabotage you &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/social/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/social/+.jpg ></img>';
+   feedbackNegative='<img src=stimuli/'+taskVersion+'/-.jpg ></img>';
+   feedbackPositive='<img src=stimuli/'+taskVersion+'/+.jpg ></img>';
    responseOptions='1 Sabotaged&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 Helped <br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider your relationships with co-workers throughout the task?";
    question2= "Did any of your co-workers deliberately sabotage you?"; 
    break;
 
-  case "nonsocial_gain":
+  case "kamin_gain":
     fileExtension='.jpg';
     instructions1='<h2 style="color:black;">In the first part of the experiment, you are asked to earn as many points as possible.</h2>' +
     '<h3 style="color:black;">You will be presented with unique shapes.</h3> '+
@@ -113,13 +115,13 @@ switch(taskVersion) {
    '<h2 style="color:black;">Shape <strong><u>is not</strong></u> followed by points &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Shape <strong><u>is</strong></u> followed by points &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/nonsocial_gain/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/nonsocial_gain/+.jpg ></img>';
+   feedbackNegative='<img src=stimuli/'+taskVersion+'/-.jpg ></img>';
+   feedbackPositive='<img src=stimuli/'+taskVersion+'/+.jpg ></img>';
    responseOptions='1 Gain Points&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Points <br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider your relationship with the shapes when making choices?";;
    question2= "Did any of the shapes deliberately sabotage you?"; 
    break;
-  case "nonsocial_loss":
+  case "kamin_loss":
     fileExtension='.jpg';
     instructions1='<h2 style="color:black;">In the first part of the experiment, you are asked to avoid losing any points.</h2>' +
     '<h3 style="color:black;">You will be presented with unique shapes.</h3> '+
@@ -142,8 +144,8 @@ switch(taskVersion) {
    '<h2 style="color:black;">Shape <strong><u>is not</strong></u> followed by loss of points &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Shape <strong><u>is</strong></u> followed by loss of points &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/nonsocial_loss/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/nonsocial_loss/+.jpg ></img>';
+   feedbackNegative='<img src=stimuli/'+taskVersion+'/-.jpg ></img>';
+   feedbackPositive='<img src=stimuli/'+taskVersion+'/+.jpg ></img>';
    responseOptions='1 Lose Points&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Points<br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider your relationship with the shapes when making choices?";;
    question2= "Did any of the shapes deliberately sabotage you?"; 

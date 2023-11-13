@@ -6,7 +6,7 @@ let practice_procedure = {
 
 let learning_procedure;
 switch(taskVersion) {
-    case "allergy":
+    case "kamin":
         learning_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_standard,
@@ -15,7 +15,7 @@ switch(taskVersion) {
             repetitions: 10
         };
     break;
-    case "social":
+    case "social_kamin":
         learning_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
@@ -24,7 +24,7 @@ switch(taskVersion) {
             repetitions: 10
         };
     break;
-    case "nonsocial_gain":
+    case "kamin_gain":
         learning_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
@@ -33,7 +33,7 @@ switch(taskVersion) {
             repetitions: 10
         };
     break;
-    case "nonsocial_loss":
+    case "kamin_loss":
         learning_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
@@ -46,7 +46,7 @@ switch(taskVersion) {
 
 let blocking_procedure;
 switch(taskVersion) {
-    case "allergy": 
+    case "kamin": 
         blocking_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_standard,
@@ -55,7 +55,7 @@ switch(taskVersion) {
             repetitions: 6
         };
     break;
-    case "social":
+    case "social_kamin":
         blocking_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
@@ -64,7 +64,7 @@ switch(taskVersion) {
             repetitions: 6
         };
     break;
-    case "nonsocial_gain":
+    case "kamin_gain":
         blocking_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
@@ -73,7 +73,7 @@ switch(taskVersion) {
             repetitions: 6
         };
     break;
-    case "nonsocial_loss":
+    case "kamin_loss":
         blocking_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
@@ -86,7 +86,7 @@ switch(taskVersion) {
 
 let testing_procedure;
 switch(taskVersion) {
-    case "allergy":
+    case "kamin":
         testing_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_standard,
@@ -95,7 +95,7 @@ switch(taskVersion) {
             repetitions: 6
         };
     break;
-    case "social":
+    case "social_kamin":
         testing_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
@@ -104,7 +104,7 @@ switch(taskVersion) {
             repetitions: 6
         }; 
     break;
-    case "nonsocial_gain":
+    case "kamin_gain":
         testing_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
@@ -113,7 +113,7 @@ switch(taskVersion) {
             repetitions: 6
         }; 
     break;
-    case "nonsocial_loss":
+    case "kamin_loss":
         testing_procedure = {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
@@ -135,9 +135,9 @@ timeline.push(practice_procedure);
 
 timeline.push(instructions_6);
 // to test uncomment the learning, blocking, and testing procedures
-timeline.push(learning_procedure);
-timeline.push(blocking_procedure);
-timeline.push(testing_procedure);
+// timeline.push(learning_procedure);
+// timeline.push(blocking_procedure);
+// timeline.push(testing_procedure);
 timeline.push(screenRating1);
 timeline.push(screenRating2);
 

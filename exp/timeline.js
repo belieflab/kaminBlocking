@@ -57,7 +57,7 @@ let stimuli = {
     stimulus: function () {
         var html;
         var stimulus2 = jsPsych.timelineVariable("stimulus2", true);
-        if (taskVersion !== "social") {
+        if (taskVersion !== "social_kamin") {
             if (stimulus2 !== null) {
                 html =
                     "<div class='image-container'>" +
@@ -85,7 +85,7 @@ let stimuli = {
                     stimulus2 +
                     "'>" +
                     "</div>";
-            } else if (stimulus2 === null && taskVersion === "social") {
+            } else if (stimulus2 === null && taskVersion === "social_kamin") {
                 html =
                     "<img class='stimuli-social' src='" +
                     jsPsych.timelineVariable("stimulus", true) +
@@ -250,7 +250,7 @@ let save_data = {
     choices: jsPsych.NO_KEYS,
     trial_duration: 5000,
     on_finish: function () {
-        saveData("kamin_" + workerId, jsPsych.data.get().csv());
+        saveData(taskVersion+'_'+ workerId, jsPsych.data.get().csv());
         document.getElementById("unload").onbeforeunload = "";
         $(document).ready(function () {
             $("body").addClass("showCursor"); // returns cursor functionality
