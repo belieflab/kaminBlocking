@@ -28,6 +28,7 @@
     <label class="container">Headphone volume is set to 50% &nbsp&nbsp&nbsp  
     <input type="checkbox" name="volume" id="volume" value="1"/>
   </label> -->
+  <p><?php echo get_current_git_commit()?></p>
   </form>
   
   <!-- <label class="container">Headphones plugged in? &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp               

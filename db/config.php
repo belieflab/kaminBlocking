@@ -13,3 +13,16 @@ if ($_GET["src_subject_id"]) {
  $groupStatus = $_GET["phenotype"];
  $visit = $_GET["visit"];
 } 
+
+/**
+ * Get the hash of the current git HEAD
+ * @param str $branch The git branch to check
+ * @return mixed Either the hash or a boolean false
+ */
+function get_current_git_commit( $branch='master' ) {
+  if ( $hash = file_get_contents( sprintf( '.git/refs/heads/%s', $branch ) ) ) {
+    return "version: ".strval(substr(trim($hash),-7));
+  } else {
+    return false;
+  }
+}
