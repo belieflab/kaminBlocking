@@ -14,7 +14,7 @@ const qualtrics = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0U3wW3G3HfY8
 // taskVersion choices: "social_kamin", "kamin", "kamin_gain", "kamin_loss"
 // social_kamin involves avatars and focuses on sabotage
 // kamin_loss and kamin_gain focus on learning which fractal images gain or lose points
-const taskVersion="kamin_gain";
+const taskVersion="kamin";
 let fileExtension;
 let instructions1;
 let instructions2;
