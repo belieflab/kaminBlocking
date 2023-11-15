@@ -2,6 +2,14 @@
 /* create timeline */
 let timeline = [];
 
+if (test) {
+    let testAlert = prompt("WARNING. This task is currently in 'test' mode. If you meant to complete task with a participant, type 'yes' to switch to production mode.");
+    if (testAlert.toLowerCase()==="yes") {
+        test=false;
+    }
+  }
+
+
 /* define welcome message trial */
 let welcome = {
     type: "html-keyboard-response",
