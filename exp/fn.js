@@ -1,14 +1,7 @@
 //  increment confidence bar
-function moveConfidence(data) { // function definition
-  var width = document.getElementById("keyBar").style.width; // variable assignment of width property of keyBar
-  // $(document).ready(function(){
-  //   $("input").keydown(function(){
-  //     $("input").css("background-color", "yellow");
-  //   });
-  //   $("input").keyup(function(){
-  //     $("input").css("background-color", "pink");
-  //   });
-  // });
+const moveConfidence = () => { // function definition
+  let width = document.getElementById("keyBar").style.width; // variable assignment of width property of keyBar
+
   width = parseFloat(width.slice(0, -1)); // variable reassignment
     if (width >= 99) { // set to record 100 taps
       trialComplete = 1;
@@ -25,37 +18,3 @@ function moveConfidence(data) { // function definition
     }
 
   }
-
-function saveData(name, data){
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'index.php'); // 'write_data.php' is the path to the php file described above.
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({filename: name, filedata: data}));
-  }
-
-function getParamFromURL(name) {
-  name = name.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");
-  var regexS = "[\?&]"+name+"=([^&#]*)";
-  var regex = new RegExp( regexS );
-  var results = regex.exec( window.location.href );
-  if( results == null )
-    return "";
-  else
-    return results[1];
-}
-
-function startExperiment(){
-  jsPsych.init({
-      timeline: timeline,
-      show_progress_bar: true,
-      preload_images: [stim_shuffle, 'stimuli/+.jpg', 'stimuli/-.jpg'],
-  });
-}
-
-//onbeforeunload in body
-function areYouSure() {
-  return "Write something clever here...";
-}
-areYouSure();
-
-

@@ -57,8 +57,8 @@ switch(taskVersion) {
    '<h2 style="color:black;">Food <strong><u>does not</strong></u> cause an allergy &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Food <strong><u>causes</strong></u> an allergy &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/'+taskVersion+'/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/'+taskVersion+'/+.jpg ></img>';
+   feedbackNegative='<img src=stim/'+taskVersion+'/-.jpg ></img>';
+   feedbackPositive='<img src=stim/'+taskVersion+'/+.jpg ></img>';
    responseOptions='1 Allergy&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Reaction <br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider the patient-doctor relationship when making choices?";
    question2= "Did it feel as though the foods were trying to trick you?";
@@ -88,8 +88,8 @@ switch(taskVersion) {
    '<h2 style="color:black;">Co-worker <strong><u>does NOT</strong></u> sabotage you (helpful) &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Co-worker <strong><u>does</strong></u> sabotage you &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/'+taskVersion+'/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/'+taskVersion+'/+.jpg ></img>';
+   feedbackNegative='<img src=stim/'+taskVersion+'/-.jpg ></img>';
+   feedbackPositive='<img src=stim/'+taskVersion+'/+.jpg ></img>';
    responseOptions='1 Sabotaged&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 Helped <br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider your relationships with co-workers throughout the task?";
    question2= "Did any of your co-workers deliberately sabotage you?"; 
@@ -118,8 +118,8 @@ switch(taskVersion) {
    '<h2 style="color:black;">Shape <strong><u>is not</strong></u> followed by points &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Shape <strong><u>is</strong></u> followed by points &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/'+taskVersion+'/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/'+taskVersion+'/+.jpg ></img>';
+   feedbackNegative='<img src=stim/'+taskVersion+'/-.jpg ></img>';
+   feedbackPositive='<img src=stim/'+taskVersion+'/+.jpg ></img>';
    responseOptions='1 Gain Points&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Points <br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider your relationship with the shapes when making choices?";;
    question2= "Did any of the shapes deliberately sabotage you?"; 
@@ -147,8 +147,8 @@ switch(taskVersion) {
    '<h2 style="color:black;">Shape <strong><u>is not</strong></u> followed by loss of points &#8594 <q><strong>0</strong></q> key </h2>'+
    '<h2 style="color:black;">Shape <strong><u>is</strong></u> followed by loss of points &#8594 <q><strong>1</strong></q> key</h2>'+
    '<p style="color:black;">Press the spacebar to begin the practice trials.</p>';
-   feedbackNegative='<img src=stimuli/'+taskVersion+'/-.jpg ></img>';
-   feedbackPositive='<img src=stimuli/'+taskVersion+'/+.jpg ></img>';
+   feedbackNegative='<img src=stim/'+taskVersion+'/-.jpg ></img>';
+   feedbackPositive='<img src=stim/'+taskVersion+'/+.jpg ></img>';
    responseOptions='1 Lose Points&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp0 No Points<br><br> Hold response key to indicate confidence level.';
    question1= "Did you consider your relationship with the shapes when making choices?";;
    question2= "Did any of the shapes deliberately sabotage you?"; 
