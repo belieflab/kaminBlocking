@@ -33,9 +33,7 @@ for (let i = 1; i < 19; i++) {
     stim_array.push("stim/" + taskVersion + "/s" + i + fileExtension);
 }
 
-// let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
-
-let stim_shuffle = stim_array;
+let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
 
 let practice_stimuli = [
     {
