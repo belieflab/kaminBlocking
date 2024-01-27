@@ -1,5 +1,5 @@
 <?php
-require_once 'jsPsychWrapper-v6.3/exp/conf.php';
+require_once 'wrap/exp/conf.php';
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ if ($workerId) {
     // Redirect to index.php with the workerId parameter
     echo"<h1>Ah! Ah! Ah!<h1>";
     echo"<h1>You didn't say the magic word!<h1/>";
-    echo"<img src='jsPsychWrapper-v6.3/magicword.gif'>";
+    echo"<img src='wrap/magicword.gif'>";
     exit; // Make sure to exit after the header redirect
 }
 
