@@ -3,12 +3,13 @@
 let timeline = [];
 
 if (test) {
-    let testAlert = prompt("WARNING. This task is currently in 'test' mode. If you meant to complete task with a participant, type 'yes' to switch to production mode.");
-    if (testAlert.toLowerCase()==="yes") {
-        test=false;
+    let testAlert = prompt(
+        "WARNING. This task is currently in 'test' mode. If you meant to complete task with a participant, type 'yes' to switch to production mode."
+    );
+    if (testAlert.toLowerCase() === "yes") {
+        test = false;
     }
-  }
-
+}
 
 /* define welcome message trial */
 let welcome = {
@@ -203,12 +204,12 @@ let feedback = {
         if (last_trial_feedback == 49) {
             // if last correct_response == 49 (1 key)
             // return '<div style="color:red; font-size:60px;">ALLERGIC REACTION!</div>'
-            // return '<img src=stimuli/social/+.jpg ></img>'
+            // return '<img src=stim/social/+.jpg ></img>'
             return feedbackPositive;
         } else if (last_trial_feedback == 48) {
             // if last correct_response == 48 (0 key)
             // return '<div style="color:green; font-size:60px;">NO REACTION</div>'
-            // return '<img src=stimuli/social/-.jpg ></img>'
+            // return '<img src=stim/social/-.jpg ></img>'
             return feedbackNegative;
         }
     },
@@ -258,7 +259,7 @@ let save_data = {
     choices: jsPsych.NO_KEYS,
     trial_duration: 5000,
     on_finish: function () {
-        saveData(taskVersion+'_'+ workerId, jsPsych.data.get().csv());
+        saveData(taskVersion + "_" + workerId, jsPsych.data.get().csv());
         document.getElementById("unload").onbeforeunload = "";
         $(document).ready(function () {
             $("body").addClass("showCursor"); // returns cursor functionality

@@ -1,5 +1,5 @@
 <?php
-require_once 'jsPsychWrapper-v6.3/db/data.php';
+require_once 'jsPsychWrapper-v6.3/lib/data.php';
 require_once 'jsPsychWrapper-v6.3/exp/conf.php';
 ?>
 
@@ -10,15 +10,16 @@ require_once 'jsPsychWrapper-v6.3/exp/conf.php';
   <!-- add the title of the experiment that would be seen in the browser -->
   <title><?php echo $experimentName; ?></title>
   <!-- PHP wrapper libraries -->
-  <script type="text/javascript" src="jsPsychWrapper-v6.3/db/validate.js"></script>
-  <script type="text/javascript" src="jsPsychWrapper-v6.3/db/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="jsPsychWrapper-v6.3/lib/validate.js"></script>
+  <script type="text/javascript" src="jsPsychWrapper-v6.3/lib/jquery-3.5.1.min.js"></script>
   <!-- jsPsych library -->
-  <script type="text/javascript" src="jsPsych/jspsych.js"></script>
+  <script type="text/javascript" src="jsPsychWrapper-v6.3/jsPsych/jspsych.js"></script>
   <!-- jsPsych Plugins (add more here) -->
-  <script type="text/javascript" src="jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
-  <script type="text/javascript" src="jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
-  <script type="text/javascript" src="jsPsych/plugins/jspsych-video-keyboard-response.js"></script>
-  <link href="jsPsych/css/jspsych.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="jsPsychWrapper-v6.3/jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
+  <script type="text/javascript" src="jsPsychWrapper-v6.3/jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
+  <script type="text/javascript" src="jsPsychWrapper-v6.3/jsPsych/plugins/jspsych-video-keyboard-response.js"></script>
+  <script type="text/javascript" src="jsPsychWrapper-v6.3/jsPsych/plugins/jspsych-survey-multi-choice.js"></script>
+  <link href="jsPsychWrapper-v6.3/jsPsych/css/jspsych.css" rel="stylesheet" type="text/css">
   <!-- general styling -->
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <!-- confidence bar styling -->
