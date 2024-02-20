@@ -5,7 +5,7 @@
 /* START TRAINING TRIAL FOR PARTICIPANTS */
 
 // version number
-const version = "corrected"; // fixed testing stimuli pairing per PRC ec3c20c
+const iteration = "corrected"; // fixed testing stimuli pairing per PRC ec3c20c
 
 // feedback contrainer
 let feedbackGenerator = '<p id="feedbackGenerator" style="color:black;"></p>';
@@ -30,7 +30,7 @@ let timeRemaining =
 
 let stim_array = [];
 for (let i = 1; i < 19; i++) {
-    stim_array.push("stim/" + taskVersion + "/s" + i + fileExtension);
+    stim_array.push("stim/" + version + "/s" + i + fileExtension);
 }
 
 let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
@@ -45,7 +45,7 @@ let practice_stimuli = [
             incorrect_response: 49,
             stim_left: stim_shuffle[15].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -57,7 +57,7 @@ let practice_stimuli = [
             incorrect_response: 49,
             stim_left: stim_shuffle[16].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -69,7 +69,7 @@ let practice_stimuli = [
             incorrect_response: 48,
             stim_left: stim_shuffle[17].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
 ];
@@ -86,7 +86,7 @@ let learning_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[0].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -100,7 +100,7 @@ let learning_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[1].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -114,7 +114,7 @@ let learning_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[4].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -128,7 +128,7 @@ let learning_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[5].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -142,7 +142,7 @@ let learning_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[9].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -156,7 +156,7 @@ let learning_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[10].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -170,7 +170,7 @@ let learning_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
 ];
@@ -187,7 +187,7 @@ let learning_stimuli_short = [
             incorrect_response: 48,
             stim_left: stim_shuffle[0].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -201,7 +201,7 @@ let learning_stimuli_short = [
             incorrect_response: 48,
             stim_left: stim_shuffle[1].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -215,7 +215,7 @@ let learning_stimuli_short = [
             incorrect_response: 49,
             stim_left: stim_shuffle[4].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -229,7 +229,7 @@ let learning_stimuli_short = [
             incorrect_response: 49,
             stim_left: stim_shuffle[5].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
 ];
@@ -246,7 +246,7 @@ let blocking_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[0].slice(8),
             stim_right: stim_shuffle[2].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -260,7 +260,7 @@ let blocking_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[1].slice(8),
             stim_right: stim_shuffle[3].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -274,7 +274,7 @@ let blocking_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[4].slice(8),
             stim_right: stim_shuffle[6].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -288,7 +288,7 @@ let blocking_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[5].slice(8),
             stim_right: stim_shuffle[7].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -302,7 +302,7 @@ let blocking_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[8].slice(8),
             stim_right: stim_shuffle[9].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -345,7 +345,7 @@ let blocking_stimuli_short = [
             incorrect_response: 48,
             stim_left: stim_shuffle[0].slice(8),
             stim_right: stim_shuffle[2].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -359,7 +359,7 @@ let blocking_stimuli_short = [
             incorrect_response: 48,
             stim_left: stim_shuffle[1].slice(8),
             stim_right: stim_shuffle[3].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -373,7 +373,7 @@ let blocking_stimuli_short = [
             incorrect_response: 48,
             stim_left: stim_shuffle[4].slice(8),
             stim_right: stim_shuffle[6].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -387,7 +387,7 @@ let blocking_stimuli_short = [
             incorrect_response: 48,
             stim_left: stim_shuffle[5].slice(8),
             stim_right: stim_shuffle[7].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -401,7 +401,7 @@ let blocking_stimuli_short = [
             incorrect_response: 49,
             stim_left: stim_shuffle[8].slice(8),
             stim_right: stim_shuffle[9].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -415,7 +415,7 @@ let blocking_stimuli_short = [
             incorrect_response: 49,
             stim_left: stim_shuffle[10].slice(8),
             stim_right: stim_shuffle[12].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -429,7 +429,7 @@ let blocking_stimuli_short = [
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),
             stim_right: stim_shuffle[13].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 0 key
 ];
@@ -446,7 +446,7 @@ let testing_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[2].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -460,7 +460,7 @@ let testing_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[3].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -474,7 +474,7 @@ let testing_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[6].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -488,7 +488,7 @@ let testing_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[7].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -502,7 +502,7 @@ let testing_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[8].slice(8),
             stim_right: stim_shuffle[9].slice(8),
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -516,7 +516,7 @@ let testing_stimuli_standard = [
             incorrect_response: 48,
             stim_left: stim_shuffle[10].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -530,7 +530,7 @@ let testing_stimuli_standard = [
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
 ];
@@ -551,7 +551,7 @@ let testing_stimuli_short = [
             incorrect_response: 48,
             stim_left: stim_shuffle[2].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -565,7 +565,7 @@ let testing_stimuli_short = [
             incorrect_response: 49,
             stim_left: stim_shuffle[3].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -579,7 +579,7 @@ let testing_stimuli_short = [
             incorrect_response: 48,
             stim_left: stim_shuffle[6].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 1 key
     {
@@ -593,7 +593,7 @@ let testing_stimuli_short = [
             incorrect_response: 49,
             stim_left: stim_shuffle[7].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
     {
@@ -607,7 +607,7 @@ let testing_stimuli_short = [
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),
             stim_right: "",
-            version: version,
+            version: iteration,
         },
     }, // 0 key
 ];

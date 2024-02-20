@@ -1,52 +1,50 @@
-// $.getScript("exp/conf.js");
+startExperiment = () => {
+    jsPsych.init({
+        timeline: timeline,
+        show_progress_bar: true,
+        preload_video: [],
+        preload_audio: [],
+        preload_images: [],
+    });
+};
+
 /* create timeline */
 let timeline = [];
-
-if (test) {
-    let testAlert = prompt(
-        "WARNING. This task is currently in 'test' mode. If you meant to complete task with a participant, type 'yes' to switch to production mode."
-    );
-    if (testAlert.toLowerCase() === "yes") {
-        test = false;
-    }
-}
 
 /* define welcome message trial */
 let welcome = {
     type: "html-keyboard-response",
-    stimulus:
-        '<h1 style="color:black;">Welcome to the experiment!</h1>' +
-        "<p>Press any key to begin.</p>",
+    stimulus: instructions[0],
 };
 
 /* define instructions trial */
 let instructions_1 = {
     type: "html-keyboard-response",
-    stimulus: instructions1,
+    stimulus: instructions[1],
     choices: [32], //ascii spacebar
 };
 
 let instructions_2 = {
     type: "html-keyboard-response",
-    stimulus: instructions2,
+    stimulus: instructions[2],
     choices: [32], //ascii spacebar
 };
 
 let instructions_3 = {
     type: "html-keyboard-response",
-    stimulus: instructions3,
+    stimulus: instructions[3],
     choices: [48, 49], //ascii spacebar
 };
 
 let instructions_4 = {
     type: "html-keyboard-response",
-    stimulus: instructions4,
+    stimulus: instructions[4],
     choices: [32],
 };
 
 let instructions_5 = {
     type: "html-keyboard-response",
-    stimulus: instructions5,
+    stimulus: instructions[5],
     choices: [32],
 };
 
@@ -66,7 +64,7 @@ let stimuli = {
     stimulus: function () {
         var html;
         var stimulus2 = jsPsych.timelineVariable("stimulus2", true);
-        if (taskVersion !== "social_kamin") {
+        if (version !== "social_kamin") {
             if (stimulus2 !== null) {
                 html =
                     "<div class='image-container'>" +
@@ -94,7 +92,7 @@ let stimuli = {
                     stimulus2 +
                     "'>" +
                     "</div>";
-            } else if (stimulus2 === null && taskVersion === "social_kamin") {
+            } else if (stimulus2 === null && version === "social_kamin") {
                 html =
                     "<img class='stimuli-social' src='" +
                     jsPsych.timelineVariable("stimulus", true) +
@@ -116,7 +114,7 @@ let stimuli = {
         timeRemaining +
         '<form autocomplete="off" action=""> <input autocomplete="false" name="hidden" id="tapTap" type="text" style="background-color:black; color: transparent; outline:none; border:none; background:none;" onkeypress="">',
     data: jsPsych.timelineVariable("data"),
-    on_load: function buttonPress(data) {
+    on_load: (buttonPress = (data) => {
         barFill = document.getElementById("fillUp");
         barFill.innerHTML = responseOptions;
         document.getElementById("tapTap").focus(); //gives focus to the text box
@@ -151,20 +149,13 @@ let stimuli = {
                 }
             });
         });
-    },
-    on_finish: function (data) {
-        data.subjectkey = GUID;
-        data.src_subject_id = workerId;
-        data.site = siteNumber;
-        data.interview_date = today;
-        data.interview_age = ageAtAssessment;
-        data.sex = sexAtBirth;
-        data.phenotype = groupStatus;
-        data.visit = visit;
-        data.handedness = handedness;
+    }),
+    on_finish: (data) => {
+        createCandidateKeys(data);
+
         data.response = responseKey;
         data.version = version;
-        data.task_version = taskVersion;
+        data.task_version = version;
 
         if (responseKey == data.correct_response) {
             data.accuracy = 1;
@@ -231,50 +222,17 @@ let feedback = {
 
 let instructions_6 = {
     type: "html-keyboard-response",
-    stimulus:
-        '<h2 style="color:black;">Let us begin!</h2>' +
-        '<p style="color:black;">Press the spacebar when you are ready to start the experiment.</p>',
+    stimulus: instructions[6],
     choices: [32],
 };
 
 //COMPLETION MESSAGE: Completed Classification Phase
 
-let save_data = {
-    type: "html-keyboard-response",
-    stimulus: dataSaveAnimation,
-    choices: jsPsych.NO_KEYS,
-    trial_duration: 5000,
-    on_finish: () => {
-        saveData(experimentAlias + "_" + subjectId, jsPsych.data.get().csv()); //function with file name and which type of file as the 2 arguments
-        document.getElementById("unload").onbeforeunload = ""; //removes popup (are you sure you want to exit) since data is saved now
-        // returns cursor functionality
-        $(document).ready(function () {
-            $("body").addClass("showCursor"); // returns cursor functionality
-            closeFullscreen(); // kill fullscreen
-        });
-    },
-};
-
-let end = {
-    type: "html-keyboard-response",
-    stimulus:
-        "<p>Thank you!</p>" +
-        "<p>You have successfully completed the experiment and your data has been saved.</p>" +
-        "<p>To leave feedback on this task, please click the following link:</p>" +
-        "<p><a href=" +
-        feedbackLink +
-        ">Leave Task Feedback!</a></p>" +
-        // "<p>Please wait for the experimenter to continue.</p>"+
-        "<p><i>You may now close the expriment window at anytime.</i></p>",
-    choices: jsPsych.NO_KEYS,
-    // trial_duration: 60000,
-};
-
 let screenRating1 = {
     type: "survey-multi-choice",
     questions: [
         {
-            prompt: question1,
+            prompt: instructions[7],
             name: "rating_random",
             options: [
                 "Definitely Not",
@@ -295,18 +253,11 @@ let screenRating1 = {
         });
     },
     on_finish: function (data) {
-        data.subjectkey = GUID;
-        data.src_subject_id = workerId;
-        data.site = siteNumber;
-        data.interview_date = today;
-        data.interview_age = ageAtAssessment;
-        data.sex = sexAtBirth;
-        data.phenotype = groupStatus;
-        data.visit = visit;
-        data.handedness = handedness;
+        createCandidateKeys(data);
+
         data.response = responseKey;
         data.version = version;
-        data.task_version = taskVersion;
+        data.task_version = version;
 
         var ratingRandom = jsPsych.data.get().select("responses").values[0];
 
@@ -319,7 +270,7 @@ let screenRating2 = {
     type: "survey-multi-choice",
     questions: [
         {
-            prompt: question2,
+            prompt: instructions[8],
             name: "rating_sabotage",
             options: [
                 "Definitely Not",
@@ -334,18 +285,10 @@ let screenRating2 = {
     ],
     choices: jsPsych.NO_KEYS,
     on_finish: function (data) {
-        data.subjectkey = GUID;
-        data.src_subject_id = workerId;
-        data.site = siteNumber;
-        data.interview_date = today;
-        data.interview_age = ageAtAssessment;
-        data.sex = sexAtBirth;
-        data.phenotype = groupStatus;
-        data.visit = visit;
-        data.handedness = handedness;
+        createCandidateKeys(data);
         data.response = responseKey;
         data.version = version;
-        data.task_version = taskVersion;
+        data.task_version = version;
         var ratingSabotage = jsPsych.data.get().select("responses").values[0];
         data.rating_sabotage = ratingSabotage;
         // var currentData = jsPsych.currentTrial().data;
@@ -354,5 +297,64 @@ let screenRating2 = {
 
     // trial_duration: 60000,
 };
+
+const dataSave = {
+    type: "html-keyboard-response",
+    stimulus: dataSaveAnimation(),
+    choices: "NO_KEYS",
+    trial_duration: 5000,
+    on_finish: () => {
+        const updatedScore =
+            typeof score !== "undefined"
+                ? score
+                : jsPsych.data.get().select("score").values.slice(-1)[0]; // Replace 'score' with actual data key if necessary
+
+        // Now, generate the thank you message with the updated score
+        const thankYou = instructions[3](updatedScore);
+
+        saveDataPromise(
+            `${experimentAlias}_${subjectId}`,
+            jsPsych.data.get().csv()
+        )
+            .then((response) => {
+                console.log("Data saved successfully.", response);
+                // Update the stimulus content directly via DOM manipulation
+                document.querySelector("#jspsych-content").innerHTML = thankYou;
+            })
+            .catch((error) => {
+                console.log("Failed to save data.", error);
+                // Check if the error object has 'error' property and use it, otherwise convert object to string
+                let errorMessage = error.error || JSON.stringify(error);
+                switch (errorMessage) {
+                    case '{"success":false}':
+                        errorMessage =
+                            "The ./data directory does not exit on this server.";
+                        break;
+                    case "Not Found":
+                        errorMessage =
+                            "There was an error saving the file to disk.";
+                        break;
+                    default:
+                        errorMessage = "Unknown error.";
+                }
+                // Update the stimulus content directly via DOM manipulation
+                const dataFailure = `
+                <div class="error-page">
+                    <p>Oh no!</p>
+                    <p>An error has occured and your data has not been saved:</p>
+                    <p>${errorMessage}</p>
+                    <p>Please wait for the experimenter to continue.</p>
+                </div>`;
+                document.querySelector("#jspsych-content").innerHTML =
+                    dataFailure;
+            })
+            .finally(() => {
+                document.getElementById("unload").onbeforeunload = ""; // Removes popup
+                $("body").addClass("showCursor"); // Returns cursor functionality
+                closeFullscreen(); // Kill fullscreen
+            });
+    },
+};
+
 // call main
 $.getScript("exp/main.js");

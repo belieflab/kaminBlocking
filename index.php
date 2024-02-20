@@ -18,13 +18,13 @@ require_once 'wrap/lib/ids.php';
   <script type="text/javascript" src="./wrap/lib/validate.js"></script>
   <script type="text/javascript" src="./wrap/lib/jquery-3.5.1.min.js"></script>
   <!-- jsPsych library -->
-  <script type="text/javascript" src="./wrap/jsPsych/jspsych.js"></script>
+  <script type="text/javascript" src="./wrap/jspsych/jspsych.js"></script>
   <!-- jsPsych Plugins (add more here) -->
-  <script type="text/javascript" src="./wrap/jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
-  <script type="text/javascript" src="./wrap/jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
-  <script type="text/javascript" src="./wrap/jsPsych/plugins/jspsych-video-keyboard-response.js"></script>
-  <script type="text/javascript" src="./wrap/jsPsych/plugins/jspsych-survey-multi-choice.js"></script>
-  <link href="./wrap/jsPsych/css/jspsych.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="./wrap/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+  <script type="text/javascript" src="./wrap/jspsych/plugins/jspsych-image-keyboard-response.js"></script>
+  <script type="text/javascript" src="./wrap/jspsych/plugins/jspsych-video-keyboard-response.js"></script>
+  <script type="text/javascript" src="./wrap/jspsych/plugins/jspsych-survey-multi-choice.js"></script>
+  <link href="./wrap/jspsych/css/jspsych.css" rel="stylesheet" type="text/css">
   <!-- general styling -->
   <link rel="stylesheet" type="text/css" href="./wrap/lib/style.css">
   <!-- confidence bar styling -->
@@ -50,8 +50,9 @@ require_once 'wrap/lib/ids.php';
   <!-- load experiment dependencies -->
   <!-- <script type="text/javascript" src="exp/conf.js"></script> -->
   <script type="text/javascript" src="./exp/fn.js"></script>
-  <script type="text/javascript" src="./exp/var.js"></script>
   <script type="text/javascript" src="./exp/lang.js"></script>
+
+  <script type="text/javascript" src="./exp/var.js"></script>
 
 </footer>
 
