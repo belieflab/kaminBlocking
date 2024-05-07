@@ -151,7 +151,7 @@ let stimuli = {
         });
     }),
     on_finish: (data) => {
-        createCandidateKeys(data);
+        writeCandidateKeysKeys(data);
 
         data.response = responseKey;
         data.version = version;
@@ -253,7 +253,7 @@ let screenRating1 = {
         });
     },
     on_finish: function (data) {
-        createCandidateKeys(data);
+        writeCandidateKeysKeys(data);
 
         data.response = responseKey;
         data.version = version;
@@ -285,7 +285,7 @@ let screenRating2 = {
     ],
     choices: jsPsych.NO_KEYS,
     on_finish: function (data) {
-        createCandidateKeys(data);
+        writeCandidateKeysKeys(data);
         data.response = responseKey;
         data.version = version;
         data.task_version = version;
