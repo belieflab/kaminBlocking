@@ -4,7 +4,7 @@
 
 // Debug Mode
 // Options: true, false
-let debug = false; // Default debug mode setting for the experiment
+let debug = true; // Default debug mode setting for the experiment
 
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
@@ -26,4 +26,4 @@ const version = "kamin";
 
 // Note: Uncomment the desired options. Ensure only one option per setting is active at a time.
 const adminEmail = undefined;
-const feedbackLink = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC?participantId=" + subjectId;
+const feedbackLink = undefined;
