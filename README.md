@@ -10,6 +10,8 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 # Alternate versions
 Three new versions were developed that (a) use different instructions/framing contexts (social vs. nonsocial), (b) different stimuli (social avatars vs. fractals), and (c) have shorter format based on (Ongchoco et al., 2023)
 
+# Git branches and latest version
+If you want to use the latest version (v7 wrapper) this will be under the branch v7. Then you can clone it by: git clone --branch v7 --recurse-submodules git@github.com:belieflab/kaminBlocking.git kaminBlocking. The branch master is being used for CAPR project, and will be depricated after the project.
 
 
 ## Development Guide
