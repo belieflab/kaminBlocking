@@ -52,7 +52,7 @@ let instructions_5 = {
 let fixation = {
     // data: {test_part: 'fixation'},
     type: "html-keyboard-response",
-    stimulus: '<div style="color:black; font-size:60px;"></div>',
+    stimulus: '<div style="color:black; font-size:60px;">+</div>',
     choices: jsPsych.NO_KEYS,
     trial_duration: 1000,
 };

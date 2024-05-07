@@ -142,8 +142,10 @@ if (!debug) {
     timeline.push(testing_procedure);
 }
 
-timeline.push(screenRating1);
-timeline.push(screenRating2);
+if (lastQuestion) {
+    timeline.push(screenRating1);
+    timeline.push(screenRating2);
+}
 
 timeline.push(dataSave);
 

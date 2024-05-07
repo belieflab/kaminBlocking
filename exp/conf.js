@@ -6,6 +6,9 @@
 // Options: true, false
 let debug = false; // Default debug mode setting for the experiment
 
+// if you want to ask questions at the end of the task then true
+let lastQuestion = false;
+
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
 const experimentAlias = "kamin"; // Unique identifier for the experiment, used in data saving
