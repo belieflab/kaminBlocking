@@ -26,4 +26,4 @@ const version = "kamin";
 
 // Note: Uncomment the desired options. Ensure only one option per setting is active at a time.
 const adminEmail = undefined;
-const feedbackLink = undefined;
+const feedbackLink = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC?participantId=" + subjectId;
