@@ -118,36 +118,44 @@ let stimuli = {
         barFill = document.getElementById("fillUp");
         barFill.innerHTML = responseOptions;
         document.getElementById("tapTap").focus(); //gives focus to the text box
-        $(document).ready(function () {
-            $("#tapTap").keypress(function (event) {
-                var keycode = event.which;
-                if ((barFill.innerHTML = responseOptions)) {
-                    if (keycode == 48) {
-                        document
-                            .getElementById("counter")
-                            .setAttribute(
-                                "onkeydown",
-                                "return moveConfidence()"
-                            ); // event.charCode allows us to set specific keys to use
-                        responseKey = 48;
-                        // console.log(responseKey);
-                    } else if (keycode == 49) {
-                        document
-                            .getElementById("counter")
-                            .setAttribute(
-                                "onkeydown",
-                                "return moveConfidence()"
-                            ); // event.charCode allows us to set specific keys to use
-                        responseKey = 49;
-                        // console.log(responseKey);
-                    } else {
-                        // all other keys ignored
-                        document
-                            .getElementById("counter")
-                            .setAttribute("onkeydown", "return false"); // event.charCode allows us to set specific keys to use
-                    }
-                }
-            });
+        // Set up the text box to capture key events
+        const tapTapElement = document.getElementById("tapTap");
+        tapTapElement.focus(); // Focus on the text box to capture key events
+
+        // Variables to keep track of whether the key is held down
+        let keyHeld48 = false;
+        let keyHeld49 = false;
+
+        // Function to handle key press
+        const handleKeyPress = (keycode, isKeyDown) => {
+            if (keycode === 48) {
+                keyHeld48 = isKeyDown;
+            } else if (keycode === 49) {
+                keyHeld49 = isKeyDown;
+            }
+
+            // Trigger the confidence movement if either key is held
+            if (keyHeld48 || keyHeld49) {
+                moveConfidence();
+            }
+        };
+
+        // Keydown event
+        $(tapTapElement).keydown(function (event) {
+            var keycode = event.which;
+            if (keycode === 48 || keycode === 49) {
+                handleKeyPress(keycode, true);
+                event.preventDefault(); // Prevent default action and stop propagation
+            }
+        });
+
+        // Keyup event
+        $(tapTapElement).keyup(function (event) {
+            var keycode = event.which;
+            if (keycode === 48 || keycode === 49) {
+                handleKeyPress(keycode, false);
+                event.preventDefault(); // Prevent default action and stop propagation
+            }
         });
     }),
     on_finish: (data) => {
