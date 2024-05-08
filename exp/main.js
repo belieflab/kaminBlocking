@@ -4,6 +4,10 @@ let practice_procedure = {
     randomize_order: false,
 };
 
+// use wrap function and add repetition number per phase (learning, blocking, and testing), also make it fullscreen and present debug mode
+let repetitions = getRepetitions([learningRepetition,blockingRepetition,testingRepetition]);
+
+// this is first phase
 let learning_procedure;
 switch (version) {
     case "kamin":
@@ -12,7 +16,7 @@ switch (version) {
             timeline_variables: learning_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: learningRepetition,
+            repetitions: repetitions[0],
         };
         break;
     case "social_kamin":
@@ -21,7 +25,7 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: learningRepetition,
+            repetitions: repetitions[0],
         };
         break;
     case "kamin_gain":
@@ -30,7 +34,7 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: learningRepetition,
+            repetitions: repetitions[0],
         };
         break;
     case "kamin_loss":
@@ -39,11 +43,12 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: learningRepetition,
+            repetitions: repetitions[0],
         };
         break;
 }
 
+// this is second phase
 let blocking_procedure;
 switch (version) {
     case "kamin":
@@ -52,7 +57,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: blockingRepetition,
+            repetitions: repetitions[1],
         };
         break;
     case "social_kamin":
@@ -61,7 +66,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: blockingRepetition,
+            repetitions: repetitions[1],
         };
         break;
     case "kamin_gain":
@@ -70,7 +75,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: blockingRepetition,
+            repetitions: repetitions[1],
         };
         break;
     case "kamin_loss":
@@ -79,11 +84,12 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: blockingRepetition,
+            repetitions: repetitions[1],
         };
         break;
 }
 
+// this is third phase
 let testing_procedure;
 switch (version) {
     case "kamin":
@@ -92,7 +98,7 @@ switch (version) {
             timeline_variables: testing_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: testingRepetition,
+            repetitions: repetitions[2],
         };
         break;
     case "social_kamin":
@@ -101,7 +107,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: testingRepetition,
+            repetitions: repetitions[2],
         };
         break;
     case "kamin_gain":
@@ -110,7 +116,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: testingRepetition,
+            repetitions: repetitions[2],
         };
         break;
     case "kamin_loss":
@@ -119,7 +125,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: testingRepetition, 
+            repetitions: repetitions[2], 
         };
         break;
 }

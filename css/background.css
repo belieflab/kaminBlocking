@@ -1,0 +1,4 @@
+root.light-theme {
+    --main-color: black; /* Switch main color to white */
+    --background-color: white; /* Assuming you want to invert the background as well */
+}

@@ -29,6 +29,8 @@ require_once 'wrap/lib/ids.php';
   <link rel="stylesheet" type="text/css" href="./wrap/lib/style.css">
   <!-- confidence bar styling -->
   <link rel="stylesheet" type="text/css" href="./css/exp.css">
+  <!-- general background colour (white) -->
+  <link rel="stylesheet" type="text/css" href="./css/background.css">
 </head>
 
 <body id='unload' onbeforeunload="return areYouSure()">
