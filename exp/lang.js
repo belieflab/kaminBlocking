@@ -23,18 +23,24 @@ const instructions6 =
 const feedbackNegative = "<img src=stim/" + version + "/-.jpg ></img>";
 const feedbackPositive = "<img src=stim/" + version + "/+.jpg ></img>";
 
-var endgame = (score) => {
-    return `
-<div class="body-white-theme">
+// declare endgame variable
+let endgame;
+
+// two cases for endgame (in-person or online)
+if (src_subject_id) {
+    endgame = `<div class="body-white-theme">
     <p>Thank you!</p>
     <p>You have successfully completed the experiment and your data has been saved.</p>
-    <p>Your final score is ${score}.</p>
     <!-- <p>To leave feedback on this task, please click the following link:</p> -->
     <!-- <p><a href="${feedbackLink}">Leave Task Feedback!</a></p> -->
     <!-- <p>Please wait for the experimenter to continue.</p> -->
     <p><i>You may now close the experiment window at any time.</i></p>
-</div>`;
-};
+    </div>`
+} else {
+    endgame = `<p style='color:white;'>Thank you!</p>
+    <p style='color:white;'>You have successfully completed the Human Detection Task and your data has been saved.</p>
+    <p style='color:white;'>You will redirected to the Qualtrics questionnaires, if you are not redirected please click <a href="${feedbackLink}">here</a>.</p>`
+}
 
 switch (version) {
     case "kamin":
@@ -206,7 +212,7 @@ switch (language) {
             responseOptions,
             question1,
             question2,
-            (score) => endgame(score), // Store it as a function that accepts score
+            endgame, // Store it as a function that accepts score
         ];
         break;
 }

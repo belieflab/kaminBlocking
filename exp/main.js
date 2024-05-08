@@ -11,8 +11,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_standard,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 10,
+            type: "fixed-repetitions",
+            repetitions: learningRepetition,
         };
         break;
     case "social_kamin":
@@ -20,8 +20,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 10,
+            type: "fixed-repetitions",
+            repetitions: learningRepetition,
         };
         break;
     case "kamin_gain":
@@ -29,8 +29,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 10,
+            type: "fixed-repetitions",
+            repetitions: learningRepetition,
         };
         break;
     case "kamin_loss":
@@ -38,8 +38,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 10,
+            type: "fixed-repetitions",
+            repetitions: learningRepetition,
         };
         break;
 }
@@ -51,8 +51,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_standard,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: blockingRepetition,
         };
         break;
     case "social_kamin":
@@ -60,8 +60,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: blockingRepetition,
         };
         break;
     case "kamin_gain":
@@ -69,8 +69,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: blockingRepetition,
         };
         break;
     case "kamin_loss":
@@ -78,8 +78,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: blockingRepetition,
         };
         break;
 }
@@ -91,8 +91,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_standard,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: testingRepetition,
         };
         break;
     case "social_kamin":
@@ -100,8 +100,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: testingRepetition,
         };
         break;
     case "kamin_gain":
@@ -109,8 +109,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: testingRepetition,
         };
         break;
     case "kamin_loss":
@@ -118,8 +118,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: testingRepetition, 
         };
         break;
 }

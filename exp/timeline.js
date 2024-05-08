@@ -304,13 +304,12 @@ const dataSave = {
     choices: "NO_KEYS",
     trial_duration: 5000,
     on_finish: () => {
-        const updatedScore =
-            typeof score !== "undefined"
-                ? score
-                : jsPsych.data.get().select("score").values.slice(-1)[0]; // Replace 'score' with actual data key if necessary
-
+        // const updatedScore =
+        //     typeof score !== "undefined"
+        //         ? score
+        //         : jsPsych.data.get().select("score").values.slice(-1)[0]; // Replace 'score' with actual data key if necessary
         // Now, generate the thank you message with the updated score
-        const thankYou = instructions[3](updatedScore);
+        const thankYou = instructions[10];
 
         saveDataPromise(
             `${experimentAlias}_${subjectId}`,
@@ -352,6 +351,9 @@ const dataSave = {
                 document.getElementById("unload").onbeforeunload = ""; // Removes popup
                 $("body").addClass("showCursor"); // Returns cursor functionality
                 closeFullscreen(); // Kill fullscreen
+                if (!src_subject_id) {
+                    window.location.replace(feedbackLink);
+                }
             });
     },
 };

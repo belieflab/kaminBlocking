@@ -9,6 +9,24 @@ let debug = false; // Default debug mode setting for the experiment
 // if you want to ask questions at the end of the task then true
 let lastQuestion = false;
 
+// design trials
+let learningRepetition;
+let blockingRepetition;
+let testingRepetition;
+
+// set default values (learning 10, blocking and testing 6)
+learningRepetition = 1;
+blockingRepetition = 1; 
+testingRepetition = 1;
+
+// when debug then made this very quickly (1 repetition only)
+if (debug) {
+    learningRepetition = 1;
+    blockingRepetition = 1;
+    testingRepetition = 1;
+}
+
+
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
 const experimentAlias = "kamin"; // Unique identifier for the experiment, used in data saving
