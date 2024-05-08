@@ -9,24 +9,41 @@
     flex-wrap: wrap; /* Allows items to wrap as needed */
 }
 
+.stimuli-container {
+    /* Specific container for stimuli pairs to prevent wrapping */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap; /* Ensures stimuli are always side by side */
+    width: 100%;
+    max-width: 1200px; /* Wide enough to avoid wrapping */
+}
+
 .stimuli-left-allergy,
 .stimuli-right-allergy,
 .stimuli-left-social,
-.stimuli-right-social,
+.stimuli-right-social {
+    width: 50%; /* Each image takes half of the stimuli-container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 600px; /* Adjusted max width for larger display */
+    margin: 5px; /* Closer spacing */
+}
+
 .stimuli-allergy,
 .stimuli-social {
     width: 100%; /* Full width to adapt container size */
     height: auto; /* Maintain aspect ratio */
-    max-width: 600px; /* Increased maximum width for stimuli images */
-    margin: 10px; /* Increased margin for better spacing */
+    max-width: 600px; /* Increased maximum width for single stimuli images */
+    margin: 10px; /* Consistent spacing */
 }
 
 .feedback-container img {
-    max-width: 600px; /* Significantly increased maximum width for feedback images */
+    max-width: 600px; /* Large maximum width for feedback images */
     height: auto; /* Maintain aspect ratio */
     margin: 10px; /* Consistent spacing around images */
 }
 
+/* Media query for smaller screens */
 @media (max-width: 800px) {
     .stimuli-left-allergy,
     .stimuli-right-allergy,
@@ -34,10 +51,23 @@
     .stimuli-right-social,
     .stimuli-allergy,
     .stimuli-social {
-        max-width: 50%; /* Adjust max-width for tighter spaces */
+        max-width: 50%; /* Adapt max-width for tighter spaces */
     }
 
     .feedback-container img {
-        max-width: 50%; /* Larger but responsive for feedback images */
+        max-width: 45%; /* Smaller max-width for feedback images on small screens */
     }
+}
+
+/* Additional media query for very small screens */
+@media (max-width: 500px) {
+    .feedback-container img {
+        max-width: 300px; /* Further reduce max-width for feedback images on very small screens */
+    }
+}
+
+.progress-bar-wrapper {
+    width: 100%; /* Ensures it takes the full width of its container */
+    max-width: 800px; /* Set a maximum width to prevent stretching */
+    margin: 0 auto; /* Center the progress bar horizontally */
 }

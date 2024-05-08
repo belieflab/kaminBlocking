@@ -67,7 +67,7 @@ let stimuli = {
         if (version !== "social_kamin") {
             if (stimulus2 !== null) {
                 html =
-                    "<div class='image-container'>" +
+                    "<div class='stimuli-container'>" + // Changed from image-container to stimuli-container
                     "<img class='stimuli-left-allergy' src='" +
                     jsPsych.timelineVariable("stimulus", true) +
                     "'>" +
@@ -84,7 +84,7 @@ let stimuli = {
         } else {
             if (stimulus2 !== null) {
                 html =
-                    "<div class='image-container'>" +
+                    "<div class='stimuli-container'>" + // Changed from image-container to stimuli-container
                     "<img class='stimuli-left-social' src='" +
                     jsPsych.timelineVariable("stimulus", true) +
                     "'>" +

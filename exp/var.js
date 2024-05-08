@@ -37,7 +37,7 @@ let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array
 
 // cues within stim_shuffle: standard version (until 11), short (until 13). SCdO 07/may/2024
 //                 0   1   2   3   4   5   6   7    8   9   10  11  12  13
-// stim_shuffle = [A1, A2, B1, B2, C1, C2, D1, D2,  E,  F,  I,  J,  K,  L] 
+// stim_shuffle = [A1, A2, B1, B2, C1, C2, D1, D2,  E,  F,  I,  J,  K,  L]
 
 let practice_stimuli = [
     {
