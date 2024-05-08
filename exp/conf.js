@@ -18,7 +18,7 @@ let testingRepetition;
 const initializedRepetitions = () => {
     // set default values (learning 10, blocking and testing 6)
     learningRepetition = 10;
-    blockingRepetition = 6; 
+    blockingRepetition = 6;
     testingRepetition = 6;
 
     // when debug then made this very quickly (1 repetition only)
@@ -27,10 +27,9 @@ const initializedRepetitions = () => {
         blockingRepetition = 1;
         testingRepetition = 1;
     }
-}
+};
 // set the initial values depending on what the user respond to the WARNING debug
-initializedRepetitions()
-
+initializedRepetitions();
 
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
@@ -40,8 +39,8 @@ const experimentAlias = "kamin"; // Unique identifier for the experiment, used i
 const language = "english"; // Language setting for the experiment
 
 // User Interface Theme
-// Options: "light", "dark"
-const theme = "light"; // Default theme setting for the user interface
+// Options: "light", "dark", "white"
+const theme = "white"; // Default theme setting for the user interface
 
 // taskVersion choices: "social_kamin", "kamin", "kamin_gain", "kamin_loss"
 // social_kamin involves avatars and focuses on sabotage
@@ -52,4 +51,6 @@ const version = "kamin";
 
 // Note: Uncomment the desired options. Ensure only one option per setting is active at a time.
 const adminEmail = undefined;
-const feedbackLink = "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC?participantId=" + subjectId;
+const feedbackLink =
+    "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC?participantId=" +
+    subjectId;
