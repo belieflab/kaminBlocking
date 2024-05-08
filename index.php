@@ -28,7 +28,10 @@ require_once 'wrap/lib/ids.php';
   <!-- general styling -->
   <link rel="stylesheet" type="text/css" href="./wrap/lib/style.css">
   <!-- confidence bar styling -->
+  <link rel="stylesheet" type="text/css" href="./css/confidence.css">
+  <!-- stimuli styling -->
   <link rel="stylesheet" type="text/css" href="./css/exp.css">
+
 </head>
 
 <body id='unload' onbeforeunload="return areYouSure()">
