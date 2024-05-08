@@ -15,9 +15,9 @@ let blockingRepetition;
 let testingRepetition;
 
 // set default values (learning 10, blocking and testing 6)
-learningRepetition = 1;
-blockingRepetition = 1; 
-testingRepetition = 1;
+learningRepetition = 10;
+blockingRepetition = 6; 
+testingRepetition = 6;
 
 // when debug then made this very quickly (1 repetition only)
 if (debug) {
@@ -25,7 +25,6 @@ if (debug) {
     blockingRepetition = 1;
     testingRepetition = 1;
 }
-
 
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar

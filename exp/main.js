@@ -136,11 +136,9 @@ timeline.push(practice_procedure);
 timeline.push(instructions_6);
 
 // to test uncomment the learning, blocking, and testing procedures
-if (!debug) {
-    timeline.push(learning_procedure);
-    timeline.push(blocking_procedure);
-    timeline.push(testing_procedure);
-}
+timeline.push(learning_procedure);
+timeline.push(blocking_procedure);
+timeline.push(testing_procedure);
 
 if (lastQuestion) {
     timeline.push(screenRating1);
