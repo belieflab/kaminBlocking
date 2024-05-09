@@ -13,4 +13,5 @@ const moveConfidence = () => {
         totalConfidence = currentWidth; // Update total confidence level
         trialComplete = 0;
     }
+    return(totalConfidence)
 };

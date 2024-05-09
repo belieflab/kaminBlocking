@@ -133,10 +133,11 @@ let stimuli = {
             } else if (keycode === 49) {
                 keyHeld49 = isKeyDown;
             }
+            responseKey = keycode;
 
             // Trigger the confidence movement if either key is held
             if (keyHeld48 || keyHeld49) {
-                moveConfidence();
+                totalConfidence = moveConfidence();
             }
         };
 
