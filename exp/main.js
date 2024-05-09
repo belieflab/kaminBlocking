@@ -16,7 +16,7 @@ switch (version) {
             timeline_variables: learning_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0],
+            repetitions: repetitions[0][0],
         };
         break;
     case "social_kamin":
@@ -25,7 +25,7 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0],
+            repetitions: repetitions[0][0],
         };
         break;
     case "kamin_gain":
@@ -34,7 +34,7 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0],
+            repetitions: repetitions[0][0],
         };
         break;
     case "kamin_loss":
@@ -43,7 +43,7 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0],
+            repetitions: repetitions[0][0],
         };
         break;
 }
@@ -57,7 +57,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[1],
+            repetitions: repetitions[0][1],
         };
         break;
     case "social_kamin":
@@ -66,7 +66,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[1],
+            repetitions: repetitions[0][1],
         };
         break;
     case "kamin_gain":
@@ -75,7 +75,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[1],
+            repetitions: repetitions[0][1],
         };
         break;
     case "kamin_loss":
@@ -84,7 +84,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[1],
+            repetitions: repetitions[0][1],
         };
         break;
 }
@@ -98,7 +98,7 @@ switch (version) {
             timeline_variables: testing_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[2],
+            repetitions: repetitions[0][2],
         };
         break;
     case "social_kamin":
@@ -107,7 +107,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[2],
+            repetitions: repetitions[0][2],
         };
         break;
     case "kamin_gain":
@@ -116,7 +116,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[2],
+            repetitions: repetitions[0][2],
         };
         break;
     case "kamin_loss":
@@ -125,7 +125,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[2], 
+            repetitions: repetitions[0][2], 
         };
         break;
 }
