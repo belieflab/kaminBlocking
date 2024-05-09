@@ -4,7 +4,7 @@
 
 // Debug Mode
 // Options: true, false
-let debug = false; // Default debug mode setting for the experiment
+let debug = true; // Default debug mode setting for the experiment
 
 // if you want to ask questions at the end of the task then true
 let lastQuestion = false;
