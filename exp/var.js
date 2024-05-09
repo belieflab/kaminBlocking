@@ -78,6 +78,7 @@ let practice_stimuli = [
     }, // 1 key
 ];
 
+// first phase
 let learning_stimuli_standard = [
     {
         stimulus: stim_shuffle[0],
@@ -249,6 +250,7 @@ let learning_stimuli_short = [
     }, // 0 key
 ];
 
+// second phase
 let blocking_stimuli_standard = [
     {
         stimulus: stim_shuffle[0],
@@ -467,6 +469,7 @@ let blocking_stimuli_short = [
 //                 0   1   2   3   4   5   6   7    8   9   10  11  12  13
 // stim_shuffle = [A1, A2, B1, B2, C1, C2, D1, D2,  E,  F,  I,  J,  K,  L]
 
+// third phase
 let testing_stimuli_standard = [
     {
         stimulus: stim_shuffle[2],
