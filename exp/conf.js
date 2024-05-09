@@ -31,6 +31,12 @@ const initializedRepetitions = () => {
 // set the initial values depending on what the user respond to the WARNING debug
 initializedRepetitions();
 
+// durations of trial components:
+fixationDuration = 1000;
+stimuliDuration = 3000;
+feedbackDuration = 1000;
+
+
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
 const experimentAlias = "kamin"; // Unique identifier for the experiment, used in data saving

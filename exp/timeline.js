@@ -54,7 +54,7 @@ let fixation = {
     type: "html-keyboard-response",
     stimulus: '<div style="color:black; font-size:60px;">+</div>',
     choices: jsPsych.NO_KEYS,
-    trial_duration: 1000,
+    trial_duration: fixationDuration,
 };
 
 // create  trials
@@ -104,8 +104,7 @@ let stimuli = {
 
     // jsPsych.timelineVariable('stimulus'),
     choices: [jsPsych.NO_KEYS], // key_press handled instead by responseKey
-    trial_duration: 3000,
-    // stimulus_duration: 3000,
+    trial_duration: stimuliDuration,
     response_ends_trial: false,
     prompt:
         progressBar +
@@ -215,7 +214,7 @@ let feedback = {
     },
 
     choices: jsPsych.NO_KEYS,
-    trial_duration: 1000,
+    trial_duration: feedbackDuration,
     response_ends_trial: false,
     // post_trial_gap: jsPsych.randomization.sampleWithReplacement(isi, 5, [5,1]),
     post_trial_gap: 1000, //ISI
