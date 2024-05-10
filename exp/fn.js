@@ -5,7 +5,7 @@
  *
  * @returns {number} The updated confidence level as a percentage of the progress bar's width.
  */
-const moveConfidence = () => {
+function moveConfidence() {
     let progressBar = document.getElementById("keyBar");
     let currentWidth = parseFloat(progressBar.style.width); // Get current width percentage
 
@@ -21,9 +21,9 @@ const moveConfidence = () => {
         totalConfidence = currentWidth; // Update total confidence level
         // trialComplete = 0;
     }
-    console.log("Confidence level: ", totalConfidence);
+    // console.log("Confidence level: ", totalConfidence);
     return totalConfidence;
-};
+}
 
 /**
  * Handles key press events to dynamically update the confidence bar based on user input.
