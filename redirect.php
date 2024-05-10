@@ -1,1 +1,1 @@
-./wrap/link/redirect.php./
+./wrap/link/redirect.php

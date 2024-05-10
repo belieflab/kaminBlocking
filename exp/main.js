@@ -4,6 +4,7 @@ let practice_procedure = {
     randomize_order: false,
 };
 
+// this is first phase
 let learning_procedure;
 switch (version) {
     case "kamin":
@@ -11,8 +12,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_standard,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 10,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().learning,
         };
         break;
     case "social_kamin":
@@ -20,8 +21,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 10,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().learning,
         };
         break;
     case "kamin_gain":
@@ -29,8 +30,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 10,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().learning,
         };
         break;
     case "kamin_loss":
@@ -38,12 +39,13 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 10,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().learning,
         };
         break;
 }
 
+// this is second phase
 let blocking_procedure;
 switch (version) {
     case "kamin":
@@ -51,8 +53,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_standard,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().blocking,
         };
         break;
     case "social_kamin":
@@ -60,8 +62,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().blocking,
         };
         break;
     case "kamin_gain":
@@ -69,8 +71,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().blocking,
         };
         break;
     case "kamin_loss":
@@ -78,12 +80,13 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().blocking,
         };
         break;
 }
 
+// this is third phase
 let testing_procedure;
 switch (version) {
     case "kamin":
@@ -91,8 +94,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_standard,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().testing,
         };
         break;
     case "social_kamin":
@@ -100,8 +103,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().testing,
         };
         break;
     case "kamin_gain":
@@ -109,8 +112,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().testing,
         };
         break;
     case "kamin_loss":
@@ -118,8 +121,8 @@ switch (version) {
             timeline: [fixation, stimuli, feedback],
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
-            type: "fixed-repititions",
-            repetitions: 6,
+            type: "fixed-repetitions",
+            repetitions: getRepetitions().testing,
         };
         break;
 }
@@ -136,14 +139,14 @@ timeline.push(practice_procedure);
 timeline.push(instructions_6);
 
 // to test uncomment the learning, blocking, and testing procedures
-if (!debug) {
-    timeline.push(learning_procedure);
-    timeline.push(blocking_procedure);
-    timeline.push(testing_procedure);
-}
+timeline.push(learning_procedure);
+timeline.push(blocking_procedure);
+timeline.push(testing_procedure);
 
-timeline.push(screenRating1);
-timeline.push(screenRating2);
+if (ratingQuestions) {
+    timeline.push(screenRating1);
+    timeline.push(screenRating2);
+}
 
 timeline.push(dataSave);
 

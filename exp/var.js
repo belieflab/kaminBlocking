@@ -21,7 +21,7 @@ let trialIterator = 1;
 
 // progress bar container
 let progressBar =
-    '<div id="counter" class="w3-container" style="color:black"><div class="w3-light-grey"><div class="w3-grey" id="keyBar" style="height:24px;width:0%;"></div></div><br><div>';
+    '<div id="counter" class="w3-container" style="max-width: 600px; margin: 0 auto;"><div class="w3-light-grey"><div class="w3-grey" id="keyBar" style="height:24px;width:0%;"></div></div><br><div>';
 let fillUp = '<p id="fillUp" style="color:black;"></p>';
 
 // set the time remaining notification for participant
@@ -34,6 +34,10 @@ for (let i = 1; i < 19; i++) {
 }
 
 let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
+
+// cues within stim_shuffle: standard version (until 11), short (until 13). SCdO 07/may/2024
+//                 0   1   2   3   4   5   6   7    8   9   10  11  12  13
+// stim_shuffle = [A1, A2, B1, B2, C1, C2, D1, D2,  E,  F,  I,  J,  K,  L]
 
 let practice_stimuli = [
     {
@@ -74,6 +78,7 @@ let practice_stimuli = [
     }, // 1 key
 ];
 
+// first phase
 let learning_stimuli_standard = [
     {
         stimulus: stim_shuffle[0],
@@ -82,8 +87,9 @@ let learning_stimuli_standard = [
             test_part: "learning",
             reaction: "allergy",
             condition: "single-positive",
-            correct_response: 49,
-            incorrect_response: 48,
+            trial_identity: "A1+",
+            correct_response: 49, // allergy (1)
+            incorrect_response: 48, // no-allergy (0)
             stim_left: stim_shuffle[0].slice(8),
             stim_right: "",
             version: iteration,
@@ -96,6 +102,7 @@ let learning_stimuli_standard = [
             test_part: "learning",
             reaction: "allergy",
             condition: "single-positive",
+            trial_identity: "A2+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[1].slice(8),
@@ -110,6 +117,7 @@ let learning_stimuli_standard = [
             test_part: "learning",
             reaction: "no-reaction",
             condition: "single-negative",
+            trial_identity: "C1-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[4].slice(8),
@@ -124,6 +132,7 @@ let learning_stimuli_standard = [
             test_part: "learning",
             reaction: "no-reaction",
             condition: "single-negative",
+            trial_identity: "C2-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[5].slice(8),
@@ -138,6 +147,7 @@ let learning_stimuli_standard = [
             test_part: "learning",
             reaction: "no-reaction",
             condition: "single-negative",
+            trial_identity: "F-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[9].slice(8),
@@ -152,6 +162,7 @@ let learning_stimuli_standard = [
             test_part: "learning",
             reaction: "allergy",
             condition: "single-positive",
+            trial_identity: "I+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[10].slice(8),
@@ -166,6 +177,7 @@ let learning_stimuli_standard = [
             test_part: "learning",
             reaction: "no-reaction",
             condition: "single-negative",
+            trial_identity: "J-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),
@@ -183,6 +195,7 @@ let learning_stimuli_short = [
             test_part: "learning",
             reaction: "allergy",
             condition: "single-positive",
+            trial_identity: "A1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[0].slice(8),
@@ -197,6 +210,7 @@ let learning_stimuli_short = [
             test_part: "learning",
             reaction: "allergy",
             condition: "single-positive",
+            trial_identity: "A2+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[1].slice(8),
@@ -211,6 +225,7 @@ let learning_stimuli_short = [
             test_part: "learning",
             reaction: "no-reaction",
             condition: "single-negative",
+            trial_identity: "C1-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[4].slice(8),
@@ -225,6 +240,7 @@ let learning_stimuli_short = [
             test_part: "learning",
             reaction: "no-reaction",
             condition: "single-negative",
+            trial_identity: "C2-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[5].slice(8),
@@ -234,6 +250,7 @@ let learning_stimuli_short = [
     }, // 0 key
 ];
 
+// second phase
 let blocking_stimuli_standard = [
     {
         stimulus: stim_shuffle[0],
@@ -242,6 +259,7 @@ let blocking_stimuli_standard = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "blocking",
+            trial_identity: "A1B1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[0].slice(8),
@@ -256,6 +274,7 @@ let blocking_stimuli_standard = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "blocking",
+            trial_identity: "A2B2+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[1].slice(8),
@@ -270,6 +289,7 @@ let blocking_stimuli_standard = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "blocking-control",
+            trial_identity: "C1D1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[4].slice(8),
@@ -284,6 +304,7 @@ let blocking_stimuli_standard = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "blocking-control",
+            trial_identity: "C2D2+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[5].slice(8),
@@ -298,6 +319,7 @@ let blocking_stimuli_standard = [
             test_part: "blocking",
             reaction: "no-reaction",
             condition: "no-allergy-control",
+            trial_identity: "EF-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[8].slice(8),
@@ -312,6 +334,7 @@ let blocking_stimuli_standard = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "consistent-allergy",
+            trial_identity: "I+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[10].slice(8),
@@ -325,6 +348,7 @@ let blocking_stimuli_standard = [
             test_part: "blocking",
             reaction: "no-reaction",
             condition: "consistent-no-allergy",
+            trial_identity: "J-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),
@@ -341,6 +365,7 @@ let blocking_stimuli_short = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "blocking",
+            trial_identity: "A1B1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[0].slice(8),
@@ -355,6 +380,7 @@ let blocking_stimuli_short = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "blocking",
+            trial_identity: "A2B2+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[1].slice(8),
@@ -369,6 +395,7 @@ let blocking_stimuli_short = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "blocking-control",
+            trial_identity: "C1D1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[4].slice(8),
@@ -383,6 +410,7 @@ let blocking_stimuli_short = [
             test_part: "blocking",
             reaction: "allergy",
             condition: "blocking-control",
+            trial_identity: "C2D2+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[5].slice(8),
@@ -397,6 +425,7 @@ let blocking_stimuli_short = [
             test_part: "blocking",
             reaction: "no-reaction",
             condition: "no-allergy-control",
+            trial_identity: "EF-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[8].slice(8),
@@ -411,6 +440,7 @@ let blocking_stimuli_short = [
             test_part: "blocking",
             reaction: "no-reaction",
             condition: "no-allergy-control",
+            trial_identity: "IK-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[10].slice(8),
@@ -425,6 +455,7 @@ let blocking_stimuli_short = [
             test_part: "blocking",
             reaction: "no-reaction",
             condition: "no-allergy-control",
+            trial_identity: "JL-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),
@@ -434,6 +465,11 @@ let blocking_stimuli_short = [
     }, // 0 key
 ];
 
+// cues within stim_shuffle: standard version (until 11), short (until 13). SCdO 07/may/2024
+//                 0   1   2   3   4   5   6   7    8   9   10  11  12  13
+// stim_shuffle = [A1, A2, B1, B2, C1, C2, D1, D2,  E,  F,  I,  J,  K,  L]
+
+// third phase
 let testing_stimuli_standard = [
     {
         stimulus: stim_shuffle[2],
@@ -442,6 +478,7 @@ let testing_stimuli_standard = [
             test_part: "testing",
             reaction: "allergy",
             condition: "blocking-violation",
+            trial_identity: "B1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[2].slice(8),
@@ -456,6 +493,7 @@ let testing_stimuli_standard = [
             test_part: "testing",
             reaction: "no-reaction",
             condition: "blocking-confirmation",
+            trial_identity: "B2-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[3].slice(8),
@@ -470,6 +508,7 @@ let testing_stimuli_standard = [
             test_part: "testing",
             reaction: "allergy",
             condition: "blocking-confirmation-control",
+            trial_identity: "D1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[6].slice(8),
@@ -484,6 +523,7 @@ let testing_stimuli_standard = [
             test_part: "testing",
             reaction: "no-reaction",
             condition: "blocking-violation-control",
+            trial_identity: "D2-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[7].slice(8),
@@ -498,6 +538,7 @@ let testing_stimuli_standard = [
             test_part: "testing",
             reaction: "no-reaction",
             condition: "no-allergy-control",
+            trial_identity: "EF-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[8].slice(8),
@@ -512,6 +553,7 @@ let testing_stimuli_standard = [
             test_part: "testing",
             reaction: "allergy",
             condition: "consistent-allergy",
+            trial_identity: "I+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[10].slice(8),
@@ -526,6 +568,7 @@ let testing_stimuli_standard = [
             test_part: "testing",
             reaction: "no-reaction",
             condition: "consistent-no-allergy",
+            trial_identity: "J-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),
@@ -547,6 +590,7 @@ let testing_stimuli_short = [
             test_part: "testing",
             reaction: "allergy",
             condition: "blocking-violation",
+            trial_identity: "B1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[2].slice(8),
@@ -561,6 +605,7 @@ let testing_stimuli_short = [
             test_part: "testing",
             reaction: "no-reaction",
             condition: "blocking-confirmation",
+            trial_identity: "B2-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[3].slice(8),
@@ -575,6 +620,7 @@ let testing_stimuli_short = [
             test_part: "testing",
             reaction: "allergy",
             condition: "blocking-confirmation-control",
+            trial_identity: "D1+",
             correct_response: 49,
             incorrect_response: 48,
             stim_left: stim_shuffle[6].slice(8),
@@ -589,6 +635,7 @@ let testing_stimuli_short = [
             test_part: "testing",
             reaction: "no-reaction",
             condition: "blocking-violation-control",
+            trial_identity: "D2-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[7].slice(8),
@@ -603,6 +650,7 @@ let testing_stimuli_short = [
             test_part: "testing",
             reaction: "no-reaction",
             condition: "no-allergy-control",
+            trial_identity: "L-",
             correct_response: 48,
             incorrect_response: 49,
             stim_left: stim_shuffle[11].slice(8),

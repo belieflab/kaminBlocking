@@ -1,20 +1,26 @@
-//  increment confidence bar
-const moveConfidence = () => { // function definition
-  let width = document.getElementById("keyBar").style.width; // variable assignment of width property of keyBar
+/**
+ * Updates the width of a progress bar to reflect the confidence level in a trial.
+ * Increments the bar's width up to a maximum of 100%. Once the progress bar reaches 100%,
+ * it resets the bar to 0%, marks the trial as complete, and ends the trial.
+ *
+ * @returns {number} The updated confidence level as a percentage of the progress bar's width.
+ */
+const moveConfidence = () => {
+    let progressBar = document.getElementById("keyBar");
+    let currentWidth = parseFloat(progressBar.style.width); // Get current width percentage
 
-  width = parseFloat(width.slice(0, -1)); // variable reassignment
-    if (width >= 99) { // set to record 100 taps
-      trialComplete = 1;
-      width = document.getElementById("keyBar").style.width="0%"; // reset to 0
-      jsPsych.finishTrial();  
-      // return (event.charCode == 48 || event.charCode == 49)
+    if (currentWidth >= 100) {
+        progressBar.style.width = "0%"; // Reset progress bar to 0%
+        totalConfidence = 100; // Set total confidence level to 100%
+        // trialComplete = 1;
+        jsPsych.finishTrial(); // Finish the trial if width reaches 100%
     } else {
-      width+= 3.70; // approximation to reach 99.9% confidence in 3s
-      console.log(width);
-      totalConfidence = width;
-      trialComplete = 0;
-      width = document.getElementById("keyBar").style.width=String(width)+"%";
-      // return (event.charCode == 48 || event.charCode == 49)
+        const increment = 3.7;
+        currentWidth = Math.min(currentWidth + increment, 100); // Cap increment at 100%
+        progressBar.style.width = `${currentWidth}%`; // Update the progress bar's width
+        totalConfidence = currentWidth; // Update total confidence level
+        // trialComplete = 0;
     }
-
-  }
+    // console.log("Confidence level: ", totalConfidence);
+    return totalConfidence;
+};

@@ -52,9 +52,9 @@ let instructions_5 = {
 let fixation = {
     // data: {test_part: 'fixation'},
     type: "html-keyboard-response",
-    stimulus: '<div style="color:black; font-size:60px;"></div>',
+    stimulus: '<div style="color:black; font-size:60px;">+</div>',
     choices: jsPsych.NO_KEYS,
-    trial_duration: 1000,
+    trial_duration: fixationDuration,
 };
 
 // create  trials
@@ -67,7 +67,7 @@ let stimuli = {
         if (version !== "social_kamin") {
             if (stimulus2 !== null) {
                 html =
-                    "<div class='image-container'>" +
+                    "<div class='stimuli-container'>" + // Changed from image-container to stimuli-container
                     "<img class='stimuli-left-allergy' src='" +
                     jsPsych.timelineVariable("stimulus", true) +
                     "'>" +
@@ -84,7 +84,7 @@ let stimuli = {
         } else {
             if (stimulus2 !== null) {
                 html =
-                    "<div class='image-container'>" +
+                    "<div class='stimuli-container'>" + // Changed from image-container to stimuli-container
                     "<img class='stimuli-left-social' src='" +
                     jsPsych.timelineVariable("stimulus", true) +
                     "'>" +
@@ -104,8 +104,7 @@ let stimuli = {
 
     // jsPsych.timelineVariable('stimulus'),
     choices: [jsPsych.NO_KEYS], // key_press handled instead by responseKey
-    trial_duration: 3000,
-    // stimulus_duration: 3000,
+    trial_duration: stimuliDuration,
     response_ends_trial: false,
     prompt:
         progressBar +
@@ -118,40 +117,49 @@ let stimuli = {
         barFill = document.getElementById("fillUp");
         barFill.innerHTML = responseOptions;
         document.getElementById("tapTap").focus(); //gives focus to the text box
-        $(document).ready(function () {
-            $("#tapTap").keypress(function (event) {
-                var keycode = event.which;
-                if ((barFill.innerHTML = responseOptions)) {
-                    if (keycode == 48) {
-                        document
-                            .getElementById("counter")
-                            .setAttribute(
-                                "onkeydown",
-                                "return moveConfidence()"
-                            ); // event.charCode allows us to set specific keys to use
-                        responseKey = 48;
-                        // console.log(responseKey);
-                    } else if (keycode == 49) {
-                        document
-                            .getElementById("counter")
-                            .setAttribute(
-                                "onkeydown",
-                                "return moveConfidence()"
-                            ); // event.charCode allows us to set specific keys to use
-                        responseKey = 49;
-                        // console.log(responseKey);
-                    } else {
-                        // all other keys ignored
-                        document
-                            .getElementById("counter")
-                            .setAttribute("onkeydown", "return false"); // event.charCode allows us to set specific keys to use
-                    }
-                }
-            });
+        // Set up the text box to capture key events
+        const tapTapElement = document.getElementById("tapTap");
+        tapTapElement.focus(); // Focus on the text box to capture key events
+
+        // Variables to keep track of whether the key is held down
+        let keyHeld48 = false;
+        let keyHeld49 = false;
+
+        // Function to handle key press
+        const handleKeyPress = (keycode, isKeyDown) => {
+            if (keycode === 48) {
+                keyHeld48 = isKeyDown;
+            } else if (keycode === 49) {
+                keyHeld49 = isKeyDown;
+            }
+            responseKey = keycode;
+
+            // Trigger the confidence movement if either key is held
+            if (keyHeld48 || keyHeld49) {
+                totalConfidence = moveConfidence();
+            }
+        };
+
+        // Keydown event
+        $(tapTapElement).keydown(function (event) {
+            var keycode = event.which;
+            if (keycode === 48 || keycode === 49) {
+                handleKeyPress(keycode, true);
+                event.preventDefault(); // Prevent default action and stop propagation
+            }
+        });
+
+        // Keyup event
+        $(tapTapElement).keyup(function (event) {
+            var keycode = event.which;
+            if (keycode === 48 || keycode === 49) {
+                handleKeyPress(keycode, false);
+                event.preventDefault(); // Prevent default action and stop propagation
+            }
         });
     }),
     on_finish: (data) => {
-        createCandidateKeys(data);
+        writeCandidateKeys(data);
 
         data.response = responseKey;
         data.version = version;
@@ -206,7 +214,7 @@ let feedback = {
     },
 
     choices: jsPsych.NO_KEYS,
-    trial_duration: 1000,
+    trial_duration: feedbackDuration,
     response_ends_trial: false,
     // post_trial_gap: jsPsych.randomization.sampleWithReplacement(isi, 5, [5,1]),
     post_trial_gap: 1000, //ISI
@@ -253,7 +261,7 @@ let screenRating1 = {
         });
     },
     on_finish: function (data) {
-        createCandidateKeys(data);
+        writeCandidateKeys(data);
 
         data.response = responseKey;
         data.version = version;
@@ -285,7 +293,7 @@ let screenRating2 = {
     ],
     choices: jsPsych.NO_KEYS,
     on_finish: function (data) {
-        createCandidateKeys(data);
+        writeCandidateKeys(data);
         data.response = responseKey;
         data.version = version;
         data.task_version = version;
@@ -304,13 +312,12 @@ const dataSave = {
     choices: "NO_KEYS",
     trial_duration: 5000,
     on_finish: () => {
-        const updatedScore =
-            typeof score !== "undefined"
-                ? score
-                : jsPsych.data.get().select("score").values.slice(-1)[0]; // Replace 'score' with actual data key if necessary
-
+        // const updatedScore =
+        //     typeof score !== "undefined"
+        //         ? score
+        //         : jsPsych.data.get().select("score").values.slice(-1)[0]; // Replace 'score' with actual data key if necessary
         // Now, generate the thank you message with the updated score
-        const thankYou = instructions[3](updatedScore);
+        const thankYou = instructions[10];
 
         saveDataPromise(
             `${experimentAlias}_${subjectId}`,
@@ -352,6 +359,9 @@ const dataSave = {
                 document.getElementById("unload").onbeforeunload = ""; // Removes popup
                 $("body").addClass("showCursor"); // Returns cursor functionality
                 closeFullscreen(); // Kill fullscreen
+                if (!src_subject_id) {
+                    window.location.replace(feedbackLink);
+                }
             });
     },
 };
