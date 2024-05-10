@@ -9,10 +9,15 @@ let debug = false; // Default debug mode setting for the experiment
 // if you want to ask questions at the end of the task then true
 let lastQuestion = false;
 
-// Number of repetitions for each phase, user-defined object
-// reference in main procedures object repetitions property:
-// e.g.
-// repetitions: getRepetitions().learning
+/**
+ * Configuration for trial repetitions:
+ * - `production`: Standard repetitions for the full experiment
+ * - `debug`: Reduced repetitions for faster testing
+ *
+ * Usage:
+ * - For object configs: getRepetitions().learning, getRepetitions().blocking, getRepetitions().testing
+ * - For single number configs: getRepetitions()
+ */
 const repetitions = {
     production: { learning: 10, blocking: 6, testing: 6 },
     debug: { learning: 1, blocking: 1, testing: 1 },

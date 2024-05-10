@@ -51,7 +51,6 @@ require_once 'wrap/lib/ids.php';
   <!-- load wrapper dependencies -->
   <script type="text/javascript" src="./wrap/lib/fn.js"></script>
   <!-- load experiment dependencies -->
-  <!-- <script type="text/javascript" src="exp/conf.js"></script> -->
   <script type="text/javascript" src="./exp/fn.js"></script>
   <script type="text/javascript" src="./exp/lang.js"></script>
 
