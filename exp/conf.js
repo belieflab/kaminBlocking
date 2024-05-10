@@ -9,33 +9,16 @@ let debug = true; // Default debug mode setting for the experiment
 // if you want to ask questions at the end of the task then true
 let lastQuestion = false;
 
-// design trials
-let learningRepetition;
-let blockingRepetition;
-let testingRepetition;
-
-// we create this function to communicate with wrap/lib/fn.js getRepetitions()
-const initializedRepetitions = () => {
-    // set default values (learning 10, blocking and testing 6)
-    learningRepetition = 10;
-    blockingRepetition = 6;
-    testingRepetition = 6;
-
-    // when debug then made this very quickly (1 repetition only)
-    if (debug) {
-        learningRepetition = 1;
-        blockingRepetition = 1;
-        testingRepetition = 1;
-    }
+// we create this object to communicate with wrap/lib/fn.js getRepetitions()
+const repetitions = {
+    production: { learning: 10, blocking: 6, testing: 6 },
+    debug: { learning: 1, blocking: 1, testing: 1 },
 };
-// set the initial values depending on what the user respond to the WARNING debug
-initializedRepetitions();
 
 // durations of trial components:
-fixationDuration = 1000;
-stimuliDuration = 3000;
-feedbackDuration = 1000;
-
+const fixationDuration = 1000;
+const stimuliDuration = 3000;
+const feedbackDuration = 1000;
 
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar

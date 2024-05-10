@@ -4,9 +4,6 @@ let practice_procedure = {
     randomize_order: false,
 };
 
-// use wrap function and add repetition number per phase (learning, blocking, and testing), also make it fullscreen and present debug mode
-let repetitions = getRepetitions([learningRepetition,blockingRepetition,testingRepetition]);
-
 // this is first phase
 let learning_procedure;
 switch (version) {
@@ -16,7 +13,7 @@ switch (version) {
             timeline_variables: learning_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][0],
+            repetitions: getRepetitions().learning,
         };
         break;
     case "social_kamin":
@@ -25,7 +22,7 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][0],
+            repetitions: getRepetitions().learning,
         };
         break;
     case "kamin_gain":
@@ -34,7 +31,7 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][0],
+            repetitions: getRepetitions().learning,
         };
         break;
     case "kamin_loss":
@@ -43,7 +40,7 @@ switch (version) {
             timeline_variables: learning_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][0],
+            repetitions: getRepetitions().learning,
         };
         break;
 }
@@ -57,7 +54,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][1],
+            repetitions: getRepetitions().blocking,
         };
         break;
     case "social_kamin":
@@ -66,7 +63,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][1],
+            repetitions: getRepetitions().blocking,
         };
         break;
     case "kamin_gain":
@@ -75,7 +72,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][1],
+            repetitions: getRepetitions().blocking,
         };
         break;
     case "kamin_loss":
@@ -84,7 +81,7 @@ switch (version) {
             timeline_variables: blocking_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][1],
+            repetitions: getRepetitions().blocking,
         };
         break;
 }
@@ -98,7 +95,7 @@ switch (version) {
             timeline_variables: testing_stimuli_standard,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][2],
+            repetitions: getRepetitions().testing,
         };
         break;
     case "social_kamin":
@@ -107,7 +104,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][2],
+            repetitions: getRepetitions().testing,
         };
         break;
     case "kamin_gain":
@@ -116,7 +113,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][2],
+            repetitions: getRepetitions().testing,
         };
         break;
     case "kamin_loss":
@@ -125,7 +122,7 @@ switch (version) {
             timeline_variables: testing_stimuli_short,
             randomize_order: true,
             type: "fixed-repetitions",
-            repetitions: repetitions[0][2], 
+            repetitions: getRepetitions().testing,
         };
         break;
 }
