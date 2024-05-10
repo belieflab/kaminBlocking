@@ -11,7 +11,7 @@ const timeline = [];
 
 const preload = {
     type: jsPsychPreload,
-    images: [stim_array, feedbackPositive, feedbackNegative],
+    images: [stimArray, positiveFeedback, negativeFeedback],
     show_detailed_errors: true,
 };
 

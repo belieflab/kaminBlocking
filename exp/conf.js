@@ -23,11 +23,6 @@ const repetitions = {
     debug: { learning: 1, blocking: 1, testing: 1 },
 };
 
-// durations of trial components:
-const fixationDuration = 1000;
-const stimuliDuration = 3000;
-const feedbackDuration = 1000;
-
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
 
