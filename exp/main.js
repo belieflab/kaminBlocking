@@ -143,7 +143,7 @@ timeline.push(learning_procedure);
 timeline.push(blocking_procedure);
 timeline.push(testing_procedure);
 
-if (lastQuestion) {
+if (ratingQuestions) {
     timeline.push(screenRating1);
     timeline.push(screenRating2);
 }

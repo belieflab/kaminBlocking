@@ -7,7 +7,7 @@
 let debug = false; // Default debug mode setting for the experiment
 
 // if you want to ask questions at the end of the task then true
-let lastQuestion = false;
+let ratingQuestions = false;
 
 /**
  * Configuration for trial repetitions:
