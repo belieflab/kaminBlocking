@@ -16,8 +16,8 @@
     
 "use strict";
 
-const negative = "stim/-.jpg";
-const positive = "stim/+.jpg";
+const negative = `stim/${version}/-.jpg`;
+const positive = `stim/${version}/+.jpg`;
 
 const negativeFeedback =
     `<div class='feedback-container'><img src='${negative}'></div>`;
