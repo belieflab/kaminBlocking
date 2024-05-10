@@ -23,35 +23,43 @@ const welcome = {
 };
 
 /* define instructions trial */
-const instructions_1 = {
+const instruction1 = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[1],
     choices: [" "], //ascii spacebar
 };
 
-const instructions_2 = {
+const instruction2 = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[2],
     choices: [" "], //ascii spacebar
 };
 
-const instructions_3 = {
+const instruction3 = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[3],
     choices: ["0", "1"], //ascii spacebar
 };
 
-const instructions_4 = {
+const instruction4 = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[4],
     choices: [" "], //ascii spacebar
 };
 
-const instructions_5 = {
+const instruction5 = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[5],
     choices: [" "], //ascii spacebar
 };
+
+const instructionSet = [
+    instruction1,
+    instruction2,
+    instruction3,
+    instruction4,
+    instruction5,
+];
 
 // create fixation point
 const fixation = {
@@ -168,7 +176,7 @@ const feedback = {
     },
 };
 
-const instructions_6 = {
+const instruction6 = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[6],
     choices: [" "], //ascii spacebar
@@ -305,6 +313,58 @@ const dataSave = {
             });
     },
 };
+
+// Defince procedures
+
+let practice_procedure = {
+    timeline: [fixation, stimuli, feedback],
+    timeline_variables: practice_stimuli,
+    randomize_order: false,
+};
+
+// Define common procedure settings struct
+const commonSettings = (stimuliType) => ({
+    timeline: [fixation, stimuli, feedback],
+    timeline_variables: stimuliType,
+    randomize_order: true,
+    type: "fixed-repetitions",
+});
+
+// Initialize procedures
+let learning_procedure, blocking_procedure, testing_procedure;
+
+switch (version) {
+    case "kamin":
+        learning_procedure = {
+            ...commonSettings(learning_stimuli_standard),
+            repetitions: getRepetitions().learning,
+        };
+        blocking_procedure = {
+            ...commonSettings(blocking_stimuli_standard),
+            repetitions: getRepetitions().blocking,
+        };
+        testing_procedure = {
+            ...commonSettings(testing_stimuli_standard),
+            repetitions: getRepetitions().testing,
+        };
+        break;
+    case "social_kamin":
+    case "kamin_gain":
+    case "kamin_loss":
+        learning_procedure = {
+            ...commonSettings(learning_stimuli_short),
+            repetitions: getRepetitions().learning,
+        };
+        blocking_procedure = {
+            ...commonSettings(blocking_stimuli_short),
+            repetitions: getRepetitions().blocking,
+        };
+        testing_procedure = {
+            ...commonSettings(testing_stimuli_short),
+            repetitions: getRepetitions().testing,
+        };
+        break;
+}
 
 // call main
 $.getScript("exp/main.js");

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Updates the width of a progress bar to reflect the confidence level in a trial.
  * Increments the bar's width up to a maximum of 100%. Once the progress bar reaches 100%,

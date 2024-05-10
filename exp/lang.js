@@ -1,3 +1,4 @@
+"use strict";
 // Translation
 // This file contains the instructions for the experiment,
 // which will be translated to the language specified in exp/conf.js
