@@ -58,7 +58,7 @@ require_once 'wrap/lib/ids.php';
   <script type="text/javascript" src="./exp/fn.js"></script>
   <script type="text/javascript" src="./exp/lang.js"></script>
 
-  <?php require_once './exp/var.php'; ?>
+  <?php require './exp/var.php'; ?>
 
 </footer>
 

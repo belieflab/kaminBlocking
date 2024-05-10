@@ -11,7 +11,7 @@ const timeline = [];
 
 const preload = {
     type: jsPsychPreload,
-    images: [stimArray, positiveFeedback, negativeFeedback],
+    images: [stimArray, negative, positive],
     show_detailed_errors: true,
 };
 
@@ -161,10 +161,10 @@ const feedback = {
             .last(1)
             .values()[0].correct_response;
         if (last_trial_feedback == 49) {
-            return feedbackPositive;
+            return positiveFeedback;
         }
         if (last_trial_feedback == 48) {
-            return feedbackNegative;
+            return negativeFeedback;
         }
     },
     choices: "NO_KEYS",

@@ -1,12 +1,28 @@
-<?php
-// Initialize variables to null
-?>
 
-<script>
-"use strict";
+<?php
+// server side logic for dealing with stimuli
+// as needed for the experiment
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// *  make sure you know what you are doing with these buttons and levers; you may break the experiment  * ///
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+?>
+
+<script>
+    
+"use strict";
+
+const negative = "stim/-.jpg";
+const positive = "stim/+.jpg";
+
+const negativeFeedback =
+    `<div class='feedback-container'><img src='${negative}'></div>`;
+const positiveFeedback =
+    `<div class='feedback-container'><img src='${positive}'></div>`;
 
 /* START TRAINING TRIAL FOR PARTICIPANTS */
 

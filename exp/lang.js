@@ -21,12 +21,6 @@ const instructions6 =
     '<h2 style="color:black;">Let us begin!</h2>' +
     '<p style="color:black;">Press the spacebar when you are ready to start the experiment.</p>';
 
-const positiveFeedback = `stim/${version}/-.jpg`;
-const negativeFeedback = `stim/${version}/-.jpg`;
-
-const feedbackNegative = `<div class='feedback-container'><img src='${positiveFeedback}'></div>`;
-const feedbackPositive = `<div class='feedback-container'><img src='${negativeFeedback}/'></div>`;
-
 // declare endgame variable
 let endgame;
 
