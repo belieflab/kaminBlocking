@@ -33,7 +33,7 @@ for (let i = 1; i < 19; i++) {
     stim_array.push("stim/" + version + "/s" + i + fileExtension);
 }
 
-let stim_shuffle = jsPsych.randomization.repeat(stim_array, 1); //shuffled array no repeats
+let stim_shuffle = shuffleArray(stim_array); //shuffled array no repeats
 
 // cues within stim_shuffle: standard version (until 11), short (until 13). SCdO 07/may/2024
 //                 0   1   2   3   4   5   6   7    8   9   10  11  12  13

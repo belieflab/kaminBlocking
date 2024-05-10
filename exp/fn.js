@@ -21,6 +21,57 @@ const moveConfidence = () => {
         totalConfidence = currentWidth; // Update total confidence level
         // trialComplete = 0;
     }
-    // console.log("Confidence level: ", totalConfidence);
+    console.log("Confidence level: ", totalConfidence);
     return totalConfidence;
 };
+
+/**
+ * Handles key press events to dynamically update the confidence bar based on user input.
+ * This function sets up event listeners on a specified text box to detect and manage keydown and keyup events,
+ * adjusting the confidence level accordingly. The function assumes the presence of a progress bar (`barFill`)
+ * and a text input (`tapTapElement`) in the DOM.
+ *
+ * When keys '0' (key code 48) or '1' (key code 49) are pressed, it either increases or maintains a level of
+ * 'totalConfidence' and updates the display through `moveConfidence()`. The function ensures the UI elements
+ * are properly focused and handles the key events to prevent default behaviors and stop event propagation.
+ */ function buttonPress() {
+    const barFill = document.getElementById("fillUp");
+    if (barFill) {
+        barFill.innerHTML = responseOptions; // Assuming 'responseOptions' is defined
+    }
+    const tapTapElement = document.getElementById("tapTap");
+    if (tapTapElement) {
+        tapTapElement.focus(); // Focus on the text box to capture key events
+        let keyHeld48 = false;
+        let keyHeld49 = false;
+
+        const handleKeyPress = (keycode, isKeyDown) => {
+            if (keycode === 48) {
+                keyHeld48 = isKeyDown;
+            } else if (keycode === 49) {
+                keyHeld49 = isKeyDown;
+            }
+            responseKey = keycode;
+
+            if (keyHeld48 || keyHeld49) {
+                totalConfidence = moveConfidence();
+            }
+        };
+
+        $(tapTapElement).keydown(function (event) {
+            const keycode = event.which;
+            if (keycode === 48 || keycode === 49) {
+                handleKeyPress(keycode, true);
+                event.preventDefault(); // Prevent default action and stop propagation
+            }
+        });
+
+        $(tapTapElement).keyup(function (event) {
+            const keycode = event.which;
+            if (keycode === 48 || keycode === 49) {
+                handleKeyPress(keycode, false);
+                event.preventDefault(); // Prevent default action and stop propagation
+            }
+        });
+    }
+}
