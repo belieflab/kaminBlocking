@@ -3,13 +3,16 @@
 //***********************************//
 
 // Debug Mode
-// Options: true, false
-let debug = true; // Default debug mode setting for the experiment
+// Options: false, true
+let debug = false; // Default debug mode setting for the experiment
 
 // if you want to ask questions at the end of the task then true
 let lastQuestion = false;
 
-// we create this object to communicate with wrap/lib/fn.js getRepetitions()
+// Number of repetitions for each phase, user-defined object
+// reference in main procedures object repetitions property:
+// e.g.
+// repetitions: getRepetitions().learning
 const repetitions = {
     production: { learning: 10, blocking: 6, testing: 6 },
     debug: { learning: 1, blocking: 1, testing: 1 },
