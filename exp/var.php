@@ -1,7 +1,9 @@
 <?php
+// Initialize variables to null
 ?>
-<script>
 
+<script>
+"use strict";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// *  make sure you know what you are doing with these buttons and levers; you may break the experiment  * ///
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,6 +24,11 @@ let responseKey;
 
 // trial index
 let trialIterator = 1;
+
+// durations of trial components:
+const fixationDuration = 1000;
+const stimuliDuration = 3000;
+const feedbackDuration = 1000;
 
 // progress bar container
 let progressBar =

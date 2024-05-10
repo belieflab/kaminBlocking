@@ -28,7 +28,7 @@ require_once 'wrap/lib/ids.php';
   <!-- custom jsPsychHtmlKeyboardResponse -->
   <script src="./wrap/plugins/plugin-html-keyboard-response.js"></script>
   <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
-  
+
   <!-- general styling -->
   <link rel="stylesheet" type="text/css" href="./wrap/lib/style.css">
   <!-- confidence bar styling -->
@@ -58,7 +58,7 @@ require_once 'wrap/lib/ids.php';
   <script type="text/javascript" src="./exp/fn.js"></script>
   <script type="text/javascript" src="./exp/lang.js"></script>
 
-  <script type="text/javascript" src="./exp/var.js"></script>
+  <?php require_once './exp/var.php'; ?>
 
 </footer>
 
