@@ -30,7 +30,13 @@ const feedbackDuration = 1000;
 
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
-const experimentAlias = "kamin"; // Unique identifier for the experiment, used in data saving
+
+// taskVersion choices: "social_kamin", "kamin", "kamin_gain", "kamin_loss"
+// social_kamin involves avatars and focuses on sabotage
+// kamin_loss and kamin_gain focus on learning which fractal images gain or lose points
+const version = "kamin";
+
+const experimentAlias = version; // Unique identifier for the experiment, used in data saving
 
 // Experiment Language
 const language = "english"; // Language setting for the experiment
@@ -38,11 +44,6 @@ const language = "english"; // Language setting for the experiment
 // User Interface Theme
 // Options: "light", "dark", "white"
 const theme = "white"; // Default theme setting for the user interface
-
-// taskVersion choices: "social_kamin", "kamin", "kamin_gain", "kamin_loss"
-// social_kamin involves avatars and focuses on sabotage
-// kamin_loss and kamin_gain focus on learning which fractal images gain or lose points
-const version = "kamin";
 
 // Add additional global configuration constants here
 
