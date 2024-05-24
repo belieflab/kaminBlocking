@@ -23,14 +23,13 @@ const repetitions = {
     debug: { learning: 1, blocking: 1, testing: 1 },
 };
 
-// Experiment Name
-const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
-
 // taskVersion choices: "social_kamin", "kamin", "kamin_gain", "kamin_loss"
 // social_kamin involves avatars and focuses on sabotage
 // kamin_loss and kamin_gain focus on learning which fractal images gain or lose points
 const version = "kamin";
 
+// Experiment Name
+const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
 const experimentAlias = version; // Unique identifier for the experiment, used in data saving
 
 // Experiment Language
