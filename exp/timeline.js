@@ -74,7 +74,7 @@ const fixation = {
 const stimuli = {
     type: jsPsychHtmlKeyboardResponse,
 
-    stimulus: function () {
+    stimulus: () => {
         var html;
         var stimulus2 = jsPsych.timelineVariable("stimulus2", true);
         if (version !== "social_kamin") {
@@ -267,10 +267,7 @@ const dataSave = {
         // Now, generate the thank you message with the updated score
         const thankYou = instructions[10];
 
-        saveDataPromise(
-            `${experimentAlias}_${subjectId}`,
-            jsPsych.data.get().csv()
-        )
+        saveDataPromise()
             .then((response) => {
                 console.log("Data saved successfully.", response);
                 // Update the stimulus content directly via DOM manipulation
