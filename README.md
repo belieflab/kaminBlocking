@@ -90,4 +90,4 @@ If you want to use the latest version (v7 wrapper) this will be under the branch
         sudo chmod -R 755 foodAllergy/
         sudo chmod -R 777 foodAllergy/data
         
-this version is correct        
+this version is correct!        
