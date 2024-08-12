@@ -360,7 +360,7 @@ const dataSave = {
                 $("body").addClass("showCursor"); // Returns cursor functionality
                 closeFullscreen(); // Kill fullscreen
                 if (!src_subject_id) {
-                    window.location.replace(feedbackLink);
+                    window.location.replace(redirectLink);
                 }
             });
     },

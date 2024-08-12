@@ -36,17 +36,19 @@ require_once 'wrap/lib/ids.php';
 
 <body id='unload' onbeforeunload="return areYouSure()">
 <?php
-    if (isset($_GET["workerId"]) || isset($_GET["PROLIFIC_PID"]) || isset($_GET["participantId"])) {
-      include_once "./wrap/include/consent.php";
+    if (isset($_GET["workerId"]) || isset($_GET["participantId"]) || isset($_GET["PROLIFIC_PID"])) {
+      include_once "./wrap/include/start.php";
     } else if (isset($_GET["src_subject_id"])) {
       include_once "./wrap/include/nda.php";
     } else {
       include_once "./wrap/include/intake.php";
     }
-  ?>
+    ?>
 </body>
 <footer>
   <!-- load config first! -->
+  <script type="text/javascript" src="./wrap/lib/redirect.js"></script>
+
   <script type="text/javascript" src="./exp/conf.js"></script>
   <!-- load wrapper dependencies -->
   <script type="text/javascript" src="./wrap/lib/fn.js"></script>

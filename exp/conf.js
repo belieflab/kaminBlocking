@@ -28,6 +28,10 @@ const fixationDuration = 1000;
 const stimuliDuration = 3000;
 const feedbackDuration = 1000;
 
+let phase = undefined;
+
+const counterbalance = false;
+
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
 const experimentAlias = "kamin"; // Unique identifier for the experiment, used in data saving
@@ -45,9 +49,13 @@ const theme = "white"; // Default theme setting for the user interface
 const version = "kamin";
 
 // Add additional global configuration constants here
+const consentLink =
+    "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_9H0WmX4yKv4jz4a";
 
 // Note: Uncomment the desired options. Ensure only one option per setting is active at a time.
 const adminEmail = undefined;
-const feedbackLink =
-    "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC?participantId=" +
-    subjectId;
+// Redirect Configuration (Daisy Chaining)
+const urlConfig = {
+    // redirect only
+    default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC",
+};
