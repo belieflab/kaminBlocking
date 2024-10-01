@@ -14,7 +14,19 @@ The scenario is as follows: subjects imagine they are an allergist and they are 
 # Alternate versions
 Three new versions were developed that (a) use different instructions/framing contexts (social vs. nonsocial), (b) different stimuli (social avatars vs. fractals), and (c) have shorter format based on (Ongchoco et al., 2023)
 
-# design 
+# design
+
+## non-social
+154 trials (+ 3 practice trials to start)
+learning: 7 stimuli each presented 10 times (1:10) / A1+, A2+, C1-, C2-, F-, I+, J-
+blocking: 7 stimuli (two foods paired and presented) each presented 6 times (11:16) / A1B1+, A2B2+, C1D1+, D2D2+, EF-, I+, J-
+testing: 7 stimuli (two foods paired and presented) each presented 6 times (17:22) / B1+, B2-, D1+, D2-, EF-, I+, J-
+Number of bad trials cannot exceed 60 (filtering out NAs in Prediction variable)
+Accuracy is above random chance - binomial test, p < 0.05 (filtering out poor learners)
+12 cues: "A1","A2","B1","B2","C1","C2","D1","D2","E","F","I","J"
+Confidence scores normalized using a participant's max confidence
+
+
 learning_phase  blocking_phase  testing_phase
 A1+             A1B1+           B1+
 A2+             A2B2+           B2-
