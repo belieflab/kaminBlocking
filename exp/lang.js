@@ -30,23 +30,18 @@ const feedbackPositive =
     "/+.jpg'></div>";
 
 // declare endgame variable
-let endgame;
-
-// two cases for endgame (in-person or online)
-if (src_subject_id) {
-    endgame = `<div class="body-white-theme">
-    <p>Thank you!</p>
-    <p>You have successfully completed the experiment and your data has been saved.</p>
-    <!-- <p>To leave feedback on this task, please click the following link:</p> -->
-    <!-- <p><a href="${redirectLink}">Leave Task Feedback!</a></p> -->
-    <!-- <p>Please wait for the experimenter to continue.</p> -->
-    <p><i>You may now close the experiment window at any time.</i></p>
-    </div>`;
-} else {
-    endgame = `<p style='color:white;'>Thank you!</p>
-    <p style='color:white;'>You have successfully completed the Human Detection Task and your data has been saved.</p>
-    <p style='color:white;'>You will redirected to the Qualtrics questionnaires, if you are not redirected please click <a href="${redirectLink}">here</a>.</p>`;
-}
+var endgame = () => {
+    return `
+        <div class="body-white-theme">
+            <p>Thank you!</p>
+            <p>You have successfully completed this task and your data has been saved.</p>
+            ${
+                !src_subject_id
+                    ? `<p>You will be redirected to the next part of the experiment. If you are not redirected, please click <a href="${redirectLink}">here</a>.</p>`
+                    : ""
+            }
+        </div>`;
+};
 
 switch (version) {
     case "kamin":
@@ -218,7 +213,7 @@ switch (language) {
             responseOptions,
             question1,
             question2,
-            endgame, // Store it as a function that accepts score
+            (score, earnings) => endgame(score, earnings), // Store it as a function that accepts score
         ];
         break;
 }

@@ -308,62 +308,10 @@ let screenRating2 = {
 
 const dataSave = {
     type: "html-keyboard-response",
-    stimulus: dataSaveAnimation(),
+    stimulus: dataSaveAnimation,
     choices: "NO_KEYS",
     trial_duration: 5000,
-    on_finish: () => {
-        // const updatedScore =
-        //     typeof score !== "undefined"
-        //         ? score
-        //         : jsPsych.data.get().select("score").values.slice(-1)[0]; // Replace 'score' with actual data key if necessary
-        // Now, generate the thank you message with the updated score
-        const thankYou = instructions[10];
-
-        saveDataPromise(
-            `${experimentAlias}_${subjectId}`,
-            jsPsych.data.get().csv()
-        )
-            .then((response) => {
-                console.log("Data saved successfully.", response);
-                // Update the stimulus content directly via DOM manipulation
-                document.querySelector("#jspsych-content").innerHTML = thankYou;
-            })
-            .catch((error) => {
-                console.log("Failed to save data.", error);
-                // Check if the error object has 'error' property and use it, otherwise convert object to string
-                let errorMessage = error.error || JSON.stringify(error);
-                switch (errorMessage) {
-                    case '{"success":false}':
-                        errorMessage =
-                            "The ./data directory does not exit on this server.";
-                        break;
-                    case "Not Found":
-                        errorMessage =
-                            "There was an error saving the file to disk.";
-                        break;
-                    default:
-                        errorMessage = "Unknown error.";
-                }
-                // Update the stimulus content directly via DOM manipulation
-                const dataFailure = `
-                <div class="error-page">
-                    <p>Oh no!</p>
-                    <p>An error has occured and your data has not been saved:</p>
-                    <p>${errorMessage}</p>
-                    <p>Please wait for the experimenter to continue.</p>
-                </div>`;
-                document.querySelector("#jspsych-content").innerHTML =
-                    dataFailure;
-            })
-            .finally(() => {
-                document.getElementById("unload").onbeforeunload = ""; // Removes popup
-                $("body").addClass("showCursor"); // Returns cursor functionality
-                closeFullscreen(); // Kill fullscreen
-                if (!src_subject_id) {
-                    window.location.replace(redirectLink);
-                }
-            });
-    },
+    on_finish: writeCsvRedirect,
 };
 
 // call main

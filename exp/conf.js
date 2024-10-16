@@ -59,3 +59,20 @@ const urlConfig = {
     // redirect only
     default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC",
 };
+
+// Intake Settings
+const intake = {
+    subject: {
+        minLength: 7,
+        maxLength: 7,
+        prefix: "VIP",
+    },
+    sites: ["Vanderbilt"],
+    phenotypes: ["sz"],
+    visits: ["1", "3"],
+    weeks: [],
+};
+
+const KLOOJE_API = "http://localhost:80/task/upload";
+const database = "sing";
+const collection = version;

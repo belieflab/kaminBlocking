@@ -19,6 +19,9 @@ let responseKey;
 // trial index
 let trialIterator = 1;
 
+let score = 0;
+let earnings = 0;
+
 // progress bar container
 let progressBar =
     '<div id="counter" class="w3-container" style="max-width: 600px; margin: 0 auto;"><div class="w3-light-grey"><div class="w3-grey" id="keyBar" style="height:24px;width:0%;"></div></div><br><div>';
