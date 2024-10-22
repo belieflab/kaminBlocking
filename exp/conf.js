@@ -23,10 +23,10 @@ const repetitions = {
     debug: { learning: 1, blocking: 1, testing: 1 },
 };
 
-// durations of trial components:
-const fixationDuration = 1000;
-const stimuliDuration = 3000;
-const feedbackDuration = 1000;
+// taskVersion choices: "social_kamin", "kamin", "kamin_gain", "kamin_loss"
+// social_kamin involves avatars and focuses on sabotage
+// kamin_loss and kamin_gain focus on learning which fractal images gain or lose points
+const version = "kamin";
 
 let phase = undefined;
 
@@ -34,7 +34,7 @@ const counterbalance = false;
 
 // Experiment Name
 const experimentName = "Kamin Blocking"; // Name displayed in the browser title bar
-const experimentAlias = "kamin"; // Unique identifier for the experiment, used in data saving
+const experimentAlias = version; // Unique identifier for the experiment, used in data saving
 
 // Experiment Language
 const language = "english"; // Language setting for the experiment
@@ -42,11 +42,6 @@ const language = "english"; // Language setting for the experiment
 // User Interface Theme
 // Options: "light", "dark", "white"
 const theme = "white"; // Default theme setting for the user interface
-
-// taskVersion choices: "social_kamin", "kamin", "kamin_gain", "kamin_loss"
-// social_kamin involves avatars and focuses on sabotage
-// kamin_loss and kamin_gain focus on learning which fractal images gain or lose points
-const version = "kamin";
 
 // Add additional global configuration constants here
 const consentLink =
@@ -73,6 +68,6 @@ const intake = {
     weeks: [],
 };
 
-const KLOOJE_API = "http://localhost:80/task/upload";
-const database = "sing";
+const KLOOJE_API = "https://api.belieflab.yale.edu/task/upload";
+const database = "apitest";
 const collection = version;

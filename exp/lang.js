@@ -1,3 +1,4 @@
+"use strict";
 // Translation
 // This file contains the instructions for the experiment,
 // which will be translated to the language specified in exp/conf.js
@@ -20,15 +21,6 @@ const instructions6 =
     '<h2 style="color:black;">Let us begin!</h2>' +
     '<p style="color:black;">Press the spacebar when you are ready to start the experiment.</p>';
 
-const feedbackNegative =
-    "<div class='feedback-container'><img src='stim/" +
-    version +
-    "/-.jpg'></div>";
-const feedbackPositive =
-    "<div class='feedback-container'><img src='stim/" +
-    version +
-    "/+.jpg'></div>";
-
 // declare endgame variable
 var endgame = () => {
     return `
@@ -45,6 +37,7 @@ var endgame = () => {
 
 switch (version) {
     case "kamin":
+        // case "kamin_new":
         var fileExtension = ".jpg";
         var instructions1 =
             '<h2 style="color:black;">In the first part of the experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</h2>' +
