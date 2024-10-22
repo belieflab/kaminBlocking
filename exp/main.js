@@ -4,17 +4,17 @@
 timeline.push(preload);
 
 // Instructions
-// timeline.push(welcome, ...instructionSet);
+timeline.push(welcome, ...instructionSet);
 
 // // Practice
 timeline.push(practice_procedure, instruction6);
 
-// // Main experiment
-// timeline.push(learning_procedure, blocking_procedure, testing_procedure);
+// Main experiment
+timeline.push(learning_procedure, blocking_procedure, testing_procedure);
 
-// if (ratingQuestions) {
-//     timeline.push(screenRating1, screenRating2);
-// }
+if (ratingQuestions) {
+    timeline.push(screenRating1, screenRating2);
+}
 
 timeline.push(dataSave);
 
