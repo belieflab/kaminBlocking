@@ -1,116 +1,130 @@
-```
+# 🧠 Kamin Blocking
+
+This psychological task investigates the Kamin blocking phenomenon, where participants predict outcomes based on their interactions with different stimuli. In the **social version**, participants are presented with co-workers (represented as emojis) and need to predict whether they will help or sabotage their efforts. In the **non-social version**, subjects associate foods with allergic reactions.
+
+## 🚀 Getting Started
+
+### Clone the Repository
+To clone the repository with all necessary submodules, run:
+```bash
 git clone --recurse-submodules -j4 git@github.com:belieflab/kaminBlocking.git && cd kaminBlocking && git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)' && git update-index --assume-unchanged exp/conf.js
 ```
 
-variables:
+### Version Information
+- **Version**: 'corrected' version appears after an error discovered in `testing_stimuli`. The "consistent-allergy" condition had a stimulus 2 pairing, which should never have been the case. Per Phil Corlett, previous data is not compromised for key trial types. However, low-level controls (I-, J+) should not be used in combined analysis of tasks without the 'correct' version variable!
 
-version = 'corrected' version appears after error disovered in testing_stimuli, the consistent-allergy conidition had a stimulus 2 pairing, which should never have been the case. Per Phil Corlett, previous data is not compromised for key trial types. However, low level controls (I-,J+) should not be used in combined analysis of tasks without version 'correct' variable!
+## 🎯 Task Description
+Participants will be shown meals (comprising one or two different foods for the non-social version or emojis representing co-workers for the social version) for 3 seconds. They will then have 1 second to determine if an allergy occurred or if they believe a co-worker will help or sabotage them.
 
-# Kamin Blocking
-This is a psychological task designed to track new causal belief formation. It involves subjects learning to associate causes (foods) with effects (allergies in a fictitious patient).
+## 📊 Alternate Versions
 
-The scenario is as follows: subjects imagine they are an allergist and they are charged with figuring our which foods cause allergies in a fictitious patient and which ones do not. They see each meal he has eaten (comprised of one or two different foods) , for 3 seconds then they see whether or not an allergy happened (for one second). When a meal is on the screen, they make a prediction with a 2-alternative button push (allergy or no allergy).
+1. **Non-Social Kamin Blocking**
+   - **Trials**: 154 total (+3 practice trials)
+   - **Cues**: 12 cues including "A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2", "E", "F", "I", "J"
+   - Participants imagine they are allergists observing a new patient who has allergic reactions after certain meals.
+   - They predict whether the meals will cause allergic reactions based on previous observations of patient reactions.
+   - **Trial Structure**:
+     - **Learning Phase**: 7 stimuli each presented 10 times (1:10) / A1+, A2+, C1-, C2-, F-, I+, J-
+     - **Blocking Phase**: 7 stimuli each presented 6 times (11:16) / A1B1+, A2B2+, C1D1+, D2D2+, EF-, I+, J-
+     - **Testing Phase**: 7 stimuli each presented 6 times (17:22) / B1+, B2-, D1+, D2-, EF-, I+, J-
 
-# Alternate versions
-Three new versions were developed that (a) use different instructions/framing contexts (social vs. nonsocial), (b) different stimuli (social avatars vs. fractals), and (c) have shorter format based on (Ongchoco et al., 2023)
+2. **Social Kamin Blocking**
+   - **Trials**: 112 total (+3 practice trials)
+   - **Cues**: 14 cues including "A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2", "E", "F", "I", "J", "K", "L"
+   - Participants imagine starting a new job, where they are evaluated by a boss and rely on co-workers, who may help or sabotage them.
+   - They predict whether the co-workers will help or sabotage them after observing their actions during the experiment.
+   - **Trial Structure**:
+     - **Learning Phase**: 4 stimuli each presented 10 times (1:10) / A1+, A2+, C1-, C2-
+     - **Blocking Phase**: 7 stimuli each presented 6 times (11:16) / A1B1+, A2B2+, C1D1+, C2D2+, EF-, IK-, JL-
+     - **Testing Phase**: 5 stimuli each presented 6 times (17:22) / B1+, B2-, D1+, D2-, L-
 
-# design
+### Cues Overview
+**Non-Social Kamin Blocking**
+| Learning Phase | Blocking Phase | Testing Phase |
+|----------------|----------------|---------------|
+| A1+           | A1B1+         | B1+           |
+| A2+           | A2B2+         | B2-           |
+| C1-           | C1D1+         | D1+           |
+| C2-           | C2D2+         | D2-           |
+| F-            | EF-           | EF-           |
+| I+            | I+            | I+            |
+| J-            | J-            | J-            |
 
-## non-social
-154 trials (+ 3 practice trials to start)
+**Social Kamin Blocking**
+| Learning Phase | Blocking Phase | Testing Phase |
+|----------------|----------------|---------------|
+| A1+           | A1B1+         | B1+           |
+| A2+           | A2B2+         | B2-           |
+| C1-           | C1D1+         | D1+           |
+| C2-           | C2D2+         | D2-           |
+| F-            | EF-           | EF-           |
+| I+            | I+            | I+            |
+| J-            | J-            | J-            |
+| K-            | K-            | K-            |
+| L-            | L-            | L-            |
 
-learning: 7 stimuli each presented 10 times (1:10) / A1+, A2+, C1-, C2-, F-, I+, J-
+## 🛠 Development Guide
 
-blocking: 7 stimuli (two foods paired and presented) each presented 6 times (11:16) / A1B1+, A2B2+, C1D1+, D2D2+, EF-, I+, J-
-
-testing: 7 stimuli (two foods paired and presented) each presented 6 times (17:22) / B1+, B2-, D1+, D2-, EF-, I+, J-
-
-Number of bad trials cannot exceed 60 (filtering out NAs in Prediction variable)
-
-Accuracy is above random chance - binomial test, p < 0.05 (filtering out poor learners)
-
-12 cues: "A1","A2","B1","B2","C1","C2","D1","D2","E","F","I","J"
-
-Confidence scores normalized using a participant's max confidence
-
-
-learning_phase  blocking_phase  testing_phase
-A1+             A1B1+           B1+
-A2+             A2B2+           B2-
-C1-             C1D1+           D1+
-C2-             C2D2+           D2-
-F-              EF-             EF-
-I+              I+              I+
-J-              J-              J-
-Total cues: A1, A2, B1, B2, C1, C2, D1, D2, E, F, I, J,
-
-cues within stim_shuffle: standard version (until 11), short (until 13). SCdO 07/may/2024
-                0   1   2   3   4   5   6   7    8   9   10  11  12  13
-stim_shuffle = [A1, A2, B1, B2, C1, C2, D1, D2,  E,  F,  I,  J,  K,  L]
-
-# Git branches and latest version
-If you want to use the latest version (v7 wrapper) this will be under the branch v7. Then you can clone it by: git clone --branch v7 --recurse-submodules git@github.com:belieflab/kaminBlocking.git kaminBlocking. The branch master is being used for CAPR project, and will be depricated after the project.
-
-
-## Development Guide
-
-#### Install and configure XAMPP:
+### Install and Configure XAMPP
 1. [Download XAMPP](https://www.apachefriends.org/download.html) with PHP version 7.3.19
-2. Open XAMPP and click "Start" to boot the XAMPP application.
-3. Navigate to "Services" and click "Start All" button.
+2. Open XAMPP and click "Start" to boot the application.
+3. Navigate to "Services" and click "Start All".
 4. Navigate to "Network", select localhost:8080, and click "Enable".
 5. Navigate to "Volumes" and click "Mount".
 
-#### Clone the git repository:
-6. Open Terminal and navigate to the htdocs directory:
+### Clone the Git Repository
+6. Open Terminal and navigate to the `htdocs` directory:
+   - **Mac/Linux:**
+     ```bash
+     cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs
+     ```
+   - **Windows:**
+     ```bash
+     cd C:\xampp\htdocs
+     ```
+7. Clone into `htdocs`:
+   ```bash
+   git clone https://github.com/belieflab/foodAllergy.git
+   ```
 
-    Mac/Linux:
-
-        cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs
-    Windows:
-
-        cd C:\\xampp\\htdocs
-
-7. Clone into htdocs:
-
-        git clone https://github.com/belieflab/foodAllergy.git
-
-#### Modify permissions:
-8. Copy this text into your terminal from the htdocs folder (the folder you are already in).
-
-        sudo chmod -R 777 foodAllergy/
+### Modify Permissions
+8. Copy this text into your terminal from the `htdocs` folder:
+   ```bash
+   sudo chmod -R 777 foodAllergy/
+   ```
         
-#### Start experiment:     
+### Start Experiment
 9. Click this URL: [http://localhost:8080/foodAllergy](http://localhost:8080/foodAllergy)
       
-#### View the source code:  
-10. Open the foodAllergy directory in a text editor of your choice. We prefer [Visual Studio Code](https://code.visualstudio.com/)
+### View the Source Code
+10. Open the `foodAllergy` directory in a text editor of your choice. We prefer [Visual Studio Code](https://code.visualstudio.com/):
+    - **Mac/Linux:**
+      ```bash
+      cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs/foodAllergy
+      ```
+    - **Windows:**
+      ```bash
+      cd C:\xampp\htdocs\foodAllergy
+      ```
 
-    Mac/Linux:
+## 🌐 Hosting Guide  
 
-        cd ~/.bitnami/stackman/machines/xampp/volumes/root/htdocs/foodAllergy
+### Clone the Git Repository
+1. Open Terminal and navigate to your server's default directory:
+   - **Apache Linux default directory:**
+     ```bash
+     cd /var/www/html
+     ```
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/belieflab/foodAllergy.git
+   ```
 
-    Windows:
+### Modify Permissions
+3. Execute these two `chmod` commands in terminal from `/var/www/html`:
+   ```bash
+   sudo chmod -R 755 foodAllergy/
+   sudo chmod -R 777 foodAllergy/data
+   ```
 
-        cd C:\\xampp\\htdocs\\foodAllergy
-
-## Hosting Guide  
-
-#### Clone the git repository:
-1. Open Terminal and navigate to the your server's default directory:
-
-    Apache Linux default directory:
-
-        cd /var/www/html
-
-2. Clone respository:
-
-        git clone https://github.com/belieflab/foodAllery.git
-
-#### Modify permissions:
-3. Execute these two chmod commands in terminal from  /var/www/html (the directory you are already in).
-
-        sudo chmod -R 755 foodAllergy/
-        sudo chmod -R 777 foodAllergy/data
-        
-this version is correct!        
+> **Note:** This version is correct!
