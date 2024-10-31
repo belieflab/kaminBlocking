@@ -1,6 +1,6 @@
 # 🧠 Kamin Blocking
 
-This psychological task investigates the [Kamin blocking phenomenon](https://en.wikipedia.org/wiki/Blocking_effect), where learning the predictive value of a cue B is impaired given that B is simultaneously paired with cue A which has been previsouly paird with the outcome. Thus A is a already a good predictor of the outcome, thus the intuition is: 'no need to learn from B, given that A already predicts the outcome', or A blocks B. 
+This psychological task investigates the [Kamin blocking phenomenon](https://en.wikipedia.org/wiki/Blocking_effect), where people learn that (1) cue A predicts an outcome, then that (2) cue A and cue B predicts an outcome. When asked if B alone predicts the outcome, they show a diminished response. A is a already a good predictor of the outcome; the intuition is: 'no need to learn from B, given that A already predicts the outcome.' In short, A blocks B. 
 
 In the **social version**, participants are presented with co-workers (represented as emojis) and need to predict whether they will help or sabotage their efforts. In the **non-social version**, subjects associate foods with allergic reactions.
 
@@ -13,10 +13,10 @@ git clone --recurse-submodules -j4 git@github.com:belieflab/kaminBlocking.git &&
 ```
 
 ### Version Information
-- **Version**: 'corrected' version appears after an error discovered in `testing_stimuli`. The "consistent-allergy" condition had a stimulus 2 pairing, which should never have been the case. Per Phil Corlett, previous data is not compromised for key trial types. However, low-level controls (I-, J+) should not be used in combined analysis of tasks without the 'correct' version variable!
+- **Version**: the 'corrected' version was created after an error was discovered in `testing_stimuli`. The "consistent-allergy" condition had a stimulus 2 pairing, which should never have been the case. Per Phil Corlett, previous data is not compromised for key trial types. However, low-level controls (I-, J+) should not be used in combined analysis of tasks without ensuring the version variable is equal to 'correct'!
 
 ## 🎯 Task Description
-In every trial participants are shown with cues (represented with letters) and asked to predict an outcome (e.g., allergy). The meals comprising one or two different foods for the non-social version or emojis representing co-workers for the social version. They will then have 1 second to determine if an allergy occurred or if they believe a co-worker will help or sabotage them.
+In every trial participants are shown with cues (represented with letters) and asked to predict an outcome (e.g., allergy). The meals comprise one or two different foods for the non-social version or emojis representing co-workers for the social version. They then have 1 second to determine if an allergy occurred or if they believe a co-worker will help or sabotage them.
 
 ## 📊 Alternate Versions and Designs
 
