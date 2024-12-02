@@ -1,1 +1,0 @@
-./wrap/link/sync.sh
