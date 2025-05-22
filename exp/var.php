@@ -59,7 +59,7 @@ let timeRemaining =
 
 let stimArray = [];
 for (let i = 1; i < 19; i++) {
-    stimArray.push("stim/" + version + "/s" + i + fileExtension);
+    stimArray.push("stim/" + version + "/set1/s" + i + fileExtension);
 }
 
 let shuffledStim = shuffleArray(stimArray); //shuffled array no repeats
