@@ -1,28 +1,10 @@
-
-<?php
-// server side logic for dealing with stimuli
-// as needed for the experiment
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// *  make sure you know what you are doing with these buttons and levers; you may break the experiment  * ///
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-?>
-
-<script>
-    
 "use strict";
 
 const negative = `stim/${version}/-.jpg`;
 const positive = `stim/${version}/+.jpg`;
 
-const negativeFeedback =
-    `<div class='feedback-container'><img src='${negative}'></div>`;
-const positiveFeedback =
-    `<div class='feedback-container'><img src='${positive}'></div>`;
+const negativeFeedback = `<div class='feedback-container'><img src='${negative}'></div>`;
+const positiveFeedback = `<div class='feedback-container'><img src='${positive}'></div>`;
 
 /* START TRAINING TRIAL FOR PARTICIPANTS */
 
@@ -57,12 +39,158 @@ let fillUp = '<p id="fillUp" style="color:black;"></p>';
 let timeRemaining =
     '<p id="timeRemaining" style="text-align:center; color:black;"></p>';
 
-let stimArray = [];
-for (let i = 1; i < 19; i++) {
-    stimArray.push("stim/" + version + "/set1/s" + i + fileExtension);
+/**
+ * Function to determine stimulus set based on visit/week index
+ * @returns {string|null} The stimulus set name or null if not available
+ */
+function getStimulusSet() {
+    let setIndex = null;
+    let visitOrWeekValue = null;
+
+    // Check if visit is defined and valid
+    if (typeof visit !== "undefined" && visit !== null) {
+        visitOrWeekValue = parseInt(visit);
+
+        // Check if this visit number exists in the intake.visits array
+        if (
+            typeof intake !== "undefined" &&
+            intake.visits &&
+            intake.visits.length > 0
+        ) {
+            // Get the specific index for this visit in the array
+            const visitIndex = intake.visits.indexOf(visitOrWeekValue);
+
+            if (visitIndex !== -1) {
+                setIndex = visitIndex;
+                console.log(
+                    `Visit ${visit} found at index ${visitIndex} in intake.visits`
+                );
+            } else {
+                // This is critical - the visit number doesn't exist in the allowed visits
+                console.error(
+                    `Visit ${visit} not found in allowed visits: ${intake.visits.join(
+                        ", "
+                    )}`
+                );
+                setIndex = null; // Explicitly set to null to indicate error
+            }
+        }
+    }
+
+    // Check if week is defined and valid (only if visit wasn't valid)
+    if (setIndex === null && typeof week !== "undefined" && week !== null) {
+        visitOrWeekValue = parseInt(week);
+
+        // Check if this week number exists in the intake.weeks array
+        if (
+            typeof intake !== "undefined" &&
+            intake.weeks &&
+            intake.weeks.length > 0
+        ) {
+            // Get the specific index for this week in the array
+            const weekIndex = intake.weeks.indexOf(visitOrWeekValue);
+
+            if (weekIndex !== -1) {
+                setIndex = weekIndex;
+                console.log(
+                    `Week ${week} found at index ${weekIndex} in intake.weeks`
+                );
+            } else {
+                // This is critical - the week number doesn't exist in the allowed weeks
+                console.error(
+                    `Week ${week} not found in allowed weeks: ${intake.weeks.join(
+                        ", "
+                    )}`
+                );
+                setIndex = null; // Explicitly set to null to indicate error
+            }
+        }
+    }
+
+    // Available stimulus sets
+    const availableSets = ["set1", "set2"];
+
+    // If no valid visit/week was found, or if the index is out of bounds
+    if (setIndex === null || setIndex >= availableSets.length) {
+        // Create detailed error message
+        let errorMessage = "";
+
+        if (setIndex === null) {
+            // Invalid visit/week
+            if (typeof visit !== "undefined" && visit !== null) {
+                errorMessage = `Error: Visit ${visit} is not in the allowed visits: ${intake.visits.join(
+                    ", "
+                )}`;
+            } else if (typeof week !== "undefined" && week !== null) {
+                errorMessage = `Error: Week ${week} is not in the allowed weeks: ${intake.weeks.join(
+                    ", "
+                )}`;
+            } else {
+                errorMessage = "Error: No valid visit or week specified";
+            }
+        } else {
+            // Valid visit/week but no corresponding stimulus set
+            errorMessage = `Error: No stimulus set available for ${
+                visit ? "visit " + visit : ""
+            }${week ? "week " + week : ""} (index: ${setIndex})`;
+        }
+
+        console.error(errorMessage);
+
+        // Display error message and stop execution
+        document.body.innerHTML = `
+            <div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <h2>Stimulus Set Not Available</h2>
+                <p>${errorMessage}</p>
+                <p>Only sets 1-2 are available for this experiment.</p>
+                <p>Available visits: ${
+                    intake.visits ? intake.visits.join(", ") : "None"
+                }</p>
+                <p>Available weeks: ${
+                    intake.weeks ? intake.weeks.join(", ") : "None"
+                }</p>
+                <p>Please contact the administrator at: <a href="mailto:${adminEmail}">${adminEmail}</a></p>
+            </div>
+        `;
+
+        // Throw an error to stop execution
+        throw new Error("Required stimulus set not available");
+    }
+
+    // If we get here, the set is available
+    const stimulusSet = availableSets[setIndex];
+    console.log("Using stimulus set:", stimulusSet, "(index:", setIndex + ")");
+    return stimulusSet;
 }
 
-let shuffledStim = shuffleArray(stimArray); //shuffled array no repeats
+// Try to get the stimulus set and proceed only if successful
+let stimArray = [];
+let shuffledStim = [];
+
+try {
+    const currentStimulusSet = getStimulusSet();
+
+    // Only proceed if we got a valid stimulus set
+    if (currentStimulusSet) {
+        for (let i = 1; i < 19; i++) {
+            stimArray.push(
+                "stim/" +
+                    version +
+                    "/" +
+                    currentStimulusSet +
+                    "/s" +
+                    i +
+                    fileExtension
+            );
+        }
+
+        console.log("Generated stimArray:", stimArray);
+        shuffledStim = shuffleArray(stimArray); //shuffled array no repeats
+    }
+} catch (error) {
+    console.error("Failed to initialize experiment:", error);
+    // The error message is already displayed to the user in getStimulusSet
+}
 
 // cues within shuffledStim: standard version (until 11), short (until 13). SCdO 07/may/2024
 //                 0   1   2   3   4   5   6   7    8   9   10  11  12  13
@@ -685,5 +813,3 @@ let testing_stimuli_short = [
         },
     }, // 0 key
 ];
-
-</script>

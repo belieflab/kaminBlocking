@@ -60,7 +60,8 @@ require_once 'wrap/lib/ids.php';
   <script type="text/javascript" src="./exp/fn.js"></script>
   <script type="text/javascript" src="./exp/lang.js"></script>
 
-  <?php require './exp/var.php'; ?>
+  <!-- now handled by include/ -->
+  <!-- <script type="text/javascript" src="./exp/var.js"></script> -->
 
 </footer>
 
