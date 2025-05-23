@@ -261,7 +261,7 @@ const dataSave = {
     stimulus: dataSaveAnimation,
     choices: "NO_KEYS",
     trial_duration: 5000,
-    on_finish: writeMongoRedirect,
+    on_finish: writeCsvRedirect,
 };
 
 // Defince procedures

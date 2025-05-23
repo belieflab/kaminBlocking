@@ -31,7 +31,7 @@
 
 .stimuli-allergy,
 .stimuli-social {
-    width: 100%; /* Full width to adapt container size */
+    width: 50%; /* Full width to adapt container size */
     height: auto; /* Maintain aspect ratio */
     max-width: 600px; /* Increased maximum width for single stimuli images */
     margin: 10px; /* Consistent spacing */
