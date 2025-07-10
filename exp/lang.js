@@ -38,7 +38,6 @@ var endgame = () => {
 switch (version) {
     case "kamin":
         // case "kamin_new":
-        var fileExtension = ".jpg";
         var instructions1 =
             '<h2 style="color:black;">In the first part of the experiment, you are asked to imagine that you are an allergist (someone who tries to discover the cause of allergic reactions in people).</h2>' +
             '<h3 style="color:black;">You have been presented with a new patient who suffers from allergic reactions following some meals, but not others.</h3> ' +
@@ -76,7 +75,6 @@ switch (version) {
             "Did it feel as though the foods were trying to trick you?";
         break;
     case "social_kamin":
-        var fileExtension = ".png";
         var instructions1 =
             '<h2 style="color:black;">In the first part of this experiment, you are asked to imagine that you are beginning a new job and your boss regularly evaluates you.</h2>' +
             '<h3 style="color:black;">You also have new co-workers, who you have to rely on for help with tasks. Nonetheless, some co-workers will actively wish for you to fail!</h3> ' +
@@ -114,7 +112,6 @@ switch (version) {
         break;
 
     case "kamin_gain":
-        var fileExtension = ".jpg";
         var instructions1 =
             '<h2 style="color:black;">In the first part of the experiment, you are asked to earn as many points as possible.</h2>' +
             '<h3 style="color:black;">You will be presented with unique shapes.</h3> ' +
@@ -148,7 +145,6 @@ switch (version) {
         var question2 = "Did any of the shapes deliberately sabotage you?";
         break;
     case "kamin_loss":
-        var fileExtension = ".jpg";
         var instructions1 =
             '<h2 style="color:black;">In the first part of the experiment, you are asked to avoid losing any points.</h2>' +
             '<h3 style="color:black;">You will be presented with unique shapes.</h3> ' +

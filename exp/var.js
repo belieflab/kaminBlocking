@@ -137,21 +137,47 @@ function getStimulusSet() {
 
         console.error(errorMessage);
 
-        // Display error message and stop execution
-        document.body.innerHTML = `
-            <div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif; max-width: 600px; margin-left: auto; margin-right: auto;">
-                <h2>Stimulus Set Not Available</h2>
-                <p>${errorMessage}</p>
-                <p>Only sets 1-2 are available for this experiment.</p>
-                <p>Available visits: ${
-                    intake.visits ? intake.visits.join(", ") : "None"
-                }</p>
-                <p>Available weeks: ${
-                    intake.weeks ? intake.weeks.join(", ") : "None"
-                }</p>
-                <p>Please contact the administrator at: <a href="mailto:${adminEmail}">${adminEmail}</a></p>
+        // ENHANCED ERROR DISPLAY - THIS IS THE KEY FIX
+        const errorHTML = `
+            <div style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: Arial, sans-serif;
+            ">
+                <div style="
+                    text-align: center;
+                    max-width: 600px;
+                    padding: 40px;
+                    border: 2px solid #ff0000;
+                    border-radius: 10px;
+                    background: #fff;
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                ">
+                    <h2 style="color: #ff0000; margin-top: 0;">Stimulus Set Not Found</h2>
+                    <p style="font-size: 16px; margin: 20px 0;">${errorMessage}</p>
+                    <p style="margin: 15px 0;">Only sets 0-7 are available for this experiment.</p>
+                    <p style="margin: 15px 0;"><strong>Available visits:</strong> ${
+                        intake.visits ? intake.visits.join(", ") : "None"
+                    }</p>
+                    <p style="margin: 15px 0;"><strong>Available weeks:</strong> ${
+                        intake.weeks ? intake.weeks.join(", ") : "None"
+                    }</p>
+                    <p style="margin: 20px 0;">Please contact the administrator at: <a href="mailto:${adminEmail}" style="color: #0066cc;">${adminEmail}</a></p>
+        
+                </div>
             </div>
         `;
+
+        // Try multiple methods to ensure the error displays
+        document.body.innerHTML = errorHTML;
 
         // Throw an error to stop execution
         throw new Error("Required stimulus set not available");
@@ -166,6 +192,20 @@ function getStimulusSet() {
 // Try to get the stimulus set and proceed only if successful
 let stimArray = [];
 let shuffledStim = [];
+
+// Add this to exp/conf.js (after version is defined)
+let fileExtension;
+switch (version) {
+    case "social_kamin":
+        fileExtension = ".png";
+        break;
+    case "kamin":
+    case "kamin_gain":
+    case "kamin_loss":
+    default:
+        fileExtension = ".jpg";
+        break;
+}
 
 try {
     const currentStimulusSet = getStimulusSet();
