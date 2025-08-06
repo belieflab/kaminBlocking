@@ -42,7 +42,7 @@ require_once 'wrap/lib/ids.php';
 <?php
     if (isset($_GET["workerId"]) || isset($_GET["participantId"]) || isset($_GET["PROLIFIC_PID"])) {
       include_once "./wrap/include/start.php";
-    } else if (isset($_GET["src_subject_id"])) {
+    } else if (isset($_GET["src_subject_id"]) || isset($_GET["ID"])) {
       include_once "./wrap/include/nda.php";
     } else {
       include_once "./wrap/include/intake.php";
