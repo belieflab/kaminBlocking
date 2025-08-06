@@ -65,7 +65,7 @@ const intake = {
     nih: false,
     sites: ["Vanderbilt"],
     phenotypes: ["sz"],
-    visits: [1, 3],
+    visits: ["T1", "T2", "T3"],
     weeks: [],
 };
 
