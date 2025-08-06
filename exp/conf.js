@@ -62,9 +62,10 @@ const intake = {
         maxLength: 7,
         prefix: "VIP",
     },
+    nih: false,
     sites: ["Vanderbilt"],
     phenotypes: ["sz"],
-    visits: ["1", "3"],
+    visits: [1, 3],
     weeks: [],
 };
 
