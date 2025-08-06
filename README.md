@@ -14,6 +14,58 @@ git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmo
 git update-index --assume-unchanged exp/conf.js
 ```
 
+> 💡 This will initialize the `wrap` submodule
+
+### Stay Updated
+
+When pulling changes, run:
+
+```bash
+./sync.sh
+```
+
+> 🔄 This ensures the `wrap` submodule is up-to-date
+
+### ⚙️ Configuration
+
+Modify `exp/conf.js` to customize your experiment. Key options include:
+
+```javascript
+// Debug Mode
+const debug = true;
+
+// Experiment Version
+const version = "deck"; // Options: "deck", "avatar", "sabotage", "gain", "loss"
+
+// URL Configuration
+const urlConfig = {
+    default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_bErtyAFIwnwDhWu",
+    loss: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_8qsU4yfds5mH6Pc",
+    gain: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_8qsU4yfds5mH6Pc",
+};
+
+// Intake Variables (for in-person experiments)
+const intake = {
+    subject: {
+        minLength: 7,
+        maxLength: 7,
+        prefix: "VIP"
+    },
+    sites: ["Vanderbilt"],
+    phenotypes: ["hc", "sz"],
+    visits: [1,2],
+    weeks: [],
+};
+```
+
+### 🌐 Online Administration
+
+For platforms like PROLIFIC, CloudResearch, MTurk, or Connect, use:
+
+```
+https://web-url-of-your-website.com/study-name/prl
+```
+
 ### Version Information
 - **Version**: the 'corrected' version was created after an error was discovered in `testing_stimuli`. The "consistent-allergy" condition had a stimulus 2 pairing, which should never have been the case. Per Phil Corlett, previous data is not compromised for key trial types. However, low-level controls (I-, J+) should not be used in combined analysis of tasks without ensuring the version variable is equal to 'correct'!
 
