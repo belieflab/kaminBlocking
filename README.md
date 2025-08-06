@@ -9,7 +9,9 @@ In the **social version**, participants are presented with co-workers (represent
 ### Clone the Repository
 To clone the repository with all necessary submodules, run:
 ```bash
-git clone --recurse-submodules -j4 git@github.com:belieflab/kaminBlocking.git && cd kaminBlocking && git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)' && git update-index --assume-unchanged exp/conf.js
+git clone --recurse-submodules -j4 git@github.com:belieflab/kaminBlocking.git && cd kaminBlocking &&
+git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)' &&
+git update-index --assume-unchanged exp/conf.js
 ```
 
 ### Version Information
