@@ -51,6 +51,7 @@ const intake = {
         maxLength: 7,
         prefix: "VIP"
     },
+    nih: false, // change to true for studies which require bi-annual uploads to the NDA
     sites: ["Vanderbilt"],
     phenotypes: ["hc", "sz"],
     visits: [1,2],
