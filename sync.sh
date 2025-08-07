@@ -38,16 +38,30 @@ echo "Updating parent repository: $repo_name"
 
 # Check if exp/conf.js exists - if so, use safe stash/pull/pop pattern
 if [ -f "exp/conf.js" ]; then
-    echo "Found exp/conf.js - using safe update method"
-    git stash
+    echo "Found exp/conf.js - preserving your local changes."
+    
+    # Check if exp/conf.js has local changes before stashing
+    if ! git diff --quiet exp/conf.js || ! git diff --cached --quiet exp/conf.js; then
+        git stash push exp/conf.js -m "Auto-stash conf.js for sync"
+        stashed=true
+    else
+        stashed=false
+    fi
+    
     git pull
-    git stash pop
+    pull_result=$?
+    
+    # Only pop if we actually stashed something
+    if [ "$stashed" = true ]; then
+        git stash pop
+    fi
 else
     # Standard pull for repos without the config file
     git pull
+    pull_result=$?
 fi
 
-if [ $? -ne 0 ]; then
+if [ $pull_result -ne 0 ]; then
     echo "Error updating the parent repository"
     error_occurred=true
 fi
