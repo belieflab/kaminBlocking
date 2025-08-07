@@ -10,8 +10,7 @@ In the **social version**, participants are presented with co-workers (represent
 To clone the repository with all necessary submodules, run:
 ```bash
 git clone --recurse-submodules -j4 git@github.com:belieflab/kaminBlocking.git && cd kaminBlocking &&
-git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)' &&
-git update-index --assume-unchanged exp/conf.js
+git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)'
 ```
 
 > 💡 This will initialize the `wrap` submodule
@@ -51,6 +50,7 @@ const intake = {
         maxLength: 7,
         prefix: "VIP"
     },
+    nih: false, // change to true for studies which require bi-annual uploads to the NDA
     sites: ["Vanderbilt"],
     phenotypes: ["hc", "sz"],
     visits: [1,2],
