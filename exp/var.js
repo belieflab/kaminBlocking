@@ -130,7 +130,7 @@ function getStimulusSet() {
     }
 
     // Available stimulus sets
-    const availableSets = ["set1", "set2", "set3"];
+    const availableSets = ["set1", "set2", "set3", "set4", "set5"];
 
     // If no valid visit/week was found, or if the index is out of bounds
     if (setIndex === null || setIndex >= availableSets.length) {
