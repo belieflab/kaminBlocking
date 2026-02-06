@@ -58,13 +58,14 @@ const urlConfig = {
 // Intake Settings
 const intake = {
     subject: {
+        prefix: "VIP",
         minLength: 7,
         maxLength: 7,
-        prefix: "VIP",
     },
-    sites: ["Vanderbilt"],
+    nih: false,
+    sites: ["Hopkins"],
     phenotypes: ["sz"],
-    visits: ["1", "3"],
+    visits: ["T1", "T2", "T3", "T4", "T5"],
     weeks: [],
 };
 

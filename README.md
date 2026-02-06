@@ -9,7 +9,61 @@ In the **social version**, participants are presented with co-workers (represent
 ### Clone the Repository
 To clone the repository with all necessary submodules, run:
 ```bash
-git clone --recurse-submodules -j4 git@github.com:belieflab/kaminBlocking.git && cd kaminBlocking && git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)' && git update-index --assume-unchanged exp/conf.js
+git clone --recurse-submodules -j4 git@github.com:belieflab/kaminBlocking.git && cd kaminBlocking &&
+git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)'
+```
+
+> 💡 This will initialize the `wrap` submodule
+
+### Stay Updated
+
+When pulling changes, run:
+
+```bash
+./sync.sh
+```
+
+> 🔄 This ensures the `wrap` submodule is up-to-date
+
+### ⚙️ Configuration
+
+Modify `exp/conf.js` to customize your experiment. Key options include:
+
+```javascript
+// Debug Mode
+const debug = true;
+
+// Experiment Version
+const version = "deck"; // Options: "deck", "avatar", "sabotage", "gain", "loss"
+
+// URL Configuration
+const urlConfig = {
+    default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_bErtyAFIwnwDhWu",
+    loss: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_8qsU4yfds5mH6Pc",
+    gain: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_8qsU4yfds5mH6Pc",
+};
+
+// Intake Variables (for in-person experiments)
+const intake = {
+    subject: {
+        minLength: 7,
+        maxLength: 7,
+        prefix: "VIP"
+    },
+    nih: false, // change to true for studies which require bi-annual uploads to the NDA
+    sites: ["Vanderbilt"],
+    phenotypes: ["hc", "sz"],
+    visits: [1,2],
+    weeks: [],
+};
+```
+
+### 🌐 Online Administration
+
+For platforms like PROLIFIC, CloudResearch, MTurk, or Connect, use:
+
+```
+https://web-url-of-your-website.com/study-name/prl
 ```
 
 ### Version Information
