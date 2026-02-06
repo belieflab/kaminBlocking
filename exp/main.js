@@ -3,6 +3,13 @@
 // Preload images
 timeline.push(preload);
 
+// here adding the WebGazer initiation and calibration process
+if (webgazer) {
+    timeline.push(cameraInit);
+    timeline.push(calibrationProcedure); //calibration info
+    timeline.push(readyToStart);
+}
+
 // Instructions
 timeline.push(welcome, ...instructionSet);
 

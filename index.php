@@ -28,7 +28,15 @@ require_once 'wrap/lib/ids.php';
   <!-- custom jsPsychHtmlKeyboardResponse -->
   <script src="./wrap/plugins/plugin-html-keyboard-response.js"></script>
   <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
-
+<!-- for inegration between jsPsych and WebGazer -->
+  <script src="https://unpkg.com/@jspsych/extension-webgazer@1.0.3"></script>
+<!-- for initializing the camera-->
+<script src="https://unpkg.com/@jspsych/plugin-webgazer-init-camera@1.0.3"></script>
+<!-- for calibration and the gaze dot-->
+<script src="https://unpkg.com/@jspsych/plugin-webgazer-calibrate@1.0.3"></script>
+<!-- for validation of the calibration accuracy-->
+<script src="https://unpkg.com/@jspsych/plugin-webgazer-validate@1.0.3"></script>  
+  
   <!-- general styling -->
   <link rel="stylesheet" type="text/css" href="./wrap/lib/style.css">
   <!-- confidence bar styling -->
