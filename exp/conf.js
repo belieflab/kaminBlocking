@@ -6,7 +6,7 @@
 // Options: false, true
 let debug = false; // Default debug mode setting for the experiment
 
-let webgazer = true; // Set to true to enable eye-tracking with WebGazer.js
+let webgazerUse = true; // Set to true to enable eye-tracking with WebGazer.js
 
 // if you want to ask questions at the end of the task then true
 let ratingQuestions = false;

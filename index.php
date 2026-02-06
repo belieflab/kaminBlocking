@@ -17,6 +17,9 @@ require_once 'wrap/lib/ids.php';
   <!-- PHP wrapper libraries -->
   <script type="text/javascript" src="./wrap/lib/validate.js"></script>
   <script type="text/javascript" src="./wrap/lib/jquery-3.5.1.min.js"></script>
+  <!-- adding webGazer.js library from CDN 
+   every dependancies will be hadeled automatically from the internet -->
+   <script src="https://cdn.jsdelivr.net/gh/jspsych/jspsych@jspsych@7.3.3/examples/js/webgazer/webgazer.js"></script>
   <!-- jsPsych CDN (content delivery network) libraries -->
   <script src="https://unpkg.com/jspsych@7.3.3"></script>
   <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css"/>

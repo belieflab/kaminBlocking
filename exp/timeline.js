@@ -22,7 +22,7 @@ const preload = {
 let timeline = [];
 
 
-switch (webgazer) {
+switch (webgazerUse) {
     case true:
         $.getScript("exp/timeline-webgazer.js");
         break;
