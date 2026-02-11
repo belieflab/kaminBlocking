@@ -51,6 +51,14 @@ function getStimulusSet() {
     let setIndex = null;
     let visitOrWeekValue = null;
 
+    // Default to set index 0 if no visit or week is specified
+    if (
+        (visit === null && week === null) ||
+        (typeof visit === "undefined" && typeof week === "undefined")
+    ) {
+        setIndex = 0;
+    }
+
     // Check if visit is defined and valid
     if (typeof visit !== "undefined" && visit !== null) {
         visitOrWeekValue = visit; // Keep as-is, don't convert to int
@@ -67,8 +75,8 @@ function getStimulusSet() {
 
             console.log(
                 `Checking visit "${visitString}" against allowed visits: [${stringVisits.join(
-                    ", "
-                )}]`
+                    ", ",
+                )}]`,
             );
 
             const visitIndex = stringVisits.indexOf(visitString);
@@ -76,14 +84,14 @@ function getStimulusSet() {
             if (visitIndex !== -1) {
                 setIndex = visitIndex;
                 console.log(
-                    `Visit ${visit} found at index ${visitIndex} in intake.visits`
+                    `Visit ${visit} found at index ${visitIndex} in intake.visits`,
                 );
             } else {
                 // This is critical - the visit value doesn't exist in the allowed visits
                 console.error(
                     `Visit ${visit} not found in allowed visits: ${stringVisits.join(
-                        ", "
-                    )}`
+                        ", ",
+                    )}`,
                 );
                 setIndex = null; // Explicitly set to null to indicate error
             }
@@ -106,8 +114,8 @@ function getStimulusSet() {
 
             console.log(
                 `Checking week "${weekString}" against allowed weeks: [${stringWeeks.join(
-                    ", "
-                )}]`
+                    ", ",
+                )}]`,
             );
 
             const weekIndex = stringWeeks.indexOf(weekString);
@@ -115,14 +123,14 @@ function getStimulusSet() {
             if (weekIndex !== -1) {
                 setIndex = weekIndex;
                 console.log(
-                    `Week ${week} found at index ${weekIndex} in intake.weeks`
+                    `Week ${week} found at index ${weekIndex} in intake.weeks`,
                 );
             } else {
                 // This is critical - the week value doesn't exist in the allowed weeks
                 console.error(
                     `Week ${week} not found in allowed weeks: ${stringWeeks.join(
-                        ", "
-                    )}`
+                        ", ",
+                    )}`,
                 );
                 setIndex = null; // Explicitly set to null to indicate error
             }
@@ -190,7 +198,7 @@ function getStimulusSet() {
                     <h2 style="color: #ff0000; margin-top: 0;">Stimulus Set Not Found</h2>
                     <p style="font-size: 16px; margin: 20px 0;">${errorMessage}</p>
                     <p style="margin: 15px 0;">Available sets: ${availableSets.join(
-                        ", "
+                        ", ",
                     )}</p>
                     <p style="margin: 15px 0;"><strong>Available visits:</strong> ${
                         intake.visits
@@ -252,7 +260,7 @@ try {
                     currentStimulusSet +
                     "/s" +
                     i +
-                    fileExtension
+                    fileExtension,
             );
         }
 
