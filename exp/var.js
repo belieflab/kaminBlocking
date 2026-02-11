@@ -51,6 +51,14 @@ function getStimulusSet() {
     let setIndex = null;
     let visitOrWeekValue = null;
 
+    // Default to set index 0 if no visit or week is specified
+    if (
+        (visit === null && week === null) ||
+        (typeof visit === "undefined" && typeof week === "undefined")
+    ) {
+        setIndex = 0;
+    }
+
     // Check if visit is defined and valid
     if (typeof visit !== "undefined" && visit !== null) {
         visitOrWeekValue = visit; // Keep as-is, don't convert to int
