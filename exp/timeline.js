@@ -47,11 +47,61 @@ const preload = {
 /* create timeline */
 let timeline = [];
 
+window.kbShowFatalLoadError =
+    window.kbShowFatalLoadError ||
+    function (scriptName, details) {
+        const submitButton = document.getElementById("submitButton");
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.innerHTML = "SUBMIT";
+        }
+        const statusText =
+            details && details.status !== undefined && details.status !== null
+                ? String(details.status)
+                : "unknown";
+        const detailText =
+            details && details.exception ? String(details.exception) : "No additional details available.";
+        const html = `
+            <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f8f8f8;padding:24px;">
+                <div style="max-width:720px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:24px;color:#222;font-family:Arial,sans-serif;">
+                    <h2 style="margin-top:0;">Experiment failed to load</h2>
+                    <p>A required script could not be loaded: <code>${scriptName}</code>.</p>
+                    <p>Status: <code>${statusText}</code></p>
+                    <p>Details: <code>${detailText}</code></p>
+                    <p>Please refresh the page. If this continues, contact study staff.</p>
+                </div>
+            </div>
+        `;
+        if (document.body) {
+            document.body.innerHTML = html;
+        }
+    };
+
 switch (eyeTrackingEnabled) {
     case true:
-        $.getScript("exp/timeline-webgazer.js");
+        $.getScript("exp/timeline-webgazer.js").fail(function (jqxhr, settings, exception) {
+            console.error("Failed to load script: exp/timeline-webgazer.js", {
+                status: jqxhr && jqxhr.status,
+                exception: exception,
+                settings: settings,
+            });
+            window.kbShowFatalLoadError("exp/timeline-webgazer.js", {
+                status: jqxhr && jqxhr.status,
+                exception: exception,
+            });
+        });
         break;
     case false:
-        $.getScript("exp/timeline-no-webgazer.js");
+        $.getScript("exp/timeline-no-webgazer.js").fail(function (jqxhr, settings, exception) {
+            console.error("Failed to load script: exp/timeline-no-webgazer.js", {
+                status: jqxhr && jqxhr.status,
+                exception: exception,
+                settings: settings,
+            });
+            window.kbShowFatalLoadError("exp/timeline-no-webgazer.js", {
+                status: jqxhr && jqxhr.status,
+                exception: exception,
+            });
+        });
         break;
 }

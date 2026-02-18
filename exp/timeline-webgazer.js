@@ -1066,4 +1066,17 @@ switch (version) {
 }
 
 // call main
-$.getScript("exp/main.js");
+$.getScript("exp/main.js").fail(function (jqxhr, settings, exception) {
+    const status = jqxhr && jqxhr.status;
+    console.error("Failed to load script: exp/main.js", {
+        status: status,
+        exception: exception,
+        settings: settings,
+    });
+    if (window.kbShowFatalLoadError) {
+        window.kbShowFatalLoadError("exp/main.js", {
+            status: status,
+            exception: exception,
+        });
+    }
+});
