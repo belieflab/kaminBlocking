@@ -20,12 +20,23 @@ const driftValidationPoints = [
 ];
 const calibRepsByAttempt = [2, 3];
 const maxCalibrationAttempts = calibRepsByAttempt.length;
+// POLICY: Validation pass/fail cutoffs are project thresholds and should be pilot-justified.
+// REPO: mean_in_roi and avg_offset are compared against these constants in isValidationPass().
+// LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
 const meanInRoiThreshold = 70;
 const avgOffsetPassPx = 200;
 const avgOffsetStrongPassPx = 150;
+// POLICY: Minimum per-point sample count for weighted mean_in_roi aggregation.
+// REPO: Applied in computeValidationMetrics() candidate filtering.
+// LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
 const validationMinSamplesPerPoint = 20;
+// SPEC: ROI radius sets acceptable distance around each validation target (pixels).
+// REPO: Shared by validation trial params and summary/report fields.
+// LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
 const roiRadius = 200;
-// jsPsych v7 calibrate plugin interprets calibration_points as percent coordinates (no separate mode param).
+// SPEC: Calibrate plugin positions calibration_points via CSS percent left/top; no coordinate-mode param is exposed.
+// REPO: calibrationPoints are percent pairs and this constant is logged for contract clarity.
+// LINK: https://www.jspsych.org/v7/plugins/webgazer-calibrate/
 const calibrationPointCoordinates = "percent";
 let calibrationAttempt = 0;
 let calibrationTerminalFail = false;
@@ -88,7 +99,9 @@ function computePointSampleCounts(webgazerData, expectedPointCount) {
     if (!Array.isArray(webgazerData)) {
         return counts;
     }
-    // jsPsych plugin-webgazer-validate emits grouped raw_gaze: one array per validation point.
+    // SPEC: validate payload raw_gaze is grouped by validation point.
+    // REPO: per-point counts use raw_gaze[i].length without interpolation/guessing.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
     for (let i = 0; i < counts.length; i++) {
         counts[i] = Array.isArray(webgazerData[i]) ? webgazerData[i].length : 0;
     }
@@ -167,8 +180,10 @@ function resolveAvgOffset(validationData) {
     if (radii.length === 0) {
         return null;
     }
-    // average_offset shape: Array<{x:number,y:number,r:number}> where r is per-point median radial offset in px.
-    // Scalar avgOffset rule: mean of per-point r across all validation points.
+    // SPEC: average_offset contains per-point offset summaries from validate.
+    // REPO: average_offset shape assumed as Array<{x:number,y:number,r:number}>; scalar avgOffset is mean(r).
+    // WHY: one deterministic scalar is needed for pass/fail and logging.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
     return radii.reduce((sum, value) => sum + value, 0) / radii.length;
 }
 
@@ -176,7 +191,9 @@ function resolveValidationRawGaze(validationData) {
     const keys = ["raw_gaze", "webgazer_data", "rawGaze"];
     for (let i = 0; i < keys.length; i++) {
         if (Array.isArray(validationData[keys[i]])) {
-            // raw_gaze/webgazer_data shape: Array<Array<{x,y,dx,dy,t}>> (one inner array per validation point)
+            // SPEC: raw gaze traces are emitted per validation point.
+            // REPO: canonical key is raw_gaze, with webgazer_data alias accepted for compatibility.
+            // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
             return validationData[keys[i]];
         }
     }
@@ -184,6 +201,9 @@ function resolveValidationRawGaze(validationData) {
 }
 
 function computeValidationMetrics(validationData, expectedPointCount) {
+    // SPEC: percent_in_roi is per-point validation accuracy (% inside ROI).
+    // REPO: normalized then aggregated with sample-count weights.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
     const percentInRoi = normalizePercentInRoi(validationData.percent_in_roi);
     const pointCount = expectedPointCount || percentInRoi.length;
     const rawGaze = sanitizeRawGazeByPoint(resolveValidationRawGaze(validationData));
@@ -206,6 +226,7 @@ function computeValidationMetrics(validationData, expectedPointCount) {
 
     const primary = candidates.length > 0 ? candidates : fallbackCandidates;
     const totalWeight = primary.reduce((sum, point) => sum + Math.max(1, point.samples), 0);
+    // POLICY: weighted mean_in_roi prioritizes points with more valid gaze samples.
     const weightedSum = primary.reduce(
         (sum, point) => sum + point.percent * Math.max(1, point.samples),
         0,
@@ -221,6 +242,9 @@ function computeValidationMetrics(validationData, expectedPointCount) {
         pointsDropped: Math.max(0, pointCount - primary.length),
         percentInRoiUsed: primary.map((point) => point.percent),
         pointSamples: pointSamples,
+        // SPEC: validate may emit samples_per_sec; fallback derives rate from raw gaze timestamps/duration.
+        // REPO: plugin value is used when finite, else computeSamplesPerSec().
+        // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
         samplesPerSec: Number.isFinite(Number(validationData.samples_per_sec))
             ? Number(validationData.samples_per_sec)
             : computeSamplesPerSec(rawGaze, validationData.validation_duration),
@@ -228,6 +252,8 @@ function computeValidationMetrics(validationData, expectedPointCount) {
 }
 
 function isValidationPass(summary) {
+    // POLICY: pass requires bounded offset and minimum weighted mean_in_roi.
+    // REPO: this gate drives retry loop decisions in calibrationProcedure.loop_function().
     return (
         summary.avgOffset !== null &&
         summary.meanInRoi !== null &&
@@ -237,6 +263,8 @@ function isValidationPass(summary) {
 }
 
 function isValidationStrongPass(summary) {
+    // POLICY: strong-pass tracks stricter offset-only quality tier.
+    // REPO: stored for reporting; does not alter retry branching.
     return summary.avgOffset !== null && summary.avgOffset <= avgOffsetStrongPassPx;
 }
 
@@ -249,6 +277,9 @@ const welcome = {
 
 const cameraInit = {
     type: jsPsychWebgazerInitCamera,
+    // SPEC: init-camera requests permission, initializes stream, and ensures face is visible before ET trials.
+    // REPO: pushed before calibrationProcedure in exp/main.js when eyeTrackingEnabled is true.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-init-camera/
     instructions: `
         <p>Initializing eye tracker...</p>
         <p>Please wait and allow camera access if prompted.</p>
@@ -304,10 +335,25 @@ const calibrationInstructions = {
 
 const calibration = {
     type: jsPsychWebgazerCalibrate,
+    // SPEC: calibration_points are screen positions (plugin renders points at those locations).
+    // REPO: 9-point percent grid defined in calibrationPoints.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-calibrate/
     calibration_points: calibrationPoints,
+    // SPEC: click mode requires user click on each point to collect supervised samples.
+    // REPO: click mode is used for all calibration attempts.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-calibrate/
     calibration_mode: "click",
+    // SPEC: point_size controls rendered dot size.
+    // REPO: fixed at 20 px for calibration visibility.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-calibrate/
     point_size: 20,
+    // SPEC: repetitions_per_point defines samples collected per target.
+    // REPO: value is updated at on_start via attempt schedule [2,3].
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-calibrate/
     repetitions_per_point: calibRepsByAttempt[0],
+    // SPEC: randomize_calibration_order shuffles point presentation.
+    // REPO: enabled to reduce order effects on model fitting.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-calibrate/
     randomize_calibration_order: true,
     data: {
         task: "calibration",
@@ -339,7 +385,7 @@ const calibration = {
     },
 };
 
-//Note for later [from https://www.jspsych.org/6.3/overview/eye-tracking/#tips-for-improving-data-quality]
+//Note for later [from https://www.jspsych.org/v7/overview/eye-tracking/]
 //WebGazer's click-based calibration can be used throughout the experiment.
 // You can turn this on by calling jsPsych.extensions.webgazer.startMouseCalibration()
 // at any point in the experiment. If you use a continue button to
@@ -369,11 +415,23 @@ const validationInstructions = {
 
 const validation = {
     type: jsPsychWebgazerValidate,
+    // SPEC: validation_points define where gaze accuracy is evaluated.
+    // REPO: reuses calibrationPoints for matched train/validate coverage.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
     validation_points: calibrationPoints,
+    // SPEC: coordinate mode declares validation_points units.
+    // REPO: explicit "percent" to match calibration point convention in this pipeline.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
     validation_point_coordinates: calibrationPointCoordinates,
+    // SPEC: roi_radius, time_to_saccade, validation_duration control acceptance radius and timing windows.
+    // REPO: roiRadius=200, time_to_saccade=1000 ms, validation_duration=2000 ms.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
     roi_radius: roiRadius,
     time_to_saccade: 1000,
     validation_duration: 2000,
+    // SPEC: point_size controls validation dot size; show_validation_data renders summary visualization.
+    // REPO: point_size=20 and visualization enabled for operator feedback.
+    // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
     point_size: 20,
     show_validation_data: true,
     data: {
@@ -390,6 +448,7 @@ const validation = {
         lastValidationSummary = summary;
         // Keep canonical plugin field + compatibility alias for existing code paths.
         if (Array.isArray(data.raw_gaze) && !Array.isArray(data.webgazer_data)) {
+            // Alias only for backward compatibility; raw_gaze remains canonical payload.
             data.webgazer_data = data.raw_gaze;
         }
         Object.assign(data, {
@@ -544,6 +603,8 @@ const calibrationProcedure = {
     loop_function: function (data) {
         const lastResult = jsPsych.data.get().last(1).values()[0];
         const passed = lastResult.calib_passed === true || lastResult.calibration_passed === true;
+        // POLICY: bounded retry loop; at most calibRepsByAttempt.length attempts.
+        // REPO: increments calibrationAttempt once and exits on final failure.
         if (!passed) {
             if (calibrationAttempt < maxCalibrationAttempts - 1) {
                 calibrationAttempt += 1;

@@ -5,6 +5,9 @@ timeline.push(preload);
 timeline.push(welcome); // welcome page
 // here adding the WebGazer initiation and calibration process
 if (eyeTrackingEnabled) {
+    // SPEC: init-camera must run before calibrate/validate trials when auto_initialize=false.
+    // REPO: cameraInit then calibrationProcedure ensures extension readiness.
+    // LINK: https://www.jspsych.org/v7/overview/eye-tracking/
     timeline.push(cameraInit);
     timeline.push(calibrationProcedure); //calibration info
     timeline.push(readyToStart);
