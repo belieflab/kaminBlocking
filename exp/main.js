@@ -8,6 +8,9 @@ if (eyeTrackingEnabled) {
     // SPEC: init-camera must run before calibrate/validate trials when auto_initialize=false.
     // REPO: cameraInit then calibrationProcedure ensures extension readiness.
     // LINK: https://www.jspsych.org/v7/overview/eye-tracking/
+    // Source (Spec): https://www.jspsych.org/v7/overview/eye-tracking/
+    // Source (Paper): Papoutsaki et al. 2016 (WebGazer) https://cs.brown.edu/people/apapouts/papers/ijcai2016webgazer.pdf
+    // Source (Paper): Steffan et al. 2024 (jsPsych + WebGazer validation) https://pmc.ncbi.nlm.nih.gov/articles/PMC10841511/
     timeline.push(cameraInit);
     timeline.push(calibrationProcedure); //calibration info
     timeline.push(readyToStart);

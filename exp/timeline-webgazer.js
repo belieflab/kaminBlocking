@@ -23,12 +23,16 @@ const maxCalibrationAttempts = calibRepsByAttempt.length;
 // POLICY: Validation pass/fail cutoffs are project thresholds and should be pilot-justified.
 // REPO: mean_in_roi and avg_offset are compared against these constants in isValidationPass().
 // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
+// Source (Spec): https://www.jspsych.org/v7/plugins/webgazer-validate/
+// Source (Paper): Yang & Krajbich 2021 (ROI/threshold protocol precedent) https://ideas.repec.org/a/cup/judgdm/v16y2021i6p1485-1505_7.html
 const meanInRoiThreshold = 70;
 const avgOffsetPassPx = 200;
 const avgOffsetStrongPassPx = 150;
 // POLICY: Minimum per-point sample count for weighted mean_in_roi aggregation.
 // REPO: Applied in computeValidationMetrics() candidate filtering.
 // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
+// Source (Spec): https://www.jspsych.org/v7/plugins/webgazer-validate/
+// Source (Paper): Van der Cruyssen et al. 2024 (online webcam ET QC/attrition burden) https://pmc.ncbi.nlm.nih.gov/articles/PMC11289066/
 const validationMinSamplesPerPoint = 20;
 // SPEC: ROI radius sets acceptable distance around each validation target (pixels).
 // REPO: Shared by validation trial params and summary/report fields.
@@ -338,6 +342,8 @@ const calibration = {
     // SPEC: calibration_points are screen positions (plugin renders points at those locations).
     // REPO: 9-point percent grid defined in calibrationPoints.
     // LINK: https://www.jspsych.org/v7/plugins/webgazer-calibrate/
+    // Source (Spec): https://www.jspsych.org/v7/plugins/webgazer-calibrate/
+    // Source (Paper): Papoutsaki et al. 2016 (WebGazer self-calibration feasibility) https://cs.brown.edu/people/apapouts/papers/ijcai2016webgazer.pdf
     calibration_points: calibrationPoints,
     // SPEC: click mode requires user click on each point to collect supervised samples.
     // REPO: click mode is used for all calibration attempts.
@@ -418,6 +424,8 @@ const validation = {
     // SPEC: validation_points define where gaze accuracy is evaluated.
     // REPO: reuses calibrationPoints for matched train/validate coverage.
     // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
+    // Source (Spec): https://www.jspsych.org/v7/plugins/webgazer-validate/
+    // Source (Paper): Steffan et al. 2024 (jsPsych + WebGazer remote validation) https://pmc.ncbi.nlm.nih.gov/articles/PMC10841511/
     validation_points: calibrationPoints,
     // SPEC: coordinate mode declares validation_points units.
     // REPO: explicit "percent" to match calibration point convention in this pipeline.
