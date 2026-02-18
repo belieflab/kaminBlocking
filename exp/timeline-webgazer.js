@@ -58,19 +58,15 @@ const calibrationInstructions = {
 const calibration = {
     type: jsPsychWebgazerCalibrate,
     calibration_points: [
-        [10, 10], //these are percentages
-        [50, 10],
-        [90, 10],
-        [10, 50],
+        [25, 25], //these are percentages
+        [75, 25],
         [50, 50],
-        [90, 50],
-        [10, 90],
-        [50, 90],
-        [90, 90],
+        [25, 75],
+        [75, 75],
     ],
     calibration_mode: "click",
     point_size: 20,
-    repetitions_per_point: 1,
+    repetitions_per_point: 2,
     randomize_calibration_order: true,
 };
 
