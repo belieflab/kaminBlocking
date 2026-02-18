@@ -7,6 +7,11 @@ const jsPsych = initJsPsych({
     extensions: [
         {
             type: jsPsychExtensionWebgazer,
+            params: {
+                sampling_interval: 34,
+                auto_initialize: false,
+                round_predictions: true,
+            },
         },
     ],
 });
