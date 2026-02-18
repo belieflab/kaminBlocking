@@ -1,5 +1,6 @@
 <?php
 require_once 'wrap/lib/ids.php';
+$assetVersion = time();
 ?>
 
 <!DOCTYPE html>
@@ -7,16 +8,20 @@ require_once 'wrap/lib/ids.php';
 
 <head>
     <!-- add the title of the experiment that would be seen in the browser -->
-    <script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-      document.title = `${experimentAlias.toUpperCase()}`;
+      if (typeof experimentAlias !== "undefined") {
+        document.title = `${experimentAlias.toUpperCase()}`;
+      } else {
+        document.title = "Kamin Blocking";
+      }
     });
   </script>
   <!-- favicon -->
   <link rel="icon" type="image/ico" href="./wrap/favicon.ico">
   <!-- PHP wrapper libraries -->
-  <script type="text/javascript" src="./wrap/lib/validate.js"></script>
-  <script type="text/javascript" src="./wrap/lib/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="./wrap/lib/validate.js?v=<?php echo $assetVersion; ?>"></script>
+  <script type="text/javascript" src="./wrap/lib/jquery-3.5.1.min.js?v=<?php echo $assetVersion; ?>"></script>
   <!-- adding webGazer.js library from CDN 
    every dependancies will be hadeled automatically from the internet -->
    <script src="https://cdn.jsdelivr.net/gh/jspsych/jspsych@jspsych@7.3.3/examples/js/webgazer/webgazer.js"></script>
@@ -29,7 +34,7 @@ require_once 'wrap/lib/ids.php';
   <!-- <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>   -->
   <!-- custom jsPsych Plugins -->
   <!-- custom jsPsychHtmlKeyboardResponse -->
-  <script src="./wrap/plugins/plugin-html-keyboard-response.js"></script>
+  <script src="./wrap/plugins/plugin-html-keyboard-response.js?v=<?php echo $assetVersion; ?>"></script>
   <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
 <!-- for inegration between jsPsych and WebGazer -->
   <script src="https://unpkg.com/@jspsych/extension-webgazer@1.0.3"></script>
@@ -62,13 +67,13 @@ require_once 'wrap/lib/ids.php';
 </body>
 <footer>
   <!-- load config first! -->
-  <script type="text/javascript" src="./wrap/lib/redirect.js"></script>
+  <script type="text/javascript" src="./wrap/lib/redirect.js?v=<?php echo $assetVersion; ?>"></script>
 
-  <script type="text/javascript" src="./exp/conf.js"></script>
+  <script type="text/javascript" src="./exp/conf.js?v=<?php echo $assetVersion; ?>"></script>
   <!-- load wrapper dependencies -->
-  <script type="text/javascript" src="./wrap/lib/fn.js"></script>
+  <script type="text/javascript" src="./wrap/lib/fn.js?v=<?php echo $assetVersion; ?>"></script>
   <!-- load experiment dependencies -->
-  <script type="text/javascript" src="./exp/fn.js"></script>
+  <script type="text/javascript" src="./exp/fn.js?v=<?php echo $assetVersion; ?>"></script>
 
   <!-- now handled by include/ -->
   <!-- <script type="text/javascript" src="./exp/var.js"></script> -->
