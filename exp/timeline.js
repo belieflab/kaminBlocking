@@ -1,15 +1,14 @@
 "use strict";
 
-
 const jsPsych = initJsPsych({
     show_progress_bar: true,
     message_progress_bar: "Completion Progress",
     auto_update_progress_bar: false,
     extensions: [
         {
-            type: jsPsychExtensionWebgazer
-        }
-    ]
+            type: jsPsychExtensionWebgazer,
+        },
+    ],
 });
 
 const preload = {
@@ -21,8 +20,7 @@ const preload = {
 /* create timeline */
 let timeline = [];
 
-
-switch (webgazerUse) {
+switch (webgazer) {
     case true:
         $.getScript("exp/timeline-webgazer.js");
         break;

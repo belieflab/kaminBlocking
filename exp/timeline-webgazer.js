@@ -1,7 +1,7 @@
 "use strict";
 
-const calibrationThreshold = 70;  //70% for now
-const roiRadius = 150;            // 150 pixel radius for "on target"
+const calibrationThreshold = 70; //70% for now
+const roiRadius = 200; // 150 pixel radius for "on target"
 
 /* define welcome message trial */
 const welcome = {
@@ -11,7 +11,7 @@ const welcome = {
 };
 
 const cameraInit = {
-    type: jsPsychWebgazerInitCamera, 
+    type: jsPsychWebgazerInitCamera,
     instructions: `
         <p>Initializing eye tracker...</p>
         <p>Please wait and allow camera access if prompted.</p>
@@ -19,17 +19,16 @@ const cameraInit = {
             Position your face so it's clearly visible in the camera preview.
         </p>
     `,
-    button_text: "My face is centered - Continue", //this will only appear when the face is center  
-    
-    on_finish: function() {
+    button_text: "My face is centered - Continue", //this will only appear when the face is center
+
+    on_finish: function () {
         webgazer.showVideo(true); //the webcam video
         webgazer.showFaceOverlay(true); //the box for the face
-        webgazer.showFaceFeedbackBox(true); //quality box        
-        webgazer.showPredictionPoints(true); // the gaze tracker 
+        webgazer.showFaceFeedbackBox(true); //quality box
+        webgazer.showPredictionPoints(true); // the gaze tracker
         console.log("WebGazer display options configured");
-    }
+    },
 };
-
 
 const calibrationInstructions = {
     type: jsPsychHtmlKeyboardResponse,
@@ -48,27 +47,26 @@ const calibrationInstructions = {
     `,
     choices: [" "],
 
-       // Hide video so calibration dots are visible
-       on_finish: function() {
+    // Hide video so calibration dots are visible
+    on_finish: function () {
         webgazer.showVideo(false);
         webgazer.showFaceOverlay(false);
         webgazer.showFaceFeedbackBox(false);
-    }
+    },
 };
 
-
 const calibration = {
-    type: jsPsychWebgazerCalibrate, 
+    type: jsPsychWebgazerCalibrate,
     calibration_points: [
-        [10, 10],   //these are percentages 
-        [50, 10],     
-        [90, 10],   
-        [10, 50],   
-        [50, 50], 
-        [90, 50],  
-        [10, 90], 
-        [50, 90],   
-        [90, 90],  
+        [10, 10], //these are percentages
+        [50, 10],
+        [90, 10],
+        [10, 50],
+        [50, 50],
+        [90, 50],
+        [10, 90],
+        [50, 90],
+        [90, 90],
     ],
     calibration_mode: "click",
     point_size: 20,
@@ -76,17 +74,15 @@ const calibration = {
     randomize_calibration_order: true,
 };
 
-
 //Note for later [from https://www.jspsych.org/6.3/overview/eye-tracking/#tips-for-improving-data-quality]
-//WebGazer's click-based calibration can be used throughout the experiment. 
-// You can turn this on by calling jsPsych.extensions.webgazer.startMouseCalibration() 
-// at any point in the experiment. If you use a continue button to 
-// advance through the experiment and move the location of the 
-// continue button around you can be making small adjustments 
+//WebGazer's click-based calibration can be used throughout the experiment.
+// You can turn this on by calling jsPsych.extensions.webgazer.startMouseCalibration()
+// at any point in the experiment. If you use a continue button to
+// advance through the experiment and move the location of the
+// continue button around you can be making small adjustments
 // to the calibration throughout.
 
-
-// this is a new step with the extensions 
+// this is a new step with the extensions
 
 const validationInstructions = {
     type: jsPsychHtmlKeyboardResponse,
@@ -104,43 +100,47 @@ const validationInstructions = {
         <p>Press SPACE when you're ready.</p>
     `,
     choices: [" "],
-
 };
 
 const validation = {
-    type: jsPsychWebgazerValidate, 
+    type: jsPsychWebgazerValidate,
     validation_points: [
-        [25, 25], 
-        [75,25], 
+        [25, 25],
+        [75, 25],
         [50, 50],
         [25, 75],
-        [75,75],
-    ], 
+        [75, 75],
+    ],
     validation_point_coordinates: "percent",
-    roi_radius: roiRadius, 
-    time_to_saccade: 1000, 
-    validation_duration: 2000, 
-    point_size: 20, 
+    roi_radius: roiRadius,
+    time_to_saccade: 1000,
+    validation_duration: 2000,
+    point_size: 20,
     show_validation_data: true,
     data: {
-        task: 'validation'
-    }
+        task: "validation",
+    },
 };
 
 const validationResults = {
-    type: jsPsychHtmlKeyboardResponse, 
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {
-        const validationData = jsPsych.data.get().filter({task: 'validation'}).last(1).values()[0]; //gets the validation data
+        const validationData = jsPsych.data
+            .get()
+            .filter({ task: "validation" })
+            .last(1)
+            .values()[0]; //gets the validation data
 
         const percentages = validationData.percent_in_roi;
-        // like a mean for the accuracy 
-        const averageAccuracy = percentages.reduce((a,b) => a+b, 0) / percentages.length;
+        // like a mean for the accuracy
+        const averageAccuracy =
+            percentages.reduce((a, b) => a + b, 0) / percentages.length;
         //how much gaze was off
-        const avgOffset = Math.round(validationData.average_offset); 
-        const passed = averageAccuracy >= calibrationThreshold; 
-        const accuracyColor = passed ? '#4CAF50' : '#f44336';
-        const statusText = passed ? 'PASSED' : 'NEEDS RECALIBRATION';
-        const statusColor = passed ? '#4CAF50' : '#f44336';
+        const avgOffset = Math.round(validationData.average_offset);
+        const passed = averageAccuracy >= calibrationThreshold;
+        const accuracyColor = passed ? "#4CAF50" : "#f44336";
+        const statusText = passed ? "PASSED" : "NEEDS RECALIBRATION";
+        const statusColor = passed ? "#4CAF50" : "#f44336";
 
         let html = `
         <h2>Calibration Results</h2>
@@ -177,51 +177,52 @@ const validationResults = {
             <p style="color: #f44336;">✗ Calibration accuracy is too low.</p>
             <p>Press SPACE to recalibrate.</p>
         `;
-
         }
         return html;
     },
 
-    choices: [ " "],
-    on_finish: function(data) {
-        const validationData = jsPsych.data.get().filter({task: 'validation'}).last(1).values()[0];
+    choices: [" "],
+    on_finish: function (data) {
+        const validationData = jsPsych.data
+            .get()
+            .filter({ task: "validation" })
+            .last(1)
+            .values()[0];
         const percentages = validationData.percent_in_roi;
-        const averageAccuracy = percentages.reduce((a, b) => a + b, 0) / percentages.length;
-        
+        const averageAccuracy =
+            percentages.reduce((a, b) => a + b, 0) / percentages.length;
+
         // Store pass/fail in this trial's data
         data.calibration_passed = averageAccuracy >= calibrationThreshold;
         data.calibration_accuracy = averageAccuracy;
-        
-        console.log(`Calibration accuracy: ${averageAccuracy.toFixed(1)}%, Passed: ${data.calibration_passed}`);
-    }
 
+        console.log(
+            `Calibration accuracy: ${averageAccuracy.toFixed(1)}%, Passed: ${data.calibration_passed}`,
+        );
+    },
 };
 
 const calibrationProcedure = {
     timeline: [
-        calibrationInstructions, 
-        calibration, 
-        validationInstructions, 
-        validation, 
+        calibrationInstructions,
+        calibration,
+        validationInstructions,
+        validation,
         validationResults,
     ],
 
-    loop_function: function(data) {
-
-        const lastResult =  jsPsych.data.get().last(1).values()[0];
+    loop_function: function (data) {
+        const lastResult = jsPsych.data.get().last(1).values()[0];
 
         if (lastResult.calibration_passed === false) {
             console.log("Calibration failed - repeating calibration procedure");
-            return true;  // Repeat the timeline
+            return true; // Repeat the timeline
         }
 
         console.log("Calibration passed - continuing to experiment");
-        return false;  
-
-    }
+        return false;
+    },
 };
-
-
 
 const readyToStart = {
     type: jsPsychHtmlKeyboardResponse,
@@ -231,19 +232,16 @@ const readyToStart = {
         <p>Press SPACE to continue to the experiment instructions.</p>
     `,
     choices: [" "],
-    on_finish: function() {
-        webgazer.showVideo(true);           
-        webgazer.showFaceOverlay(true);     
-        webgazer.showFaceFeedbackBox(true); 
+    on_finish: function () {
+        webgazer.showVideo(true);
+        webgazer.showFaceOverlay(true);
+        webgazer.showFaceFeedbackBox(true);
         webgazer.showPredictionPoints(false); // can be true too
         // for other experiments this is useful, see https://www.jspsych.org/6.3/overview/eye-tracking/#tips-for-improving-data-quality
-    jsPsych.extensions.webgazer.startMouseCalibration();    
-    console.log("Continuous mouse calibration started");
-    }
-}
-
-
-
+        jsPsych.extensions.webgazer.startMouseCalibration();
+        console.log("Continuous mouse calibration started");
+    },
+};
 
 /* define instructions trial */
 const instruction1 = {
@@ -352,14 +350,14 @@ const stimuli = {
     on_load: () => {
         buttonPress(48, 49); // Correctly pass the function to execute upon loading
     },
-extensions: [
-    {
-        type: jsPsychExtensionWebgazer, 
-        params: {
-            targets: []
-        }
-    }
-],
+    extensions: [
+        {
+            type: jsPsychExtensionWebgazer,
+            params: {
+                targets: [],
+            },
+        },
+    ],
 
     on_finish: (data) => {
         writeCandidateKeys(data);
@@ -382,7 +380,9 @@ extensions: [
             responseKey = "";
         }
         if (data.webgazer_data) {
-            console.log(`Trial collected ${data.webgazer_data.length} gaze samples`);
+            console.log(
+                `Trial collected ${data.webgazer_data.length} gaze samples`,
+            );
         }
         data.index = trialIterator;
         trialIterator++;
@@ -406,13 +406,13 @@ const feedback = {
     },
     choices: "NO_KEYS",
     extensions: [
-    {
-        type: jsPsychExtensionWebgazer, 
-        params: {
-            targets: []
-        }
-    }
-],
+        {
+            type: jsPsychExtensionWebgazer,
+            params: {
+                targets: [],
+            },
+        },
+    ],
     trial_duration: feedbackDuration,
     response_ends_trial: false,
     on_start: () => {
@@ -422,9 +422,11 @@ const feedback = {
 
     on_finish: (data) => {
         if (data.webgazer_data) {
-            console.log(`Trial collected ${data.webgazer_data.length} gaze samples`);
+            console.log(
+                `Trial collected ${data.webgazer_data.length} gaze samples`,
+            );
         }
-    }
+    },
 };
 
 const instruction6 = {
@@ -461,13 +463,13 @@ const screenRating1 = {
     },
 
     extensions: [
-    {
-        type: jsPsychExtensionWebgazer, 
-        params: {
-            targets: []
-        }
-    }
-],
+        {
+            type: jsPsychExtensionWebgazer,
+            params: {
+                targets: [],
+            },
+        },
+    ],
     on_finish: function (data) {
         writeCandidateKeys(data);
 
@@ -481,7 +483,9 @@ const screenRating1 = {
         console.log(ratingRandom);
         data.rating_random = ratingRandom;
         if (data.webgazer_data) {
-            console.log(`Trial collected ${data.webgazer_data.length} gaze samples`);
+            console.log(
+                `Trial collected ${data.webgazer_data.length} gaze samples`,
+            );
         }
     },
 };
@@ -504,13 +508,13 @@ const screenRating2 = {
     ],
     choices: "NO_KEYS",
     extensions: [
-    {
-        type: jsPsychExtensionWebgazer, 
-        params: {
-            targets: []
-        }
-    }
-],
+        {
+            type: jsPsychExtensionWebgazer,
+            params: {
+                targets: [],
+            },
+        },
+    ],
     on_finish: function (data) {
         writeCandidateKeys(data);
         data.response = responseKey;
@@ -521,9 +525,10 @@ const screenRating2 = {
         // var currentData = jsPsych.currentTrial().data;
         console.log(ratingSabotage);
         if (data.webgazer_data) {
-            console.log(`Trial collected ${data.webgazer_data.length} gaze samples`);
+            console.log(
+                `Trial collected ${data.webgazer_data.length} gaze samples`,
+            );
         }
-    
     },
 
     // trial_duration: 60000,
@@ -534,7 +539,7 @@ const dataSave = {
     stimulus: dataSaveAnimation,
     choices: "NO_KEYS",
     trial_duration: 5000,
-on_finish: () => {
+    on_finish: () => {
         jsPsych.extensions.webgazer.stopMouseCalibration();
         console.log("Continuous mouse calibration stopped");
         writeCsvRedirect();
@@ -543,7 +548,7 @@ on_finish: () => {
         webgazer.showFaceOverlay(false);
         webgazer.showFaceFeedbackBox(false);
         console.log("Experiment complete, data saved");
-    }    
+    },
 };
 
 // Defince procedures
