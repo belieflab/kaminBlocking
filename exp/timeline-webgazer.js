@@ -2,6 +2,9 @@
 
 const calibrationThreshold = 70; //70% for now
 const roiRadius = 200; // 150 pixel radius for "on target"
+const maxCalibrationAttempts = 2;
+let calibrationAttempt = 0;
+let calibrationTerminalFail = false;
 
 /* define welcome message trial */
 const welcome = {
@@ -167,11 +170,18 @@ const validationResults = {
                 <p style="color: #4CAF50;">✓ Calibration successful!</p>
                 <p>Press SPACE to continue to the experiment.</p>
             `;
-        } else {
+        } else if (calibrationAttempt < maxCalibrationAttempts - 1) {
             html += `
             <br>
             <p style="color: #f44336;">✗ Calibration accuracy is too low.</p>
-            <p>Press SPACE to recalibrate.</p>
+            <p>Press SPACE to recalibrate (final attempt).</p>
+        `;
+        } else {
+            html += `
+            <br>
+            <p style="color: #f44336;">✗ Calibration accuracy is still low.</p>
+            <p>We will proceed, but this session will be flagged.</p>
+            <p>Press SPACE to continue.</p>
         `;
         }
         return html;
@@ -191,6 +201,10 @@ const validationResults = {
         // Store pass/fail in this trial's data
         data.calibration_passed = averageAccuracy >= calibrationThreshold;
         data.calibration_accuracy = averageAccuracy;
+        data.calibration_attempt = calibrationAttempt;
+        data.calibration_terminal_fail =
+            !data.calibration_passed &&
+            calibrationAttempt >= maxCalibrationAttempts - 1;
 
         console.log(
             `Calibration accuracy: ${averageAccuracy.toFixed(1)}%, Passed: ${data.calibration_passed}`,
@@ -211,8 +225,14 @@ const calibrationProcedure = {
         const lastResult = jsPsych.data.get().last(1).values()[0];
 
         if (lastResult.calibration_passed === false) {
-            console.log("Calibration failed - repeating calibration procedure");
-            return true; // Repeat the timeline
+            if (calibrationAttempt < maxCalibrationAttempts - 1) {
+                calibrationAttempt += 1;
+                console.log("Calibration failed - repeating calibration procedure");
+                return true;
+            }
+            calibrationTerminalFail = true;
+            console.log("Calibration failed after fallback - proceeding flagged");
+            return false;
         }
 
         console.log("Calibration passed - continuing to experiment");
@@ -222,11 +242,21 @@ const calibrationProcedure = {
 
 const readyToStart = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `
-        <h2>Calibration successfully completed!</h2>
-        <p>The eye tracker is now calibrated.</p>
-        <p>Press SPACE to continue to the experiment instructions.</p>
-    `,
+    stimulus: function () {
+        if (calibrationTerminalFail) {
+            return `
+                <h2>Calibration Completed (Flagged)</h2>
+                <p>Calibration did not meet thresholds after the fallback attempt.</p>
+                <p>We will proceed, but this session will be flagged.</p>
+                <p>Press SPACE to continue to the experiment instructions.</p>
+            `;
+        }
+        return `
+            <h2>Calibration successfully completed!</h2>
+            <p>The eye tracker is now calibrated.</p>
+            <p>Press SPACE to continue to the experiment instructions.</p>
+        `;
+    },
     choices: [" "],
     on_finish: function () {
         webgazer.showVideo(true);
@@ -235,6 +265,11 @@ const readyToStart = {
         webgazer.showPredictionPoints(false); // can be true too
         // for other experiments this is useful, see https://www.jspsych.org/6.3/overview/eye-tracking/#tips-for-improving-data-quality
         jsPsych.extensions.webgazer.startMouseCalibration();
+        jsPsych.data.addProperties({
+            calibration_final_passed: !calibrationTerminalFail,
+            calibration_attempts: calibrationAttempt + 1,
+            calibration_terminal_fail: calibrationTerminalFail,
+        });
         console.log("Continuous mouse calibration started");
     },
 };
