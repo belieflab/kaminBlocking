@@ -6,7 +6,29 @@
 // Options: false, true
 const debug = false; // Default debug mode setting for the experiment
 
-const useWebgazer = true; // Set to true to enable eye-tracking with WebGazer.js
+const runtimeConf = {
+    webgazer: {
+        enable: true,
+        regression_module: "ridge",
+        sampling_interval_ms: 34,
+        auto_initialize: false,
+        round_predictions: true,
+    },
+    cameraGatePolicy: "fail_open_but_exclude",
+    virtualChinrest: {
+        enabled: true,
+        blindspot_reps: 3,
+        resize_units: "deg",
+        pixels_per_unit: 50,
+        item_path: "img/card.png",
+    },
+};
+
+const eyeTrackingEnabled = !!(runtimeConf.webgazer && runtimeConf.webgazer.enable);
+if (!eyeTrackingEnabled && runtimeConf.virtualChinrest) {
+    runtimeConf.virtualChinrest.enabled = false;
+}
+const useWebgazer = eyeTrackingEnabled; // compatibility alias
 
 // if you want to ask questions at the end of the task then true
 let ratingQuestions = false;

@@ -8,9 +8,18 @@ const jsPsych = initJsPsych({
         {
             type: jsPsychExtensionWebgazer,
             params: {
-                sampling_interval: 34,
-                auto_initialize: false,
-                round_predictions: true,
+                sampling_interval:
+                    runtimeConf &&
+                    runtimeConf.webgazer &&
+                    runtimeConf.webgazer.sampling_interval_ms,
+                auto_initialize:
+                    runtimeConf &&
+                    runtimeConf.webgazer &&
+                    runtimeConf.webgazer.auto_initialize,
+                round_predictions:
+                    runtimeConf &&
+                    runtimeConf.webgazer &&
+                    runtimeConf.webgazer.round_predictions,
             },
         },
     ],
@@ -25,7 +34,7 @@ const preload = {
 /* create timeline */
 let timeline = [];
 
-switch (useWebgazer) {
+switch (eyeTrackingEnabled) {
     case true:
         $.getScript("exp/timeline-webgazer.js");
         break;
