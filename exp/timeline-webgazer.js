@@ -18,13 +18,18 @@ const driftValidationPoints = [
     [10, 90],
     [90, 90],
 ];
+// Source (Spec): https://www.jspsych.org/v7/overview/eye-tracking/
+// Source (Paper): Van der Cruyssen et al. 2024 (QC burden/attrition context) https://pmc.ncbi.nlm.nih.gov/articles/PMC11289066/
+// Note: Drift validation points are repo-defined policy for periodic quality checks.
 const calibRepsByAttempt = [2, 3];
 const maxCalibrationAttempts = calibRepsByAttempt.length;
 // POLICY: Validation pass/fail cutoffs are project thresholds and should be pilot-justified.
 // REPO: mean_in_roi and avg_offset are compared against these constants in isValidationPass().
 // LINK: https://www.jspsych.org/v7/plugins/webgazer-validate/
 // Source (Spec): https://www.jspsych.org/v7/plugins/webgazer-validate/
+// Source (Paper): Papoutsaki et al. 2016 (WebGazer foundation) https://cs.brown.edu/people/apapouts/papers/ijcai2016webgazer.pdf
 // Source (Paper): Yang & Krajbich 2021 (ROI/threshold protocol precedent) https://ideas.repec.org/a/cup/judgdm/v16y2021i6p1485-1505_7.html
+// Note: Threshold values here are repo-defined policy, not claimed as fixed paper defaults.
 const meanInRoiThreshold = 70;
 const avgOffsetPassPx = 200;
 const avgOffsetStrongPassPx = 150;
@@ -284,6 +289,10 @@ const cameraInit = {
     // SPEC: init-camera requests permission, initializes stream, and ensures face is visible before ET trials.
     // REPO: pushed before calibrationProcedure in exp/main.js when eyeTrackingEnabled is true.
     // LINK: https://www.jspsych.org/v7/plugins/webgazer-init-camera/
+    // Source (Spec): https://www.jspsych.org/v7/plugins/webgazer-init-camera/
+    // Source (Paper): Steffan et al. 2024 (remote webcam ET validation context) https://pmc.ncbi.nlm.nih.gov/articles/PMC10841511/
+    // Source (Paper): Van der Cruyssen et al. 2024 (online webcam ET exclusions/QC burden) https://pmc.ncbi.nlm.nih.gov/articles/PMC11289066/
+    // Note: Face-visibility gating is repo policy to operationalize camera-quality exclusion criteria.
     instructions: `
         <p>Initializing eye tracker...</p>
         <p>Please wait and allow camera access if prompted.</p>
