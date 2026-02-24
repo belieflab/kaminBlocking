@@ -246,7 +246,66 @@ const dataSave = {
     stimulus: dataSaveAnimation,
     choices: "NO_KEYS",
     trial_duration: 5000,
-    on_finish: writeCsvRedirect,
+    on_finish: function (data) {
+        const calibrationReport = {
+            attempts_total: 0,
+            attempts: [],
+            final: {
+                calib_passed: false,
+                calib_strong_pass: false,
+                calib_terminal_fail: false,
+                avg_offset_px: null,
+                mean_in_roi: null,
+            },
+            drift_checks_total: 0,
+            drift_failures_total: 0,
+            drift_recalibrations_total: 0,
+            drift_checks_skipped: true,
+            camera_gate_failed: false,
+            camera_gate_timeout: false,
+            camera_gate_policy: null,
+            camera_gate_failure_reason: null,
+            regression_module: null,
+            chinrest_used: false,
+            chinrest_passed: false,
+            chinrest_failure_reason: null,
+            chinrest_metrics: null,
+            device_metrics: {
+                screen_w: window.screen && Number.isFinite(window.screen.width) ? window.screen.width : null,
+                screen_h: window.screen && Number.isFinite(window.screen.height) ? window.screen.height : null,
+                window_w: window.innerWidth,
+                window_h: window.innerHeight,
+                devicePixelRatio: window.devicePixelRatio || 1,
+            },
+        };
+        const chinrestSummary = {
+            chinrest_used: false,
+            chinrest_passed: false,
+            chinrest_failure_reason: null,
+            chinrest_metrics: null,
+        };
+        jsPsych.data.addProperties(
+            Object.assign({}, chinrestSummary, {
+                webgazer_enabled: false,
+                calib_passed: false,
+                calib_attempts: 0,
+                camera_gate_failed: false,
+                camera_gate_timeout: false,
+                camera_gate_policy: null,
+                regression_module: null,
+                drift_checks: {
+                    total: 0,
+                    failures: 0,
+                    recalibrations: 0,
+                    skipped: true,
+                },
+                calibration_report: calibrationReport,
+            }),
+        );
+        data.calibration_report = calibrationReport;
+        data.chinrest_summary = chinrestSummary;
+        writeCsvRedirect();
+    },
 };
 
 // Defince procedures
