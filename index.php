@@ -36,6 +36,7 @@ $assetVersion = time();
   <!-- custom jsPsychHtmlKeyboardResponse -->
   <script src="./wrap/plugins/plugin-html-keyboard-response.js?v=<?php echo $assetVersion; ?>"></script>
   <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-virtual-chinrest@2.0.3"></script>
   <!-- Pinned local vendor copies for auditability; see wrap/vendor/jspsych/SHA256SUMS.txt -->
   <!-- for inegration between jsPsych and WebGazer -->
   <script src="./wrap/vendor/jspsych/extension-webgazer-1.0.3.js?v=<?php echo $assetVersion; ?>"></script>
@@ -74,7 +75,9 @@ $assetVersion = time();
   <!-- load wrapper dependencies -->
   <script type="text/javascript" src="./wrap/lib/fn.js?v=<?php echo $assetVersion; ?>"></script>
   <!-- load experiment dependencies -->
-  <script type="text/javascript" src="./exp/fn.js?v=<?php echo $assetVersion; ?>"></script>
+	  <script type="text/javascript" src="./exp/fn.js?v=<?php echo $assetVersion; ?>"></script>
+	  <script type="text/javascript" src="./exp/chinrest-core.js?v=<?php echo $assetVersion; ?>"></script>
+	  <script type="text/javascript" src="./exp/camera-gate-core.js?v=<?php echo $assetVersion; ?>"></script>
 
   <!-- now handled by include/ -->
   <!-- <script type="text/javascript" src="./exp/var.js"></script> -->

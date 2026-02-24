@@ -53,9 +53,34 @@ let currentCalibRepsPerPoint = calibRepsByAttempt[0];
 let calibrationStartTs = null;
 let validationStartTs = null;
 let lastValidationSummary = null;
+let cameraGateFailed = false;
+let cameraGateTimedOut = false;
+let cameraGateHardFail = false;
+let cameraGateDurationMs = null;
+let cameraGateFailureReason = null;
+let cameraGateLatestQuality = {
+    face_box_w: null,
+    face_box_h: null,
+    center_jitter: null,
+    brightness: null,
+};
+
+const cameraGateCore =
+    typeof KaminCameraGateCore !== "undefined" ? KaminCameraGateCore : null;
+const cameraGatePolicy = cameraGateCore
+    ? cameraGateCore.normalizePolicy(runtimeConf && runtimeConf.cameraGatePolicy)
+    : runtimeConf && runtimeConf.cameraGatePolicy
+      ? runtimeConf.cameraGatePolicy
+      : "fail_open_but_exclude";
 
 function getDisplayMetrics() {
     return {
+        screen_w: window.screen && Number.isFinite(window.screen.width) ? window.screen.width : null,
+        screen_h: window.screen && Number.isFinite(window.screen.height) ? window.screen.height : null,
+        window_w: window.innerWidth,
+        window_h: window.innerHeight,
+        devicePixelRatio: window.devicePixelRatio || 1,
+        // compatibility aliases retained for downstream consumers
         display_width_px: window.innerWidth,
         display_height_px: window.innerHeight,
         device_pixel_ratio: window.devicePixelRatio || 1,
@@ -277,11 +302,324 @@ function isValidationStrongPass(summary) {
     return summary.avgOffset !== null && summary.avgOffset <= avgOffsetStrongPassPx;
 }
 
+function applyCameraGateFailure() {
+    if (cameraGateCore && cameraGateCore.applyCameraGateFailure) {
+        const next = cameraGateCore.applyCameraGateFailure(
+            {
+                cameraGateFailed: cameraGateFailed,
+                cameraGateTimedOut: cameraGateTimedOut,
+                cameraGateHardFail: cameraGateHardFail,
+                cameraGateFailureReason: cameraGateFailureReason,
+            },
+            cameraGatePolicy,
+        );
+        cameraGateFailed = !!next.cameraGateFailed;
+        cameraGateTimedOut = !!next.cameraGateTimedOut;
+        cameraGateHardFail = !!next.cameraGateHardFail;
+        cameraGateFailureReason = next.cameraGateFailureReason || "camera_quality_timeout";
+        jsPsych.data.addProperties({
+            camera_gate_failed: cameraGateFailed,
+            camera_gate_timeout: cameraGateTimedOut,
+            camera_gate_policy: cameraGatePolicy,
+        });
+        if (next.exclusionRecommended) {
+            jsPsych.data.addProperties({
+                exclusion_recommended: true,
+                exclusion_reason: next.exclusionReason || "camera_gate_failed",
+            });
+        }
+        return;
+    }
+
+    cameraGateFailed = true;
+    cameraGateTimedOut = true;
+    cameraGateHardFail = cameraGatePolicy === "fail_closed";
+    cameraGateFailureReason = "camera_quality_timeout";
+    jsPsych.data.addProperties({
+        camera_gate_failed: true,
+        camera_gate_timeout: true,
+        camera_gate_policy: cameraGatePolicy,
+        exclusion_recommended: true,
+        exclusion_reason: "camera_gate_failed",
+    });
+}
+
+function computeFaceCenterJitter(samples) {
+    if (!Array.isArray(samples) || samples.length < 2) {
+        return null;
+    }
+    let total = 0;
+    for (let i = 1; i < samples.length; i++) {
+        const dx = samples[i].x - samples[i - 1].x;
+        const dy = samples[i].y - samples[i - 1].y;
+        total += Math.sqrt(dx * dx + dy * dy);
+    }
+    return total / (samples.length - 1);
+}
+
+function hideWebgazerUi() {
+    if (typeof webgazer === "undefined") {
+        return;
+    }
+    webgazer.showVideo(false);
+    webgazer.showFaceOverlay(false);
+    webgazer.showFaceFeedbackBox(false);
+    webgazer.showPredictionPoints(false);
+}
+
 /* define welcome message trial */
 const welcome = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[0],
     choices: "ALL_KEYS", //ascii spacebar
+};
+
+const chinrestCore = typeof KaminChinrestCore !== "undefined" ? KaminChinrestCore : null;
+const chinrestConfig =
+    runtimeConf && runtimeConf.virtualChinrest ? runtimeConf.virtualChinrest : {};
+
+const chinrestStateFallback = {
+    chinrestEnabled: !!chinrestConfig.enabled,
+    chinrestUsed: false,
+    chinrestPassed: false,
+    chinrestFailed: false,
+    chinrestFailureReason: null,
+    chinrestMetrics: null,
+};
+const chinrestRuntime = {
+    preflightStatus: "skipped",
+    shouldRunTrial: false,
+};
+
+const chinrestDataPort = {
+    addGlobal: function (props) {
+        jsPsych.data.addProperties(props);
+    },
+    annotateTrial: function (_stageIdOrTrialId, props, trialData) {
+        if (trialData && typeof trialData === "object") {
+            Object.assign(trialData, props);
+        }
+    },
+    writeFinalSummary: function (summaryProps) {
+        jsPsych.data.addProperties(summaryProps);
+    },
+};
+
+const chinrestPluginPort = {
+    isAvailable: function () {
+        return typeof globalThis.jsPsychVirtualChinrest !== "undefined";
+    },
+    run: function (config) {
+        return {
+            type: globalThis.jsPsychVirtualChinrest,
+            blindspot_reps: config.blindspot_reps,
+            resize_units: config.resize_units,
+            pixels_per_unit: config.pixels_per_unit,
+            item_path: config.item_path,
+        };
+    },
+};
+
+const chinrestScaleGuardPort = {
+    getGuard: function () {
+        return document.documentElement.hasAttribute("data-chinrest-scale-applied");
+    },
+    setGuard: function (enabled) {
+        if (enabled) {
+            document.documentElement.setAttribute("data-chinrest-scale-applied", "1");
+            return;
+        }
+        document.documentElement.removeAttribute("data-chinrest-scale-applied");
+    },
+    getCachedMetrics: function () {
+        return window.__virtualChinrestMetrics || null;
+    },
+    setCachedMetrics: function (metrics) {
+        window.__virtualChinrestMetrics = metrics;
+    },
+};
+
+const chinrestTerminationPort = {
+    persistAndExit: function (reason, payload) {
+        jsPsych.data.addProperties(
+            Object.assign(
+                {
+                    termination_reason: reason,
+                },
+                payload || {},
+            ),
+        );
+        writeCsvRedirect();
+        experimentComplete = true;
+        if (typeof webgazer !== "undefined") {
+            webgazer.showVideo(false);
+            webgazer.showFaceOverlay(false);
+            webgazer.showFaceFeedbackBox(false);
+            webgazer.showPredictionPoints(false);
+        }
+    },
+};
+
+let chinrestController = null;
+let chinrestFlowController = {
+    shouldRunChinrestStage: function () {
+        return false;
+    },
+    shouldRunCalibration: function () {
+        return true;
+    },
+    shouldRunMainTask: function () {
+        return true;
+    },
+    shouldRunFailureExit: function () {
+        return false;
+    },
+};
+
+if (chinrestCore) {
+    chinrestController = chinrestCore.createChinrestController({
+        chinrestConfig: chinrestConfig,
+        pluginPort: chinrestPluginPort,
+        dataPort: chinrestDataPort,
+        scaleGuardPort: chinrestScaleGuardPort,
+        terminationPort: chinrestTerminationPort,
+        taskIdentifier: "chinrest_failure_exit",
+    });
+    chinrestFlowController = chinrestCore.createChinrestFlowController(function () {
+        return chinrestController.getState();
+    }, {
+        isHardCameraGateFailed: function () {
+            return cameraGateHardFail === true;
+        },
+    });
+} else {
+    console.error("Chinrest core module unavailable; chinrest is forced disabled.");
+    chinrestStateFallback.chinrestEnabled = false;
+}
+
+window.kbChinrestController = chinrestController;
+window.kbChinrestFlowController = chinrestFlowController;
+window.kbCameraGateState = {
+    isHardFail: function () {
+        return cameraGateHardFail === true;
+    },
+};
+
+const virtualChinrestGate = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "",
+    choices: "NO_KEYS",
+    trial_duration: 1,
+    data: {
+        task: "virtual_chinrest_gate",
+    },
+    on_finish: function (data) {
+        let preflight = { status: "skipped" };
+        let state = chinrestStateFallback;
+        if (chinrestController) {
+            preflight = chinrestController.runPreflight();
+            state = chinrestController.getState();
+        }
+        chinrestRuntime.preflightStatus = preflight.status;
+        chinrestRuntime.shouldRunTrial = preflight.status === "run_required";
+        data.eye_tracking_enabled = !!eyeTrackingEnabled;
+        data.virtual_chinrest_enabled = !!state.chinrestEnabled;
+        if (preflight.status === "passed_cached") {
+            data.chinrest_reused_metrics = true;
+            data.chinrest_passed = true;
+            if (state.chinrestMetrics) {
+                Object.assign(data, state.chinrestMetrics);
+            }
+        }
+        if (preflight.status === "failed") {
+            data.chinrest_passed = false;
+            data.chinrest_failure_reason = state.chinrestFailureReason;
+        }
+        chinrestDataPort.annotateTrial("virtual_chinrest_gate", {
+            chinrest_preflight_status: preflight.status,
+        }, data);
+    },
+};
+
+const virtualChinrest = Object.assign({}, chinrestPluginPort.run(chinrestConfig), {
+    data: {
+        task: "virtual_chinrest",
+    },
+    on_finish: function (data) {
+        if (!chinrestController) {
+            return;
+        }
+        const result = chinrestController.handleRunResult(data);
+        const state = chinrestController.getState();
+        data.chinrest_passed = !!state.chinrestPassed;
+        if (state.chinrestMetrics) {
+            Object.assign(data, state.chinrestMetrics);
+        }
+        if (result.status === "failed") {
+            data.chinrest_failure_reason = state.chinrestFailureReason;
+        }
+        chinrestDataPort.annotateTrial("virtual_chinrest", {
+            chinrest_result_status: result.status,
+        }, data);
+    },
+});
+
+const virtualChinrestProcedure = {
+    timeline: [
+        virtualChinrestGate,
+        {
+            timeline: [virtualChinrest],
+            conditional_function: function () {
+                return chinrestRuntime.shouldRunTrial === true;
+            },
+        },
+    ],
+    conditional_function: function () {
+        return chinrestFlowController.shouldRunChinrestStage();
+    },
+};
+
+const chinrestFailureExitTrial = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function () {
+        const reason =
+            chinrestController && chinrestController.getFailureReason
+                ? chinrestController.getFailureReason()
+                : "chinrest_failed";
+        return `
+            <h2>Setup Check Failed</h2>
+            <p>We could not complete required display setup checks.</p>
+            <p>Failure reason: <code>${reason}</code></p>
+            <p>Your session will now be saved and ended.</p>
+        `;
+    },
+    choices: "NO_KEYS",
+    trial_duration: 1500,
+    data: {
+        task: "chinrest_failure_exit",
+    },
+    on_finish: function (data) {
+        const reason =
+            chinrestController && chinrestController.getFailureReason
+                ? chinrestController.getFailureReason()
+                : "chinrest_failed";
+        data.chinrest_failure_reason = reason;
+        if (chinrestController && chinrestController.persistFailureAndExit) {
+            chinrestController.persistFailureAndExit();
+        } else {
+            chinrestTerminationPort.persistAndExit(reason, {
+                task: "chinrest_failure_exit",
+                chinrest_failure_reason: reason,
+            });
+        }
+    },
+};
+
+const chinrestFailureExit = {
+    timeline: [chinrestFailureExitTrial],
+    conditional_function: function () {
+        return chinrestFlowController.shouldRunFailureExit();
+    },
 };
 
 const cameraInit = {
@@ -317,6 +655,139 @@ const cameraInit = {
         // Keep gaze dot hidden during calibration; show only on validation visualization.
         webgazer.showPredictionPoints(false);
         console.log("WebGazer display options configured");
+    },
+};
+
+const cameraQualityCheck = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <h2>Camera Quality Check</h2>
+        <p>Keep your face centered and still while we check video quality.</p>
+        <p>This may take a few seconds.</p>
+    `,
+    choices: "NO_KEYS",
+    trial_duration: null,
+    data: {
+        task: "camera_quality_gate",
+    },
+    on_load: function () {
+        const startedAt = Date.now();
+        const timeoutMs = Number(
+            runtimeConf && Number.isFinite(Number(runtimeConf.cameraGateTimeoutMs))
+                ? Number(runtimeConf.cameraGateTimeoutMs)
+                : 15000,
+        );
+        const minFaceBoxSize = Number(
+            runtimeConf && Number.isFinite(Number(runtimeConf.cameraGateMinFaceBoxPx))
+                ? Number(runtimeConf.cameraGateMinFaceBoxPx)
+                : 60,
+        );
+        const maxCenterJitter = Number(
+            runtimeConf && Number.isFinite(Number(runtimeConf.cameraGateMaxCenterJitterPx))
+                ? Number(runtimeConf.cameraGateMaxCenterJitterPx)
+                : 30,
+        );
+
+        const centerSamples = [];
+        const intervalId = setInterval(function () {
+            const now = Date.now();
+            const elapsed = now - startedAt;
+            const faceBox = document.getElementById("webgazerFaceFeedbackBox");
+            const rect = faceBox && faceBox.getBoundingClientRect ? faceBox.getBoundingClientRect() : null;
+            const faceBoxW = rect && Number.isFinite(rect.width) ? rect.width : null;
+            const faceBoxH = rect && Number.isFinite(rect.height) ? rect.height : null;
+
+            if (
+                rect &&
+                Number.isFinite(rect.left) &&
+                Number.isFinite(rect.top) &&
+                Number.isFinite(rect.width) &&
+                Number.isFinite(rect.height)
+            ) {
+                centerSamples.push({
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2,
+                });
+                if (centerSamples.length > 12) {
+                    centerSamples.shift();
+                }
+            }
+
+            const centerJitter = computeFaceCenterJitter(centerSamples);
+            const brightness = null;
+
+            cameraGateLatestQuality = {
+                face_box_w: faceBoxW,
+                face_box_h: faceBoxH,
+                center_jitter: centerJitter,
+                brightness: brightness,
+            };
+
+            const qualityPassed =
+                Number.isFinite(faceBoxW) &&
+                Number.isFinite(faceBoxH) &&
+                faceBoxW >= minFaceBoxSize &&
+                faceBoxH >= minFaceBoxSize &&
+                (centerJitter === null || centerJitter <= maxCenterJitter);
+
+            if (qualityPassed) {
+                clearInterval(intervalId);
+                cameraGateFailed = false;
+                cameraGateTimedOut = false;
+                cameraGateHardFail = false;
+                cameraGateFailureReason = null;
+                cameraGateDurationMs = elapsed;
+                jsPsych.finishTrial({
+                    task: "camera_quality_gate",
+                    camera_gate_policy: cameraGatePolicy,
+                    camera_gate_failed: false,
+                    camera_gate_timeout: false,
+                    camera_gate_duration_ms: elapsed,
+                    quality_passed: true,
+                    face_box_w: faceBoxW,
+                    face_box_h: faceBoxH,
+                    center_jitter: centerJitter,
+                    brightness: brightness,
+                });
+                return;
+            }
+
+            if (elapsed >= timeoutMs) {
+                clearInterval(intervalId);
+                cameraGateDurationMs = elapsed;
+                applyCameraGateFailure();
+                jsPsych.finishTrial({
+                    task: "camera_quality_gate",
+                    camera_gate_policy: cameraGatePolicy,
+                    camera_gate_failed: true,
+                    camera_gate_timeout: true,
+                    camera_gate_duration_ms: elapsed,
+                    quality_passed: false,
+                    face_box_w: faceBoxW,
+                    face_box_h: faceBoxH,
+                    center_jitter: centerJitter,
+                    brightness: brightness,
+                });
+            }
+        }, 100);
+    },
+    on_finish: function (data) {
+        data.camera_gate_policy = cameraGatePolicy;
+        data.camera_gate_failed = cameraGateFailed;
+        data.camera_gate_timeout = cameraGateTimedOut;
+        data.camera_gate_duration_ms = cameraGateDurationMs;
+        if (!Object.prototype.hasOwnProperty.call(data, "quality_passed")) {
+            data.quality_passed = !cameraGateTimedOut;
+        }
+        data.face_box_w = cameraGateLatestQuality.face_box_w;
+        data.face_box_h = cameraGateLatestQuality.face_box_h;
+        data.center_jitter = cameraGateLatestQuality.center_jitter;
+        data.brightness = cameraGateLatestQuality.brightness;
+        jsPsych.data.addProperties({
+            camera_gate_failed: cameraGateFailed,
+            camera_gate_timeout: cameraGateTimedOut,
+            camera_gate_policy: cameraGatePolicy,
+        });
     },
 };
 
@@ -608,7 +1079,7 @@ const validationResults = {
     },
 };
 
-const calibrationProcedure = {
+const calibrationAttemptLoop = {
     timeline: [
         calibrationInstructions,
         calibration,
@@ -616,6 +1087,12 @@ const calibrationProcedure = {
         validation,
         validationResults,
     ],
+    conditional_function: function () {
+        if (cameraGateCore && cameraGateCore.shouldRunCalibrationAttemptLoop) {
+            return cameraGateCore.shouldRunCalibrationAttemptLoop(cameraGateTimedOut);
+        }
+        return cameraGateTimedOut !== true;
+    },
 
     loop_function: function (data) {
         const lastResult = jsPsych.data.get().last(1).values()[0];
@@ -642,9 +1119,57 @@ const calibrationProcedure = {
     },
 };
 
+const calibrationProcedure = {
+    timeline: [cameraQualityCheck, calibrationAttemptLoop],
+};
+
+const cameraGateFailureExit = {
+    timeline: [
+        {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `
+                <h2>Camera Setup Failed</h2>
+                <p>We could not verify camera quality for this session.</p>
+                <p>Your session will now be saved and ended.</p>
+            `,
+            choices: "NO_KEYS",
+            trial_duration: 1500,
+            data: {
+                task: "camera_gate_failure_exit",
+            },
+            on_finish: function (data) {
+                data.camera_gate_failure_reason =
+                    cameraGateFailureReason || "camera_quality_timeout";
+                data.camera_gate_policy = cameraGatePolicy;
+                data.exclusion_recommended = true;
+                data.exclusion_reason = "camera_gate_failed";
+                jsPsych.data.addProperties({
+                    camera_gate_failure_reason: data.camera_gate_failure_reason,
+                    camera_gate_policy: cameraGatePolicy,
+                    exclusion_recommended: true,
+                    exclusion_reason: "camera_gate_failed",
+                });
+                hideWebgazerUi();
+                writeCsvRedirect();
+                experimentComplete = true;
+            },
+        },
+    ],
+    conditional_function: function () {
+        return eyeTrackingEnabled && cameraGateHardFail === true;
+    },
+};
+
 const readyToStart = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {
+        if (cameraGateFailed) {
+            return `
+                <h2>Camera Check Completed (Flagged)</h2>
+                <p>Camera quality checks timed out and this session is flagged.</p>
+                <p>Press SPACE to continue to the experiment instructions.</p>
+            `;
+        }
         if (calibrationTerminalFail) {
             return `
                 <h2>Calibration Completed (Flagged)</h2>
@@ -660,7 +1185,22 @@ const readyToStart = {
         `;
     },
     choices: [" "],
+    conditional_function: function () {
+        return !chinrestFlowController.shouldRunFailureExit() && cameraGateHardFail === false;
+    },
     on_finish: function () {
+        const latestValidationResult = jsPsych.data
+            .get()
+            .filter({ task: "validation_result" })
+            .last(1)
+            .values()[0];
+        const calibPassed = latestValidationResult
+            ? latestValidationResult.calib_passed === true
+            : cameraGateTimedOut
+              ? false
+              : !calibrationTerminalFail;
+        const calibAttempts = latestValidationResult ? calibrationAttempt + 1 : cameraGateTimedOut ? 0 : calibrationAttempt + 1;
+
         webgazer.showVideo(true);
         webgazer.showFaceOverlay(true);
         webgazer.showFaceFeedbackBox(true);
@@ -669,23 +1209,23 @@ const readyToStart = {
         jsPsych.extensions.webgazer.startMouseCalibration();
         jsPsych.data.addProperties({
             webgazer_enabled: eyeTrackingEnabled,
-            calib_passed: !calibrationTerminalFail,
-            calib_attempts: calibrationAttempt + 1,
-            camera_gate_failed: false,
-            camera_gate_timeout: false,
-            camera_gate_policy:
-                runtimeConf && runtimeConf.cameraGatePolicy
-                    ? runtimeConf.cameraGatePolicy
-                    : null,
+            calib_passed: calibPassed,
+            calib_attempts: calibAttempts,
+            camera_gate_failed: cameraGateFailed,
+            camera_gate_timeout: cameraGateTimedOut,
+            camera_gate_policy: cameraGatePolicy,
             regression_module:
                 runtimeConf &&
                 runtimeConf.webgazer &&
                 runtimeConf.webgazer.regression_module
                     ? runtimeConf.webgazer.regression_module
                     : null,
-            drift_checks: false,
-            calibration_final_passed: !calibrationTerminalFail,
-            calibration_attempts: calibrationAttempt + 1,
+            drift_checks:
+                cameraGateCore && cameraGateCore.createEmptyDriftChecks
+                    ? cameraGateCore.createEmptyDriftChecks()
+                    : { total: 0, failures: 0, recalibrations: 0, skipped: true },
+            calibration_final_passed: calibPassed,
+            calibration_attempts: calibAttempts,
             calibration_terminal_fail: calibrationTerminalFail,
         });
         console.log("Continuous mouse calibration started");
@@ -989,33 +1529,96 @@ const dataSave = {
     choices: "NO_KEYS",
     trial_duration: 5000,
     on_finish: (data) => {
-        const latestValidationResult = jsPsych.data
+        const validationResultsRows = jsPsych.data
             .get()
             .filter({ task: "validation_result" })
-            .last(1)
-            .values()[0];
+            .values();
+        const latestValidationResult =
+            validationResultsRows.length > 0
+                ? validationResultsRows[validationResultsRows.length - 1]
+                : null;
+        const chinrestState =
+            chinrestController && chinrestController.getState
+                ? chinrestController.getState()
+                : chinrestStateFallback;
+        const driftChecks =
+            cameraGateCore && cameraGateCore.createEmptyDriftChecks
+                ? cameraGateCore.createEmptyDriftChecks()
+                : { total: 0, failures: 0, recalibrations: 0, skipped: true };
         const calibrationReport = {
-            calib_passed: latestValidationResult
-                ? latestValidationResult.calib_passed
-                : !calibrationTerminalFail,
-            calib_strong_pass: latestValidationResult
-                ? latestValidationResult.calib_strong_pass
-                : null,
-            calib_terminal_fail: calibrationTerminalFail,
-            calib_attempts: calibrationAttempt + 1,
-            calib_reps_schedule: calibRepsByAttempt.slice(),
-            roi_radius_px: roiRadius,
-            mean_in_roi_threshold_pct: meanInRoiThreshold,
-            avg_offset_pass_px: avgOffsetPassPx,
-            avg_offset_strong_pass_px: avgOffsetStrongPassPx,
-            validation_min_samples_per_point: validationMinSamplesPerPoint,
-            drift_validation_points: driftValidationPoints,
-            validation_points: calibrationPoints,
+            attempts_total: validationResultsRows.length,
+            attempts: validationResultsRows.map((row) => ({
+                calib_attempt: row.calib_attempt,
+                calib_reps_per_point: row.calib_reps_per_point,
+                calib_passed: row.calib_passed,
+                calib_strong_pass: row.calib_strong_pass,
+                calib_terminal_fail: row.calib_terminal_fail,
+                avg_offset_px: row.avg_offset_px,
+                mean_in_roi: row.mean_in_roi,
+                roi_radius_px: row.roi_radius_px,
+                validation_point_count: row.validation_point_count,
+                validation_points_included: row.validation_points_included,
+                validation_points_total: row.validation_points_total,
+                validation_points_dropped: row.validation_points_dropped,
+                validation_min_samples_per_point: row.validation_min_samples_per_point,
+                percent_in_roi_used: row.percent_in_roi_used,
+                camera_fps: row.camera_fps,
+                samples_per_sec: row.samples_per_sec,
+            })),
+            final: {
+                calib_passed: latestValidationResult
+                    ? latestValidationResult.calib_passed === true
+                    : false,
+                calib_strong_pass: latestValidationResult
+                    ? latestValidationResult.calib_strong_pass === true
+                    : false,
+                calib_terminal_fail: latestValidationResult
+                    ? latestValidationResult.calib_terminal_fail === true
+                    : calibrationTerminalFail,
+                avg_offset_px: latestValidationResult
+                    ? latestValidationResult.avg_offset_px
+                    : null,
+                mean_in_roi: latestValidationResult
+                    ? latestValidationResult.mean_in_roi
+                    : null,
+            },
+            drift_checks_total: driftChecks.total,
+            drift_failures_total: driftChecks.failures,
+            drift_recalibrations_total: driftChecks.recalibrations,
+            drift_checks_skipped: driftChecks.skipped,
+            camera_gate_failed: cameraGateFailed,
+            camera_gate_timeout: cameraGateTimedOut,
+            camera_gate_policy: cameraGatePolicy,
+            camera_gate_failure_reason: cameraGateFailureReason,
+            regression_module:
+                runtimeConf &&
+                runtimeConf.webgazer &&
+                runtimeConf.webgazer.regression_module
+                    ? runtimeConf.webgazer.regression_module
+                    : null,
+            chinrest_used: !!chinrestState.chinrestUsed,
+            chinrest_passed: !!chinrestState.chinrestPassed,
+            chinrest_failure_reason: chinrestState.chinrestFailureReason,
+            chinrest_metrics: chinrestState.chinrestMetrics,
+            device_metrics: getDisplayMetrics(),
         };
         jsPsych.data.addProperties({
+            webgazer_enabled: eyeTrackingEnabled,
+            calib_passed: calibrationReport.final.calib_passed,
+            calib_attempts: calibrationReport.attempts_total,
+            camera_gate_failed: cameraGateFailed,
+            camera_gate_timeout: cameraGateTimedOut,
+            camera_gate_policy: cameraGatePolicy,
+            regression_module: calibrationReport.regression_module,
+            drift_checks: driftChecks,
             calibration_report: calibrationReport,
         });
         data.calibration_report = calibrationReport;
+        if (chinrestController && chinrestController.getSummary) {
+            const chinrestSummary = chinrestController.getSummary();
+            jsPsych.data.addProperties(chinrestSummary);
+            data.chinrest_summary = chinrestSummary;
+        }
 
         if (jsPsych.extensions.webgazer.stopMouseCalibration) {
             jsPsych.extensions.webgazer.stopMouseCalibration();
