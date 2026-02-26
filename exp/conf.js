@@ -16,6 +16,7 @@ const runtimeConf = {
     },
     cameraGatePolicy: "fail_open_but_exclude",
     virtualChinrest: {
+        // Toggle chinrest here: true = enabled, false = disabled (ET-off will force this to false).
         enabled: true,
         blindspot_reps: 3,
         resize_units: "deg",
@@ -24,7 +25,15 @@ const runtimeConf = {
     },
 };
 
-const eyeTrackingEnabled = !!(runtimeConf.webgazer && runtimeConf.webgazer.enable);
+const chinrestCoreConfigResolver =
+    typeof KaminChinrestCore !== "undefined" ? KaminChinrestCore : null;
+const resolvedEnablement = chinrestCoreConfigResolver
+    ? chinrestCoreConfigResolver.resolveEnablement(runtimeConf)
+    : {
+          eyeTrackingEnabled: !!(runtimeConf.webgazer && runtimeConf.webgazer.enable),
+          chinrestEnabled: !!(runtimeConf.virtualChinrest && runtimeConf.virtualChinrest.enabled),
+      };
+const eyeTrackingEnabled = !!resolvedEnablement.eyeTrackingEnabled;
 if (!eyeTrackingEnabled && runtimeConf.virtualChinrest) {
     runtimeConf.virtualChinrest.enabled = false;
 }
