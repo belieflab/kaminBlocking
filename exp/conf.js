@@ -8,7 +8,7 @@ const debug = false; // Default debug mode setting for the experiment
 
 const runtimeConf = {
     webgazer: {
-        enable: true,
+        enable: false,
         regression_module: "ridge",
         sampling_interval_ms: 34,
         auto_initialize: false,
@@ -40,7 +40,7 @@ if (!eyeTrackingEnabled && runtimeConf.virtualChinrest) {
 const useWebgazer = eyeTrackingEnabled; // compatibility alias
 
 // if you want to ask questions at the end of the task then true
-let ratingQuestions = false;
+let ratingQuestions = true;
 
 /**
  * Configuration for trial repetitions:

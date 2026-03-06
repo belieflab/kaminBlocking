@@ -1,0 +1,28 @@
+{
+  "name": "kaminblocking",
+  "version": "1.0.0",
+  "description": "This psychological task investigates the [Kamin blocking phenomenon](https://en.wikipedia.org/wiki/Blocking_effect), where people learn that (1) cue A predicts an outcome, then that (2) cue A and cue B predicts an outcome. When asked if B alone predicts the outcome, they show a diminished response. A is a already a good predictor of the outcome; the intuition is: 'no need to learn from B, given that A already predicts the outcome.' In short, A blocks B.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/belieflab/kaminBlocking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/belieflab/kaminBlocking/issues"
+  },
+  "homepage": "https://github.com/belieflab/kaminBlocking#readme",
+  "dependencies": {
+    "playwright": "^1.58.2"
+  },
+  "type": "commonjs"
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="856" height="540" viewBox="0 0 856 540" role="img" aria-label="Reference card for resize calibration">
+  <rect x="2" y="2" width="852" height="536" rx="28" ry="28" fill="#f8fafc" stroke="#0f172a" stroke-width="4"/>
+  <rect x="40" y="72" width="240" height="160" rx="12" ry="12" fill="#cbd5e1"/>
+  <rect x="40" y="300" width="420" height="24" rx="6" ry="6" fill="#94a3b8"/>
+  <rect x="40" y="340" width="300" height="24" rx="6" ry="6" fill="#94a3b8"/>
+  <text x="428" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#0f172a">Card Size Reference</text>
+</svg>
