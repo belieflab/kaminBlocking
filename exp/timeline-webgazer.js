@@ -58,6 +58,11 @@ let cameraGateTimedOut = false;
 let cameraGateHardFail = false;
 let cameraGateDurationMs = null;
 let cameraGateFailureReason = null;
+const runtimeDebugLog = (...args) => {
+    if (typeof debug !== "undefined" && debug) {
+        console.log(...args);
+    }
+};
 let cameraGateLatestQuality = {
     face_box_w: null,
     face_box_h: null,
@@ -654,7 +659,7 @@ const cameraInit = {
         webgazer.showFaceFeedbackBox(true); //quality box
         // Keep gaze dot hidden during calibration; show only on validation visualization.
         webgazer.showPredictionPoints(false);
-        console.log("WebGazer display options configured");
+        runtimeDebugLog("WebGazer display options configured");
     },
 };
 
@@ -1071,7 +1076,7 @@ const validationResults = {
             calibration_terminal_fail: calibTerminalFail,
         });
 
-        console.log(
+        runtimeDebugLog(
             `Calibration meanInROI: ${
                 summary.meanInRoi === null ? "null" : summary.meanInRoi.toFixed(1)
             }%, Passed: ${calibPassed}`,
@@ -1106,15 +1111,15 @@ const calibrationAttemptLoop = {
                 if (webgazer && webgazer.clearData) {
                     webgazer.clearData();
                 }
-                console.log("Calibration failed - repeating calibration procedure");
+                runtimeDebugLog("Calibration failed - repeating calibration procedure");
                 return true;
             }
             calibrationTerminalFail = true;
-            console.log("Calibration failed after fallback - proceeding flagged");
+            runtimeDebugLog("Calibration failed after fallback - proceeding flagged");
             return false;
         }
 
-        console.log("Calibration passed - continuing to experiment");
+        runtimeDebugLog("Calibration passed - continuing to experiment");
         return false;
     },
 };
@@ -1369,7 +1374,7 @@ const stimuli = {
             responseKey = "";
         }
         if (data.webgazer_data) {
-            console.log(
+            runtimeDebugLog(
                 `Trial collected ${data.webgazer_data.length} gaze samples`,
             );
         }
@@ -1411,7 +1416,7 @@ const feedback = {
 
     on_finish: (data) => {
         if (data.webgazer_data) {
-            console.log(
+            runtimeDebugLog(
                 `Trial collected ${data.webgazer_data.length} gaze samples`,
             );
         }
@@ -1469,10 +1474,10 @@ const screenRating1 = {
         var ratingRandom = jsPsych.data.get().select("responses").values[0];
 
         // var currentData = jsPsych.currentTrial().data;
-        console.log(ratingRandom);
+        runtimeDebugLog(ratingRandom);
         data.rating_random = ratingRandom;
         if (data.webgazer_data) {
-            console.log(
+            runtimeDebugLog(
                 `Trial collected ${data.webgazer_data.length} gaze samples`,
             );
         }
@@ -1512,9 +1517,9 @@ const screenRating2 = {
         var ratingSabotage = jsPsych.data.get().select("responses").values[0];
         data.rating_sabotage = ratingSabotage;
         // var currentData = jsPsych.currentTrial().data;
-        console.log(ratingSabotage);
+        runtimeDebugLog(ratingSabotage);
         if (data.webgazer_data) {
-            console.log(
+            runtimeDebugLog(
                 `Trial collected ${data.webgazer_data.length} gaze samples`,
             );
         }
@@ -1623,13 +1628,17 @@ const dataSave = {
         if (jsPsych.extensions.webgazer.stopMouseCalibration) {
             jsPsych.extensions.webgazer.stopMouseCalibration();
         }
-        console.log("Continuous mouse calibration stopped");
+        if (typeof debug !== "undefined" && debug) {
+            console.log("Continuous mouse calibration stopped");
+        }
         writeCsvRedirect();
         experimentComplete = true;
         webgazer.showVideo(false);
         webgazer.showFaceOverlay(false);
         webgazer.showFaceFeedbackBox(false);
-        console.log("Experiment complete, data saved");
+        if (typeof debug !== "undefined" && debug) {
+            console.log("Experiment complete, data saved");
+        }
     },
 };
 

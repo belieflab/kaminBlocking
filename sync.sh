@@ -12,28 +12,7 @@ cd "$(git rev-parse --show-toplevel)"
 # Initialize a flag to track if an error occurs
 error_occurred=false
 
-# Check if .gitmodules exists and is not empty
-if [ -s .gitmodules ]; then
-    # Read each submodule path from .gitmodules
-    while IFS= read -r line; do
-        # Extract the path of the submodule
-        if [[ "$line" =~ ^[[:space:]]*path[[:space:]]*=[[:space:]]*(.*)$ ]]; then
-            submodule_path="${BASH_REMATCH[1]}"
-            echo "Updating submodule: $submodule_path"
-            # Navigate to the submodule directory and pull the latest changes
-            git -C "$submodule_path" pull
-            if [ $? -ne 0 ]; then
-                echo "Error updating submodule at path: $submodule_path"
-                error_occurred=true
-            fi
-        fi
-    done < <(grep 'path =' .gitmodules)
-else
-    echo ".gitmodules file not found or empty."
-    error_occurred=true
-fi
-
-# Finally, pull the latest changes for the parent repository
+# Pull the parent repository first so submodules resolve to parent-pinned commits
 echo "Updating parent repository: $repo_name"
 
 # Check if exp/conf.js exists - if so, use safe stash/pull/pop pattern
@@ -64,6 +43,19 @@ fi
 if [ $pull_result -ne 0 ]; then
     echo "Error updating the parent repository"
     error_occurred=true
+fi
+
+# Update submodules to the exact commits pinned by the parent repository
+if [ -s .gitmodules ]; then
+    echo "Syncing and updating submodules to parent-pinned commits"
+    git submodule sync --recursive
+    git submodule update --init --recursive
+    if [ $? -ne 0 ]; then
+        echo "Error updating submodules"
+        error_occurred=true
+    fi
+else
+    echo ".gitmodules file not found or empty."
 fi
 
 # Only display "Update complete" if no errors occurred

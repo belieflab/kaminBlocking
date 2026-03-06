@@ -1,5 +1,11 @@
 "use strict";
 
+const runtimeDebugLog = (...args) => {
+    if (typeof debug !== "undefined" && debug) {
+        console.log(...args);
+    }
+};
+
 /* define welcome message trial */
 const welcome = {
     type: jsPsychHtmlKeyboardResponse,
@@ -205,7 +211,7 @@ const screenRating1 = {
         var ratingRandom = jsPsych.data.get().select("responses").values[0];
 
         // var currentData = jsPsych.currentTrial().data;
-        console.log(ratingRandom);
+        runtimeDebugLog(ratingRandom);
         data.rating_random = ratingRandom;
     },
 };
@@ -235,7 +241,7 @@ const screenRating2 = {
         var ratingSabotage = jsPsych.data.get().select("responses").values[0];
         data.rating_sabotage = ratingSabotage;
         // var currentData = jsPsych.currentTrial().data;
-        console.log(ratingSabotage);
+        runtimeDebugLog(ratingSabotage);
     },
 
     // trial_duration: 60000,

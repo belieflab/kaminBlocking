@@ -16,6 +16,24 @@ $assetVersion = time();
         document.title = "Kamin Blocking";
       }
     });
+
+    window.__kbCriticalAssetFailed = false;
+    window.kbHandleCriticalAssetError = function (assetUrl) {
+      window.__kbCriticalAssetFailed = true;
+      const message = `
+        <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f8f8f8;padding:24px;">
+          <div style="max-width:720px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:24px;color:#222;font-family:Arial,sans-serif;">
+            <h2 style="margin-top:0;">Experiment failed to load</h2>
+            <p>A required external asset could not be loaded:</p>
+            <p><code>${assetUrl}</code></p>
+            <p>Please check your internet connection and refresh the page.</p>
+          </div>
+        </div>
+      `;
+      if (document.body) {
+        document.body.innerHTML = message;
+      }
+    };
   </script>
   <!-- favicon -->
   <link rel="icon" type="image/ico" href="./wrap/favicon.ico">
@@ -24,19 +42,19 @@ $assetVersion = time();
   <script type="text/javascript" src="./wrap/lib/jquery-3.5.1.min.js?v=<?php echo $assetVersion; ?>"></script>
   <!-- adding webGazer.js library from CDN 
    every dependancies will be hadeled automatically from the internet -->
-   <script src="https://cdn.jsdelivr.net/gh/jspsych/jspsych@jspsych@7.3.3/examples/js/webgazer/webgazer.js"></script>
+   <script src="https://cdn.jsdelivr.net/gh/jspsych/jspsych@jspsych@7.3.3/examples/js/webgazer/webgazer.js" onerror="kbHandleCriticalAssetError('https://cdn.jsdelivr.net/gh/jspsych/jspsych@jspsych@7.3.3/examples/js/webgazer/webgazer.js')"></script>
   <!-- jsPsych CDN (content delivery network) libraries -->
-  <script src="https://unpkg.com/jspsych@7.3.3"></script>
-  <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css"/>
+  <script src="https://unpkg.com/jspsych@7.3.3" onerror="kbHandleCriticalAssetError('https://unpkg.com/jspsych@7.3.3')"></script>
+  <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" onerror="kbHandleCriticalAssetError('https://unpkg.com/jspsych@7.3.3/css/jspsych.css')"/>
   <!-- jsPsych Plugins (add more here) -->
-  <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3" onerror="kbHandleCriticalAssetError('https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3')"></script>
   <!-- default jsPsychHtmlKeyboardResponse -->
   <!-- <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>   -->
   <!-- custom jsPsych Plugins -->
   <!-- custom jsPsychHtmlKeyboardResponse -->
   <script src="./wrap/plugins/plugin-html-keyboard-response.js?v=<?php echo $assetVersion; ?>"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-virtual-chinrest@2.0.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3" onerror="kbHandleCriticalAssetError('https://unpkg.com/@jspsych/plugin-preload@1.1.3')"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-virtual-chinrest@2.0.3" onerror="kbHandleCriticalAssetError('https://unpkg.com/@jspsych/plugin-virtual-chinrest@2.0.3')"></script>
   <!-- Pinned local vendor copies for auditability; see wrap/vendor/jspsych/SHA256SUMS.txt -->
   <!-- for inegration between jsPsych and WebGazer -->
   <script src="./wrap/vendor/jspsych/extension-webgazer-1.0.3.js?v=<?php echo $assetVersion; ?>"></script>
