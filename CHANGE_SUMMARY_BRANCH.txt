@@ -1,0 +1,103 @@
+### Parent repo PR draft (belieflab/kaminBlocking)
+
+Title
+Fix P0/P1 runtime stability issues and add P2 resilience hardening
+
+Base / Compare
+
+- Base: chinrest-webgazer-merge target branch as desired
+- Compare: chinrest-webgazer-merge (current pushed head includes:
+    - e40a320
+    - 41ec19c)
+
+Summary
+This PR completes staged remediation from the quality audit:
+
+- P0:
+    - Prevents stimulus-init failure from cascading into
+      shuffledStim[*].slice(...) crashes.
+    - Adds a local known card asset for virtual chinrest
+      calibration and points config to it.
+- P1:
+    - Includes wrap submodule pointer update with redirect/phase/
+      fullscreen runtime fixes.
+- P2:
+    - Adds CDN critical asset load-failure UX.
+    - Reduces non-essential runtime log noise by debug-gating.
+    - Hardens sync.sh to keep submodules aligned with parent-pinned
+      commits.
+
+Changes
+
+- exp/var.js
+    - Add guard clause: abort timeline setup when stimulus
+      initialization is incomplete.
+- exp/conf.js
+    - virtualChinrest.item_path -> img/card.svg
+    - Add urlConfig.default
+- img/card.svg
+    - Add local credit-card-ratio calibration asset.
+- index.php
+    - Add kbHandleCriticalAssetError(...) and wire onerror handlers
+      for critical CDN assets.
+- exp/timeline-webgazer.js
+    - Debug-gate noisy runtime logs.
+- exp/timeline-no-webgazer.js
+    - Debug-gate rating logs.
+- sync.sh
+    - Replace submodule git pull loop with git submodule sync
+      --recursive + git submodule update --init --recursive.
+
+Submodule update
+
+- wrap pointer advanced to submodule branch commit:
+    - 7887a78 on chinrest-webgazer-merge-remediation
+
+Validation performed
+
+- node --test tests/*.test.js (pass: 6, fail: 0)
+- node --check exp/conf.js exp/main.js exp/timeline.js exp/
+  timeline-webgazer.js exp/timeline-no-webgazer.js exp/var.js (no
+  syntax errors)
+- bash -n sync.sh (no syntax errors)
+
+---
+
+### Submodule PR draft (belieflab/jsPsychWrapper-v7.x)
+
+Title
+Harden redirect fallback, preserve phase=0, and prevent fullscreen
+listener duplication
+
+Base / Compare
+
+- Base: main
+- Compare: chinrest-webgazer-merge-remediation
+
+Summary
+Fixes runtime correctness issues used by kaminBlocking integration:
+
+- Redirect fallback no longer generates invalid undefined?... URLs.
+- phase=0 is preserved in candidate key serialization.
+- Fullscreen listeners are bound once; “one hour” constants
+  corrected to real ms.
+
+Changes
+
+- lib/redirect.js
+    - Resolve unknown versions via default.
+    - Return undefined cleanly if no redirect path exists.
+    - Append phase only when defined and numeric (>= 0), including
+      0.
+- lib/ids.php
+    - Replace truthy phase check with explicit null/empty guard to
+      retain phase=0.
+- lib/fn.js
+    - Use 60*60*1000 for one-hour thresholds.
+    - Add single-bind guard for fullscreen key/touch listeners.
+
+Validation context
+
+- Consumed by parent repo tests and runtime checks in
+  kaminBlocking.
+- Parent integration tests passed after pointer update.
