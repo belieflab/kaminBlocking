@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="856" height="540" viewBox="0 0 856 540" role="img" aria-label="Calibration card with standard credit card proportions">
+  <rect x="8" y="8" width="840" height="524" rx="36" ry="36" fill="#f4f6f8" stroke="#1f2937" stroke-width="16"/>
+  <rect x="72" y="118" width="712" height="66" fill="#1f2937"/>
+  <rect x="72" y="232" width="220" height="42" fill="#9ca3af"/>
+  <rect x="72" y="300" width="320" height="24" fill="#9ca3af"/>
+  <rect x="72" y="340" width="260" height="24" fill="#9ca3af"/>
+  <text x="428" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#111827">85.6mm × 54.0mm</text>
+</svg>

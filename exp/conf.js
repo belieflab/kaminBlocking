@@ -21,7 +21,7 @@ const runtimeConf = {
         blindspot_reps: 3,
         resize_units: "deg",
         pixels_per_unit: 50,
-        item_path: "img/card.png",
+        item_path: "img/card.svg",
     },
 };
 
@@ -84,6 +84,7 @@ const consentLink =
 const adminEmail = "joshua.kenney@yale.edu";
 // Redirect Configuration (Daisy Chaining)
 const urlConfig = {
+    default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC",
     // redirect only
     kamin: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC",
 };
