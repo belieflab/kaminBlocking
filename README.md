@@ -81,7 +81,7 @@ In every trial participants are shown with cues (represented with letters) and a
    - They predict whether the meals will cause allergic reactions based on previous observations of patient reactions.
    - **Trial Structure**:
      - **Learning Phase**: 7 trial types each presented 10 times (1:10) / A1+, A2+, C1-, C2-, F-, I+, J-
-     - **Blocking Phase**: 7 trial types each presented 6 times (11:16) / A1B1+, A2B2+, C1D1+, D2D2+, EF-, I+, J-
+     - **Blocking Phase**: 7 trial types each presented 6 times (11:16) / A1B1+, A2B2+, C1D1+, C2D2+, EF-, I+, J-
      - **Testing Phase**: 7 trial types each presented 6 times (17:22) / B1+, B2-, D1+, D2-, EF-, I+, J-
    
 | Learning Phase | Blocking Phase | Testing Phase |
