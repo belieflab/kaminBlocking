@@ -6,6 +6,10 @@
 // Options: false, true
 let debug = false; // Default debug mode setting for the experiment
 
+// Playwright Mode
+// Options: false, true
+const playwright = false;
+
 // if you want to ask questions at the end of the task then true
 let ratingQuestions = false;
 
