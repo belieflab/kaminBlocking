@@ -20,6 +20,7 @@ const welcome = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[0],
     choices: "ALL_KEYS", //ascii spacebar
+    on_load: () => handleFullscreen(),
 };
 
 /* define instructions trial */
