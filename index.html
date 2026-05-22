@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    window.addEventListener("error", (e) => {
+      fetch("/api/log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ level: "error", message: e.message, source: e.filename, line: e.lineno }),
+      }).catch(() => {});
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // experimentAlias is declared in exp/conf.js (loaded in <footer>)
+      if (typeof experimentAlias !== "undefined") {
+        document.title = experimentAlias.toUpperCase();
+      }
+    });
+  </script>
+  <!-- Wrap client utilities -->
+  <script src="/wrap/lib/ids.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- jsPsych CDN libraries -->
+  <script src="https://unpkg.com/jspsych@7.3.3"></script>
+  <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css">
+  <!-- jsPsych Plugins (add more as needed) -->
+  <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
+  <!-- Wrap and experiment styles -->
+  <link rel="stylesheet" type="text/css" href="/wrap/lib/style.css">
+  <link rel="icon" type="image/ico" href="/wrap/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="/css/exp.css">
+  <link rel="stylesheet" type="text/css" href="/css/confidence.css">
+</head>
+
+<body id="unload" onbeforeunload="return areYouSure()">
+
+  <!-- Start form: shown when workerId / PROLIFIC_PID / participantId is present -->
+  <div id="form-start" hidden>
+    <div class="screening">
+      <br>
+      <h1 style="text-align:center;">Participant Intake</h1>
+      <form>
+        <h4 style="color:black">Which is your dominant hand?</h4>
+        <label class="custom-radio-button">Left
+          <input type="radio" name="handedness" value="left" id="left">
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-radio-button">Right
+          <input type="radio" name="handedness" value="right" id="right">
+          <span class="checkmark"></span>
+        </label>
+        <button id="submitButton" class="loadMain" onclick="validateStart()" type="button">SUBMIT</button>
+        <h5 id="version-display"></h5>
+      </form>
+    </div>
+  </div>
+
+  <!-- NDA form: shown when src_subject_id or ID is present -->
+  <div id="form-nda" hidden>
+    <div class="screening">
+      <br>
+      <h1 style="text-align:center;">Participant Intake</h1>
+      <form>
+        <h4 style="color:black">Which is your dominant hand?</h4>
+        <label class="custom-radio-button">Left
+          <input type="radio" name="handedness" value="left" id="left-nda">
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-radio-button">Right
+          <input type="radio" name="handedness" value="right" id="right-nda">
+          <span class="checkmark"></span>
+        </label>
+        <button id="submitButton" class="loadMain" onclick="validateNda()" type="button">SUBMIT</button>
+        <h5 id="version-display-nda"></h5>
+      </form>
+    </div>
+  </div>
+
+  <!-- Intake form: shown when no URL identifier is present (manual lab entry) -->
+  <div id="form-intake" hidden>
+    <div class="screening" style="background-color:lightgray; text-align:center; margin:35px; vertical-align:middle">
+      <br>
+      <h1 style="text-align:center;">Participant Intake</h1>
+      <div id="intake">
+        <form>
+          <div class="form-group">
+            <p style="color:black; text-align:center;"><b>Research Site:</b></p>
+            <select name="site" id="site" class="custom-select">
+              <option value="">---</option>
+            </select>
+          </div>
+          <h4 style="color:black">Subject ID:</h4>
+          <input required id="subject" type="text" name="subject" class="custom-input">
+
+          <div id="guid-container" style="display:none;">
+            <h4 style="color:black">GUID:</h4>
+            <input id="guid" type="text" name="guid" minlength="12" maxlength="12"
+              oninput="this.value = this.value.toUpperCase()" class="custom-input">
+          </div>
+
+          <div id="dob-container" style="display:none;">
+            <h4 style="color:black"><label for="dob">Date of Birth:</label></h4>
+            <input id="dob" type="date" class="custom-input">
+          </div>
+
+          <div class="form-group">
+            <h4 style="color:black"><label for="phenotype">Phenotype:</label></h4>
+            <select name="phenotype" id="phenotype" class="custom-select">
+              <option value="">---</option>
+            </select>
+          </div>
+
+          <h4 style="color:black">Sex at Birth:</h4>
+          <label class="custom-radio-button">Male
+            <input type="radio" id="male" name="sex" value="M" class="custom-radio">
+            <span class="checkmark"></span>
+          </label>
+          <label class="custom-radio-button">Female
+            <input type="radio" id="female" name="sex" value="F" class="custom-radio">
+            <span class="checkmark"></span>
+          </label>
+
+          <h4 style="color:black">Which is your dominant hand?</h4>
+          <label class="custom-radio-button">Left
+            <input type="radio" name="handedness" value="left" id="left-intake">
+            <span class="checkmark"></span>
+          </label>
+          <label class="custom-radio-button">Right
+            <input type="radio" name="handedness" value="right" id="right-intake">
+            <span class="checkmark"></span>
+          </label>
+
+          <button id="submitButton" class="loadMain" onclick="validateIntake()" type="button">SUBMIT</button>
+          <h5 id="version-display-intake"></h5>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<footer>
+  <!-- Load config first, then wrap utilities, then experiment-specific code -->
+  <script src="/wrap/lib/redirect.js"></script>
+  <script src="/exp/conf.js"></script>
+  <script src="/wrap/lib/validate.js"></script>
+  <script src="/wrap/lib/fn.js"></script>
+  <script src="/exp/fn.js"></script>
+  <script>
+    // Fetch and display git version in all form version slots
+    fetch("/api/version")
+      .then(r => r.json())
+      .then(({ version }) => {
+        if (!version) return;
+        ["version-display", "version-display-nda", "version-display-intake"].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = version;
+        });
+      })
+      .catch(() => {});
+  </script>
+</footer>
+
+</html>

@@ -1,0 +1,3 @@
+[submodule "wrap"]
+	path = wrap
+	url = git@github.com:belieflab/jsPsychWrapper-v7.x.git
