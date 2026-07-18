@@ -66,14 +66,32 @@ if (eyeTrackingEnabled) {
     }
 }
 
-const mainTaskTimeline = [
-    ...instructionSet,
-    practice_procedure,
-    instruction6,
-    learning_procedure,
-    blocking_procedure,
-    testing_procedure,
-];
+const mainTaskTimeline = [...instructionSet, practice_procedure, instruction6];
+
+// Interleave 3 silent gaze-fixation break probes at even quarters of the main
+// task (mid-learning, learning/blocking seam, blocking/testing seam). Guarded
+// because exp/timeline-no-webgazer.js also loads this file and does not
+// define the split learning procedure or the probe trials.
+if (
+    typeof learning_procedure_part1 !== "undefined" &&
+    typeof learning_procedure_part2 !== "undefined" &&
+    typeof gazeFixationProbe1 !== "undefined" &&
+    typeof gazeFixationProbe2 !== "undefined" &&
+    typeof gazeFixationProbe3 !== "undefined"
+) {
+    mainTaskTimeline.push(
+        learning_procedure_part1,
+        gazeFixationProbe1,
+        learning_procedure_part2,
+        gazeFixationProbe2,
+        blocking_procedure,
+        gazeFixationProbe3,
+        testing_procedure,
+    );
+} else {
+    mainTaskTimeline.push(learning_procedure, blocking_procedure, testing_procedure);
+}
+
 if (ratingQuestions) {
     mainTaskTimeline.push(screenRating1, screenRating2);
 }

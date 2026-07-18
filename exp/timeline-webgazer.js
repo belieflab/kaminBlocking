@@ -307,6 +307,29 @@ function isValidationStrongPass(summary) {
     return summary.avgOffset !== null && summary.avgOffset <= avgOffsetStrongPassPx;
 }
 
+function computeCenterFixationMetrics(webgazerData, center, roiRadiusPx) {
+    const samples = Array.isArray(webgazerData)
+        ? webgazerData.filter((s) => s && Number.isFinite(Number(s.x)) && Number.isFinite(Number(s.y)))
+        : [];
+    if (samples.length === 0 || !center) {
+        return { sampleCount: samples.length, meanOffsetPx: null, percentInRoi: null };
+    }
+    let offsetSum = 0;
+    let inRoi = 0;
+    for (const s of samples) {
+        const dx = Number(s.x) - center.x;
+        const dy = Number(s.y) - center.y;
+        const offset = Math.sqrt(dx * dx + dy * dy);
+        offsetSum += offset;
+        if (offset <= roiRadiusPx) inRoi++;
+    }
+    return {
+        sampleCount: samples.length,
+        meanOffsetPx: offsetSum / samples.length,
+        percentInRoi: (inRoi / samples.length) * 100,
+    };
+}
+
 function applyCameraGateFailure() {
     if (cameraGateCore && cameraGateCore.applyCameraGateFailure) {
         const next = cameraGateCore.applyCameraGateFailure(
@@ -1423,6 +1446,52 @@ const feedback = {
     },
 };
 
+// SPEC: silent gaze-fixation break probes interleaved into the main task.
+// REPO: 3s central fixation dot, no response; scores gaze offset-from-center
+// and percent-in-ROI using the same roiRadius convention as calibration/validation.
+// Purely observational — does not affect session flow, exclusion, or the
+// (separate, unrelated) driftValidationPoints/drift_checks scaffold above.
+const gazeProbeDuration = 3000;
+
+function createGazeFixationProbe(probeIndex) {
+    const domId = `gaze-fixation-probe-dot-${probeIndex}`;
+    let capturedCenter = null;
+    return {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<div id="${domId}" style="width:20px;height:20px;border-radius:50%;background-color:#333;border:1px solid #000;display:inline-block;"></div>`,
+        choices: "NO_KEYS",
+        trial_duration: gazeProbeDuration,
+        data: { task: "gaze_fixation_probe", probe_index: probeIndex },
+        extensions: [{ type: jsPsychExtensionWebgazer, params: { targets: [] } }],
+        on_load: function () {
+            const el = document.getElementById(domId);
+            const rect = el && el.getBoundingClientRect ? el.getBoundingClientRect() : null;
+            capturedCenter = rect
+                ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+                : { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        },
+        on_finish: function (data) {
+            const metrics = computeCenterFixationMetrics(data.webgazer_data, capturedCenter, roiRadius);
+            Object.assign(data, {
+                task: "gaze_fixation_probe",
+                probe_index: probeIndex,
+                gaze_sample_count: metrics.sampleCount,
+                gaze_mean_offset_px: metrics.meanOffsetPx,
+                gaze_percent_in_roi: metrics.percentInRoi,
+                roi_radius_px: roiRadius,
+                screen_center_x: capturedCenter ? capturedCenter.x : null,
+                screen_center_y: capturedCenter ? capturedCenter.y : null,
+                camera_fps: getCameraFps(),
+                ...getDisplayMetrics(),
+            });
+        },
+    };
+}
+
+const gazeFixationProbe1 = createGazeFixationProbe(1);
+const gazeFixationProbe2 = createGazeFixationProbe(2);
+const gazeFixationProbe3 = createGazeFixationProbe(3);
+
 const instruction6 = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: instructions[6],
@@ -1625,6 +1694,22 @@ const dataSave = {
             data.chinrest_summary = chinrestSummary;
         }
 
+        // Convenience summary of the 3 gaze-fixation break probes; purely
+        // additive read of already-recorded trial rows, unrelated to the
+        // drift_checks_* fields above.
+        const gazeFixationProbeRows = jsPsych.data
+            .get()
+            .filter({ task: "gaze_fixation_probe" })
+            .values();
+        const gazeFixationProbes = gazeFixationProbeRows.map((row) => ({
+            probe_index: row.probe_index,
+            gaze_sample_count: row.gaze_sample_count,
+            gaze_mean_offset_px: row.gaze_mean_offset_px,
+            gaze_percent_in_roi: row.gaze_percent_in_roi,
+        }));
+        jsPsych.data.addProperties({ gaze_fixation_probes: gazeFixationProbes });
+        data.gaze_fixation_probes = gazeFixationProbes;
+
         if (jsPsych.extensions.webgazer.stopMouseCalibration) {
             jsPsych.extensions.webgazer.stopMouseCalibration();
         }
@@ -1693,6 +1778,27 @@ switch (version) {
         };
         break;
 }
+
+// Split learning_procedure in half so a gaze-fixation break probe can be
+// interleaved mid-learning, without touching the per-version switch above.
+const learningTotalRepetitions = learning_procedure.repetitions;
+const learningPart1Repetitions = Math.ceil(learningTotalRepetitions / 2);
+const learningPart2Repetitions = learningTotalRepetitions - learningPart1Repetitions;
+
+const learning_procedure_part1 = {
+    ...learning_procedure,
+    repetitions: learningPart1Repetitions,
+};
+const learning_procedure_part2 = {
+    ...learning_procedure,
+    repetitions: learningPart2Repetitions,
+    // POLICY: repetitions:0 does NOT skip a jsPsych timeline node (the first
+    // pass always runs unconditionally); guard with conditional_function so
+    // low debug repetition counts don't silently double learning trials.
+    conditional_function: function () {
+        return learningPart2Repetitions > 0;
+    },
+};
 
 // call main
 $.getScript("exp/main.js").fail(function (jqxhr, settings, exception) {
