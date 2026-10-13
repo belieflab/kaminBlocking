@@ -7,9 +7,9 @@ In the **social version**, participants are presented with co-workers (represent
 ## 🚀 Getting Started
 
 ### Clone the Repository
-To clone the repository with all necessary submodules, run:
+To clone the `fmri` branch with all necessary submodules into a `kaminBlocking-fmri` folder, run:
 ```bash
-git clone --recurse-submodules -j4 git@github.com:belieflab/kaminBlocking.git && cd kaminBlocking &&
+git clone --recurse-submodules -j4 --branch fmri git@github.com:belieflab/kaminBlocking.git kaminBlocking-fmri && cd kaminBlocking-fmri &&
 git submodule foreach --recursive 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)'
 ```
 
