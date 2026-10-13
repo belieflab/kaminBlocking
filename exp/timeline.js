@@ -62,13 +62,26 @@ const instructionSet = [
     instruction5,
 ];
 
-// create fixation point
-const fixation = {
-    // data: {test_part: 'fixation'},
+// create fixation point for inter-stimulus interval (between cue and feedback)
+const isi = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: '<div style="color:black; font-size:60px;">+</div>',
     choices: "NO_KEYS",
-    trial_duration: fixationDuration,
+    trial_duration: () => currentIsi,
+    data: { test_part: "isi" },
+    on_start: () => {
+        // Clear the keyboard buffer to prevent any previous responses from affecting this trial
+        jsPsych.pluginAPI.clearAllTimeouts(); // Clear any timeouts set by previous trials
+    },
+};
+
+// create fixation point for inter-trial interval (after feedback)
+const iti = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: '<div style="color:black; font-size:60px;">+</div>',
+    choices: "NO_KEYS",
+    trial_duration: () => currentIti,
+    data: { test_part: "iti" },
 };
 
 // create  trials
@@ -152,6 +165,13 @@ const stimuli = {
         }
         data.index = trialIterator;
         trialIterator++;
+
+        // draw jittered ISI/ITI for this trial type in this phase
+        const jitterDurations = nextJitter(data.test_part, data.trial_identity);
+        currentIsi = jitterDurations.isi;
+        currentIti = jitterDurations.iti;
+        data.isi_duration = currentIsi;
+        data.iti_duration = currentIti;
     },
 };
 
@@ -159,10 +179,11 @@ const stimuli = {
 const feedback = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: () => {
-        let last_trial_feedback = jsPsych.data
-            .get()
-            .last(1)
-            .values()[0].correct_response;
+        // read from the current timeline variable (the previous data row is now the ISI)
+        let last_trial_feedback = jsPsych.timelineVariable(
+            "data",
+            true
+        ).correct_response;
         if (last_trial_feedback == 49) {
             return positiveFeedback;
         }
@@ -173,10 +194,6 @@ const feedback = {
     choices: "NO_KEYS",
     trial_duration: feedbackDuration,
     response_ends_trial: false,
-    on_start: () => {
-        // Clear the keyboard buffer to prevent any previous responses from affecting this trial
-        jsPsych.pluginAPI.clearAllTimeouts(); // Clear any timeouts set by previous trials
-    },
 };
 
 const instruction6 = {
@@ -268,14 +285,14 @@ const dataSave = {
 // Defince procedures
 
 let practice_procedure = {
-    timeline: [fixation, stimuli, feedback],
+    timeline: [stimuli, isi, feedback, iti],
     timeline_variables: practice_stimuli,
     randomize_order: false,
 };
 
 // Define common procedure settings struct
 const commonSettings = (stimuliType) => ({
-    timeline: [fixation, stimuli, feedback],
+    timeline: [stimuli, isi, feedback, iti],
     timeline_variables: stimuliType,
     randomize_order: true,
     type: "fixed-repetitions",

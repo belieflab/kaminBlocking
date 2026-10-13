@@ -26,9 +26,48 @@ let trialIterator = 1;
 let score = 0;
 let earnings = 0;
 // durations of trial components:
-const fixationDuration = 1000;
+// trial structure (fMRI): cue -> ISI -> feedback -> ITI
 const stimuliDuration = 3000;
 const feedbackDuration = 1000;
+const isiDuration = 2000; // mean ISI; used for practice and as fallback
+const itiDuration = 3000; // mean ITI; used for practice and as fallback
+
+// ISI/ITI jitters (ms) per trial type per phase; each list keeps the mean at isiDuration/itiDuration
+// ISI and ITI lists are shuffled independently for each trial type within each phase
+const jitter = {
+    learning: {
+        isi: [1000, 1000, 1000, 3000, 3000, 3000, 2000, 2000, 2000, 2000],
+        iti: [2000, 2000, 2000, 4000, 4000, 4000, 3000, 3000, 3000, 3000],
+    },
+    blocking: {
+        isi: [1000, 1000, 3000, 3000, 2000, 2000],
+        iti: [2000, 2000, 4000, 4000, 3000, 3000],
+    },
+    testing: {
+        isi: [1000, 1000, 3000, 3000, 2000, 2000],
+        iti: [2000, 2000, 4000, 4000, 3000, 3000],
+    },
+};
+
+let jitterQueues = {}; // remaining jitters keyed by `${test_part}_${trial_identity}`
+let currentIsi = isiDuration;
+let currentIti = itiDuration;
+
+// returns the next {isi, iti} for this trial type in this phase
+function nextJitter(testPart, trialIdentity) {
+    const key = `${testPart}_${trialIdentity}`;
+    if (!(key in jitterQueues) && jitter[testPart]) {
+        jitterQueues[key] = {
+            isi: jsPsych.randomization.shuffle(jitter[testPart].isi),
+            iti: jsPsych.randomization.shuffle(jitter[testPart].iti),
+        };
+    }
+    const queue = jitterQueues[key];
+    if (!queue || queue.isi.length === 0) {
+        return { isi: isiDuration, iti: itiDuration };
+    }
+    return { isi: queue.isi.pop(), iti: queue.iti.pop() };
+}
 
 // progress bar container
 let progressBar =

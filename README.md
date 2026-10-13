@@ -114,6 +114,89 @@ In every trial participants are shown with cues (represented with letters) and a
 |                | IK-            |               |
 |                | JL-            |               |
 
+## ⏱ Trial Timing: Original vs fMRI-Friendly
+
+Each trial has a **cue** screen, where the participant predicts the outcome, followed by an **outcome feedback** screen. The original (behavioral) version presents feedback right after the cue with a short 1 s inter-trial interval. The fMRI-friendly version (this branch) adds a jittered **inter-stimulus interval (ISI)** between cue and feedback and uses a longer, jittered **inter-trial interval (ITI)**. This lets the cue-related (prediction) and feedback-related (outcome / prediction error) BOLD responses be modeled separately.
+
+> ℹ️ "Original" and "fMRI-friendly" refer to the **timing** only. Both work with the **Standard** and **Short** stimulus sets described above.
+
+### Trial Events
+
+| Event | What is on screen | Original (behavioral) | fMRI-friendly |
+|-------|-------------------|-----------------------|---------------|
+| Fixation (pre-cue) | Central `+` | 1 s (de facto ITI) | — (removed; replaced by the ITI below) |
+| **Cue** | 1 or 2 food images + confidence bar | 3 s | 3 s |
+| **ISI** | Central `+` | — | 1, 2 or 3 s (mean 2 s), jittered |
+| **Feedback** | Outcome image: allergy (+) or no allergy (−) | 1 s | 1 s |
+| **ITI** | Central `+` | — | 2, 3 or 4 s (mean 3 s), jittered |
+| **Trial length** | | **5 s (fixed)** | **7–11 s (mean 9 s)** |
+
+- **Response**: participants respond with the `0` (no allergy) / `1` (allergy) keys **during the cue only**. Holding a key fills a confidence bar. The cue always lasts the full 3 s; a response does not end it.
+- **Feedback** always shows the true outcome for that trial type, whatever the participant responded. It is not accuracy feedback.
+- All screens have fixed durations, so the task is not self-paced and no event depends on the participant's response time.
+
+**Original (behavioral), 5 s per trial**
+```
+|-- + --|------------ CUE ------------|-- FB --|-- + --|------------ CUE ...
+   1 s               3 s                 1 s     1 s
+```
+
+**fMRI-friendly, 7–11 s per trial (mean 9 s)**
+```
+|------------ CUE ------------|---- + ----|-- FB --|------ + ------|------------ CUE ...
+             3 s                ISI 1–3 s     1 s      ITI 2–4 s
+```
+
+### Jitter Design
+
+ISI and ITI durations are drawn from fixed lists **for each trial type within each phase**, so every trial type in every phase has exactly the same mean ISI (2 s) and mean ITI (3 s):
+
+| Phase | Repetitions per trial type | ISI list (s) | ITI list (s) |
+|-------|----------------------------|--------------|--------------|
+| Learning | 10 | 1, 1, 1, 3, 3, 3, 2, 2, 2, 2 | 2, 2, 2, 4, 4, 4, 3, 3, 3, 3 |
+| Blocking | 6 | 1, 1, 3, 3, 2, 2 | 2, 2, 4, 4, 3, 3 |
+| Testing | 6 | 1, 1, 3, 3, 2, 2 | 2, 2, 4, 4, 3, 3 |
+
+- Each trial type uses up its own lists over the phase, sampling without replacement, so the per-type means are exact.
+- The ISI and ITI lists are **shuffled independently**, with no fixed ISI–ITI pairing. This keeps ISI and ITI uncorrelated across trials.
+- Derived intervals in the fMRI-friendly version:
+  - Cue onset → feedback onset: **4–6 s** (3 s cue + 1–3 s ISI)
+  - Feedback offset → next cue onset: **2–4 s**
+  - Cue onset → next cue onset (SOA): **7–11 s**
+- Practice trials (3) use the mean values: ISI 2 s, ITI 3 s.
+- Configured in `exp/var.js` (`stimuliDuration`, `feedbackDuration`, `isiDuration`, `itiDuration`, `jitter`).
+
+### Trial Order
+
+Within each phase, trials come in **mini-blocks**: each repetition shows every trial type of that phase once, in random order (10 mini-blocks in learning, 6 in blocking, 6 in testing). The three phases run back-to-back with no break or instruction screen between them.
+
+### Task Duration
+
+Durations count the main trials only. Practice trials and the self-paced instructions are not included. Because the jitter lists have fixed sums, the fMRI-friendly durations are **exact**, not averages.
+
+| Stimulus set | Phase | Trials | Original (5 s/trial) | fMRI-friendly (9 s/trial) |
+|--------------|-------|--------|----------------------|---------------------------|
+| Standard | Learning | 70 (7 × 10) | 5 min 50 s | 10 min 30 s |
+| Standard | Blocking | 42 (7 × 6) | 3 min 30 s | 6 min 18 s |
+| Standard | Testing | 42 (7 × 6) | 3 min 30 s | 6 min 18 s |
+| **Standard** | **Total** | **154** | **12 min 50 s** | **23 min 06 s** |
+| Short | Total | 112 (40 + 42 + 30) | 9 min 20 s | 16 min 48 s |
+| Practice | — | 3 | 15 s | 27 s |
+
+### Logged Timing Data
+
+- Each cue row stores `isi_duration` and `iti_duration` (ms) for that trial.
+- ISI and ITI screens are saved as their own rows with `test_part` = `"isi"` / `"iti"`.
+- `time_elapsed` (ms since the experiment started) can be used to rebuild cue, feedback, and response onsets for the GLM.
+
+### Open Points for fMRI Review
+
+- **Scanner synchronization**: the task does not yet wait for a scanner trigger (TTL pulse). Onsets are relative to the start of the browser session, not to the first volume.
+- **Baseline / run structure**: there are no initial or final fixation periods, and all three phases run as one continuous block (~23 min with the Standard set). Splitting into separate runs (e.g., one per phase) and adding fixation periods at the start and end of each run may be preferable.
+- **Response–cue overlap**: the response window is the cue period itself, so motor activity overlaps with cue/prediction activity.
+- **Jitter range**: is ISI 1–3 s and ITI 2–4 s enough to separate cue- and feedback-related responses efficiently at the planned TR?
+- **Timing precision**: presentation uses jsPsych/browser timers, so durations are accurate to about one screen refresh (~16 ms at 60 Hz).
+
 ## 🛠 Development Guide
 
 ### Install and Configure XAMPP
