@@ -49,14 +49,14 @@ const theme = "white"; // Default theme setting for the user interface
 
 // Add additional global configuration constants here
 const consentLink =
-    "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_9H0WmX4yKv4jz4a";
+    "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_5cCgKdbb5ngceAS";
 
 // Note: Uncomment the desired options. Ensure only one option per setting is active at a time.
 const adminEmail = undefined;
 // Redirect Configuration (Daisy Chaining)
 const urlConfig = {
     // redirect only
-    default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_0xGKiCrNbAUGwoC",
+    default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_4HHbJ9T2aXS18xg",
 };
 
 // Intake Settings

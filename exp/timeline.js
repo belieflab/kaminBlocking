@@ -141,7 +141,7 @@ const stimuli = {
         '<form autocomplete="off" action=""> <input autocomplete="false" name="hidden" id="tapTap" type="text" style="background-color:black; color: transparent; outline:none; border:none; background:none;" onkeypress="">',
     data: jsPsych.timelineVariable("data"),
     on_load: () => {
-        buttonPress(48, 49); // Correctly pass the function to execute upon loading
+        buttonPressLocked(48, 49); // only the first key pressed can increase confidence (exp/fn.js)
     },
     on_finish: (data) => {
         writeCandidateKeys(data);

@@ -131,7 +131,7 @@ Each trial has a **cue** screen, where the participant predicts the outcome, fol
 | **ITI** | Central `+` | — | 2, 3 or 4 s (mean 3 s), jittered |
 | **Trial length** | | **5 s (fixed)** | **7–11 s (mean 9 s)** |
 
-- **Response**: participants respond with the `0` (no allergy) / `1` (allergy) keys **during the cue only**. Holding a key fills a confidence bar. The cue always lasts the full 3 s; a response does not end it.
+- **Response**: participants respond with the `0` (no allergy) / `1` (allergy) keys **during the cue only**. The **first key pressed** is the recorded choice, and only that key can fill the confidence bar; the other key is ignored for the rest of the trial. Holding the key fills the bar up to 100%. The cue always lasts the full 3 s; neither a response nor a full bar ends it.
 - **Feedback** always shows the true outcome for that trial type, whatever the participant responded. It is not accuracy feedback.
 - All screens have fixed durations, so the task is not self-paced and no event depends on the participant's response time.
 
