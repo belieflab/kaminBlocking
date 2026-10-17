@@ -29,23 +29,23 @@ let earnings = 0;
 // trial structure (fMRI): cue -> ISI -> feedback -> ITI
 const stimuliDuration = 3000;
 const feedbackDuration = 1000;
-const isiDuration = 2000; // mean ISI; used for practice and as fallback
-const itiDuration = 3000; // mean ITI; used for practice and as fallback
+const isiDuration = 1500; // mean ISI; used for practice and as fallback
+const itiDuration = 2500; // mean ITI; used for practice and as fallback
 
 // ISI/ITI jitters (ms) per trial type per phase; each list keeps the mean at isiDuration/itiDuration
 // ISI and ITI lists are shuffled independently for each trial type within each phase
 const jitter = {
     learning: {
-        isi: [1000, 1000, 1000, 3000, 3000, 3000, 2000, 2000, 2000, 2000],
-        iti: [2000, 2000, 2000, 4000, 4000, 4000, 3000, 3000, 3000, 3000],
+        isi: [500, 500, 500, 2500, 2500, 2500, 1500, 1500, 1500, 1500],
+        iti: [1500, 1500, 1500, 3500, 3500, 3500, 2500, 2500, 2500, 2500],
     },
     blocking: {
-        isi: [1000, 1000, 3000, 3000, 2000, 2000],
-        iti: [2000, 2000, 4000, 4000, 3000, 3000],
+        isi: [500, 500, 2500, 2500, 1500, 1500],
+        iti: [1500, 1500, 3500, 3500, 2500, 2500],
     },
     testing: {
-        isi: [1000, 1000, 3000, 3000, 2000, 2000],
-        iti: [2000, 2000, 4000, 4000, 3000, 3000],
+        isi: [500, 500, 2500, 2500, 1500, 1500],
+        iti: [1500, 1500, 3500, 3500, 2500, 2500],
     },
 };
 

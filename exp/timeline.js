@@ -84,6 +84,59 @@ const iti = {
     data: { test_part: "iti" },
 };
 
+/**
+ * Increases the confidence bar by a fixed increment, capped at 100%.
+ * Unlike moveConfidence() in the wrapper, it never ends the trial early,
+ * so the cue always lasts the full stimuliDuration (fixed fMRI timing).
+ *
+ * @returns {number} The updated confidence level as a percentage of the bar's width.
+ */
+function moveConfidenceCapped() {
+    const keyBar = document.getElementById("keyBar");
+    const increment = 3.7;
+    const currentWidth = Math.min(
+        parseFloat(keyBar.style.width) + increment,
+        100
+    );
+    keyBar.style.width = `${currentWidth}%`;
+    totalConfidence = currentWidth;
+    return totalConfidence;
+}
+
+/**
+ * Handles responses during the cue: the first key pressed (key1 or key2) is the
+ * participant's choice, and only that key can increase the confidence bar.
+ * Keys are captured on the whole page, so a mouse click cannot steal focus.
+ * The listener is removed in stimuli.on_finish.
+ *
+ * @param {number} key1 - Key code of the first response key (e.g., 48 for "0").
+ * @param {number} key2 - Key code of the second response key (e.g., 49 for "1").
+ */
+function buttonPressLocked(key1, key2) {
+    const barFill = document.getElementById("fillUp");
+    if (barFill) {
+        barFill.innerHTML = responseOptions;
+    }
+
+    let lockedKey = null; // first key pressed in this trial
+
+    $(document).on("keydown.confidence", function (event) {
+        const keycode = event.which;
+        if (keycode !== key1 && keycode !== key2) {
+            return;
+        }
+        event.preventDefault();
+
+        if (lockedKey === null) {
+            lockedKey = keycode;
+            responseKey = keycode;
+        }
+        if (keycode === lockedKey) {
+            totalConfidence = moveConfidenceCapped();
+        }
+    });
+}
+
 // create  trials
 const stimuli = {
     type: jsPsychHtmlKeyboardResponse,
@@ -141,9 +194,10 @@ const stimuli = {
         '<form autocomplete="off" action=""> <input autocomplete="false" name="hidden" id="tapTap" type="text" style="background-color:black; color: transparent; outline:none; border:none; background:none;" onkeypress="">',
     data: jsPsych.timelineVariable("data"),
     on_load: () => {
-        buttonPressLocked(48, 49); // only the first key pressed can increase confidence (exp/fn.js)
+        buttonPressLocked(48, 49); // only the first key pressed can increase confidence
     },
     on_finish: (data) => {
+        $(document).off("keydown.confidence"); // stop listening for responses after the cue
         writeCandidateKeys(data);
 
         data.response = responseKey;
@@ -165,6 +219,9 @@ const stimuli = {
         }
         data.index = trialIterator;
         trialIterator++;
+
+        // advance the completion progress bar at the top of the screen
+        jsPsych.setProgressBar(Math.min(data.index / totalTrials, 1));
 
         // draw jittered ISI/ITI for this trial type in this phase
         const jitterDurations = nextJitter(data.test_part, data.trial_identity);
@@ -333,6 +390,14 @@ switch (version) {
         };
         break;
 }
+
+// total number of cue trials (practice + all phases), used to advance the progress bar
+const totalTrials = [
+    practice_procedure,
+    learning_procedure,
+    blocking_procedure,
+    testing_procedure,
+].reduce((n, p) => n + p.timeline_variables.length * (p.repetitions || 1), 0);
 
 // call main
 $.getScript("exp/main.js");
