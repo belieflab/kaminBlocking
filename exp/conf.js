@@ -56,7 +56,7 @@ const adminEmail = undefined;
 // Redirect Configuration (Daisy Chaining)
 const urlConfig = {
     // redirect only
-    default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_4HHbJ9T2aXS18xg",
+    default: "https://yalesurvey.ca1.qualtrics.com/jfe/form/SV_aiavhZfIjMMLY1M",
 };
 
 // Intake Settings
